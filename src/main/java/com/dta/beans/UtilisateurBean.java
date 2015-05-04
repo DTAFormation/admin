@@ -104,7 +104,7 @@ public class UtilisateurBean {
 
 	public List<Utilisateur> getUtilisateur() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
+		Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil", null);
 		utilisateurs.add(u);
 		return utilisateurs;
     }
