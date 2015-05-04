@@ -6,6 +6,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/jdbc/ecommercedb</jta-data-source>
 		<class>com.dta.entities.Catalogue</class>
+		<class>com.dta.entities.Utilisateur</class>
+		<class>com.dta.entities.Produit</class>
+		<class>com.dta.entities.Article</class>
 		<properties>
 		<!-- resource Local
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/ecommercedb" />
@@ -13,7 +16,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 		-->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
 	</persistence-unit>
