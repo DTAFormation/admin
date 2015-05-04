@@ -14,7 +14,14 @@
 
 	<h:form>
 		<h:outputText id="coco" value="#{hello.hello}" />
+			<h:commandButton action="Client/addClient" value="Add" />
 	</h:form>
+	
+
+
+	<p:link outcome="vues/detailProduit.xhtml" value="détail du produit N°1">
+		<f:param name="idProduit" value="1" />
+	</p:link>
 
 </h:body>
 </html>
