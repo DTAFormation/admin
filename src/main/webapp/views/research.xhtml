@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+
+	</p>
+
+	<p:stack icon="/resources/icon/stack.png" expanded="true">
+		<p:menuitem value="Recherche"
+			icon="/resources/icon/recherche-rouge.png" url="#" />
+		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
+			url="#" />
+		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
+			url="#" />
+		<p:menuitem value="Produit" icon="/resources/icon/user-rouge.png"
+			url="#" />
+		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
+			url="#" />
+		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
+			url="#" />
+	</p:stack>
+
+</h:head>
+
+<body>
+	<h:form>
+
+		<p:fieldset legend="Criteres de recherche" toggleable="true"
+			toggleSpeed="500">
+			<p:ajax event="toggle" />
+			<h:panelGrid columns="6" cellpadding="5">
+
+				<p:outputLabel for="nom" value="Nom:" />
+				<p:inputText value="#{research.nom}" id="nom" />
+
+				<p:outputLabel for="ref" value="Ref:" />
+				<p:inputText value="#{research.ref}" id="ref" />
+
+				<p:outputLabel for="typeSelect" value="Type:" />
+
+				<p:selectOneListbox id="typeSelect" value="#{research.type}">
+					<f:selectItem itemLabel="utilisateur" itemValue="UTILISATEUR" />
+					<f:selectItem itemLabel="produit" itemValue="PRODUIT" />
+					<f:selectItem itemLabel="catalogue" itemValue="CATALOGUE" />
+				</p:selectOneListbox>
+
+				<p:commandButton value="Rechercher"
+					actionListener="#{research.submitResearch()}" update="results" />
+
+			</h:panelGrid>
+		</p:fieldset>
+
+		<br />
+
+		<p:dataList value="#{research.products}" var="list" type="unordered"
+			itemType="none" id="results">
+			<f:facet name="header">
+				Resultats de recherche: 
+            	<p:outputLabel value="#{research.resultSize}" />
+			</f:facet>
+			<h:panelGrid columns="2">
+				<h:graphicImage library="img" name="loupe.png" />
+
+				<h:panelGrid columns="2">
+
+					<p:outputLabel for="nom" value="nom:" />
+					<h:outputText value="#{list.nom}" id="nom" />
+
+					<p:outputLabel for="prix" value="prix:" />
+					<h:outputText value="#{list.prix}" id="prix" />
+
+					<p:outputLabel for="stock" value="stock:" />
+					<h:outputText value="#{list.stock}" id="stock" />
+
+				</h:panelGrid>
+			</h:panelGrid>
+			<hr />
+		</p:dataList>
+
+	</h:form>
+</body>
+
+</html>
