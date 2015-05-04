@@ -1,37 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<head>
-<f:metadata>
-	<f:viewParam name="idProduit" value="#{detailProduit.idProduit}" />
-</f:metadata>
-<title>Détail du produit n° #{detailProduit.idProduit}</title>
-</head>
-<body>
 
+<h:head>
+	<f:metadata>
+		<f:viewParam name="articleId" value="#{detailProduit.articleId}" />
+	</f:metadata>
+	<title>Détail du produit n° #{detailProduit.articleId}</title>
+</h:head>
+<h:body>
 
+	<h1>Détail du produit n° #{detailProduit.articleId}</h1>
 
+	<p:accordionPanel multiple="true">
+		<p:tab title="Article">
+			<p:panelGrid columns="2" cellpadding="10">
+				<h:outputText value="Article ID" />
+				<h:outputText value="#{detailProduit.articleId}" />
 
+				<h:outputText value="Article Nom" />
+				<h:outputText value="#{detailProduit.articleNom}" />
+				<h:outputText value="Article Prix" />
+				<h:outputText value="#{detailProduit.articlePrix}" />
+				<h:outputText value="Article Stock" />
+				<h:outputText value="#{detailProduit.articleStock}" />
+			</p:panelGrid>
+		</p:tab>
+		<p:tab title="Produit de l'article">
+			<p:panelGrid columns="2" cellpadding="10">
+				<h:outputText value="Produit ID" />
+				<h:outputText value="#{detailProduit.produitId}" />
+				<h:outputText value="Produit Nom" />
+				<h:outputText value="#{detailProduit.produitNom}" />
+			</p:panelGrid>
+		</p:tab>
+		<p:tab title="Catalogue de l'article">
+			<p:panelGrid columns="2" cellpadding="10">
+				<h:outputText value="Catalogue ID" />
+				<h:outputText value="#{detailProduit.catalogueId}" />
+				<h:outputText value="Catalogue Nom" />
+				<h:outputText value="#{detailProduit.catalogueNom}" />
+				<h:outputText value="Catalogue Description" />
+				<h:outputText value="#{detailProduit.catalogueDescription}" />
+			</p:panelGrid>
+		</p:tab>
+	</p:accordionPanel>
 
-	<p:dataTable var="car" value="#{dtBasicView.cars}">
-		<p:column headerText="Id">
-			<h:outputText value="#{car.id}" />
-		</p:column>
-
-		<p:column headerText="Year">
-			<h:outputText value="#{car.year}" />
-		</p:column>
-
-		<p:column headerText="Brand">
-			<h:outputText value="#{car.brand}" />
-		</p:column>
-
-		<p:column headerText="Color">
-			<h:outputText value="#{car.color}" />
-		</p:column>
-	</p:dataTable>
-</body>
+</h:body>
 </html>

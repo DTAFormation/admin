@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p>Add Client</p>
+
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Login : " for="loginInput" />
+	        <p:inputText id="loginInput" value="#{addClient.login}" type="text" required="true" />
+	
+			<p:outputLabel value="Nom : " for="NomInput" />
+	        <p:inputText id="NomInput" value="#{addClient.nom}" type="text" required="true" />
+	
+			<p:outputLabel value="Prenom : " for="PrenomInput" />
+	        <p:inputText id="PrenomInput" value="#{addClient.prenom}" type="text" required="true" />
+	
+			<p:outputLabel value="Email : " for="EmailInput" />
+	        <p:inputText id="EmailInput" value="#{addClient.email}" type="email" required="true" />
+	
+			<p:outputLabel value="Adresse : " for="AdressInput" />
+	        <p:inputText id="AdressInput" value="#{addClient.address}" type="text" required="true" />
+	
+			<p:outputLabel value="Telephone : " for="telephoneInput" />
+	        <p:inputText id="telephoneInput" value="#{addClient.telephone}" type="number" required="true" />
+	
+			<p:outputLabel for="CibilitéInput " value="Civilité :" />
+	        <p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}" style="width:125px">
+	           <f:selectItem itemLabel="Select One" itemValue="" />
+	           <f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
+	           <f:selectItem itemLabel="Madame" itemValue="Madame" />
+	           <f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
+	        </p:selectOneMenu>
+	        
+			<p:outputLabel for="ResponsabilitéInput " value="Type Utilisateur :" />
+	        <p:selectOneMenu id="ResponsabilitéInput" value="#{addClient.typeUtil}" style="width:125px">
+	           <f:selectItem itemLabel="Select One" itemValue="" />
+	           <f:selectItem itemLabel="Administrateur" itemValue="a" />
+	           <f:selectItem itemLabel="Gestionnaire" itemValue="g" />
+	           <f:selectItem itemLabel="Client" itemValue="c" />
+	        </p:selectOneMenu>
+		</h:panelGrid>
+
+		<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+			<h:outputLabel for="pwd1" value="Password: *" />
+			<p:password id="pwd1" value="#{addClient.password}" match="pwd2" label="Password 1" required="true" />
+
+			<h:outputLabel for="pwd2" value="Réecrire Password: *" />
+			<p:password id="pwd2" value="#{addClient.password}"	label="Password 2" required="true" />
+		</h:panelGrid>
+		
+		
+			        
+		<h:commandButton action="#{addClient.save()}" value="Submit" />
+	</h:form>
+
+</h:body>
+
+
+</html>

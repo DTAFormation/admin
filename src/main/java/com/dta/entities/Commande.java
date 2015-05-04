@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -29,9 +30,11 @@ public class Commande {
 	private String typeCarteCredit;
 	
 	@ManyToOne
+	@JoinTable(name="commandes_adresse")
 	private Adresse adresse;
 	
 	@ManyToOne
+	@JoinTable(name="commandes_utilisateur")
 	private Utilisateur utilisateur;
 	
 	/*@ManyToMany
@@ -112,6 +115,6 @@ public class Commande {
 				+ dateExpCarteCredit + ", dateCommande=" + dateCommande
 				+ ", numCarteCredit=" + numCarteCredit + ", typeCarteCredit="
 				+ typeCarteCredit + ", adresse=" + adresse + ", utilisateur="
-				+ utilisateur + "]";
+				+ utilisateur.getUtilisateurId() + "]";
 	}	
 }
