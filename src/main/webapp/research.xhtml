@@ -6,16 +6,37 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h1>Rechercher dans la base</h1>
+
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+
+	</p>
+
+	<p:stack icon="/resources/icon/stack.png" expanded="true">
+		<p:menuitem value="Recherche"
+			icon="/resources/icon/recherche-rouge.png" url="#" />
+		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
+			url="#" />
+		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
+			url="#" />
+		<p:menuitem value="Produit" icon="/resources/icon/user-rouge.png"
+			url="#" />
+		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
+			url="#" />
+		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
+			url="#" />
+	</p:stack>
+
 </h:head>
 
 <body>
 	<h:form>
-		<p:growl id="growl" showDetail="true" />
 
-		<p:fieldset legend="Critères de recherche" toggleable="true" toggleSpeed="500">
-			<p:ajax event="toggle"/>
-			<h:panelGrid columns="7" cellpadding="5">
+		<p:fieldset legend="Critères de recherche" toggleable="true"
+			toggleSpeed="500">
+			<p:ajax event="toggle" />
+			<h:panelGrid columns="6" cellpadding="5">
 
 				<p:outputLabel for="nom" value="Nom:" />
 				<p:inputText value="#{research.nom}" id="nom" />
@@ -24,18 +45,47 @@
 				<p:inputText value="#{research.ref}" id="ref" />
 
 				<p:outputLabel for="typeSelect" value="Type:" />
-				
+
 				<p:selectOneListbox id="typeSelect" value="#{research.type}">
 					<f:selectItem itemLabel="utilisateur" itemValue="UTILISATEUR" />
 					<f:selectItem itemLabel="produit" itemValue="PRODUIT" />
 					<f:selectItem itemLabel="catalogue" itemValue="CATALOGUE" />
 				</p:selectOneListbox>
-				
-				<p:commandButton value="Rechercher" actionListener="#{research.saveMessage}" update="growl" />  
+
+				<p:commandButton value="Rechercher"
+					actionListener="#{research.submitResearch()}" update="results" />
 
 			</h:panelGrid>
 		</p:fieldset>
-	</h:form>
 
+		<br />
+
+		<p:dataList value="#{research.products}" var="list" type="unordered"
+			itemType="none" id="results">
+			<f:facet name="header">
+				Résultats de recherche: 
+            	<p:outputLabel value="#{research.resultSize}" />
+			</f:facet>
+			<h:panelGrid columns="2">
+				<h:graphicImage library="img" name="loupe.png" />
+
+				<h:panelGrid columns="2">
+
+					<p:outputLabel for="nom" value="nom:" />
+					<h:outputText value="#{list.nom}" id="nom" />
+
+					<p:outputLabel for="prix" value="prix:" />
+					<h:outputText value="#{list.prix}" id="prix" />
+
+					<p:outputLabel for="stock" value="stock:" />
+					<h:outputText value="#{list.stock}" id="stock" />
+
+				</h:panelGrid>
+			</h:panelGrid>
+			<hr />
+		</p:dataList>
+
+	</h:form>
 </body>
+
 </html>

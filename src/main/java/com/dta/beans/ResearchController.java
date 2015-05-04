@@ -1,8 +1,11 @@
 package com.dta.beans;
 
-import javax.faces.application.FacesMessage;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+
+import com.dta.entities.Article;
 
 @ManagedBean(name="research")
 public class ResearchController {
@@ -11,6 +14,8 @@ public class ResearchController {
 	private String nom;
 	private String ref;
 	private String msg;
+	
+	private List<Article> products;
 	
 	public ResearchController(){
 		this("none", "none", "none", "none");
@@ -22,6 +27,8 @@ public class ResearchController {
 		this.nom = nom;
 		this.ref = ref;
 		this.msg = msg;
+		
+		products = new ArrayList<Article>();
 	}
 
 
@@ -57,6 +64,10 @@ public class ResearchController {
 		this.msg = msg;
 	}
 	
+	public List<Article> getProducts(){
+		return this.products;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -64,10 +75,25 @@ public class ResearchController {
 				+ ref + ", msg=" + msg + "]";
 	}
 
-	public void saveMessage() {
-        FacesContext context = FacesContext.getCurrentInstance();
-         
-        context.addMessage(null, new FacesMessage("Successful", this.toString()) );
-    }	
+	public void submitResearch() {
+		
+		//requetes recherche
+		
+		System.out.println("\n\n --> recherche: ");
+		System.out.println(this.toString());
+		
+		for(int i = 0; i<100; i++){
+			Article art = new Article();
+			art.setNom("article n°"+i);
+			art.setPrix(500);
+			art.setProduit(null);
+			art.setStock(100);
+			products.add(art);
+		}
+    }
+	
+	public int getResultSize(){
+		return products.size();
+	}
 	
 }
