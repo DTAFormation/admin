@@ -146,7 +146,7 @@ public class ResearchController {
 
 		List<Article> result = new ArrayList<Article>();
 		Article art = new Article();
-		art.setNom("article n°"+id);
+		art.setNom("article nÂ°"+id);
 		art.setPrix(500);
 		art.setProduit(null);
 		art.setStock(100);
@@ -161,7 +161,7 @@ public class ResearchController {
 
 		for(int i=0; i<50; i++){
 			Article art = new Article();
-			art.setNom(name+" n°"+i);
+			art.setNom(name+" nÂ°"+i);
 			art.setPrix(500);
 			art.setProduit(null);
 			art.setStock(100);
