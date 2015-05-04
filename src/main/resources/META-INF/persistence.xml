@@ -10,7 +10,7 @@
 		<class>com.dta.entities.Produit</class>
 		<class>com.dta.entities.Article</class>
 		<properties>
-		<!-- ressource Local
+		<!-- resource Local
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/ecommercedb" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
