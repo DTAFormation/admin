@@ -5,21 +5,43 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<h:head>
+
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+
+	</p>
+
+	<p:stack icon="/resources/icon/stack.png" expanded="true">
+		<p:menuitem value="Recherche"
+			icon="/resources/icon/recherche-rouge.png"
+			url="/views/research.xhtml" />
+		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
+			url="#" />
+		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
+			url="/views/ajoutProduit.xhtml" />
+		<p:menuitem value="Utilisateur" icon="/resources/icon/user-rouge.png"
+			url="views/addClient.xhtml" />
+		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
+			url="#" />
+		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
+			url="#" />
+	</p:stack>
+</h:head>
 <h:body>
 	<p>in JSF page</p>
 
-	<h1>yo</h1>
-
-	<h:form>
-		<h:outputText id="coco" value="#{hello.hello}" />
-			<h:commandButton action="Client/addClient" value="Add" />
-	</h:form>
-	
+	<h1>yo from html</h1>
 
 
-	<p:link outcome="vues/detailProduit.xhtml" value="détail du produit N°1">
-		<f:param name="idProduit" value="1" />
+
+	<p:link outcome="views/detailProduit.xhtml"
+		value="détail du produit N°1">
+		<f:param name="articleId" value="1" />
+	</p:link>
+
+	<p:link outcome="views/ajoutProduit.xhtml" value="ajout du produit N°1">
 	</p:link>
 
 </h:body>

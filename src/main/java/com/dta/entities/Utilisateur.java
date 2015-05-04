@@ -1,9 +1,12 @@
 package com.dta.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Utilisateur {
@@ -40,15 +43,17 @@ public class Utilisateur {
 	@Column(name="type_util", length=1)
 	private String typeUtil;
 	
-	/*
 	@OneToMany(mappedBy="utilisateur")
-	private List<Adresse> adresses;*/
+	private List<Adresse> adresses;
+	
+	@OneToMany(mappedBy="utilisateur")
+	private List<Commande> commandes;
 	
 	public Utilisateur() {}
 
-	public Utilisateur(String email, int fax, String login,
-			String nom, String password, String prenom, int telephone,
-			String titre, String typeUtil/*, List<Adresse> adresses*/) {
+	public Utilisateur(String email, int fax, String login, String nom,
+			String password, String prenom, int telephone, String titre,
+			String typeUtil, List<Adresse> adresses) {
 		this.email = email;
 		this.fax = fax;
 		this.login = login;
@@ -58,7 +63,7 @@ public class Utilisateur {
 		this.telephone = telephone;
 		this.titre = titre;
 		this.typeUtil = typeUtil;
-		//this.adresses = adresses;
+		this.adresses = adresses;
 	}
 
 	public int getUtilisateurId() {
@@ -141,13 +146,13 @@ public class Utilisateur {
 		this.typeUtil = typeUtil;
 	}
 
-	/*public List<Adresse> getAdresses() {
+	public List<Adresse> getAdresses() {
 		return adresses;
 	}
 
 	public void setAdresse(List<Adresse> adresses) {
 		this.adresses = adresses;
-	}*/
+	}
 
 	@Override
 	public String toString() {

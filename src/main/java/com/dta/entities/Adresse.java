@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -39,12 +40,13 @@ public class Adresse {
 	private List<Commande> commande;
 	
 	@ManyToOne
+	@JoinTable(name="adresses_utilisateur")
 	private Utilisateur utilisateur;
 	
 	public Adresse() {}
 
-	public Adresse(int codePostal, String departement, int num,
-			String pays, String rue, String ville, List<Commande> commande,
+	public Adresse(int codePostal, String departement, int num, String pays,
+			String rue, String ville, List<Commande> commande,
 			Utilisateur utilisateur) {
 		this.codePostal = codePostal;
 		this.departement = departement;

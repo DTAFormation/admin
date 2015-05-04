@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>5.1</version>
+			<version>5.2</version>
 		</dependency>
 
 		<dependency>
@@ -73,8 +73,9 @@
 	<repositories>
 		<repository>
 			<id>prime-repo</id>
-			<name>Prime Repo</name>
+			<name>PrimeFaces Maven Repository</name>
 			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
 
