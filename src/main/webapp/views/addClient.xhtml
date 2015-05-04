@@ -10,17 +10,56 @@
 	<p>Add Client</p>
 
 	<h:form>
-		Login      : <h:inputText value="#{addClient.login}" />
-		Name       : <h:inputText value="#{addClient.nom}" required="true"/>
-		First Name : <h:inputText value="#{addClient.prenom}" required="true"/>
-		email 	   : <h:inputText value="#{addClient.email}" />
-		Address    : <h:inputText value="#{addClient.address}" required="true"/>
-		PassWord   : <h:inputText value="#{addClient.password}" required="true" />
-		telephone  : <h:inputText value="#{addClient.telephone}" />
-		sexe       : <h:inputText value="#{addClient.titre}" />
-		typeUtil   : <h:inputText value="#{addClient.typeUtil}" />
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Login : " for="loginInput" />
+	        <p:inputText id="loginInput" value="#{addClient.login}" type="text" required="true" />
+	
+			<p:outputLabel value="Nom : " for="NomInput" />
+	        <p:inputText id="NomInput" value="#{addClient.nom}" type="text" required="true" />
+	
+			<p:outputLabel value="Prenom : " for="PrenomInput" />
+	        <p:inputText id="PrenomInput" value="#{addClient.prenom}" type="text" required="true" />
+	
+			<p:outputLabel value="Email : " for="EmailInput" />
+	        <p:inputText id="EmailInput" value="#{addClient.email}" type="email" required="true" />
+	
+			<p:outputLabel value="Adresse : " for="AdressInput" />
+	        <p:inputText id="AdressInput" value="#{addClient.address}" type="text" required="true" />
+	
+			<p:outputLabel value="Telephone : " for="telephoneInput" />
+	        <p:inputText id="telephoneInput" value="#{addClient.telephone}" type="number" required="true" />
+	
+			<p:outputLabel for="CibilitéInput " value="Civilité :" />
+	        <p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}" style="width:125px">
+	           <f:selectItem itemLabel="Select One" itemValue="" />
+	           <f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
+	           <f:selectItem itemLabel="Madame" itemValue="Madame" />
+	           <f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
+	        </p:selectOneMenu>
+	        
+			<p:outputLabel for="ResponsabilitéInput " value="Type Utilisateur :" />
+	        <p:selectOneMenu id="ResponsabilitéInput" value="#{addClient.typeUtil}" style="width:125px">
+	           <f:selectItem itemLabel="Select One" itemValue="" />
+	           <f:selectItem itemLabel="Administrateur" itemValue="a" />
+	           <f:selectItem itemLabel="Gestionnaire" itemValue="g" />
+	           <f:selectItem itemLabel="Client" itemValue="c" />
+	        </p:selectOneMenu>
+		</h:panelGrid>
+
+		<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+			<h:outputLabel for="pwd1" value="Password: *" />
+			<p:password id="pwd1" value="#{addClient.password}" match="pwd2" label="Password 1" required="true" />
+
+			<h:outputLabel for="pwd2" value="Réecrire Password: *" />
+			<p:password id="pwd2" value="#{addClient.password}"	label="Password 2" required="true" />
+		</h:panelGrid>
+		
+		
+			        
 		<h:commandButton action="#{addClient.save()}" value="Submit" />
 	</h:form>
 
 </h:body>
+
+
 </html>
