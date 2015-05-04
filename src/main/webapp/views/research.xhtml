@@ -10,7 +10,6 @@
 	<p align="center">
 		<h:graphicImage library="img" name="logoDTA.png" />
 		<br />
-
 	</p>
 
 	<p:stack icon="/resources/icon/stack.png" expanded="true">
@@ -32,30 +31,65 @@
 
 <body>
 	<h:form>
-
 		<p:fieldset legend="Criteres de recherche" toggleable="true"
-			toggleSpeed="500">
+			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
-			<h:panelGrid columns="6" cellpadding="5">
+			
+			<h:inputHidden value="utilisateur" id="typeRecherche" />
 
-				<p:outputLabel for="nom" value="Nom:" />
-				<p:inputText value="#{research.nom}" id="nom" />
+			<p:tabView>
+				<p:tab title="Article">
+					<h:panelGrid columns="6" cellpadding="5">
 
-				<p:outputLabel for="ref" value="Ref:" />
-				<p:inputText value="#{research.ref}" id="ref" />
+						<p:outputLabel for="nomArticle" value="Nom:" />
+						<p:inputText value="#{research.articleName}" id="nomArticle" />
 
-				<p:outputLabel for="typeSelect" value="Type:" />
+						<p:outputLabel for="produit" value="Produit:" />
+						<p:inputText value="#{research.product}" id="produit" />
+						
+						<p:outputLabel for="id" value="id:" />
+						<p:inputText value="#{research.articleId}" id="id" />
 
-				<p:selectOneListbox id="typeSelect" value="#{research.type}">
-					<f:selectItem itemLabel="utilisateur" itemValue="UTILISATEUR" />
-					<f:selectItem itemLabel="produit" itemValue="PRODUIT" />
-					<f:selectItem itemLabel="catalogue" itemValue="CATALOGUE" />
-				</p:selectOneListbox>
+					</h:panelGrid>
 
-				<p:commandButton value="Rechercher"
-					actionListener="#{research.submitResearch()}" update="results" />
+				</p:tab>
+				<p:tab title="Utilisateur">
+					<h:panelGrid columns="4" cellpadding="5">
 
-			</h:panelGrid>
+						<p:outputLabel for="nomUtilisateur" value="Nom:" />
+						<p:inputText value="#{research.userName}" id="nomUtilisateur" />
+
+						<p:outputLabel for="typeSelect" value="Type:" />
+						<p:selectOneListbox id="typeSelect" value="#{research.userType}">
+							<f:selectItem itemLabel="client" itemValue="CLIENT" />
+							<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
+							<f:selectItem itemLabel="administrateur" itemValue="ADMINISTRATEUR" />
+						</p:selectOneListbox>
+					</h:panelGrid>
+
+				</p:tab>
+			</p:tabView>
+
+			<br />
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton value="Rechercher" update="results"
+						actionListener="#{research.submitResearchArticle()}"
+						style="margin-right:20px;" />
+				</f:facet>
+				
+				<f:facet name="left">
+					<p:commandButton value="Afficher tout" update="results"
+						actionListener="#{research.submitResearchAllArticle}"
+						style="margin-right:20px;" />
+				</f:facet>
+
+				<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panel" resetValues="true" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
 		</p:fieldset>
 
 		<br />
@@ -66,9 +100,9 @@
 				Resultats de recherche: 
             	<p:outputLabel value="#{research.resultSize}" />
 			</f:facet>
+
 			<h:panelGrid columns="2">
 				<h:graphicImage library="img" name="loupe.png" />
-
 				<h:panelGrid columns="2">
 
 					<p:outputLabel for="nom" value="nom:" />
