@@ -3,9 +3,12 @@ package com.dta.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import com.dta.entities.Article;
+import com.dta.metier.SearchArticle;
+import com.dta.metier.SearchProduit;
 
 @ManagedBean(name="research")
 public class ResearchController {
@@ -18,6 +21,12 @@ public class ResearchController {
 	private String articleName;
 	private String product;
 	private int articleId;
+	
+	@EJB
+	private SearchArticle searchArticle;
+	
+	@EJB
+	private SearchProduit searchProduit;
 
 	private List<Article> products;
 
@@ -116,10 +125,10 @@ public class ResearchController {
 		}else if(!this.articleName.equals("") && !this.product.equals("")){
 			
 		}else if(!this.articleName.equals("")){
-			products = mockRequest(this.articleName);
+			products = searchArticle.findByName(this.articleName);
 			
 		}else if(!this.product.equals("")){
-			products = mockRequest(this.product);
+			products = searchProduit.findAllArticles(this.product);
 			
 		}
 		
@@ -139,14 +148,14 @@ public class ResearchController {
 	public void submitResearchAllArticle(){
 		//getAll
 		System.out.println("azll");
-		products = mockRequest("all");
+		products = searchArticle.findAll();
 	}
 
 	private List<Article> mockRequest(int id){
 
 		List<Article> result = new ArrayList<Article>();
 		Article art = new Article();
-		art.setNom("article n°"+id);
+		art.setNom("article nï¿½"+id);
 		art.setPrix(500);
 		art.setProduit(null);
 		art.setStock(100);
@@ -161,13 +170,12 @@ public class ResearchController {
 
 		for(int i=0; i<50; i++){
 			Article art = new Article();
-			art.setNom(name+" n°"+i);
+			art.setNom(name+" nï¿½"+i);
 			art.setPrix(500);
 			art.setProduit(null);
 			art.setStock(100);
 			result.add(art);
 		}
-    }
 
 		return result;
 	}
