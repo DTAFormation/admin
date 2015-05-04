@@ -1,9 +1,11 @@
 package com.dta.beans;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 
 import com.dta.entities.Utilisateur;
+import com.dta.metier.AddClientEJB;
 
 @ManagedBean(name="addClient")
 public class ClientAddBean {
@@ -21,7 +23,8 @@ public class ClientAddBean {
 	private String typeUtil;
 	private String address;
 
-	
+	@EJB
+	private AddClientEJB ejb;
 
 	@Override
 	public String toString() {
@@ -34,6 +37,17 @@ public class ClientAddBean {
 
 	public void save(){
 		System.out.println(toString());
+		utilisateur =new Utilisateur();
+		utilisateur.setEmail(email);
+		utilisateur.setFax(fax);
+		utilisateur.setLogin(login);
+		utilisateur.setNom(nom);
+		utilisateur.setPassword(password);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setTelephone(telephone);
+		utilisateur.setTitre(titre);
+		utilisateur.setTypeUtil(typeUtil);
+		ejb.save(utilisateur);
 	}
 
 
@@ -91,12 +105,9 @@ public class ClientAddBean {
 	public void setTypeUtil(String typeUtil) {
 		this.typeUtil = typeUtil;
 	}
-
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
