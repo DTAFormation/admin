@@ -31,11 +31,12 @@ public class Produit {
 	
 	public Produit() {}
 
-	public Produit(String description, String nom,
-			Catalogue catalogue) {
+	public Produit(String description, String nom, Catalogue catalogue,
+			List<Article> articles) {
 		this.description = description;
 		this.nom = nom;
 		this.catalogue = catalogue;
+		this.articles = articles;
 	}
 
 	public int getProduitId() {
@@ -73,7 +74,7 @@ public class Produit {
 	@Override
 	public String toString() {
 		return "Produit [produitId=" + produitId + ", description="
-				+ description + ", nom=" + nom + ", catalogue=" + catalogue
+				+ description + ", nom=" + nom + ", catalogue=" + catalogue.getCatalogueId()
 				+ "]";
 	}
 }

@@ -28,8 +28,7 @@ public class Catalogue {
 	
 	public Catalogue() {}
 
-	public Catalogue(String description, String nom,
-			List<Produit> produits) {
+	public Catalogue(String description, String nom, List<Produit> produits) {
 		this.description = description;
 		this.nom = nom;
 		this.produits = produits;
@@ -70,6 +69,6 @@ public class Catalogue {
 	@Override
 	public String toString() {
 		return "Catalogue [catalogueId=" + catalogueId + ", description="
-				+ description + ", nom=" + nom + ", nbProduits " + produits.size() + "]";
+				+ description + ", nom=" + nom + ", nbProduits=" + produits.size() + "]";
 	}
 }
