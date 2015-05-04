@@ -167,6 +167,7 @@ public class ResearchController {
 			art.setStock(100);
 			result.add(art);
 		}
+    }
 
 		return result;
 	}
