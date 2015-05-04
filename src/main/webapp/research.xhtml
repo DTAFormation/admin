@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h1>Rechercher dans la base</h1>
+</h:head>
+
+<body>
+	<h:form>
+		<p:growl id="growl" showDetail="true" />
+
+		<p:fieldset legend="Critères de recherche" toggleable="true" toggleSpeed="500">
+			<p:ajax event="toggle"/>
+			<h:panelGrid columns="7" cellpadding="5">
+
+				<p:outputLabel for="nom" value="Nom:" />
+				<p:inputText value="#{research.nom}" id="nom" />
+
+				<p:outputLabel for="ref" value="Ref:" />
+				<p:inputText value="#{research.ref}" id="ref" />
+
+				<p:outputLabel for="typeSelect" value="Type:" />
+				
+				<p:selectOneListbox id="typeSelect" value="#{research.type}">
+					<f:selectItem itemLabel="utilisateur" itemValue="UTILISATEUR" />
+					<f:selectItem itemLabel="produit" itemValue="PRODUIT" />
+					<f:selectItem itemLabel="catalogue" itemValue="CATALOGUE" />
+				</p:selectOneListbox>
+				
+				<p:commandButton value="Rechercher" actionListener="#{research.saveMessage}" update="growl" />  
+
+			</h:panelGrid>
+		</p:fieldset>
+	</h:form>
+
+</body>
+</html>
