@@ -16,7 +16,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>research.xhtml</welcome-file>
 	</welcome-file-list>
 
 </web-app>
