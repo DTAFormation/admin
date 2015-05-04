@@ -49,6 +49,7 @@ public class Utilisateur {
 	@OneToMany(mappedBy="utilisateur")
 	private List<Commande> commandes;
 	
+	
 	public Utilisateur() {}
 
 	public Utilisateur(String email, int fax, String login, String nom,
