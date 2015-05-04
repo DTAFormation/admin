@@ -34,7 +34,7 @@
 		<p:fieldset legend="Criteres de recherche" toggleable="true"
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
-			
+
 			<h:inputHidden value="utilisateur" id="typeRecherche" />
 
 			<p:tabView>
@@ -46,11 +46,25 @@
 
 						<p:outputLabel for="produit" value="Produit:" />
 						<p:inputText value="#{research.product}" id="produit" />
-						
+
 						<p:outputLabel for="id" value="id:" />
 						<p:inputText value="#{research.articleId}" id="id" />
-
 					</h:panelGrid>
+
+					<br />
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton value="Rechercher" update="results"
+								actionListener="#{research.submitResearchArticle}"
+								style="margin-right:20px;" />
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandButton value="Effacer" style="margin-right:20px;">
+								<p:ajax update="panel" resetValues="true" />
+							</p:commandButton>
+						</f:facet>
+					</p:toolbar>
 
 				</p:tab>
 				<p:tab title="Utilisateur">
@@ -63,33 +77,29 @@
 						<p:selectOneListbox id="typeSelect" value="#{research.userType}">
 							<f:selectItem itemLabel="client" itemValue="CLIENT" />
 							<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
-							<f:selectItem itemLabel="administrateur" itemValue="ADMINISTRATEUR" />
+							<f:selectItem itemLabel="administrateur"
+								itemValue="ADMINISTRATEUR" />
 						</p:selectOneListbox>
 					</h:panelGrid>
+
+					<br />
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton value="Rechercher" update="results"
+								actionListener="#{research.submitResearchUser}"
+								style="margin-right:20px;" />
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandButton value="Effacer" style="margin-right:20px;">
+								<p:ajax update="panel" resetValues="true" />
+							</p:commandButton>
+						</f:facet>
+					</p:toolbar>
 
 				</p:tab>
 			</p:tabView>
 
-			<br />
-			<p:toolbar>
-				<f:facet name="left">
-					<p:commandButton value="Rechercher" update="results"
-						actionListener="#{research.submitResearchArticle()}"
-						style="margin-right:20px;" />
-				</f:facet>
-				
-				<f:facet name="left">
-					<p:commandButton value="Afficher tout" update="results"
-						actionListener="#{research.submitResearchAllArticle}"
-						style="margin-right:20px;" />
-				</f:facet>
-
-				<f:facet name="right">
-					<p:commandButton value="Effacer" style="margin-right:20px;">
-						<p:ajax update="panel" resetValues="true" />
-					</p:commandButton>
-				</f:facet>
-			</p:toolbar>
 		</p:fieldset>
 
 		<br />
