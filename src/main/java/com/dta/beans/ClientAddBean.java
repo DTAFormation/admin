@@ -1,9 +1,10 @@
-package com.dta.addClient;
+package com.dta.beans;
 
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name="addClient")
-public class ManagedClient {
+public class ClientAddBean {
+	
 	String name;
 	String firstName;
 	String passWord;
