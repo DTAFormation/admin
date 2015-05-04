@@ -10,11 +10,11 @@
 	<p>Add Client</p>
 
 	<h:form>
-		Name       : <h:inputText value="#{addClient.name}"/>
-		First Name : <h:inputText value="#{addClient.firstName}" />
-		Address    : <h:inputText value="#{addClient.address}" />
-		age   	   : <h:inputText value="#{addClient.age}" />
-		PassWord   : <h:inputText value="#{addClient.passWord}" />
+		Name       : <h:inputText value="#{addClient.name}" required="true"/>
+		First Name : <h:inputText value="#{addClient.firstName}" required="true"/>
+		Address    : <h:inputText value="#{addClient.address}" required="true"/>
+		age   	   : <h:inputText type="number" value="#{addClient.age}" required="true" />
+		PassWord   : <h:inputText value="#{addClient.passWord}" required="true" />
 	
 		<h:commandButton action="#{addClient.save()}" value="Submit" />
 	</h:form>
