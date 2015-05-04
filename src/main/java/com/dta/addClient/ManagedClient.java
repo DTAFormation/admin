@@ -12,9 +12,11 @@ public class ManagedClient {
 	
 	@Override
 	public String toString() {
-		return "ManagedClient name=" + name + ", firstName=" + firstName
-				+ ", passWord=" + passWord + ", age=" + age + ", address="
-				+ address ;
+		return "ManagedClient name=" + name 
+				+ ", firstName=" + firstName
+				+ ", passWord=" + passWord 
+				+ ", age=" + age 
+				+ ", address=" + address ;
 	}
 
 
