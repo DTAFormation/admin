@@ -15,6 +15,9 @@ public class ResearchController {
 
 	//user fields
 	private String userName;
+	private String userFirstName;
+	private String userMail;
+	private String userLogin;
 	private String userType;
 
 	//article fields
@@ -40,18 +43,22 @@ public class ResearchController {
 
 	public ResearchController(){
 		
-		this("", "", "", "", -1, -1, -1, null, null, null);
+		this("", "", "", "", "", "", "", -1, -1, -1, null, null, null);
 
 		List<Article> liste = new ArrayList<Article>();
 		products = liste;
 	}
-
-	public ResearchController(String userName, String userType,
+	
+	public ResearchController(String userName, String userFirstName,
+			String userMail, String userLogin, String userType,
 			String articleName, String productArticle, int articleId,
 			float priceArticle, int stockArticle, SearchArticle searchArticle,
 			SearchProduit searchProduit, List<Article> products) {
 		super();
 		this.userName = userName;
+		this.userFirstName = userFirstName;
+		this.userMail = userMail;
+		this.userLogin = userLogin;
 		this.userType = userType;
 		this.articleName = articleName;
 		this.productArticle = productArticle;
@@ -62,7 +69,9 @@ public class ResearchController {
 		this.searchProduit = searchProduit;
 		this.products = products;
 	}
-	
+
+
+
 	/*
 	 * 
 	 * Controller Methods
@@ -91,7 +100,11 @@ public class ResearchController {
 	}
 
 	public void submitResearchUser(){
-
+		//todo
+	}
+	
+	public void submitResearchAllUser(){
+		//todo
 	}
 
 	public int getResultSize(){
@@ -207,6 +220,30 @@ public class ResearchController {
 		this.stockArticle = stockArticle;
 	}
 	
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+	public String getUserMail() {
+		return userMail;
+	}
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+	public String getUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
+	}
+
 	/*
 	 * 
 	 * (non-Javadoc)
@@ -214,13 +251,13 @@ public class ResearchController {
 	 */
 	@Override
 	public String toString() {
-		return "ResearchController [userName=" + userName + ", userType="
-				+ userType + ", articleName=" + articleName
-				+ ", productArticle=" + productArticle + ", articleId="
-				+ articleId + ", priceArticle=" + priceArticle
+		return "ResearchController [userName=" + userName + ", userFirstName="
+				+ userFirstName + ", userMail=" + userMail + ", userLogin="
+				+ userLogin + ", userType=" + userType + ", articleName="
+				+ articleName + ", productArticle=" + productArticle
+				+ ", articleId=" + articleId + ", priceArticle=" + priceArticle
 				+ ", stockArticle=" + stockArticle + ", searchArticle="
 				+ searchArticle + ", searchProduit=" + searchProduit
 				+ ", products=" + products + "]";
 	}
-
 }
