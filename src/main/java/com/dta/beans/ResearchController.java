@@ -91,7 +91,7 @@ public class ResearchController {
 			modelArticle.setPrix(this.priceArticle);
 			modelArticle.setStock(this.stockArticle);
 			
-			products = searchArticle.findDetail(modelArticle);
+			products = searchArticle.findDetail(modelArticle, this.productArticle);
 		}
 	}
 	
