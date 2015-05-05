@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -43,7 +44,7 @@ public class Utilisateur {
 	@Column(name="type_util", length=1)
 	private String typeUtil;
 	
-	@OneToMany(mappedBy="utilisateur")
+	@OneToMany(mappedBy="utilisateur", fetch=FetchType.EAGER)
 	private List<Adresse> adresses;
 	
 	@OneToMany(mappedBy="utilisateur")
@@ -151,7 +152,7 @@ public class Utilisateur {
 		return adresses;
 	}
 
-	public void setAdresse(List<Adresse> adresses) {
+	public void setAdresses(List<Adresse> adresses) {
 		this.adresses = adresses;
 	}
 

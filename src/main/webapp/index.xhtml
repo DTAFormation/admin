@@ -12,21 +12,50 @@
 		<br />
 	</p>
 
-	<p:stack icon="/resources/icon/stack.png" expanded="true">
-		<p:menuitem value="Recherche"
-			icon="/resources/icon/recherche-rouge.png"
-			url="/views/research.xhtml" />
-		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
-			url="#" />
-		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
-			url="/views/ajoutProduit.xhtml" />
-		<p:menuitem value="Utilisateur" icon="/resources/icon/user-rouge.png"
-			url="views/addClient.xhtml" />
-		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
-			url="#" />
-		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
-			url="#" />
-	</p:stack>
+	<!-- MENU -->
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:submenu label="Element" icon="ui-icon-document">
+				<p:submenu label="Nouveau" icon="ui-icon-contact">
+					<p:menuitem value="Utilisateur" url="views/addClient.xhtml" />
+					<p:menuitem value="Article" url="views/ajoutArticle.xhtml" />
+				</p:submenu>
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="views/rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="views/rechercherUtilisateur.xhtml" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:submenu label="Profil" icon="ui-icon-person">
+				<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+				<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+			</p:submenu>
+
+			<p:submenu label="Outils" icon="ui-icon-wrench">
+				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="views/rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="views/rechercherUtilisateur.xhtml" />
+				</p:submenu>
+			</p:submenu>
+
+			<f:facet name="options">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+					<p:commandButton type="button" value="Logout"
+						icon="ui-icon-extlink" />
+				</h:panelGrid>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<br />
+
+	<!-- fin menu -->
+
 </h:head>
 <h:body>
 
@@ -35,8 +64,16 @@
 		<f:param name="articleId" value="1" />
 	</p:link>
 
-	<p:link outcome="views/ajoutProduit.xhtml" value="ajout du produit N°1">
-	</p:link>
+	<ul>
+		<li><p:link outcome="views/ajoutProduit.xhtml"
+				value="ajout d'un produit"></p:link></li>
+
+		<li><p:link outcome="views/ajoutCatalogue.xhtml"
+				value="ajout d'un catalogue"></p:link></li>
+
+		<li><p:link outcome="views/ajoutArticle.xhtml"
+				value="ajout d'un article"></p:link></li>
+	</ul>
 
 </h:body>
 </html>

@@ -2,16 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head></h:head> 
 <h:body>
 	<p>Add Produit</p>
 
 	<h:form>
-		Nom       : <h:inputText value="#{addProduit.nom}" required="true"/>
-		Description : <h:inputText value="#{addProduit.description}" required="true"/>
-		<h:commandButton action="#{addProduit.save()}" value="Submit" />
+		Nom       : <h:inputText value="#{ajoutProduit.nom}" required="true"/>
+		Description : <h:inputText value="#{ajoutProduit.description}"/>
+		Catalogue : <h:inputText value="#{ajoutProduit.catnom}"/>
+		<h:commandButton action="#{ajoutProduit.save()}" value="Submit" />
 	</h:form>
 
 </h:body>

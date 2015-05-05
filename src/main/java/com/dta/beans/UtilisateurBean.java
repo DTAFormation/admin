@@ -7,11 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-
+import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.GetUtilisateurEJG;
+import com.dta.metier.SearchUtilisateur;
 
 
 @ManagedBean(name="utilisateur")
@@ -21,7 +19,7 @@ public class UtilisateurBean {
 	private Utilisateur utilisateur;
 	
 	@EJB
-	private GetUtilisateurEJG utilisateurEJB;
+	private SearchUtilisateur searchUtilisateur;
 	
 	public UtilisateurBean() {
 		this.utilisateur = new Utilisateur();
@@ -106,24 +104,34 @@ public class UtilisateurBean {
 	public void setTypeUtil(String typeUtil) {
 		utilisateur.setTypeUtil(typeUtil);
 	}
+	
+	public List<Adresse> getAdresses () {
+		return utilisateur.getAdresses();
+	}
+	
+	public void setAdresses (List<Adresse> adresses) {
+		utilisateur.setAdresses(adresses);
+	}
 
-	public List<Utilisateur> setShowOne(int userID) {
-		List<Utilisateur> utilisateurs = new ArrayList<>();
-		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
-		Utilisateur u = utilisateurEJB.find(userID);
-		utilisateurs.add(u);
-		return utilisateurs;
+	public Utilisateur showOne(int userID) {
+		Utilisateur utilisateur = searchUtilisateur.findById(userID);
+		return utilisateur;
+    }
+	
+	public List<Adresse> showAdresses(int userID) {
+		List<Adresse> adresses = new ArrayList<>();
+		Utilisateur utilisateur = searchUtilisateur.findById(userID);
+		adresses = utilisateur.getAdresses();
+		return adresses;
     }
 	
 	public List<Utilisateur> getShowAll() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
-		Utilisateur u = utilisateurEJB.find(1);
-		Utilisateur u1 = utilisateurEJB.find(2);
-		Utilisateur u2 = utilisateurEJB.find(3);
-		utilisateurs.add(u);
-		utilisateurs.add(u1);
-		utilisateurs.add(u2);
+		utilisateurs = searchUtilisateur.findAll();
 		return utilisateurs;
+    }
+	
+	public void delete() {
+		// An admin can delete the user 
     }
 }

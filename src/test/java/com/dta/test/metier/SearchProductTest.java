@@ -86,7 +86,7 @@ public class SearchProductTest {
 		// Ajout des produits dans le catalogue
 		cat.setProduits(Arrays.asList(prod1, prod2));		
 	}
-
+/*
 	@Test
 	public void SearchAllProductsTest(){
 		List<Produit> produitList = searchProduit.findAll();
@@ -97,5 +97,5 @@ public class SearchProductTest {
 	public void SearchProductByName(){
 		Produit produit = searchProduit.findByName("articles de natation");
 		Assert.assertEquals(produit.getProduitId(), 2);
-	}
+	}*/
 }
