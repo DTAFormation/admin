@@ -5,9 +5,15 @@
       xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
+<h:head>
+	<f:metadata>
+		<f:viewParam name="idUser" value="1" />
+	</f:metadata>
+</h:head> 
 <body> 
-	<p:dataTable value="#{utilisateur.utilisateur}" var="utilisateur">
+	
+	<p:dataTable value="#{utilisateur.showOne(idUser)}" var="utilisateur">
+		<h1>Détail de l'utilisateur n° #{utilisateur.utilisateurId}</h1>
 		<p:column headerText="Id">
 			<h:outputText value="#{utilisateur.utilisateurId}" />
 		</p:column>
