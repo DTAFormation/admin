@@ -23,7 +23,7 @@ public class AjoutProduitBean {
 	private AddProduitEJB ejb;
 
 	public void save(){
-		catalogue = ejb.getCatalogueById(catalogueId).get(0);
+		catalogue = ejb.getCatalogueById(catalogueId);
 		produit = new Produit(description, nom, catalogue, null);
 		ejb.save(produit);
 	}

@@ -7,22 +7,26 @@
 
 <h:head></h:head>
 <h:body>
-	<p:panel id="panel" header="Ajout produit">
-		<h:panelGrid columns="2" cellpadding="5">
-			<p:outputLabel value="Nom:" />
-			<p:inputText value="#{ajoutProduit.nom}" required="true" />
+	<h:form>
+		<p:panel id="panel" header="Ajout produit">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Nom:" />
+				<p:inputText value="#{ajoutProduit.nom}" required="true" />
 
-			<p:outputLabel value="Description:" />
-			<p:inputText value="#{ajoutProduit.description}" required="true" />
+				<p:outputLabel value="Description:" />
+				<p:inputText value="#{ajoutProduit.description}" required="true" />
 
-			<p:outputLabel value="Catalogue:" />
-			<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
-				<f:selectItem  itemLabel="-- Choisir catalogue --" itemValue="#{null}"/>
-				<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
-					itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
-			</p:selectOneMenu>
-		</h:panelGrid>
-		<p:commandButton actionListener="#{ajoutProduit.save}" value="Submit" />
-	</p:panel>
+				<p:outputLabel value="Catalogue:" />
+				<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
+					<f:selectItem itemLabel="-- Choisir catalogue --"
+						itemValue="#{null}" />
+					<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
+						itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<p:commandButton actionListener="#{ajoutProduit.save}" value="Submit" />
+		</p:panel>
+	</h:form>
+	<p:link outcome="/index.xhtml" value="Retour au menu principal" />
 </h:body>
 </html>
