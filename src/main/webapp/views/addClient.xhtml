@@ -51,9 +51,7 @@
 			</p:menubar>
 
 	</h:form>
-
 	<br />
-
 	<!-- fin menu -->
 
 </h:head>
@@ -78,7 +76,7 @@
 
 					<p:outputLabel for="CibilitéInput " value="Civilité :" />
 					<p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}"
-						style="width:125px">
+						style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
 						<f:selectItem itemLabel="Madame" itemValue="Madame" />
@@ -89,37 +87,44 @@
 					<p:inputText id="telephoneInput" value="#{addClient.telephone}"
 						type="number" />
 
-
-					<p:outputLabel value="Adresse : " for="AdressInput" />
-					<p:inputText id="AdressInput" value="#{addClient.address}"
-						type="text" required="true" />
-
 				</h:panelGrid>
 			</p:fieldset>
 
 			<p:fieldset legend="Donnée du Profil" toggleable="false"
 				toggleSpeed="500" id="panelprofil">
-				<h:panelGrid columns="4" cellpadding="5">
+				<h:panelGrid columns="3" cellpadding="5">
 
 					<p:outputLabel value="Login : " for="loginInput" />
 					<p:inputText id="loginInput" value="#{addClient.login}" type="text"
-						required="true" />
-
+						required="true" >
+  						<f:ajax event="blur" render="LoginMessage" />
+						<f:validator binding="#{existenceLoginValidator}" />
+					</p:inputText>
+					<p:message id="LoginMessage" for="loginInput" errorClass="erreur" />
+				</h:panelGrid>
+				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel for="ResponsabilitéInput "
 						value="Type Utilisateur :" />
 					<p:selectOneMenu id="ResponsabilitéInput"
-						value="#{addClient.typeUtil}" style="width:125px">
+						value="#{addClient.typeUtil}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Administrateur" itemValue="a" />
 						<f:selectItem itemLabel="Gestionnaire" itemValue="g" />
 						<f:selectItem itemLabel="Client" itemValue="c" />
 					</p:selectOneMenu>
-
+				</h:panelGrid>
+				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Email : " for="EmailInput" />
 					<p:inputText id="EmailInput" value="#{addClient.email}"
-						type="email" required="true" />
+						type="email" required="true" >
+  						<f:ajax event="blur" render="emailMessage" />
+						<f:validator binding="#{existenceEmailValidator}" />
+					</p:inputText>
+					<p:message id="emailMessage" for="EmailInput" errorClass="erreur" />
 				</h:panelGrid>
 
+			<!-- Gestion PassWord -->
+			
 				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
 					<h:outputLabel for="pwd1" value="Password: *" />
 					<p:password id="pwd1" value="#{addClient.password}" match="pwd2"
@@ -129,6 +134,8 @@
 					<p:password id="pwd2" value="#{addClient.password}"
 						label="Password 2" required="true" />
 				</h:panelGrid>
+				
+				
 			</p:fieldset>
 		</p:fieldset>
 		<p:toolbar>

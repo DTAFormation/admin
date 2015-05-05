@@ -3,13 +3,11 @@ package com.dta.beans;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import com.dta.entities.Article;
 import com.dta.metier.SearchArticle;
 
-@ManagedBean(name="detailProduit")
-@SessionScoped
+@ManagedBean
 public class DetailProduitBean{
 	
 	
