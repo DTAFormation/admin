@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<body>
+	<h:form id="myform">
+		<p:dataTable value="#{utilisateur.showAll}" var="utilisateur">
+
+			<p:column headerText="Id">
+				<h:outputText value="#{utilisateur.utilisateurId}" />
+			</p:column>
+			<p:column headerText="Login">
+				<h:outputText value="#{utilisateur.login}" />
+			</p:column>
+			<p:column headerText="Titre">
+				<h:outputText value="#{utilisateur.titre}" />
+			</p:column>
+			<p:column headerText="Nom">
+				<h:outputText value="#{utilisateur.nom}" />
+			</p:column>
+			<p:column headerText="Prenom">
+				<h:outputText value="#{utilisateur.prenom}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{utilisateur.email}" />
+			</p:column>
+			<p:column headerText="Téléphone">
+				<h:outputText value="#{utilisateur.telephone}" />
+			</p:column>
+			<p:column headerText="Fax">
+				<h:outputText value="#{utilisateur.fax}" />
+			</p:column>
+			<p:column headerText="Type">
+				<h:outputText value="#{utilisateur.typeUtil}" />
+			</p:column>
+			<p:column headerText="Détail">
+				<p:link outcome="showUser.xhtml" value="détail">
+					<f:param name="idUser" value="#{utilisateur.utilisateurId}" />
+				</p:link>
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+
+
+</body>
+</html>
