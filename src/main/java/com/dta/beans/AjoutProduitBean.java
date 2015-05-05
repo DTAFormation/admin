@@ -1,5 +1,7 @@
 package com.dta.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -14,15 +16,20 @@ public class AjoutProduitBean {
 	
 	private String nom;
 	private String description;
-	private String catnom;
+	private int catalogueId;
+	private Catalogue catalogue;
 	
 	@EJB
 	private AddProduitEJB ejb;
 
 	public void save(){
-		Catalogue catalogue = ejb.getCatalogueByName(catnom).get(0);
+		catalogue = ejb.getCatalogueById(catalogueId).get(0);
 		produit = new Produit(description, nom, catalogue, null);
 		ejb.save(produit);
+	}
+	
+	public List<Catalogue> getAllCatalogues() {
+		return ejb.getAllCatalogues();
 	}
 
 	public Produit getProduit() {
@@ -49,13 +56,16 @@ public class AjoutProduitBean {
 		this.nom = nom;
 	}
 
-	public String getCatnom() {
-		return catnom;
+	public int getCatalogueId() {
+		return catalogueId;
 	}
 
-	public void setCatnom(String catnom) {
-		this.catnom = catnom;
+	public void setCatalogueId(int catalogueId) {
+		this.catalogueId = catalogueId;
 	}
+
+	
+
 	
 	
 }
