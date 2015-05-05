@@ -33,15 +33,19 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 		return query.getResultList();
 	}
 	
-	public String requestGenerator(Utilisateur utilisateur){
-		System.out.println("\n \n \n \n \n " + utilisateur);
-		String request = "SELECT u FROM Utilisateur u WHERE ";
-
-		if(utilisateur.getLogin() != null){
-			request += "u.login ='"+utilisateur.getLogin()+"' ";
-		}
-//		if(utilisateur.getNom() != null){
-//			if(utilisateur.getLogin() != null){
+	public Utilisateur findById(int id){
+		return em.find(Utilisateur.class, id);
+	}
+	
+//	public String requestGenerator(Utilisateur utilisateur){
+//		System.out.println("\n \n \n \n \n " + utilisateur);
+//		String request = "SELECT u FROM Utilisateur u WHERE ";
+//
+//		if(utilisateur.getLogin()){
+//			request += "u.login ='"+utilisateur.getLogin()+"' ";
+//		}
+//		if(!utilisateur.getNom().equals("")){
+//			if(!utilisateur.getLogin().equals("")){
 //				request += "AND u.nom ='"+utilisateur.getNom()+"' ";
 //			}else{
 //				request += "u.nom ='"+utilisateur.getNom()+"' ";
