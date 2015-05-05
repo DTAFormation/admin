@@ -5,58 +5,142 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<h:body>
-	<p>Add Client</p>
+<h:head>
 
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+
+	<!-- MENU -->
 	<h:form>
-		<h:panelGrid columns="2" cellpadding="5">
-			<p:outputLabel value="Login : " for="loginInput" />
-	        <p:inputText id="loginInput" value="#{addClient.login}" type="text" required="true" />
-	
-			<p:outputLabel value="Nom : " for="NomInput" />
-	        <p:inputText id="NomInput" value="#{addClient.nom}" type="text" required="true" />
-	
-			<p:outputLabel value="Prenom : " for="PrenomInput" />
-	        <p:inputText id="PrenomInput" value="#{addClient.prenom}" type="text" required="true" />
-	
-			<p:outputLabel value="Email : " for="EmailInput" />
-	        <p:inputText id="EmailInput" value="#{addClient.email}" type="email" required="true" />
-	
-			<p:outputLabel value="Adresse : " for="AdressInput" />
-	        <p:inputText id="AdressInput" value="#{addClient.address}" type="text" required="true" />
-	
-			<p:outputLabel value="Telephone : " for="telephoneInput" />
-	        <p:inputText id="telephoneInput" value="#{addClient.telephone}" type="number" required="true" />
-	
-			<p:outputLabel for="CibilitéInput " value="Civilité :" />
-	        <p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}" style="width:125px">
-	           <f:selectItem itemLabel="Select One" itemValue="" />
-	           <f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
-	           <f:selectItem itemLabel="Madame" itemValue="Madame" />
-	           <f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
-	        </p:selectOneMenu>
-	        
-			<p:outputLabel for="ResponsabilitéInput " value="Type Utilisateur :" />
-	        <p:selectOneMenu id="ResponsabilitéInput" value="#{addClient.typeUtil}" style="width:125px">
-	           <f:selectItem itemLabel="Select One" itemValue="" />
-	           <f:selectItem itemLabel="Administrateur" itemValue="a" />
-	           <f:selectItem itemLabel="Gestionnaire" itemValue="g" />
-	           <f:selectItem itemLabel="Client" itemValue="c" />
-	        </p:selectOneMenu>
-		</h:panelGrid>
+		<p:growl id="messages" />
+			<p:menubar>
+				<p:submenu label="Element" icon="ui-icon-document">
+					<p:submenu label="Nouveau" icon="ui-icon-contact">
+						<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+						<p:menuitem value="Article" url="ajoutArticle.xhtml" />
+					</p:submenu>
+					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
+					</p:submenu>
+				</p:submenu>
 
-		<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
-			<h:outputLabel for="pwd1" value="Password: *" />
-			<p:password id="pwd1" value="#{addClient.password}" match="pwd2" label="Password 1" required="true" />
+				<p:submenu label="Profil" icon="ui-icon-person">
+					<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+					<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+				</p:submenu>
 
-			<h:outputLabel for="pwd2" value="Réecrire Password: *" />
-			<p:password id="pwd2" value="#{addClient.password}"	label="Password 2" required="true" />
-		</h:panelGrid>
-		
-		
-			        
-		<h:commandButton action="#{addClient.save()}" value="Submit" />
+				<p:submenu label="Outils" icon="ui-icon-wrench">
+					<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+					<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
+					</p:submenu>
+				</p:submenu>
+
+				<f:facet name="options">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+						<p:commandButton type="button" value="Logout"
+							icon="ui-icon-extlink" />
+					</h:panelGrid>
+				</f:facet>
+			</p:menubar>
+
+	</h:form>
+
+	<br />
+
+	<!-- fin menu -->
+
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:fieldset legend="Création d'un Utilisateur" toggleable="false"
+			toggleSpeed="500" id="panelgenreal">
+
+
+			<p:fieldset legend="Information Personnelle" toggleable="false"
+				toggleSpeed="500" id="panelpersonnel">
+
+				<h:panelGrid columns="4" cellpadding="5">
+					<p:outputLabel value="Nom : " for="NomInput" />
+					<p:inputText id="NomInput" value="#{addClient.nom}" type="text"
+						required="true" />
+
+					<p:outputLabel value="Prenom : " for="PrenomInput" />
+					<p:inputText id="PrenomInput" value="#{addClient.prenom}"
+						type="text" required="true" />
+
+					<p:outputLabel for="CibilitéInput " value="Civilité :" />
+					<p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}"
+						style="width:125px">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
+						<f:selectItem itemLabel="Madame" itemValue="Madame" />
+						<f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Telephone : " for="telephoneInput" />
+					<p:inputText id="telephoneInput" value="#{addClient.telephone}"
+						type="number" />
+
+
+					<p:outputLabel value="Adresse : " for="AdressInput" />
+					<p:inputText id="AdressInput" value="#{addClient.address}"
+						type="text" required="true" />
+
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset legend="Donnée du Profil" toggleable="false"
+				toggleSpeed="500" id="panelprofil">
+				<h:panelGrid columns="4" cellpadding="5">
+
+					<p:outputLabel value="Login : " for="loginInput" />
+					<p:inputText id="loginInput" value="#{addClient.login}" type="text"
+						required="true" />
+
+					<p:outputLabel for="ResponsabilitéInput "
+						value="Type Utilisateur :" />
+					<p:selectOneMenu id="ResponsabilitéInput"
+						value="#{addClient.typeUtil}" style="width:125px">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Administrateur" itemValue="a" />
+						<f:selectItem itemLabel="Gestionnaire" itemValue="g" />
+						<f:selectItem itemLabel="Client" itemValue="c" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Email : " for="EmailInput" />
+					<p:inputText id="EmailInput" value="#{addClient.email}"
+						type="email" required="true" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+					<h:outputLabel for="pwd1" value="Password: *" />
+					<p:password id="pwd1" value="#{addClient.password}" match="pwd2"
+						label="Password 1" required="true" />
+
+					<h:outputLabel for="pwd2" value="Réecrire Password: *" />
+					<p:password id="pwd2" value="#{addClient.password}"
+						label="Password 2" required="true" />
+				</h:panelGrid>
+			</p:fieldset>
+		</p:fieldset>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton action="#{addClient.save()}" value="Enregistrer" />
+			</f:facet>
+			<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panelgenreal" resetValues="true" />
+					</p:commandButton>
+			</f:facet>
+		</p:toolbar>
 	</h:form>
 
 </h:body>
