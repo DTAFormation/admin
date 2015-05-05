@@ -67,10 +67,19 @@
 			<p:ajax event="toggle" />
 
 
-			<h:panelGrid columns="4" cellpadding="5">
+			<h:panelGrid columns="6" cellpadding="5">
 
 				<p:outputLabel for="nomUtilisateur" value="Nom:" />
 				<p:inputText value="#{research.userName}" id="nomUtilisateur" />
+				
+				<p:outputLabel for="prenomUtilisateur" value="Prenom:" />
+				<p:inputText value="#{research.userFirstName}" id="prenomUtilisateur" />
+				
+				<p:outputLabel for="loginUtilisateur" value="Login:" />
+				<p:inputText value="#{research.userLogin}" id="loginUtilisateur" />
+				
+				<p:outputLabel for="mailUtilisateur" value="Mail:" />
+				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
 
 				<p:outputLabel for="typeSelect" value="Type:" />
 				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
@@ -86,13 +95,13 @@
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton value="Rechercher" update="results"
-						actionListener="#{research.submitResearchArticle()}"
+						actionListener="#{research.submitResearchUser()}"
 						style="margin-right:20px;" />
 				</f:facet>
 
 				<f:facet name="left">
 					<p:commandButton value="Afficher tout" update="results"
-						actionListener="#{research.submitResearchAllArticle}"
+						actionListener="#{research.submitResearchAllUser}"
 						style="margin-right:20px;" />
 				</f:facet>
 
@@ -116,7 +125,6 @@
 			</f:facet>
 
 			<h:panelGrid columns="2">
-
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
 					<h:outputLink value="#{research.path}">
 						<h:graphicImage library="img" name="loupe.png" />
@@ -125,7 +133,6 @@
 				</p:lightBox>
 
 				<h:panelGrid columns="2">
-
 					<p:outputLabel for="nom" value="nom:" />
 					<h:outputText value="#{list.nom}" id="nom" />
 
@@ -134,7 +141,6 @@
 
 					<p:outputLabel for="stock" value="stock:" />
 					<h:outputText value="#{list.stock}" id="stock" />
-
 				</h:panelGrid>
 			</h:panelGrid>
 			<hr />
