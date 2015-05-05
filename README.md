@@ -37,5 +37,5 @@ etape 4: dans eclipse. mise ajour du persistance.xml.
 
 - dans le fichier persistance.
 - garder que les deux dernieres ligne du property.
-- remplacer le RESSOURCE LOCAL en JTA
+- remplacer le RESOURCE LOCAL en JTA
 - ajouter en dessous de provider : <jta-data-source> VOTRE JNDI NAME </jta-data-source>
