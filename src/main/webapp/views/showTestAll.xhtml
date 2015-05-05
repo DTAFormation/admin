@@ -39,12 +39,12 @@
 				<h:outputText value="#{utilisateur.typeUtil}" />
 			</p:column>
 			<p:column headerText="Détail">
-				<p:link outcome="showUser.xhtml" value="détail">
+
+				<p:button outcome="showUser.xhtml" icon="ui-icon-search">
 					<f:param name="idUser" value="#{utilisateur.utilisateurId}" />
-				</p:link>
+				</p:button>
 			</p:column>
 		</p:dataTable>
-
 	</h:form>
 
 
