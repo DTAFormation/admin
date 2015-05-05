@@ -12,20 +12,51 @@
 		<br />
 	</p>
 
-	<p:stack icon="/resources/icon/stack.png" expanded="true">
-		<p:menuitem value="Recherche"
-			icon="/resources/icon/recherche-rouge.png" url="#" />
-		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
-			url="#" />
-		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
-			url="#" />
-		<p:menuitem value="Produit" icon="/resources/icon/user-rouge.png"
-			url="#" />
-		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
-			url="#" />
-		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
-			url="#" />
-	</p:stack>
+	<!-- MENU -->
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:submenu label="Element" icon="ui-icon-document">
+				<p:submenu label="Nouveau" icon="ui-icon-contact">
+					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
+				</p:submenu>
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur"
+						url="rechercherUtilisateur.xhtml" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:submenu label="Profil" icon="ui-icon-person">
+				<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+				<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+			</p:submenu>
+
+			<p:submenu label="Outils" icon="ui-icon-wrench">
+				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur"
+						url="rechercherUtilisateur.xhtml" />
+				</p:submenu>
+			</p:submenu>
+
+			<f:facet name="options">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+					<p:commandButton type="button" value="Logout"
+						icon="ui-icon-extlink" />
+				</h:panelGrid>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<br />
+
+	<!-- fin menu -->
 
 </h:head>
 
@@ -35,45 +66,19 @@
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
 
-			<!-- Form research -->
 
-			<p:tabView>
-				<p:tab title="Article">
-					<h:panelGrid columns="6" cellpadding="5">
+			<h:panelGrid columns="4" cellpadding="5">
 
-						<p:outputLabel for="nomArticle" value="Nom:" />
-						<p:inputText value="#{research.articleName}" id="nomArticle" />
+				<p:outputLabel for="nomUtilisateur" value="Nom:" />
+				<p:inputText value="#{research.userName}" id="nomUtilisateur" />
 
-						<p:outputLabel for="produit" value="Produit:" />
-						<p:inputText value="#{research.productArticle}" id="produit" />
-
-						<p:outputLabel for="id" value="id:" />
-						<p:inputText value="#{research.articleId}" id="id" />
-
-						<p:outputLabel for="prixArticle" value="Prix:" />
-						<p:inputText value="#{research.priceArticle}" id="prixArticle" />
-
-						<p:outputLabel for="stockArticle" value="Stock:" />
-						<p:inputText value="#{research.stockArticle}" id="stockArticle" />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Utilisateur">
-					<h:panelGrid columns="4" cellpadding="5">
-
-						<p:outputLabel for="nomUtilisateur" value="Nom:" />
-						<p:inputText value="#{research.userName}" id="nomUtilisateur" />
-
-						<p:outputLabel for="typeSelect" value="Type:" />
-						<p:selectOneListbox id="typeSelect" value="#{research.userType}">
-							<f:selectItem itemLabel="client" itemValue="CLIENT" />
-							<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
-							<f:selectItem itemLabel="administrateur"
-								itemValue="ADMINISTRATEUR" />
-						</p:selectOneListbox>
-					</h:panelGrid>
-
-				</p:tab>
-			</p:tabView>
+				<p:outputLabel for="typeSelect" value="Type:" />
+				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
+					<f:selectItem itemLabel="client" itemValue="CLIENT" />
+					<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
+					<f:selectItem itemLabel="administrateur" itemValue="ADMINISTRATEUR" />
+				</p:selectOneListbox>
+			</h:panelGrid>
 
 			<!-- Validation toolbar -->
 

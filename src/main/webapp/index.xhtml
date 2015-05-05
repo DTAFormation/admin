@@ -22,8 +22,10 @@
 					<p:menuitem value="Utilisateur" url="views/addClient.xhtml" />
 					<p:menuitem value="Article" url="views/ajoutArticle.xhtml" />
 				</p:submenu>
-				<p:separator />
-				<p:menuitem value="Rechercher" url="views/research.xhtml" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="views/rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="views/rechercherUtilisateur.xhtml" />
+				</p:submenu>
 			</p:submenu>
 
 			<p:submenu label="Profil" icon="ui-icon-person">
@@ -34,8 +36,10 @@
 			<p:submenu label="Outils" icon="ui-icon-wrench">
 				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
 				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
-				<p:menuitem value="Rechercher" url="views/research.xhtml"
-					icon="ui-icon-zoomin" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="views/rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="views/rechercherUtilisateur.xhtml" />
+				</p:submenu>
 			</p:submenu>
 
 			<f:facet name="options">
@@ -50,21 +54,8 @@
 
 	<br />
 
-	<p:stack icon="/resources/icon/stack.png" expanded="true">
-		<p:menuitem value="Recherche"
-			icon="/resources/icon/recherche-rouge.png"
-			url="/views/research.xhtml" />
-		<p:menuitem value="Analyse" icon="/resources/icon/analyse-rouge.png"
-			url="#" />
-		<p:menuitem value="Produit" icon="/resources/icon/produit-rouge.png"
-			url="/views/ajoutProduit.xhtml" />
-		<p:menuitem value="Utilisateur" icon="/resources/icon/user-rouge.png"
-			url="views/addClient.xhtml" />
-		<p:menuitem value="Reglages" icon="/resources/icon/reglage-rouge.png"
-			url="#" />
-		<p:menuitem value="Logout" icon="/resources/icon/logout-rouge.png"
-			url="#" />
-	</p:stack>
+	<!-- fin menu -->
+
 </h:head>
 <h:body>
 
