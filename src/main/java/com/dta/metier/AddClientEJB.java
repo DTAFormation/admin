@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import com.dta.entities.Utilisateur;
 
 @Stateless(name="AddClientEJB")
-public class AddClientEJB {
+public class AddClientEJB{
 	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
@@ -15,4 +15,14 @@ public class AddClientEJB {
 	public void save(Utilisateur utilisateur){
 		em.persist(utilisateur);
 	}
+
+	protected EntityManager getEm() {
+		return em;
+	}
+
+	protected void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
+	
 }
