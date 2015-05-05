@@ -3,6 +3,7 @@ package com.dta.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -10,6 +11,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.dta.entities.Utilisateur;
+import com.dta.metier.GetUtilisateurEJG;
 
 
 @ManagedBean(name="utilisateur")
@@ -17,6 +19,9 @@ import com.dta.entities.Utilisateur;
 public class UtilisateurBean {
 
 	private Utilisateur utilisateur;
+	
+	@EJB
+	private GetUtilisateurEJG utilisateurEJB;
 	
 	public UtilisateurBean() {
 		this.utilisateur = new Utilisateur();
@@ -102,13 +107,23 @@ public class UtilisateurBean {
 		utilisateur.setTypeUtil(typeUtil);
 	}
 
-	public List<Utilisateur> getUtilisateur() {
+	public List<Utilisateur> setShowOne(int userID) {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		/*Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
-		utilisateurs.add(u);*/
-		Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil", null);
+		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
+		Utilisateur u = utilisateurEJB.find(userID);
 		utilisateurs.add(u);
-
+		return utilisateurs;
+    }
+	
+	public List<Utilisateur> getShowAll() {
+		List<Utilisateur> utilisateurs = new ArrayList<>();
+		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
+		Utilisateur u = utilisateurEJB.find(1);
+		Utilisateur u1 = utilisateurEJB.find(2);
+		Utilisateur u2 = utilisateurEJB.find(3);
+		utilisateurs.add(u);
+		utilisateurs.add(u1);
+		utilisateurs.add(u2);
 		return utilisateurs;
     }
 }

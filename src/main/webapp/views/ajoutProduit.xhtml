@@ -10,17 +10,9 @@
 	<p>Add Produit</p>
 
 	<h:form>
-	<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-		Nom       : <h:inputText value="#{ajoutProduit.nom}" required="true"/>
-		Description : <h:inputText value="#{ajoutProduit.description}" required="true"/>
-        <p:outputLabel for="catalogue" value="Catalogue:" />
-        <p:selectOneMenu id="catalogue" value="#{ajoutProduit.catalogue}" style="width:125px">
-            <f:selectItem itemLabel="Sport" itemValue="Sport" />
-            <f:selectItem itemLabel="Autres" itemValue="Autres" />
-        </p:selectOneMenu>
-     </h:panelGrid>
-
-		<h:commandButton action="#{ajoutProduit.save()}" value="Submit" />
+		Nom       : <h:inputText value="#{addProduit.nom}" required="true"/>
+		Description : <h:inputText value="#{addProduit.description}" required="true"/>
+		<h:commandButton action="#{addProduit.save()}" value="Submit" />
 	</h:form>
 
 </h:body>
