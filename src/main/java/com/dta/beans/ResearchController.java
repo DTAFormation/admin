@@ -49,6 +49,8 @@ public class ResearchController {
 	 */
 
 	public ResearchController(){
+		
+		this("", "", "", "", "", "", "", "", "", "", null, null, null, null);
 
 		List<Article> liste = new ArrayList<Article>();
 		products = liste;
@@ -96,7 +98,7 @@ public class ResearchController {
 		System.out.println();
 
 		//requetes recherche
-		if(this.articleId.equals("")){
+		if(!this.articleId.equals("")){
 			int articleId = Integer.parseInt(this.articleId);
 			products = mockRequest(articleId);
 		}else{
@@ -104,12 +106,12 @@ public class ResearchController {
 			
 			Article modelArticle = new Article();
 			modelArticle.setNom( (this.articleName.equals("")) ? null : this.articleName);
-			modelArticle.setPrix( (this.priceArticle.equals("")) ? -1 : Integer.parseInt(this.priceArticle));
+			modelArticle.setPrix( (this.priceArticle.equals("")) ? -1 : Float.parseFloat(this.priceArticle));
 			modelArticle.setStock( (this.stockArticle.equals("")) ? -1 : Integer.parseInt(this.stockArticle));
 			
+			System.out.println(modelArticle);
+			
 
-			
-			
 			products = searchArticle.findDetail(modelArticle, this.productArticle);
 		}
 	}
@@ -126,6 +128,7 @@ public class ResearchController {
 		modelUtilisateur.setEmail(this.userMail.equals("") ? null : this.userMail);
 		modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType);
 
+		System.out.println(modelUtilisateur);
 		
 		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
