@@ -3,46 +3,46 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<f:metadata>
 		<f:viewParam name="idUser" />
 	</f:metadata>
+	
+	<c:set var="utilisateur" scope="request" value="${utilisateurBean.showOne(idUser)}" />
 </h:head>
 <body>
-	<h1>Détail de l'utilisateur n° #{idUser}</h1>
-
-	<p:carousel value="#{utilisateurBean.showOne(idUser)}" var="utilisateur"
-		headerText="Utilisateur">
-		<p:panelGrid columns="2">
-		
-			<h:outputText value="ID" />
-			<h:outputText value="#{utilisateur.utilisateurId}" />
-			<h:outputText value="Type" />
-			<h:outputText value="#{utilisateur.typeUtil}" />
-			<h:outputText value="Login" />
-			<h:outputText value="#{utilisateur.login}" />
-			<h:outputText value="Civilité" />
-			<h:outputText value="#{utilisateur.titre}" />
-			<h:outputText value="Nom" />
-			<h:outputText value="#{utilisateur.nom}" />
-			<h:outputText value="Prenom" />
-			<h:outputText value="#{utilisateur.prenom}" />
-			<h:outputText value="Email" />
-			<h:outputText value="#{utilisateur.email}" />
-			<h:outputText value="Téléphone" />
-			<h:outputText value="#{utilisateur.telephone}" />
-			<h:outputText value="Fax" />
-			<h:outputText value="#{utilisateur.fax}" />
-
-		</p:panelGrid>
-	</p:carousel>
-
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+		<p:row>
+            <p:column colspan="2">Utilisateur n° #{idUser}</p:column>
+        </p:row>
+        </f:facet>
+		<h:outputText value="ID" />
+		<h:outputText value="#{utilisateur.utilisateurId}" />
+		<h:outputText value="Type" />
+		<h:outputText value="#{utilisateur.typeUtil}" />
+		<h:outputText value="Login" />
+		<h:outputText value="#{utilisateur.login}" />
+		<h:outputText value="Civilité" />
+		<h:outputText value="#{utilisateur.titre}" />
+		<h:outputText value="Nom" />
+		<h:outputText value="#{utilisateur.nom}" />
+		<h:outputText value="Prenom" />
+		<h:outputText value="#{utilisateur.prenom}" />
+		<h:outputText value="Email" />
+		<h:outputText value="#{utilisateur.email}" />
+		<h:outputText value="Téléphone" />
+		<h:outputText value="#{utilisateur.telephone}" />
+		<h:outputText value="Fax" />
+		<h:outputText value="#{utilisateur.fax}" />
+	</p:panelGrid>
 	<br />
 
-	<p:carousel value="#{utilisateurBean.showAdresses(idUser)}" var="adresse"
-		headerText="Adresses">
+	<p:carousel value="#{utilisateurBean.showAdresses(idUser)}"
+		var="adresse" headerText="Adresses">
 		<p:panelGrid columns="2">
 			<h:outputText value="Adresse ID" />
 			<h:outputText value="#{adresse.adresseId}" />
