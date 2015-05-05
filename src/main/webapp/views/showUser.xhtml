@@ -13,7 +13,7 @@
 <body>
 	<h1>Détail de l'utilisateur n° #{idUser}</h1>
 
-	<p:carousel value="#{utilisateur.showOne(idUser)}" var="utilisateur"
+	<p:carousel value="#{utilisateurBean.showOne(idUser)}" var="utilisateur"
 		headerText="Utilisateur">
 		<p:panelGrid columns="2">
 		
@@ -36,13 +36,12 @@
 			<h:outputText value="Fax" />
 			<h:outputText value="#{utilisateur.fax}" />
 
-
 		</p:panelGrid>
 	</p:carousel>
 
 	<br />
 
-	<p:carousel value="#{utilisateur.showAdresses(idUser)}" var="adresse"
+	<p:carousel value="#{utilisateurBean.showAdresses(idUser)}" var="adresse"
 		headerText="Adresses">
 		<p:panelGrid columns="2">
 			<h:outputText value="Adresse ID" />
