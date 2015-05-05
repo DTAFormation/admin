@@ -10,9 +10,8 @@
 
 	<h:form>
 		Nom       : <h:inputText value="#{ajoutProduit.nom}" required="true"/>
-		Descrption : <h:inputText value="#{ajoutProduit.description}" required="true"/>
-		Catalogue    : <h:inputText value="#{ajoutProduit.catalogue}" required="false"/>
-	
+		Description : <h:inputText value="#{ajoutProduit.description}"/>
+		Catalogue : <h:inputText value="#{ajoutProduit.catnom}"/>
 		<h:commandButton action="#{ajoutProduit.save()}" value="Submit" />
 	</h:form>
 

@@ -6,22 +6,22 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.dta.entities.Article;
 import com.dta.entities.Produit;
-import com.dta.entities.Catalogue;
 
-@Stateless(name="AddProduitEJB")
-public class AddProduitEJB {
+@Stateless(name="AddArticleEJB")
+public class AddArticleEJB {
 	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 	
-	public void save(Produit produit){
-		em.persist(produit);
+	public void save(Article article){
+		em.persist(article);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Catalogue> getCatalogueByName(String name) {
-		return em.createQuery("FROM Catalogue c where c.nom = :arg")
+	public List<Produit> getProduitByName(String name) {
+		return em.createQuery("FROM Produit p where p.nom = :arg")
 			.setParameter("arg", name)
 			.getResultList();
 	}

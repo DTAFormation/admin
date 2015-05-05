@@ -11,9 +11,9 @@ public class AjoutCatalogueBean {
 	
 	Catalogue catalogue;
 	
-	private String description;
-	
 	private String nom;
+	private String description;
+
 
 	@EJB
 	private AddCatalogueEJB ejb;
