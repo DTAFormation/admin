@@ -7,6 +7,7 @@ etape 1 : creer un user
 
 - lancer add-user.bat présent dans le bin
 - créer un management user.
+- Lancer wildfly (standalone.bat)
 
 
 etape deux: configurer Wildfly
@@ -16,12 +17,12 @@ etape deux: configurer Wildfly
 - aller dans le dossier ..\wildfly-8.1.0.Final\bin
 - lancer le "jboss-cli.bat"
 - ecrire "connect"
-- copier l'intérieur du fichier driver.txt dans la consolle.
+- copier l'intérieur du fichier driver.txt dans la console.
 
 
 etape 3 : configurer sur le localhost:9990
 
-- lancer le stadealone.bat 
+-(si vous l'avez éteind) Lancer wildflyu avec standalone
 - allez dans configuration 
 - faire "Add"
 - Name: = ecommercedb
