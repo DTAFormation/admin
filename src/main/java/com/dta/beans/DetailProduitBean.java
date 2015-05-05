@@ -18,7 +18,7 @@ public class DetailProduitBean{
 	
 		
 	public Article showDetailArticle(int id) {
-		Article monArticle = searchArticle.findById(id);
+		Article monArticle = searchArticle.findById(id).get(0);
 		return monArticle;
     }
 	

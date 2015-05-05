@@ -34,7 +34,8 @@ public class SearchArticle extends SearchEntities<Article>{
 		if(model.getPrix()!=-1){
 			if(model.getNom()!=null){
 				request += "AND a.prix="+model.getPrix()+" ";
-			}else{
+			}
+			else{
 				request += "a.prix="+model.getPrix()+" ";
 			}
 		}
