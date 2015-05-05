@@ -17,12 +17,15 @@
 
 			<p:outputLabel value="Catalogue:" />
 			<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
-				<f:selectItem  itemLabel="-- Choisir catalogue --" itemValue="#{null}"/>
+				<f:selectItem itemLabel="-- Choisir catalogue --"
+					itemValue="#{null}" />
 				<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
 					itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
 			</p:selectOneMenu>
 		</h:panelGrid>
-		<p:commandButton actionListener="#{ajoutProduit.save}" value="Submit" />
+		
+		<p:commandButton actionListener="#{ajoutProduit.save()}" value="Submit" />
+		
 	</p:panel>
 </h:body>
 </html>
