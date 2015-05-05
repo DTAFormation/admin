@@ -21,6 +21,8 @@
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
 					<p:menuitem value="Utilisateur" url="views/addClient.xhtml" />
 					<p:menuitem value="Article" url="views/ajoutArticle.xhtml" />
+					<p:menuitem value="Catalogue" url="views/ajoutCatalogue.xhtml" />
+					<p:menuitem value="Produit" url="views/ajoutProduit.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="views/rechercherArticle.xhtml" />
@@ -63,17 +65,5 @@
 		value="détail du produit N°1">
 		<f:param name="articleId" value="1" />
 	</p:link>
-
-	<ul>
-		<li><p:link outcome="views/ajoutProduit.xhtml"
-				value="ajout d'un produit"></p:link></li>
-
-		<li><p:link outcome="views/ajoutCatalogue.xhtml"
-				value="ajout d'un catalogue"></p:link></li>
-
-		<li><p:link outcome="views/ajoutArticle.xhtml"
-				value="ajout d'un article"></p:link></li>
-	</ul>
-
 </h:body>
 </html>
