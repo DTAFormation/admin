@@ -11,11 +11,13 @@
 	</f:metadata>
 </h:head> 
 <body> 
-	
+	<h1>Détail de l'utilisateur n° #{idUser}</h1>
 	<p:dataTable value="#{utilisateur.showOne(idUser)}" var="utilisateur">
-		<h1>Détail de l'utilisateur n° #{utilisateur.utilisateurId}</h1>
 		<p:column headerText="Id">
 			<h:outputText value="#{utilisateur.utilisateurId}" />
+		</p:column>		
+		<p:column headerText="Type">
+			<h:outputText value="#{utilisateur.typeUtil}" />
 		</p:column>
 		<p:column headerText="Login">
 			<h:outputText value="#{utilisateur.login}" />
@@ -38,8 +40,30 @@
 		<p:column headerText="Fax">
 			<h:outputText value="#{utilisateur.fax}" />
 		</p:column>
-		<p:column headerText="Type">
-			<h:outputText value="#{utilisateur.typeUtil}" />
+	</p:dataTable>
+	<br />
+	<h1>Adresses de l'utilisateur n° #{idUser}</h1>
+	<p:dataTable value="#{utilisateur.showAdresses(idUser)}" var="adresse">
+		<p:column headerText="Id">
+			<h:outputText value="#{adresse.adresseId}" />
+		</p:column>
+		<p:column headerText="Numéro">
+			<h:outputText value="#{adresse.num}" />
+		</p:column>		
+		<p:column headerText="Rue">
+			<h:outputText value="#{adresse.rue}" />
+		</p:column>		
+		<p:column headerText="Code Postal">
+			<h:outputText value="#{adresse.codePostal}" />
+		</p:column>		
+		<p:column headerText="Ville">
+			<h:outputText value="#{adresse.ville}" />
+		</p:column>
+		<p:column headerText="Département">
+			<h:outputText value="#{adresse.departement}" />
+		</p:column>
+		<p:column headerText="Pays">
+			<h:outputText value="#{adresse.pays}" />
 		</p:column>
 	</p:dataTable>
 </body> 
