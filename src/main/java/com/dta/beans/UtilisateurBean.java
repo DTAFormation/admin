@@ -7,9 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-
+import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.GetUtilisateurEJG;
 
@@ -106,22 +104,32 @@ public class UtilisateurBean {
 	public void setTypeUtil(String typeUtil) {
 		utilisateur.setTypeUtil(typeUtil);
 	}
+	
+	public List<Adresse> getAdresses () {
+		return utilisateur.getAdresses();
+	}
+	
+	public void setAdresses (List<Adresse> adresses) {
+		utilisateur.setAdresses(adresses);
+	}
 
 	public List<Utilisateur> showOne(int userID) {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
-		Utilisateur u = utilisateurEJB.find(userID);
-		utilisateurs.add(u);
+		Utilisateur utilisateur = utilisateurEJB.find(userID);
+		utilisateurs.add(utilisateur);
 		return utilisateurs;
+    }
+	
+	public List<Adresse> showAdresses(int userID) {
+		List<Adresse> adresses = new ArrayList<>();
+		Utilisateur utilisateur = utilisateurEJB.find(userID);
+		adresses = utilisateur.getAdresses();
+		return adresses;
     }
 	
 	public List<Utilisateur> getShowAll() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
 		utilisateurs = utilisateurEJB.getAll();
-		
-
-		
 		return utilisateurs;
     }
 }
