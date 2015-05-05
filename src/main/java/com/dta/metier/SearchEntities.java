@@ -2,12 +2,11 @@ package com.dta.metier;
 
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
-@Local
+
 public abstract class SearchEntities<T> {
 	
 	@PersistenceContext(unitName="ecommercedb")
@@ -28,10 +27,4 @@ public abstract class SearchEntities<T> {
 		return em.createQuery(criteria).getResultList();
 	}
 	
-	public T findById(int entityId){
-		return em.find(entityClass, entityId);
-	}
-	
-	
-
 }

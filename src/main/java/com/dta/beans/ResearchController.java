@@ -73,7 +73,7 @@ public class ResearchController {
 
 		//requetes recherche
 		if(this.articleId!=-1){
-			products = mockRequest(this.articleId);
+			products = searchArticle.findById(articleId);
 		}else{
 			// create a model article to search, based on the fields search
 			
@@ -82,7 +82,7 @@ public class ResearchController {
 			modelArticle.setPrix(this.priceArticle);
 			modelArticle.setStock(this.stockArticle);
 			
-			//send request
+			products = searchArticle.findDetail(modelArticle);
 		}
 	}
 	

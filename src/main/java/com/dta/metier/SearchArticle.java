@@ -1,5 +1,6 @@
 package com.dta.metier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -22,29 +23,45 @@ public class SearchArticle extends SearchEntities<Article>{
 		return query.getResultList();
 		
 	}
-	
-	public static String requestGenerator(Article model){
+		
+	public String requestGenerator(Article model){
 
-		String request = "SELECT article p FROM Article WHERE ";
+		String request = "SELECT a FROM Article a WHERE ";
 
 		if(model.getNom()!=null){
-			request += "p.name='"+model.getNom()+"' ";
+			request += "a.nom='"+model.getNom()+"' ";
 		}
 		if(model.getPrix()!=-1){
 			if(model.getNom()!=null){
-				request += "AND p.price='"+model.getPrix()+"' ";
+				request += "AND a.prix="+model.getPrix()+" ";
 			}else{
-				request += "p.price='"+model.getPrix()+"' ";
+				request += "a.prix="+model.getPrix()+" ";
 			}
 		}
 		if(model.getStock()!=-1){
-			if(model.getPrix()!=-1){
-				request += "AND p.stock='"+model.getStock()+"' ";
+			if(model.getPrix()!=-1 || model.getNom() != null){
+				request += "AND a.stock="+model.getStock()+" ";
 			}else{
-				request += "p.stock='"+model.getStock()+"' ";
+				request += "a.stock="+model.getStock()+" ";
 			}
 		}
 		return request;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Article> findDetail (Article article){
+		String requete = requestGenerator(article);
+		Query query = em.createQuery(requete);
+		if (query.getResultList().size() == 0)
+			return new ArrayList<Article>();
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Article> findById(int articleId){
+		Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
+		query.setParameter("id", articleId);
+		return query.getResultList();
+	}
+
 }
