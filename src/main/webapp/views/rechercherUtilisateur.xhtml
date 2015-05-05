@@ -117,18 +117,18 @@
 
 		<!-- Liste results -->
 
-		<p:dataList value="#{research.products}" var="list" type="unordered"
+		<p:dataList value="#{research.users}" var="list" type="unordered"
 			itemType="none" id="results">
 			<f:facet name="header">
 				Resultats de recherche: 
-            	<p:outputLabel value="#{research.resultSize}" />
+            	<p:outputLabel value="#{research.users.size()}" />
 			</f:facet>
 
 			<h:panelGrid columns="2">
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
-					<h:outputLink value="#{research.path}">
+					<h:outputLink value="showUser.xhtml">
 						<h:graphicImage library="img" name="loupe.png" />
-						<f:param name="articleId" value="#{list.articleId}" />
+						<f:param name="idUser" value="#{list.utilisateurId}" />
 					</h:outputLink>
 				</p:lightBox>
 
@@ -136,11 +136,11 @@
 					<p:outputLabel for="nom" value="nom:" />
 					<h:outputText value="#{list.nom}" id="nom" />
 
-					<p:outputLabel for="prix" value="prix:" />
-					<h:outputText value="#{list.prix}" id="prix" />
+					<p:outputLabel for="prenom" value="prix:" />
+					<h:outputText value="#{list.prenom}" id="prix" />
 
-					<p:outputLabel for="stock" value="stock:" />
-					<h:outputText value="#{list.stock}" id="stock" />
+					<p:outputLabel for="email" value="stock:" />
+					<h:outputText value="#{list.email}" id="stock" />
 				</h:panelGrid>
 			</h:panelGrid>
 			<hr />
