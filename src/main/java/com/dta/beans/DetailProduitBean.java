@@ -11,9 +11,6 @@ import com.dta.metier.SearchArticle;
 @ManagedBean(name="detailProduit")
 @SessionScoped
 public class DetailProduitBean{
-
-	private int articleId;
-
 	
 	
 	@EJB
@@ -24,18 +21,6 @@ public class DetailProduitBean{
 		Article monArticle = searchArticle.findById(id);
 		return monArticle;
     }
-
-
-	public int getArticleId() {
-		return articleId;
-	}
-
-
-	public void setArticleId(int articleId) {
-		this.articleId = articleId;
-	}
-
-
 	
 	
 }

@@ -5,44 +5,44 @@
 
 <h:head>
 	<f:metadata>
-		<f:viewParam name="articleId" value="#{detailProduit.articleId}" />
+		<f:viewParam name="articleId" />
 	</f:metadata>
-	<title>Détail du produit n° #{detailProduit.articleId}</title>
+	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
 
-	<h1>Détail du produit n° #{detailProduit.articleId}</h1>
+	<h1>Détail du produit n° #{articleId}</h1>
 
 	<p:accordionPanel multiple="true">
 		<p:tab title="Article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Article ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).articleId}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).articleId}" />
 
 				<h:outputText value="Article Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).nom}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).nom}" />
 				<h:outputText value="Article Prix" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).prix}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).prix}" />
 				<h:outputText value="Article Stock" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).stock}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).stock}" />
 			</p:panelGrid>
 		</p:tab>
 		<p:tab title="Produit de l'article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Produit ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).produit.produitId}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.produitId}" />
 				<h:outputText value="Produit Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).produit.nom}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.nom}" />
 			</p:panelGrid>
 		</p:tab>
 		<p:tab title="Catalogue de l'article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Catalogue ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).produit.catalogue.catalogueId}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.catalogueId}" />
 				<h:outputText value="Catalogue Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).produit.catalogue.nom}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.nom}" />
 				<h:outputText value="Catalogue Description" />
-				<h:outputText value="#{detailProduit.showDetailArticle(detailProduit.articleId).produit.catalogue.description}" />
+				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.description}" />
 			</p:panelGrid>
 		</p:tab>
 	</p:accordionPanel>
