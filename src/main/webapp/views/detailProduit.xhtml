@@ -1,12 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<f:metadata>
 		<f:viewParam name="articleId" />
 	</f:metadata>
+	<c:set var="monArticle" value="${detailProduit.showDetailArticle(articleId)}" ></c:set>
+	<c:set var="monProduit" value="${monArticle.produit}" ></c:set>
+	<c:set var="monCatalogue" value="${monProduit.catalogue}" ></c:set>
 	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
@@ -17,32 +21,32 @@
 		<p:tab title="Article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Article ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).articleId}" />
+				<h:outputText value="#{monArticle.articleId}" />
 
 				<h:outputText value="Article Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).nom}" />
+				<h:outputText value="#{monArticle.nom}" />
 				<h:outputText value="Article Prix" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).prix}" />
+				<h:outputText value="#{monArticle.prix}" />
 				<h:outputText value="Article Stock" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).stock}" />
+				<h:outputText value="#{monArticle.stock}" />
 			</p:panelGrid>
 		</p:tab>
 		<p:tab title="Produit de l'article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Produit ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.produitId}" />
+				<h:outputText value="#{monProduit.produitId}" />
 				<h:outputText value="Produit Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.nom}" />
+				<h:outputText value="#{monProduit.nom}" />
 			</p:panelGrid>
 		</p:tab>
 		<p:tab title="Catalogue de l'article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Catalogue ID" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.catalogueId}" />
+				<h:outputText value="#{monCatalogue.catalogueId}" />
 				<h:outputText value="Catalogue Nom" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.nom}" />
+				<h:outputText value="#{monCatalogue.nom}" />
 				<h:outputText value="Catalogue Description" />
-				<h:outputText value="#{detailProduit.showDetailArticle(articleId).produit.catalogue.description}" />
+				<h:outputText value="#{monCatalogue.description}" />
 			</p:panelGrid>
 		</p:tab>
 	</p:accordionPanel>

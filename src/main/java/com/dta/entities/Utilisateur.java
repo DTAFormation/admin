@@ -7,9 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Utilisateur.findByTitre", query="SELECT u FROM Utilisateur u WHERE u.typeUtil = :typeUt"),
+    @NamedQuery(name="Utilisateur.findByName", query="SELECT u FROM Utilisateur u WHERE u.nom = :name")
+}) 
 public class Utilisateur {
 
 	@Id

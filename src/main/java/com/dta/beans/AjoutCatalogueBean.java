@@ -24,7 +24,6 @@ public class AjoutCatalogueBean {
 				+ description + ", nom=" + nom + "]";
 	}
 
-
 	public void save(){
 		catalogue = new Catalogue(description, nom, null);
 		ejb.save(catalogue);

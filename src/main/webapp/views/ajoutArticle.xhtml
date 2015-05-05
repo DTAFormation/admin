@@ -1,20 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body> 
-	<p>Add Article</p>
+<h:head>
 
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+
+	<!-- MENU -->
 	<h:form>
-		Nom       : <h:inputText value="#{ajoutArticle.nom}" required="true"/>
-		Prix      : <h:inputText value="#{ajoutArticle.prix}" required="true"/>
-		Produit : <h:inputText value="#{ajoutArticle.prodnom}"/>
-		Stock : <h:inputText value="#{ajoutArticle.stock}"/>
-		<h:commandButton action="#{ajoutArticle.save()}" value="Submit" />
+		<p:growl id="messages" />
+			<p:menubar>
+				<p:submenu label="Element" icon="ui-icon-document">
+					<p:submenu label="Nouveau" icon="ui-icon-contact">
+						<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+						<p:menuitem value="Catalogue" url="ajoutCatalogue.xhtml" />
+						<p:menuitem value="Produit" url="ajoutProduit.xhtml" />
+					</p:submenu>
+					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
+					</p:submenu>
+				</p:submenu>
+
+				<p:submenu label="Profil" icon="ui-icon-person">
+					<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+					<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+				</p:submenu>
+
+				<p:submenu label="Outils" icon="ui-icon-wrench">
+					<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+					<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
+					</p:submenu>
+				</p:submenu>
+
+				<f:facet name="options">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+						<p:commandButton type="button" value="Logout"
+							icon="ui-icon-extlink" />
+					</h:panelGrid>
+				</f:facet>
+			</p:menubar>
+
 	</h:form>
 
-</body> 
+	<br />
+
+	<!-- fin menu -->
+
+</h:head>
+<body>
+	<h:form>
+		<p:panel id="panel" header="Ajout article">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Nom:" />
+				<p:inputText value="#{ajoutArticle.nom}" required="true" />
+
+				<p:outputLabel value="Prix:" />
+				<p:inputText value="#{ajoutArticle.prix}" required="true" />
+
+				<p:outputLabel value="Produit:" />
+				<p:selectOneMenu value="#{ajoutArticle.produitId}">
+					<f:selectItem itemLabel="-- Choisir produit --" itemValue="#{null}" />
+					<f:selectItems value="#{ajoutArticle.allProduits}" var="prod"
+						itemLabel="#{prod.nom}" itemValue="#{prod.produitId}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Stock:" />
+				<p:inputText value="#{ajoutArticle.stock}" required="true" />
+			</h:panelGrid>
+			<p:commandButton actionListener="#{ajoutArticle.save()}"
+				value="Submit" />
+		</p:panel>
+	</h:form>
+	<p:link outcome="/index.xhtml" value="Retour au menu principal" />
+</body>
 </html>
