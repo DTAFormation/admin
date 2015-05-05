@@ -26,9 +26,9 @@ public class ResearchController {
 	//article fields
 	private String articleName;
 	private String productArticle;
-	private int articleId;
-	private float priceArticle;
-	private int stockArticle;
+	private String articleId;
+	private String priceArticle;
+	private String stockArticle;
 	
 	@EJB
 	private SearchArticle searchArticle;
@@ -50,18 +50,20 @@ public class ResearchController {
 
 	public ResearchController(){
 		
-		this("", "", "", "", "", "", "", -1, -1, -1, null, null, null);
+		this("", "", "", "", "", "", "", "", "", "", null, null, null, null);
 
 		List<Article> liste = new ArrayList<Article>();
 		products = liste;
 		users = new ArrayList<Utilisateur>();
 	}
 	
+
 	public ResearchController(String userName, String userFirstName,
 			String userMail, String userLogin, String userType,
-			String articleName, String productArticle, int articleId,
-			float priceArticle, int stockArticle, SearchArticle searchArticle,
-			SearchProduit searchProduit, List<Article> products) {
+			String articleName, String productArticle, String articleId,
+			String priceArticle, String stockArticle,
+			SearchArticle searchArticle, SearchProduit searchProduit,
+			List<Article> products, List<Utilisateur> users) {
 		super();
 		this.userName = userName;
 		this.userFirstName = userFirstName;
@@ -76,7 +78,10 @@ public class ResearchController {
 		this.searchArticle = searchArticle;
 		this.searchProduit = searchProduit;
 		this.products = products;
+		this.users = users;
 	}
+
+
 
 	/*
 	 * 
@@ -84,19 +89,29 @@ public class ResearchController {
 	 * 
 	 */
 	
+	public void deleteUser(int id){
+		System.out.println("deleteting "+id);
+	}
+	
 	public void submitResearchArticle() {
+		
+		System.out.println();
 
 		//requetes recherche
-		if(this.articleId!=-1){
-			products = searchArticle.findById(articleId);
+		if(!this.articleId.equals("")){
+			int articleId = Integer.parseInt(this.articleId);
+			products = mockRequest(articleId);
 		}else{
 			// create a model article to search, based on the fields search
 			
 			Article modelArticle = new Article();
-			modelArticle.setNom( (this.articleName.equals("")) ? "" : this.articleName);
-			modelArticle.setPrix(this.priceArticle);
-			modelArticle.setStock(this.stockArticle);
+
+			modelArticle.setNom( (this.articleName.equals("")) ? null : this.articleName);
+			modelArticle.setPrix( (this.priceArticle.equals("")) ? -1 : Float.parseFloat(this.priceArticle));
+			modelArticle.setStock( (this.stockArticle.equals("")) ? -1 : Integer.parseInt(this.stockArticle));
 			
+			System.out.println(modelArticle);
+
 			products = searchArticle.findDetail(modelArticle, this.productArticle);
 		}
 	}
@@ -165,108 +180,7 @@ public class ResearchController {
 		}
 		return result;
 	}
-	
-	
-	/*
-	 * Getters and Setters
-	 * 
-	 */
 
-	public List<Article> getProducts(){
-		return this.products;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	public String getArticleName() {
-		return articleName;
-	}
-
-	public void setArticleName(String articleName) {
-		this.articleName = articleName;
-	}
-
-	public String getProductArticle() {
-		return productArticle;
-	}
-
-	public void setProductArticle(String productArticle) {
-		this.productArticle = productArticle;
-	}
-
-	public int getArticleId() {
-		return articleId;
-	}
-
-	public void setArticleId(int articleId) {
-		this.articleId = articleId;
-	}
-
-	public void setProducts(List<Article> products) {
-		this.products = products;
-	}
-	
-	public float getPriceArticle() {
-		return priceArticle;
-	}
-
-	public void setPriceArticle(float priceArticle) {
-		this.priceArticle = priceArticle;
-	}
-
-	public int getStockArticle() {
-		return stockArticle;
-	}
-
-	public void setStockArticle(int stockArticle) {
-		this.stockArticle = stockArticle;
-	}
-	
-	public String getUserFirstName() {
-		return userFirstName;
-	}
-
-	public void setUserFirstName(String userFirstName) {
-		this.userFirstName = userFirstName;
-	}
-
-	public String getUserMail() {
-		return userMail;
-	}
-
-	public void setUserMail(String userMail) {
-		this.userMail = userMail;
-	}
-
-	public String getUserLogin() {
-		return userLogin;
-	}
-
-	public void setUserLogin(String userLogin) {
-		this.userLogin = userLogin;
-	}
-
-	public List<Utilisateur> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<Utilisateur> users) {
-		this.users = users;
-	}
 
 	/*
 	 * 
@@ -283,5 +197,149 @@ public class ResearchController {
 				+ ", stockArticle=" + stockArticle + ", searchArticle="
 				+ searchArticle + ", searchProduit=" + searchProduit
 				+ ", products=" + products + "]";
+	}
+	
+	
+	/*
+	 * Getters and Setters
+	 * 
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+
+	public String getUserMail() {
+		return userMail;
+	}
+
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+
+	public String getUserLogin() {
+		return userLogin;
+	}
+
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
+	}
+
+
+	public String getUserType() {
+		return userType;
+	}
+
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+
+	public String getArticleName() {
+		return articleName;
+	}
+
+
+	public void setArticleName(String articleName) {
+		this.articleName = articleName;
+	}
+
+
+	public String getProductArticle() {
+		return productArticle;
+	}
+
+
+	public void setProductArticle(String productArticle) {
+		this.productArticle = productArticle;
+	}
+
+
+	public String getArticleId() {
+		return articleId;
+	}
+
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+
+	public String getPriceArticle() {
+		return priceArticle;
+	}
+
+
+	public void setPriceArticle(String priceArticle) {
+		this.priceArticle = priceArticle;
+	}
+
+
+	public String getStockArticle() {
+		return stockArticle;
+	}
+
+
+	public void setStockArticle(String stockArticle) {
+		this.stockArticle = stockArticle;
+	}
+
+
+	public SearchArticle getSearchArticle() {
+		return searchArticle;
+	}
+
+
+	public void setSearchArticle(SearchArticle searchArticle) {
+		this.searchArticle = searchArticle;
+	}
+
+
+	public SearchProduit getSearchProduit() {
+		return searchProduit;
+	}
+
+
+	public void setSearchProduit(SearchProduit searchProduit) {
+		this.searchProduit = searchProduit;
+	}
+
+
+	public List<Article> getProducts() {
+		return products;
+	}
+
+
+	public void setProducts(List<Article> products) {
+		this.products = products;
+	}
+
+
+	public List<Utilisateur> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<Utilisateur> users) {
+		this.users = users;
 	}
 }
