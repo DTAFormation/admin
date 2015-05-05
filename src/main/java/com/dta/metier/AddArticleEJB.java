@@ -20,9 +20,16 @@ public class AddArticleEJB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Produit> getProduitByName(String name) {
-		return em.createQuery("FROM Produit p where p.nom = :arg")
-			.setParameter("arg", name)
+	public Produit getProduitById(int id) {
+		List<Produit> list = em.createQuery("FROM Produit p where p.produitId = :arg")
+				.setParameter("arg", id)
+				.getResultList();
+		return list.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Produit> getAllProduits() {		
+		return em.createQuery("FROM Produit p")
 			.getResultList();
 	}
 }
