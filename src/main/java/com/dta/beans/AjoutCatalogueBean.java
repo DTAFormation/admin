@@ -3,41 +3,41 @@ package com.dta.beans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import com.dta.entities.Produit;
-import com.dta.metier.AddProduitEJB;
+import com.dta.entities.Catalogue;
+import com.dta.metier.AddCatalogueEJB;
 
-@ManagedBean(name="ajoutProduit")
-public class AjoutProduitBean {
+@ManagedBean(name="ajoutCatalogue")
+public class AjoutCatalogueBean {
 	
-	Produit produit;
+	Catalogue catalogue;
 	
 	private String description;
 	
 	private String nom;
 
 	@EJB
-	private AddProduitEJB ejb;
+	private AddCatalogueEJB ejb;
 
 	@Override
 	public String toString() {
-		return "AjoutProduitBean [produit=" + produit + ", description="
+		return "AjoutCatalogueBean [catalogue=" + catalogue + ", description="
 				+ description + ", nom=" + nom + "]";
 	}
 
 
 	public void save(){
-		produit = new Produit(description, nom, null, null);
-		ejb.save(produit);
+		catalogue = new Catalogue(description, nom, null);
+		ejb.save(catalogue);
 	}
 
 
-	public Produit getProduit() {
-		return produit;
+	public Catalogue getCatalogue() {
+		return catalogue;
 	}
 
 
-	public void setProduit(Produit produit) {
-		this.produit = produit;
+	public void setCatalogue(Catalogue catalogue) {
+		this.catalogue = catalogue;
 	}
 
 

@@ -27,6 +27,7 @@ public class Produit {
 	private Catalogue catalogue;
 	
 	@OneToMany(mappedBy="produit")
+	@Column(nullable=true)
 	private List<Article> articles;
 	
 	public Produit() {}
