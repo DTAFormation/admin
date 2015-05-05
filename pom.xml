@@ -10,7 +10,12 @@
 	<!-- Maven dependencies -->
 
 	<dependencies>
-
+		<dependency>  
+		    <groupId>org.apache.openejb</groupId>  
+		    <artifactId>openejb-core</artifactId>  
+		    <version>4.0.0-beta-1</version>  
+		    <scope>test</scope>  
+		</dependency>  
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>

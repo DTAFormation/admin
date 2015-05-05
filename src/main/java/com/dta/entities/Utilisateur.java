@@ -16,13 +16,13 @@ public class Utilisateur {
 	@Column(name="utilisateur_id", length=19)
 	private int utilisateurId;
 	
-	@Column(name="email", length=255)
+	@Column(name="email", length=255, unique=true)
 	private String email;
 	
 	@Column(name="fax", length=10)
 	private int fax;
 	
-	@Column(name="login", length=255)
+	@Column(name="login", length=255 , unique=true)
 	private String login;
 	
 	@Column(name="nom", length=255)
