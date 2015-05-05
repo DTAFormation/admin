@@ -11,6 +11,7 @@ import com.dta.entities.Produit;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchProduit;
+import com.dta.metier.SearchUtilisateur;
 
 @ManagedBean(name="research")
 public class ResearchController {
@@ -34,6 +35,9 @@ public class ResearchController {
 	
 	@EJB
 	private SearchProduit searchProduit;
+	
+	@EJB
+	private SearchUtilisateur searchUtilisateur;
 
 	private List<Article> products;
 	private List<Utilisateur> users; 
@@ -106,7 +110,7 @@ public class ResearchController {
 
 			
 			
-			//send request
+			products = searchArticle.findDetail(modelArticle, this.productArticle);
 		}
 	}
 	
@@ -115,11 +119,19 @@ public class ResearchController {
 	}
 
 	public void submitResearchUser(){
-		//todo
+		Utilisateur modelUtilisateur = new Utilisateur();
+		modelUtilisateur.setLogin(this.userLogin.equals("") ? null : this.userLogin);
+		modelUtilisateur.setNom(this.userName.equals("") ? null : this.userName);
+		modelUtilisateur.setPrenom(this.userFirstName.equals("") ? null : this.userFirstName);
+		modelUtilisateur.setEmail(this.userMail.equals("") ? null : this.userMail);
+		modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType);
+
+		
+		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
 	
 	public void submitResearchAllUser(){
-		users = mockRequest("lebricoleur");
+		users = searchUtilisateur.findAll();
 	}
 
 	public int getResultSize(){

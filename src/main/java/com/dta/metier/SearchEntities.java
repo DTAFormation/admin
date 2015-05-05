@@ -26,10 +26,4 @@ public abstract class SearchEntities<T> {
 		return em.createQuery(criteria).getResultList();
 	}
 	
-	public T findById(int entityId){
-		return em.find(entityClass, entityId);
-	}
-	
-	
-
 }
