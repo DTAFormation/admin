@@ -45,13 +45,17 @@
 						<p:inputText value="#{research.articleName}" id="nomArticle" />
 
 						<p:outputLabel for="produit" value="Produit:" />
-						<p:inputText value="#{research.product}" id="produit" />
+						<p:inputText value="#{research.productArticle}" id="produit" />
 						
 						<p:outputLabel for="id" value="id:" />
 						<p:inputText value="#{research.articleId}" id="id" />
-
+						
+						<p:outputLabel for="prixArticle" value="Prix:" />
+						<p:inputText value="#{research.priceArticle}" id="prixArticle" />
+						
+						<p:outputLabel for="stockArticle" value="Stock:" />
+						<p:inputText value="#{research.stockArticle}" id="stockArticle" />
 					</h:panelGrid>
-
 				</p:tab>
 				<p:tab title="Utilisateur">
 					<h:panelGrid columns="4" cellpadding="5">
