@@ -22,7 +22,6 @@ public class Article {
 	private float prix;
 	
 	@ManyToOne
-	@JoinTable(name="articles_produit")
 	private Produit produit;
 	
 	@Column(name="stock", length=19)
