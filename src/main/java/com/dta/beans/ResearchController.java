@@ -97,6 +97,15 @@ public class ResearchController {
 	public int getResultSize(){
 		return products.size();
 	}
+	
+	public String getPath(){
+		return "detailProduit.xhtml";
+	}
+	
+	/*
+	 * Mock methods
+	 * 
+	 */
 
 	private List<Article> mockRequest(int id){
 
