@@ -23,4 +23,28 @@ public class SearchArticle extends SearchEntities<Article>{
 		
 	}
 	
+	public static String requestGenerator(Article model){
+
+		String request = "SELECT article p FROM Article WHERE ";
+
+		if(model.getNom()!=null){
+			request += "p.name='"+model.getNom()+"' ";
+		}
+		if(model.getPrix()!=-1){
+			if(model.getNom()!=null){
+				request += "AND p.price='"+model.getPrix()+"' ";
+			}else{
+				request += "p.price='"+model.getPrix()+"' ";
+			}
+		}
+		if(model.getStock()!=-1){
+			if(model.getPrix()!=-1){
+				request += "AND p.stock='"+model.getStock()+"' ";
+			}else{
+				request += "p.stock='"+model.getStock()+"' ";
+			}
+		}
+		return request;
+	}
+	
 }

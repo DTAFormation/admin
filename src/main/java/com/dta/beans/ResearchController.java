@@ -13,14 +13,16 @@ import com.dta.metier.SearchProduit;
 @ManagedBean(name="research")
 public class ResearchController {
 
-	private String msg;
-
+	//user fields
 	private String userName;
 	private String userType;
 
+	//article fields
 	private String articleName;
-	private String product;
+	private String productArticle;
 	private int articleId;
+	private float priceArticle;
+	private int stockArticle;
 	
 	@EJB
 	private SearchArticle searchArticle;
@@ -29,39 +31,117 @@ public class ResearchController {
 	private SearchProduit searchProduit;
 
 	private List<Article> products;
+	
+	/*
+	 * 
+	 * Constructors
+	 * 
+	 */
 
 	public ResearchController(){
-
-		this("", "", "CLIENT", "", "", 0, null);
+		
+		this("", "", "", "", -1, -1, -1, null, null, null);
 
 		List<Article> liste = new ArrayList<Article>();
-
 		products = liste;
-
 	}
 
-
-	public ResearchController(String msg, String userName, String userType,
-			String articleName, String product, int articleId,
-			List<Article> products) {
+	public ResearchController(String userName, String userType,
+			String articleName, String productArticle, int articleId,
+			float priceArticle, int stockArticle, SearchArticle searchArticle,
+			SearchProduit searchProduit, List<Article> products) {
 		super();
-		this.msg = msg;
 		this.userName = userName;
 		this.userType = userType;
 		this.articleName = articleName;
-		this.product = product;
+		this.productArticle = productArticle;
 		this.articleId = articleId;
+		this.priceArticle = priceArticle;
+		this.stockArticle = stockArticle;
+		this.searchArticle = searchArticle;
+		this.searchProduit = searchProduit;
 		this.products = products;
 	}
+	
+	/*
+	 * 
+	 * Controller Methods
+	 * 
+	 */
+	
+	public void submitResearchArticle() {
 
-
-	public String getMsg(){
-		return this.msg;
+		//requetes recherche
+		if(this.articleId!=-1){
+			products = mockRequest(this.articleId);
+		}else{
+			// create a model article to search, based on the fields search
+			
+			Article modelArticle = new Article();
+			modelArticle.setNom( (this.articleName.equals("")) ? null : this.articleName);
+			modelArticle.setPrix(this.priceArticle);
+			modelArticle.setStock(this.stockArticle);
+			
+			//send request
+		}
+	}
+	
+	public void submitResearchAllArticle(){
+		products = searchArticle.findAll();
 	}
 
-	public void setMsg(String msg){
-		this.msg = msg;
+	public void submitResearchUser(){
+
 	}
+
+	public int getResultSize(){
+		return products.size();
+	}
+	
+	public String getPath(){
+		return "detailProduit.xhtml";
+	}
+	
+	/*
+	 * Mock methods
+	 * 
+	 */
+
+	private List<Article> mockRequest(int id){
+
+		List<Article> result = new ArrayList<Article>();
+		Article art = new Article();
+
+		art.setNom("article n°"+id);
+		art.setPrix(500);
+		art.setProduit(null);
+		art.setStock(100);
+		result.add(art);
+
+		return result;
+	}
+
+	private List<Article> mockRequest(String name){
+
+		List<Article> result = new ArrayList<Article>();
+
+		for(int i=0; i<50; i++){
+			Article art = new Article();
+
+			art.setNom(name+" n°"+i);
+			art.setPrix(500);
+			art.setProduit(null);
+			art.setStock(100);
+			result.add(art);
+		}
+		return result;
+	}
+	
+	
+	/*
+	 * Getters and Setters
+	 * 
+	 */
 
 	public List<Article> getProducts(){
 		return this.products;
@@ -91,12 +171,12 @@ public class ResearchController {
 		this.articleName = articleName;
 	}
 
-	public String getProduct() {
-		return product;
+	public String getProductArticle() {
+		return productArticle;
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setProductArticle(String productArticle) {
+		this.productArticle = productArticle;
 	}
 
 	public int getArticleId() {
@@ -110,76 +190,37 @@ public class ResearchController {
 	public void setProducts(List<Article> products) {
 		this.products = products;
 	}
-
-	@Override
-	public String toString() {
-		return "ResearchController [msg=" + msg + "]";
+	
+	public float getPriceArticle() {
+		return priceArticle;
 	}
 
-	public void submitResearchArticle() {
-
-		//requetes recherche
-		if(this.articleId!=0){
-			products = mockRequest(this.articleId);
-			
-		}else if(!this.articleName.equals("") && !this.product.equals("")){
-			
-		}else if(!this.articleName.equals("")){
-			products = searchArticle.findByName(this.articleName);
-			
-		}else if(!this.product.equals("")){
-			products = searchProduit.findAllArticles(this.product);
-			
-		}
-		
-		System.out.println("\n\n --> recherche: ");
-		System.out.println(this.toString());
-
+	public void setPriceArticle(float priceArticle) {
+		this.priceArticle = priceArticle;
 	}
 
-	public void submitResearchUser(){
-
+	public int getStockArticle() {
+		return stockArticle;
 	}
 
-	public int getResultSize(){
-		return products.size();
+	public void setStockArticle(int stockArticle) {
+		this.stockArticle = stockArticle;
 	}
 	
-	public void submitResearchAllArticle(){
-		//getAll
-		System.out.println("azll");
-		products = searchArticle.findAll();
-	}
-
-	private List<Article> mockRequest(int id){
-
-		List<Article> result = new ArrayList<Article>();
-		Article art = new Article();
-
-		art.setNom("article n°"+id);
-		art.setPrix(500);
-		art.setProduit(null);
-		art.setStock(100);
-		result.add(art);
-
-		return result;
-	}
-
-	private List<Article> mockRequest(String name){
-
-		List<Article> result = new ArrayList<Article>();
-
-		for(int i=0; i<50; i++){
-			Article art = new Article();
-
-			art.setNom(name+" n°"+i);
-			art.setPrix(500);
-			art.setProduit(null);
-			art.setStock(100);
-			result.add(art);
-		}
-
-		return result;
+	/*
+	 * 
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ResearchController [userName=" + userName + ", userType="
+				+ userType + ", articleName=" + articleName
+				+ ", productArticle=" + productArticle + ", articleId="
+				+ articleId + ", priceArticle=" + priceArticle
+				+ ", stockArticle=" + stockArticle + ", searchArticle="
+				+ searchArticle + ", searchProduit=" + searchProduit
+				+ ", products=" + products + "]";
 	}
 
 }

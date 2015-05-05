@@ -34,8 +34,8 @@
 		<p:fieldset legend="Criteres de recherche" toggleable="true"
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
-			
-			<h:inputHidden value="utilisateur" id="typeRecherche" />
+
+			<!-- Form research -->
 
 			<p:tabView>
 				<p:tab title="Article">
@@ -45,13 +45,17 @@
 						<p:inputText value="#{research.articleName}" id="nomArticle" />
 
 						<p:outputLabel for="produit" value="Produit:" />
-						<p:inputText value="#{research.product}" id="produit" />
-						
+						<p:inputText value="#{research.productArticle}" id="produit" />
+
 						<p:outputLabel for="id" value="id:" />
 						<p:inputText value="#{research.articleId}" id="id" />
 
-					</h:panelGrid>
+						<p:outputLabel for="prixArticle" value="Prix:" />
+						<p:inputText value="#{research.priceArticle}" id="prixArticle" />
 
+						<p:outputLabel for="stockArticle" value="Stock:" />
+						<p:inputText value="#{research.stockArticle}" id="stockArticle" />
+					</h:panelGrid>
 				</p:tab>
 				<p:tab title="Utilisateur">
 					<h:panelGrid columns="4" cellpadding="5">
@@ -63,12 +67,15 @@
 						<p:selectOneListbox id="typeSelect" value="#{research.userType}">
 							<f:selectItem itemLabel="client" itemValue="CLIENT" />
 							<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
-							<f:selectItem itemLabel="administrateur" itemValue="ADMINISTRATEUR" />
+							<f:selectItem itemLabel="administrateur"
+								itemValue="ADMINISTRATEUR" />
 						</p:selectOneListbox>
 					</h:panelGrid>
 
 				</p:tab>
 			</p:tabView>
+
+			<!-- Validation toolbar -->
 
 			<br />
 			<p:toolbar>
@@ -77,7 +84,7 @@
 						actionListener="#{research.submitResearchArticle()}"
 						style="margin-right:20px;" />
 				</f:facet>
-				
+
 				<f:facet name="left">
 					<p:commandButton value="Afficher tout" update="results"
 						actionListener="#{research.submitResearchAllArticle}"
@@ -94,6 +101,8 @@
 
 		<br />
 
+		<!-- Liste results -->
+
 		<p:dataList value="#{research.products}" var="list" type="unordered"
 			itemType="none" id="results">
 			<f:facet name="header">
@@ -102,7 +111,12 @@
 			</f:facet>
 
 			<h:panelGrid columns="2">
-				<h:graphicImage library="img" name="loupe.png" />
+
+				<p:link outcome="#{research.path}">
+					<h:graphicImage library="img" name="loupe.png" />
+					<f:param name="articleId" value="1" />
+				</p:link>
+
 				<h:panelGrid columns="2">
 
 					<p:outputLabel for="nom" value="nom:" />
