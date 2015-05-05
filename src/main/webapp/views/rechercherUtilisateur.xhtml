@@ -24,8 +24,7 @@
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur"
-						url="rechercherUtilisateur.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
 			</p:submenu>
 
@@ -39,8 +38,7 @@
 				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur"
-						url="rechercherUtilisateur.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
 			</p:submenu>
 
@@ -71,13 +69,14 @@
 
 				<p:outputLabel for="nomUtilisateur" value="Nom:" />
 				<p:inputText value="#{research.userName}" id="nomUtilisateur" />
-				
+
 				<p:outputLabel for="prenomUtilisateur" value="Prenom:" />
-				<p:inputText value="#{research.userFirstName}" id="prenomUtilisateur" />
-				
+				<p:inputText value="#{research.userFirstName}"
+					id="prenomUtilisateur" />
+
 				<p:outputLabel for="loginUtilisateur" value="Login:" />
 				<p:inputText value="#{research.userLogin}" id="loginUtilisateur" />
-				
+
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
 				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
 
@@ -142,6 +141,13 @@
 					<p:outputLabel for="email" value="email:" />
 					<h:outputText value="#{list.email}" id="email" />
 				</h:panelGrid>
+
+
+				<p:commandButton style="margin-right:20px;"
+					icon="ui-icon-closethick">
+					<f:ajax execute="#{research.deleteUser(list.utilisateurId)}"/>
+				</p:commandButton>
+
 			</h:panelGrid>
 			<hr />
 		</p:dataList>
