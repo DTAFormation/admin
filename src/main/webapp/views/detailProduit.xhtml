@@ -8,7 +8,7 @@
 	<f:metadata>
 		<f:viewParam name="articleId" />
 	</f:metadata>
-	<c:set var="monArticle" value="${detailProduit.showDetailArticle(articleId)}" ></c:set>
+	<c:set var="monArticle" value="${DetailProduitBean.showDetailArticle(articleId)}" ></c:set>
 	<c:set var="monProduit" value="${monArticle.produit}" ></c:set>
 	<c:set var="monCatalogue" value="${monProduit.catalogue}" ></c:set>
 	<title>Détail du produit n° #{articleId}</title>
