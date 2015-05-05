@@ -1,5 +1,6 @@
 package com.dta.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,6 +28,7 @@ public class Produit {
 	private Catalogue catalogue;
 	
 	@OneToMany(mappedBy="produit")
+	@Column(nullable=true)
 	private List<Article> articles;
 	
 	public Produit() {}
@@ -37,6 +39,11 @@ public class Produit {
 		this.nom = nom;
 		this.catalogue = catalogue;
 		this.articles = articles;
+	}
+	
+	public Produit(String description, String nom) {
+		this.description = description;
+		this.nom = nom;
 	}
 
 	public int getProduitId() {
