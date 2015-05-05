@@ -160,6 +160,7 @@ public class ResearchController {
 			ut.setEmail("bob@gmail.com");
 			ut.setLogin("boby");
 			ut.setTitre("bricoleur");
+			ut.setUtilisateurId(i);
 
 			result.add(ut);
 		}

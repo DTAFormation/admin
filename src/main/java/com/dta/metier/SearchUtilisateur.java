@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
@@ -15,20 +15,16 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 	
 	public SearchUtilisateur() {
 		super(Utilisateur.class);
-		// TODO Auto-generated constructor stub
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findByName(String name){
-		Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.nom = :name");
+		TypedQuery<Utilisateur> query = em.createQuery("Utilisateur.findByName", Utilisateur.class);
 		query.setParameter("name", name);
-		return query.getResultList();
-		
+		return query.getResultList();		
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Utilisateur> findByType(String type){
-		Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.typeUtil = :typeUt");
+	public List<Utilisateur> findByTitre(String type){
+		TypedQuery<Utilisateur> query = em.createNamedQuery("Utilisateur.findByTitre", Utilisateur.class);
 		query.setParameter("typeUt", type);
 		return query.getResultList();
 	}
