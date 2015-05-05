@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
-
 public abstract class SearchEntities<T> {
 	
 	@PersistenceContext(unitName="ecommercedb")

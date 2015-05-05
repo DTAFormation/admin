@@ -1,70 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<f:metadata>
-		<f:viewParam name="idUser" value="1" />
+		<f:viewParam name="idUser" />
 	</f:metadata>
-</h:head> 
-<body> 
+</h:head>
+<body>
 	<h1>Détail de l'utilisateur n° #{idUser}</h1>
-	<p:dataTable value="#{utilisateur.showOne(idUser)}" var="utilisateur">
-		<p:column headerText="Id">
+
+	<p:carousel value="#{utilisateur.showOne(idUser)}" var="utilisateur"
+		headerText="Utilisateur">
+		<p:panelGrid columns="2">
+		
+			<h:outputText value="ID" />
 			<h:outputText value="#{utilisateur.utilisateurId}" />
-		</p:column>		
-		<p:column headerText="Type">
+			<h:outputText value="Type" />
 			<h:outputText value="#{utilisateur.typeUtil}" />
-		</p:column>
-		<p:column headerText="Login">
+			<h:outputText value="Login" />
 			<h:outputText value="#{utilisateur.login}" />
-		</p:column>
-		<p:column headerText="Titre">
+			<h:outputText value="Civilité" />
 			<h:outputText value="#{utilisateur.titre}" />
-		</p:column>
-		<p:column headerText="Nom">
+			<h:outputText value="Nom" />
 			<h:outputText value="#{utilisateur.nom}" />
-		</p:column>
-		<p:column headerText="Prenom">
+			<h:outputText value="Prenom" />
 			<h:outputText value="#{utilisateur.prenom}" />
-		</p:column>
-		<p:column headerText="Email">
+			<h:outputText value="Email" />
 			<h:outputText value="#{utilisateur.email}" />
-		</p:column>
-		<p:column headerText="Téléphone">
+			<h:outputText value="Téléphone" />
 			<h:outputText value="#{utilisateur.telephone}" />
-		</p:column>
-		<p:column headerText="Fax">
+			<h:outputText value="Fax" />
 			<h:outputText value="#{utilisateur.fax}" />
-		</p:column>
-	</p:dataTable>
+
+
+		</p:panelGrid>
+	</p:carousel>
+
 	<br />
-	<h1>Adresses de l'utilisateur n° #{idUser}</h1>
-	<p:dataTable value="#{utilisateur.showAdresses(idUser)}" var="adresse">
-		<p:column headerText="Id">
+
+	<p:carousel value="#{utilisateur.showAdresses(idUser)}" var="adresse"
+		headerText="Adresses">
+		<p:panelGrid columns="2">
+			<h:outputText value="Adresse ID" />
 			<h:outputText value="#{adresse.adresseId}" />
-		</p:column>
-		<p:column headerText="Numéro">
+			<h:outputText value="Numéro" />
 			<h:outputText value="#{adresse.num}" />
-		</p:column>		
-		<p:column headerText="Rue">
+			<h:outputText value="Rue" />
 			<h:outputText value="#{adresse.rue}" />
-		</p:column>		
-		<p:column headerText="Code Postal">
+			<h:outputText value="Code Postal" />
 			<h:outputText value="#{adresse.codePostal}" />
-		</p:column>		
-		<p:column headerText="Ville">
+			<h:outputText value="Ville" />
 			<h:outputText value="#{adresse.ville}" />
-		</p:column>
-		<p:column headerText="Département">
+			<h:outputText value="Département" />
 			<h:outputText value="#{adresse.departement}" />
-		</p:column>
-		<p:column headerText="Pays">
+			<h:outputText value="Pays" />
 			<h:outputText value="#{adresse.pays}" />
-		</p:column>
-	</p:dataTable>
-</body> 
+		</p:panelGrid>
+	</p:carousel>
+
+	<br />
+
+</body>
 </html>

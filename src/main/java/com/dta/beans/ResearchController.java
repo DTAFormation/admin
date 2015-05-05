@@ -7,6 +7,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import com.dta.entities.Article;
+import com.dta.entities.Produit;
+import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchProduit;
 
@@ -34,6 +36,7 @@ public class ResearchController {
 	private SearchProduit searchProduit;
 
 	private List<Article> products;
+	private List<Utilisateur> users; 
 	
 	/*
 	 * 
@@ -47,6 +50,7 @@ public class ResearchController {
 
 		List<Article> liste = new ArrayList<Article>();
 		products = liste;
+		users = new ArrayList<Utilisateur>();
 	}
 	
 	public ResearchController(String userName, String userFirstName,
@@ -69,8 +73,6 @@ public class ResearchController {
 		this.searchProduit = searchProduit;
 		this.products = products;
 	}
-
-
 
 	/*
 	 * 
@@ -104,7 +106,7 @@ public class ResearchController {
 	}
 	
 	public void submitResearchAllUser(){
-		//todo
+		users = mockRequest("lebricoleur");
 	}
 
 	public int getResultSize(){
@@ -134,18 +136,20 @@ public class ResearchController {
 		return result;
 	}
 
-	private List<Article> mockRequest(String name){
+	private List<Utilisateur> mockRequest(String name){
 
-		List<Article> result = new ArrayList<Article>();
+		List<Utilisateur> result = new ArrayList<Utilisateur>();
 
 		for(int i=0; i<50; i++){
-			Article art = new Article();
+			Utilisateur ut = new Utilisateur();
+			
+			ut.setNom(name);
+			ut.setPrenom("bob");
+			ut.setEmail("bob@gmail.com");
+			ut.setLogin("boby");
+			ut.setTitre("bricoleur");
 
-			art.setNom(name+" n°"+i);
-			art.setPrix(500);
-			art.setProduit(null);
-			art.setStock(100);
-			result.add(art);
+			result.add(ut);
 		}
 		return result;
 	}
@@ -242,6 +246,14 @@ public class ResearchController {
 
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
+	}
+
+	public List<Utilisateur> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Utilisateur> users) {
+		this.users = users;
 	}
 
 	/*

@@ -20,9 +20,15 @@ public class AddProduitEJB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Catalogue> getCatalogueByName(String name) {
-		return em.createQuery("FROM Catalogue c where c.nom = :arg")
-			.setParameter("arg", name)
+	public List<Catalogue> getCatalogueById(int id) {
+		return em.createQuery("FROM Catalogue c where c.catalogueId = :arg")
+			.setParameter("arg", id)
+			.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Catalogue> getAllCatalogues() {		
+		return em.createQuery("FROM Catalogue c")
 			.getResultList();
 	}
 }
