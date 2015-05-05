@@ -112,10 +112,10 @@
 
 			<h:panelGrid columns="2">
 
-				<p:lightBox iframe="true" id="lightbox">
+				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
 					<h:outputLink value="#{research.path}">
 						<h:graphicImage library="img" name="loupe.png" />
-						<f:param name="articleId" value="1" />
+						<f:param name="articleId" value="#{list.articleId}" />
 					</h:outputLink>
 				</p:lightBox>
 

@@ -12,6 +12,44 @@
 		<br />
 	</p>
 
+	<!-- MENU -->
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:submenu label="Element" icon="ui-icon-document">
+				<p:submenu label="Nouveau" icon="ui-icon-contact">
+					<p:menuitem value="Utilisateur" url="views/addClient.xhtml" />
+					<p:menuitem value="Article" url="views/ajoutArticle.xhtml" />
+				</p:submenu>
+				<p:separator />
+				<p:menuitem value="Rechercher" url="views/research.xhtml" />
+			</p:submenu>
+
+			<p:submenu label="Profil" icon="ui-icon-person">
+				<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+				<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+			</p:submenu>
+
+			<p:submenu label="Outils" icon="ui-icon-wrench">
+				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+				<p:menuitem value="Rechercher" url="views/research.xhtml"
+					icon="ui-icon-zoomin" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+					<p:commandButton type="button" value="Logout"
+						icon="ui-icon-extlink" />
+				</h:panelGrid>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<br />
+
 	<p:stack icon="/resources/icon/stack.png" expanded="true">
 		<p:menuitem value="Recherche"
 			icon="/resources/icon/recherche-rouge.png"
@@ -35,13 +73,16 @@
 		<f:param name="articleId" value="1" />
 	</p:link>
 
-<ul>
-	<li><p:link outcome="views/ajoutProduit.xhtml" value="ajout d'un produit"></p:link></li>
-	
-	<li><p:link outcome="views/ajoutCatalogue.xhtml" value="ajout d'un catalogue"></p:link></li>
-	
-	<li><p:link outcome="views/ajoutArticle.xhtml" value="ajout d'un article"></p:link></li>
-</ul>
+	<ul>
+		<li><p:link outcome="views/ajoutProduit.xhtml"
+				value="ajout d'un produit"></p:link></li>
+
+		<li><p:link outcome="views/ajoutCatalogue.xhtml"
+				value="ajout d'un catalogue"></p:link></li>
+
+		<li><p:link outcome="views/ajoutArticle.xhtml"
+				value="ajout d'un article"></p:link></li>
+	</ul>
 
 </h:body>
 </html>
