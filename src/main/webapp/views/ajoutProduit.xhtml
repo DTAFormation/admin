@@ -1,20 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
+<h:head></h:head>
 <h:body>
-	<p>Add Produit</p>
+	<p:panel id="panel" header="Ajout produit">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Nom:" />
+			<p:inputText value="#{ajoutProduit.nom}" required="true" />
 
-	<h:form>
-		Nom       : <h:inputText value="#{ajoutProduit.nom}" required="true"/>
-		Description : <h:inputText value="#{ajoutProduit.description}"/>
-		Catalogue : <h:inputText value="#{ajoutProduit.catnom}"/>
-		<h:commandButton action="#{ajoutProduit.save()}" value="Submit" />
-	</h:form>
+			<p:outputLabel value="Description:" />
+			<p:inputText value="#{ajoutProduit.description}" required="true" />
 
+			<p:outputLabel value="Catalogue:" />
+			<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
+				<f:selectItem  itemLabel="-- Choisir catalogue --" itemValue="#{null}"/>
+				<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
+					itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+		<p:commandButton actionListener="#{ajoutProduit.save}" value="Submit" />
+	</p:panel>
 </h:body>
 </html>

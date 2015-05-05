@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.GetUtilisateurEJG;
+import com.dta.metier.SearchUtilisateur;
 
 
 @ManagedBean(name="utilisateur")
@@ -19,7 +19,7 @@ public class UtilisateurBean {
 	private Utilisateur utilisateur;
 	
 	@EJB
-	private GetUtilisateurEJG utilisateurEJB;
+	private SearchUtilisateur searchUtilisateur;
 	
 	public UtilisateurBean() {
 		this.utilisateur = new Utilisateur();
@@ -113,23 +113,25 @@ public class UtilisateurBean {
 		utilisateur.setAdresses(adresses);
 	}
 
-	public List<Utilisateur> showOne(int userID) {
-		List<Utilisateur> utilisateurs = new ArrayList<>();
-		Utilisateur utilisateur = utilisateurEJB.find(userID);
-		utilisateurs.add(utilisateur);
-		return utilisateurs;
+	public Utilisateur showOne(int userID) {
+		Utilisateur utilisateur = searchUtilisateur.findById(userID);
+		return utilisateur;
     }
 	
 	public List<Adresse> showAdresses(int userID) {
 		List<Adresse> adresses = new ArrayList<>();
-		Utilisateur utilisateur = utilisateurEJB.find(userID);
+		Utilisateur utilisateur = searchUtilisateur.findById(userID);
 		adresses = utilisateur.getAdresses();
 		return adresses;
     }
 	
 	public List<Utilisateur> getShowAll() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		utilisateurs = utilisateurEJB.getAll();
+		utilisateurs = searchUtilisateur.findAll();
 		return utilisateurs;
+    }
+	
+	public void delete() {
+		// An admin can delete the user 
     }
 }
