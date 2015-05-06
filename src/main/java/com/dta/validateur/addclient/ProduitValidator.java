@@ -15,7 +15,7 @@ import com.dta.metier.AddProduitEJB;
 @RequestScoped
 public class ProduitValidator implements Validator {
 
-	private static final String PRODUIT_EXISTANT = "Ce nom de produit est déjà pris";
+	private static final String PRODUIT_EXISTANT = "Ce nom de produit est deja pris";
 
 	@EJB
 	private AddProduitEJB ejb;

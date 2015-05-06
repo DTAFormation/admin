@@ -44,7 +44,7 @@ public class AjoutClientBean {
 		utilisateur.setTitre(titre);
 		utilisateur.setTypeUtil(typeUtil);
 		ejb.save(utilisateur);
-		RequestContext.getCurrentInstance().execute("PF('dlgClientAjouté').show()");
+		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
 	}
 
 	public String getEmail() {
