@@ -15,7 +15,7 @@ import com.dta.metier.AddCatalogueEJB;
 @RequestScoped
 public class CatalogueValidator implements Validator {
 	
-	private static final String CATALOGUE_EXISTANT = "Ce nom de catalogue est déjà pris";
+	private static final String CATALOGUE_EXISTANT = "Ce nom de catalogue est deja pris";
 	
 	@EJB
 	private AddCatalogueEJB ejb;
