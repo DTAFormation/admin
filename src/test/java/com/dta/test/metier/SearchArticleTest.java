@@ -102,6 +102,9 @@ public class SearchArticleTest{
 		List<Article> liste = new ArrayList<Article>();
 		liste.add(new Article("bob", 10, new Produit(), 10));
 		liste.add(new Article("bil", 20, new Produit(), 20));
+		
+		when(em.createNamedQuery("Article.findAll")).thenReturn(query);
+		when(query.getResultList()).thenReturn(liste);
 
 		int expectedResult = 2;
 		
@@ -157,7 +160,7 @@ public class SearchArticleTest{
 		LOG.info("");
 		assertEquals(result.get(0).toString(),articleAttendu.get(0).toString());
 	}
-	/*
+	
 	@Test
 	public void findDetailTest(){
 			
@@ -167,7 +170,7 @@ public class SearchArticleTest{
 		List<Article> articlesEnBase = new ArrayList<>();
 		articlesEnBase.add(new Article("testNom", 1.0f, null, 0));
 		
-		when(em.createQuery("SELECT a FROM Article a WHERE a.prix=1.0")).thenReturn(query);
+		when(em.createQuery("SELECT a FROM Article a WHERE a.prix=1.0 ")).thenReturn(query);
 		when(query.getResultList()).thenReturn(articlesEnBase);
 			
 		
@@ -179,11 +182,12 @@ public class SearchArticleTest{
 		LOG.info("Lorsque service.findByName(testNom)");
 		Article articleModel = new Article(null, 1.0f, null, -1);
 		String produitModel = "";
-		System.out.println(service.requestGenerator(articleModel, produitModel));
-		List<Article> result = service.findDetail(articleModel,produitModel);
+		String catalogueModel = "";
+		System.out.println(searchArticle.requestGenerator(articleModel, produitModel, catalogueModel));
+		List<Article> result = searchArticle.findDetail(articleModel,produitModel, catalogueModel);
 		
 		LOG.info("");
 		assertEquals(result.get(0).toString(),articleAttendu.get(0).toString());
 	}
-	*/
+	
 }

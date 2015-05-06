@@ -74,8 +74,6 @@ public class SearchArticle extends SearchEntities<Article>{
 	public List<Article> findDetail (Article article, String produit, String catalogue){
 		String requete = requestGenerator(article, produit, catalogue);
 		Query query = em.createQuery(requete);
-		if (query.getResultList().size() == 0)
-			return new ArrayList<Article>();
 		return query.getResultList();
 	}
 	
