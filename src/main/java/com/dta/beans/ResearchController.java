@@ -84,17 +84,12 @@ public class ResearchController {
 	/*
 	 *  Methods research ARTICLE
 	 */
-<<<<<<< HEAD
 	
 	public void logout() throws IOException{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 		
 	}
-	
-	public void submitResearchArticle() {
-=======
->>>>>>> 5f5c0694cdd372876e47b04123003c6c889f0232
 
 	public void submitResearchArticle() {
 		

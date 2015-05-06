@@ -66,7 +66,8 @@ public class Utilisateur {
 		this.typeUtil = typeUtil;
 		this.adresses = adresses;
 	}
-
+	
+	
 	public int getUtilisateurId() {
 		return utilisateurId;
 	}
