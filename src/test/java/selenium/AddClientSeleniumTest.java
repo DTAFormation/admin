@@ -9,7 +9,7 @@ public class AddClientSeleniumTest extends SeleneseTestCase {
 	/** {@inheritDoc} */
 	@Override
 	public void setUp() throws Exception {
-		setUp("http://www.netapsys.fr","*firefox"); // délégation de la configuration à la classe parente
+		setUp("http://www.netapsys.fr","*firefox"); // delegation de la configuration a la classe parente
 	}
 
 	/** Ouvre la page et verifie que le texte est bien present. */
