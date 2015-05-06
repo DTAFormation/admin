@@ -118,7 +118,7 @@
 					<p:selectOneMenu id="ResponsabilitéInput" value="#{ajoutClientBean.typeUtil}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Administrateur" itemValue="a" />
-						<f:selectItem itemLabel="Gestionnaire" itemValue="g" />
+						<f:selectItem itemLabel="Moderateur" itemValue="m" />
 						<f:selectItem itemLabel="Client" itemValue="c" />
 					</p:selectOneMenu>
 				</h:panelGrid>
@@ -191,7 +191,7 @@
 				</f:facet>
 				<f:facet name="right">
 					<p:commandButton value="Effacer" style="margin-right:20px;">
-						<p:ajax update="panelgenreal" resetValues="true" />
+						<p:ajax update="panelpersonnel" resetValues="true" />
 					</p:commandButton>
 				</f:facet>
 			</p:toolbar>

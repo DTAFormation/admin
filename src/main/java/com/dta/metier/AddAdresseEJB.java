@@ -17,14 +17,15 @@ public class AddAdresseEJB {
 	
 	public int save(Adresse adresse){
 		em.persist(adresse);
-		Query query = em.createQuery("SELECT a.adresse_id FROM Adresse a");
+		Query query = em.createQuery("SELECT a FROM Adresse a");
+		/*
 		query.setParameter("codepostal", adresse.getCodePostal());
 		query.setParameter("departement", adresse.getDepartement());
 		query.setParameter("numero", adresse.getNum());
 		query.setParameter("pays", adresse.getPays());
 		query.setParameter("rue", adresse.getRue());
 		query.setParameter("ville", adresse.getVille());
-		
+		/**/
 		List<Integer> adresseList = query.getResultList();
 		if(adresseList != null){
 			return (adresseList.get(adresseList.size()-1));
