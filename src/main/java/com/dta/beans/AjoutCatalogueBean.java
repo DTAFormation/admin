@@ -19,10 +19,7 @@ public class AjoutCatalogueBean {
 
 	public void save(){
 		catalogue = new Catalogue(description, nom, null);
-		try {
-			ejb.save(catalogue);
-		}
-		catch(Exception ex) {}
+		ejb.save(catalogue);
 	}
 
 	public Catalogue getCatalogue() {

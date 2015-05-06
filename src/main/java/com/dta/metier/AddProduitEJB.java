@@ -29,4 +29,8 @@ public class AddProduitEJB {
 		return em.createNamedQuery("Catalogue.findAll", Catalogue.class)
 			.getResultList();
 	}
+
+	public EntityManager getEm() {
+		return em;
+	}
 }

@@ -1,5 +1,7 @@
 package com.dta.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -25,6 +27,10 @@ public class AjoutArticleBean {
 		produit = ejb.getProduitById(produitId);
 		article = new Article(nom, prix, produit, stock);
 		ejb.save(article);
+	}
+	
+	public List<Produit> getAllProduits() {
+		return ejb.getAllProduits(); 
 	}
 	
 	public String getNom() {
