@@ -21,7 +21,6 @@ public class SearchArticle extends SearchEntities<Article>{
 		Query query = em.createQuery("SELECT a FROM Article a WHERE a.nom = :name");
 		query.setParameter("name", name);
 		return query.getResultList();
-		
 	}
 		
 	public String requestGenerator(Article model, String produit, String catalogue){
@@ -85,5 +84,4 @@ public class SearchArticle extends SearchEntities<Article>{
 		Query query = em.createQuery("DELETE FROM Article a WHERE articleId = "+articleId);
 		query.getFirstResult();
 	}
-
 }
