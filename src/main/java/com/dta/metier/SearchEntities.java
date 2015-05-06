@@ -26,14 +26,8 @@ public abstract class SearchEntities<T> {
 		return em.createQuery(criteria).getResultList();
 	}
 
-	public EntityManager getEm() {
-		return em;
-	}
-
+		
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	
-	
 }

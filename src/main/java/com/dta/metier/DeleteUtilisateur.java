@@ -12,8 +12,9 @@ public class DeleteUtilisateur {
 	@PersistenceContext(unitName="ecommercedb")
 	protected EntityManager em;
 	
-	public void delete(Utilisateur utilisateur){
-		em.remove(utilisateur);
+	public void delete(int utilisateurId){
+		Utilisateur utilisateur = em.find(Utilisateur.class, utilisateurId);
+		em.remove(utilisateur);		
 	}
-
+		
 }

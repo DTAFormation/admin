@@ -19,7 +19,7 @@ public class SearchArticle extends SearchEntities<Article>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findByName(String name){
-		Query query = em.createQuery("SELECT a FROM Article a WHERE a.nom = :name");
+		Query query = em.createNamedQuery("Article.findByName");
 		query.setParameter("name", name);
 		return query.getResultList();
 	}
@@ -82,7 +82,7 @@ public class SearchArticle extends SearchEntities<Article>{
 	@SuppressWarnings("unchecked")
 	public List<Article> findById(int articleId){
 		//Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
-		Query query = em.createNamedQuery("Article.findById", Article.class);
+		Query query = em.createNamedQuery("Article.findById");
 		query.setParameter("id", articleId);
 		return query.getResultList();
 	}
