@@ -18,7 +18,7 @@
 		<p:menubar>
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
-					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Utilisateur" url="ajoutClientBean.xhtml" />
 					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
@@ -49,7 +49,6 @@
 				</h:panelGrid>
 			</f:facet>
 		</p:menubar>
-
 	</h:form>
 	<br />
 	<!-- fin menu -->
@@ -60,22 +59,22 @@
 	<h:form>
 		<p:fieldset legend="Création d'un Utilisateur" toggleable="false"
 			toggleSpeed="500" id="panelgenreal">
-			
+
+
 			<p:fieldset legend="Information Personnelle" toggleable="false"
 				toggleSpeed="500" id="panelpersonnel">
-
 				<h:panelGrid columns="4" cellpadding="5">
 					<p:outputLabel value="Nom : " for="NomInput" />
-					<p:inputText id="NomInput" value="#{addClient.nom}" type="text"
-						required="true" />
-
-					<p:outputLabel value="Prenom : " for="PrenomInput" />
-					<p:inputText id="PrenomInput" value="#{addClient.prenom}"
+					<p:inputText id="NomInput" value="#{ajoutClientBean.nom}"
 						type="text" required="true" />
 
-					<p:outputLabel for="CibilitéInput " value="Civilité :" />
-					<p:selectOneMenu id="CibilitéInput" value="#{addClient.titre}"
-						style="width:150px">
+					<p:outputLabel value="Prenom : " for="PrenomInput" />
+					<p:inputText id="PrenomInput" value="#{ajoutClientBean.prenom}"
+						type="text" required="true" />
+
+					<p:outputLabel for="CivilitéInput " value="Civilité :" />
+					<p:selectOneMenu id="CivilitéInput"
+						value="#{ajoutClientBean.titre}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
 						<f:selectItem itemLabel="Madame" itemValue="Madame" />
@@ -83,19 +82,31 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Telephone : " for="telephoneInput" />
-					<p:inputText id="telephoneInput" value="#{addClient.telephone}"
-						type="number" />
-
+					<p:inputText id="telephoneInput"
+						value="#{ajoutClientBean.telephone}" type="tel" />
 				</h:panelGrid>
 			</p:fieldset>
-			
-			<p:fieldset legend="Donnée du Profil" toggleable="false"
-				toggleSpeed="500" id="panelprofil">
+
+			<p:fieldset legend="Liste des Adresses" toggleable="false"
+				toggleSpeed="500" id="panelAdresse">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Ajouter adresse" immediate="true" onclick="PF('dlgadress').show()" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton value="Effacer" style="margin-right:20px;">
+							<p:ajax update="panelgenreal" resetValues="true" />
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+			</p:fieldset>
+
+
+			<p:fieldset legend="Donnée du Profil" toggleable="false" toggleSpeed="500" id="panelprofil">
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<p:outputLabel value="Login : " for="loginInput" />
-					<p:inputText id="loginInput" value="#{addClient.login}" type="text"
-						required="true">
+					<p:inputText id="loginInput" value="#{ajoutClientBean.login}" type="text" required="true">
 						<f:ajax event="blur" render="LoginMessage" />
 						<f:validator binding="#{existenceLoginValidator}" />
 					</p:inputText>
@@ -104,8 +115,7 @@
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel for="ResponsabilitéInput "
 						value="Type Utilisateur :" />
-					<p:selectOneMenu id="ResponsabilitéInput"
-						value="#{addClient.typeUtil}" style="width:150px">
+					<p:selectOneMenu id="ResponsabilitéInput" value="#{ajoutClientBean.typeUtil}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Administrateur" itemValue="a" />
 						<f:selectItem itemLabel="Gestionnaire" itemValue="g" />
@@ -114,8 +124,7 @@
 				</h:panelGrid>
 				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Email : " for="EmailInput" />
-					<p:inputText id="EmailInput" value="#{addClient.email}"
-						type="email" required="true">
+					<p:inputText id="EmailInput" value="#{ajoutClientBean.email}" type="email" required="true">
 						<f:ajax event="blur" render="emailMessage" />
 						<f:validator binding="#{existenceEmailValidator}" />
 					</p:inputText>
@@ -125,31 +134,72 @@
 				<!-- Gestion PassWord -->
 
 				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
-					<h:outputLabel for="pwd1" value="Password: *" />
-					<p:password id="pwd1" value="#{addClient.password}" match="pwd2"
-						label="Password 1" required="true" />
+					<p:outputLabel for="pwd1" value="Password: *" />
+					<p:password id="pwd1" value="#{ajoutClientBean.password}" match="pwd2" label="Password 1" required="true" />
 
-					<h:outputLabel for="pwd2" value="Réecrire Password: *" />
-					<p:password id="pwd2" value="#{addClient.password}"
-						label="Password 2" required="true" />
+					<p:outputLabel for="pwd2" value="Réecrire Password: *" />
+					<p:password id="pwd2" value="#{ajoutClientBean.password}" label="Password 2" required="true" />
 				</h:panelGrid>
-
 			</p:fieldset>
-			<br />
-			<p:toolbar>
-				<f:facet name="left">
-					<p:commandButton action="#{addClient.save()}" value="Enregistrer" />
-				</f:facet>
-				<f:facet name="right">
-					<p:commandButton value="Effacer" style="margin-right:20px;">
-						<p:ajax update="panelgenreal" resetValues="true" />
-					</p:commandButton>
-				</f:facet>
-			</p:toolbar>
 		</p:fieldset>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton action="#{ajoutClientBean.save()}"
+					value="Enregistrer" />
+			</f:facet>
+			<f:facet name="right">
+				<p:commandButton value="Effacer" style="margin-right:20px;">
+					<p:ajax update="panelgenreal" resetValues="true" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
 	</h:form>
-
 </h:body>
 
 
+<p:dialog header="Dialog" widgetVar="dlgadress" dynamic="true">
+	<h:body>
+		<h:form>
+			<p:fieldset legend="Information Personnelle" toggleable="false"
+				toggleSpeed="500" id="panelpersonnel">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="Pays : " for="PaysInput" />
+					<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}" type="text" required="true" />
+
+					<p:outputLabel value="Departement : " for="DepartementInput" />
+					<p:inputText id="DepartementInput"
+						value="#{ajoutAdresseBean.departement}" type="text"	required="true" />
+
+					<p:outputLabel value="Ville : " for="VilleInput" />
+					<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}" type="text" required="true" />
+
+					<p:outputLabel value="CodePostal : " for="CodePostalInput" />
+					<p:inputText id="CodePostalInput"
+						value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
+
+					<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
+					<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}" type="text" required="true" />
+
+					<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
+					<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}" type="text" required="true" />
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton action="#{ajoutAdresseBean.save()}" value="Enregistrer"/>
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panelpersonnel" resetValues="true" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</h:body>
+</p:dialog>
+
+
 </html>
+
+

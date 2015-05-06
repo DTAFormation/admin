@@ -14,9 +14,6 @@ public class SearchArticleTest{
 	@EJB
 	private SearchArticle searchArticle;
 	
-
-	
-	
 	@Test
 	public void searchAllArticlesTest(){
 		int expectedResult = 4;
