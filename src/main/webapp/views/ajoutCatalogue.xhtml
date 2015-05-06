@@ -61,15 +61,25 @@
 <body>
 	<h:form>
 		<p:panel id="panel" header="Ajout catalogue">
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="2" cellpadding="5" id="panelgenreal">
 				<p:outputLabel value="Nom:" />
 				<p:inputText value="#{ajoutCatalogue.nom}" required="true" />
 
 				<p:outputLabel value="Description:" />
 				<p:inputText value="#{ajoutCatalogue.description}" required="true" />
-			</h:panelGrid>
-			<p:commandButton actionListener="#{ajoutCatalogue.save()}"
-				value="Submit" />
+			</h:panelGrid>			
+			<br/>
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton actionListener="#{ajoutCatalogue.save()}"
+				value="Enregistrer" />
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panelgenreal" resetValues="true" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>			
 		</p:panel>
 	</h:form>
 	<p:link outcome="/index.xhtml" value="Retour au menu principal" />

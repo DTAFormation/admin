@@ -61,7 +61,7 @@
 <h:body>
 	<h:form>
 		<p:panel id="panel" header="Ajout produit">
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="2" cellpadding="5" id="panelgenreal">
 				<p:outputLabel value="Nom:" />
 				<p:inputText value="#{ajoutProduit.nom}" required="true" />
 
@@ -76,7 +76,19 @@
 						itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
-			<p:commandButton actionListener="#{ajoutProduit.save}" value="Submit" />
+			
+			
+			<br/>
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton actionListener="#{ajoutProduit.save}" value="Enregistrer" />
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panelgenreal" resetValues="true" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
 		</p:panel>
 	</h:form>
 	<p:link outcome="/index.xhtml" value="Retour au menu principal" />
