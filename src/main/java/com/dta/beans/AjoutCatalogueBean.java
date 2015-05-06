@@ -14,50 +14,38 @@ public class AjoutCatalogueBean {
 	private String nom;
 	private String description;
 
-
 	@EJB
 	private AddCatalogueEJB ejb;
 
-	@Override
-	public String toString() {
-		return "AjoutCatalogueBean [catalogue=" + catalogue + ", description="
-				+ description + ", nom=" + nom + "]";
-	}
-
 	public void save(){
 		catalogue = new Catalogue(description, nom, null);
-		ejb.save(catalogue);
+		try {
+			ejb.save(catalogue);
+		}
+		catch(Exception ex) {}
 	}
-
 
 	public Catalogue getCatalogue() {
 		return catalogue;
 	}
 
-
 	public void setCatalogue(Catalogue catalogue) {
 		this.catalogue = catalogue;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public String getNom() {
 		return nom;
 	}
 
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	
 }

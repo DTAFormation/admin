@@ -66,10 +66,10 @@
 				<p:inputText value="#{ajoutCatalogue.nom}" required="true" />
 
 				<p:outputLabel value="Description:" />
-				<p:inputText value="#{ajoutCatalogue.description}" required="true" />
+				<p:inputText value="#{ajoutCatalogue.description}" />
 			</h:panelGrid>
 			<p:commandButton actionListener="#{ajoutCatalogue.save()}"
-				value="Submit" />
+				value="Submit" action="index"/>
 		</p:panel>
 	</h:form>
 	<p:link outcome="/index.xhtml" value="Retour au menu principal" />
