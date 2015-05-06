@@ -100,7 +100,7 @@ public class ResearchController {
 		//requetes recherche
 		if(!this.articleId.equals("")){
 			int articleId = Integer.parseInt(this.articleId);
-			products = mockRequest(articleId);
+			products = searchArticle.findById(articleId);
 		}else{
 			// create a model article to search, based on the fields search
 			
@@ -113,6 +113,8 @@ public class ResearchController {
 			
 
 			products = searchArticle.findDetail(modelArticle, this.productArticle);
+			
+			String test = "test";
 		}
 	}
 	
