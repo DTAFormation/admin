@@ -19,13 +19,12 @@ public class AddClientEJB{
 	}
 	
 	//Methode pour le validator.
-	public boolean SearchEmail(String email){
-		Query query = em.createQuery("SELECT email FROM Utilisateur WHERE email= :email").setParameter("email", email);
+	public boolean SearchExistenceEmail(String email){
+		Query query = em.createQuery("Utilisateur.findByEmail",Utilisateur.class).setParameter("email", email);
 		return (query.getResultList().size()!=0);
 	}
-	
-	public boolean SearchLogin(String login){
-		Query query = em.createQuery("SELECT login FROM Utilisateur WHERE login= :login").setParameter("login", login);
+	public boolean SearchExistenceLogin(String login){
+		Query query = em.createQuery("Utilisateur.findByLogin",Utilisateur.class).setParameter("login", login);
 		return (query.getResultList().size()!=0);
 	}
 

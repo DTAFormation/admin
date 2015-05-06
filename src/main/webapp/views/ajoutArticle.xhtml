@@ -61,10 +61,18 @@
 <body>
 	<h:form>
 		<p:panel id="panel" header="Ajout article">
-			<h:panelGrid columns="2" cellpadding="5" id="panelgenreal">
+			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
 				<p:outputLabel value="Nom:" />
-				<p:inputText value="#{ajoutArticle.nom}" required="true" />
-
+				<p:inputText id="articleInput" value="#{ajoutArticle.nom}"
+					required="true">
+					<f:ajax event="blur" render="articleMessage" />
+					<f:validator binding="#{articleValidator}" />
+				</p:inputText>
+				<p:message id="articleMessage" for="articleInput"
+					errorClass="erreur" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Prix:" />
 				<p:inputText value="#{ajoutArticle.prix}" required="true" />
 
@@ -76,14 +84,15 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Stock:" />
-				<p:inputText value="#{ajoutArticle.stock}" required="true" />
+				<p:inputText value="#{ajoutArticle.stock}" required="true"
+					requiredMessage="Champ obligatoire" />
 			</h:panelGrid>
 
-			<br/>
+			<br />
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton actionListener="#{ajoutArticle.save()}"
-				value="Enregistrer" />
+						value="Enregistrer" />
 				</f:facet>
 				<f:facet name="right">
 					<p:commandButton value="Effacer" style="margin-right:20px;">

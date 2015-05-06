@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import com.dta.entities.Article;
 import com.dta.entities.Produit;
@@ -19,18 +18,19 @@ public class AddArticleEJB {
 	public void save(Article article){
 		em.persist(article);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public Produit getProduitById(int id) {
-		List<Produit> list = em.createQuery("FROM Produit p where p.produitId = :arg")
-				.setParameter("arg", id)
-				.getResultList();
-		return list.get(0);
+		return em.createNamedQuery("Produit.findById", Produit.class)
+				.setParameter("id", id)
+				.getSingleResult();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Produit> getAllProduits() {		
-		return em.createQuery("FROM Produit p")
+		return em.createNamedQuery("Produit.findAll", Produit.class)
 			.getResultList();
+	}
+
+	public EntityManager getEm() {
+		return em;
 	}
 }

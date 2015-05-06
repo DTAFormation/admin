@@ -62,10 +62,5 @@ public class AjoutProduitBean {
 
 	public void setCatalogueId(int catalogueId) {
 		this.catalogueId = catalogueId;
-	}
-
-	
-
-	
-	
+	}	
 }

@@ -15,7 +15,7 @@ import com.dta.metier.AddClientEJB;
 @RequestScoped
 public class ExistenceEmailValidator implements Validator{
 
-	private static final String EMAIL_EXISTE_DEJA = "Cette adresse email est déjà utilisée";
+	private static final String EMAIL_EXISTE_DEJA = "Cette adresse email est deja utilisee";
 	
 	@EJB
 	private AddClientEJB addclientEJB;
@@ -24,7 +24,7 @@ public class ExistenceEmailValidator implements Validator{
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String email = (String) arg2;
-		if(addclientEJB.SearchEmail(email)){
+		if(addclientEJB.SearchExistenceEmail(email)){
 		      throw new ValidatorException(
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, EMAIL_EXISTE_DEJA, null ) );
 		}

@@ -75,7 +75,8 @@ public class SearchArticle extends SearchEntities<Article>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findById(int articleId){
-		Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
+		//Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
+		Query query = em.createNamedQuery("Article.findById", Article.class);
 		query.setParameter("id", articleId);
 		return query.getResultList();
 	}

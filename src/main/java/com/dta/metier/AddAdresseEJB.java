@@ -4,19 +4,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.dta.entities.Catalogue;
+import com.dta.entities.Adresse;
 
-@Stateless(name="AddCatalogueEJB")
-public class AddCatalogueEJB {
-	
+@Stateless
+public class AddAdresseEJB {
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 	
-	public void save(Catalogue catalogue){
-		em.persist(catalogue);
-	}
-	
-	public EntityManager getEm() {
-		return em;
+	public void save(Adresse adresse){
+		em.persist(adresse);
 	}
 }
