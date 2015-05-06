@@ -16,7 +16,7 @@ import com.dta.metier.AddClientEJB;
 @RequestScoped
 public class ExistenceLoginValidator implements Validator{
 
-	private static final String LOGIN_EXISTE_DEJA = "Ce login est déjà utilisé";
+	private static final String LOGIN_EXISTE_DEJA = "Ce login est deja utilise";
 	
 	@EJB
 	private AddClientEJB addclientEJB;
@@ -25,7 +25,7 @@ public class ExistenceLoginValidator implements Validator{
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String login = (String) arg2;
-		if(addclientEJB.SearchLogin(login)){
+		if(addclientEJB.SearchExistenceLogin(login)){
 		      throw new ValidatorException(
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, LOGIN_EXISTE_DEJA, null ) );
 		}

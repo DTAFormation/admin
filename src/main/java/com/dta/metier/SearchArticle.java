@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 import com.dta.entities.Article;
 
@@ -18,10 +19,9 @@ public class SearchArticle extends SearchEntities<Article>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findByName(String name){
-		Query query = em.createQuery("SELECT a FROM Article a WHERE a.nom = :name");
+		Query query = em.createNamedQuery("Article.findByName");
 		query.setParameter("name", name);
 		return query.getResultList();
-		
 	}
 		
 	public String requestGenerator(Article model, String produit, String catalogue){
@@ -64,20 +64,23 @@ public class SearchArticle extends SearchEntities<Article>{
 		return request;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Article> findAll(){
+		Query query = em.createNamedQuery("Article.findAll");
+		return query.getResultList();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findDetail (Article article, String produit, String catalogue){
 		String requete = requestGenerator(article, produit, catalogue);
 		Query query = em.createQuery(requete);
-		if (query.getResultList().size() == 0)
-			return new ArrayList<Article>();
 		return query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findById(int articleId){
 		//Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
-		Query query = em.createNamedQuery("Article.findById", Article.class);
+		Query query = em.createNamedQuery("Article.findById");
 		query.setParameter("id", articleId);
 		return query.getResultList();
 	}
@@ -86,5 +89,4 @@ public class SearchArticle extends SearchEntities<Article>{
 		Query query = em.createQuery("DELETE FROM Article a WHERE articleId = "+articleId);
 		query.getFirstResult();
 	}
-
 }

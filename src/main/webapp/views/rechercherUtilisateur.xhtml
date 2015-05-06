@@ -19,7 +19,7 @@
 		<p:menubar>
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
-					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Utilisateur" url="ajoutClient.xhtml" />
 					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
@@ -75,7 +75,7 @@
 				<p:inputText value="#{research.userLogin}" id="loginUtilisateur" />
 
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
-				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
+				<p:inputText value="#{research.userMail}" id="mailUtilisateur"/>
 
 				<p:outputLabel for="typeSelect" value="Type:" />
 				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
@@ -135,7 +135,7 @@
 					<h:outputText value="#{list.prenom}" id="prenom" />
 
 					<p:outputLabel for="email" value="email:" />
-					<h:outputText value="#{list.email}" id="email" />
+					<h:outputText value="#{list.email}" id="email"/>
 				</h:panelGrid>
 
 				<p:commandButton style="margin-right:20px;"

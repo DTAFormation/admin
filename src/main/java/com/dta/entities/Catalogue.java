@@ -23,19 +23,15 @@ public class Catalogue {
 	@GeneratedValue
 	@Column(name="catalogue_id", length=19)
 	private int catalogueId;
-	
 	@Column(name="nom", unique=true, length=255)
 	private String nom;
-	
 	@Column(name="description", nullable=false, length=255)
 	private String description;
-	
 	@OneToMany(mappedBy="catalogue", fetch=FetchType.EAGER)
 	@Column(nullable=false)
 	private List<Produit> produits;
 	
 	public Catalogue() {}
-
 	public Catalogue(String description, String nom, List<Produit> produits) {
 		this.description = description;
 		this.nom = nom;
@@ -45,35 +41,28 @@ public class Catalogue {
 	public int getCatalogueId() {
 		return catalogueId;
 	}
-
 	public void setCatalogueId(int catalogueId) {
 		this.catalogueId = catalogueId;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
 	public List<Produit> getProduits() {
 		return produits;
 	}
-
 	public void setProduits(List<Produit> produits) {
 		this.produits = produits;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Catalogue [catalogueId=" + catalogueId + ", description="
