@@ -1,5 +1,5 @@
 package com.dta.test.metier;
-
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,21 +10,27 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Article;
 import com.dta.entities.Produit;
 import com.dta.metier.SearchArticle;
 
+import static org.mockito.Mockito.*;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SearchArticleTest{
 
-	static SearchArticle searchArticle;
+	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);
+	
+	private SearchArticle service;
 	
 	@Mock private EntityManager em;
 	@Mock private Query query;
@@ -32,9 +38,10 @@ public class SearchArticleTest{
 	@Mock private CriteriaBuilder criteriaBuilder;
 	@Mock private AbstractQuery<Object> abstractQuery;
 
-	@BeforeClass
-	public static void initTest(){
-		searchArticle = new SearchArticle();
+	@Before
+	public void setUp() {
+		service = new SearchArticle();
+		service.setEm(em);
 	}
 
 	@Test
@@ -104,4 +111,82 @@ public class SearchArticleTest{
 		Assert.assertEquals(expectedResult, result);
 	}
 */
+
+	@Test
+	public void findByIdTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Article> articlesEnBase = new ArrayList<>();
+		articlesEnBase.add(new Article());
+		when(em.createNamedQuery("Article.findById")).thenReturn(query);
+		when(query.getResultList()).thenReturn(articlesEnBase);
+		
+		
+		
+		LOG.info("Objet supposé etre reçu");
+		List<Article> articleAttendu = new ArrayList<>();
+		Article monArticleAttendu = new Article();
+		articleAttendu.add(monArticleAttendu);
+		
+		LOG.info("Lorsque service.findById(0)");
+		List<Article> result = service.findById(0);
+		
+		LOG.info("");
+		assertEquals(result.get(0).toString(),articleAttendu.get(0).toString());
+	}
+	
+	
+	@Test
+	public void findByNameTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Article> articlesEnBase = new ArrayList<>();
+		articlesEnBase.add(new Article("testNom", 0.0f, null, 0));
+		when(em.createNamedQuery("Article.findByName")).thenReturn(query);
+		when(query.getResultList()).thenReturn(articlesEnBase);
+			
+		LOG.info("Objet supposé etre reçu");
+		List<Article> articleAttendu = new ArrayList<>();
+		Article monArticleAttendu = new Article("testNom", 0.0f, null, 0);
+		articleAttendu.add(monArticleAttendu);
+		
+		LOG.info("Lorsque service.findByName(testNom)");
+		List<Article> result = service.findByName("testNom");
+		
+		LOG.info("");
+		assertEquals(result.get(0).toString(),articleAttendu.get(0).toString());
+	}
+	/*
+	@Test
+	public void findDetailTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Article> articlesEnBase = new ArrayList<>();
+		articlesEnBase.add(new Article("testNom", 1.0f, null, 0));
+		
+		when(em.createQuery("SELECT a FROM Article a WHERE a.prix=1.0")).thenReturn(query);
+		when(query.getResultList()).thenReturn(articlesEnBase);
+			
+		
+		LOG.info("Objet supposé etre reçu");
+		List<Article> articleAttendu = new ArrayList<>();
+		Article monArticleAttendu = new Article("testNom", 1.0f, null, 0);
+		articleAttendu.add(monArticleAttendu);
+		
+		LOG.info("Lorsque service.findByName(testNom)");
+		Article articleModel = new Article(null, 1.0f, null, -1);
+		String produitModel = "";
+		System.out.println(service.requestGenerator(articleModel, produitModel));
+		List<Article> result = service.findDetail(articleModel,produitModel);
+		
+		LOG.info("");
+		assertEquals(result.get(0).toString(),articleAttendu.get(0).toString());
+	}
+	*/
 }
