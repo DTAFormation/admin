@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.context.RequestContext;
+
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.AddClientEJB;
@@ -58,6 +60,7 @@ public class AjoutClientBean {
 		utilisateur.setTitre(titre);
 		utilisateur.setTypeUtil(typeUtil);
 		ejb.save(utilisateur);
+		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
 	}
 
 	public String getEmail() {

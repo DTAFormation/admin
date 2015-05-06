@@ -39,7 +39,7 @@ public class AddProduitTest {
 	
 	@Test
 	public void creerProduit() {
-		LOG.info("Etant donné un objet Produit");
+		LOG.info("Etant donne un objet Produit");
 		
 		Produit produit = new Produit("ceci est une description", "nom");
 		
@@ -50,13 +50,13 @@ public class AddProduitTest {
 		
 		ejb.save(produit);
 		
-		LOG.info("Alors 'produit' est présent en BDD");
+		LOG.info("Alors 'produit' est present en BDD");
 		verify(em).persist(produit);
 	}
 	
 	@Test
 	public void creerProduitAvecNomExistant() {
-		LOG.info("Etant donné des objets Produit avec le même nom");
+		LOG.info("Etant donne des objets Produit avec le meme nom");
 		
 		Produit produit1 = new Produit("ceci est une description", "nom");
 		Produit produit2 = new Produit("ceci est une autre description", "nom");
@@ -69,7 +69,7 @@ public class AddProduitTest {
 		ejb.save(produit1);
 		ejb.save(produit2);
 		
-		LOG.info("Alors 'produit' est présent en BDD");
+		LOG.info("Alors 'produit' est present en BDD");
 		verify(em).persist(produit1);
 	}
 }

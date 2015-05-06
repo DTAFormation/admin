@@ -136,11 +136,6 @@
 					<p:outputLabel for="email" value="email:" />
 					<h:outputText value="#{list.email}" id="email"/>
 				</h:panelGrid>
-
-				<p:commandButton style="margin-right:20px;"
-					icon="ui-icon-closethick">
-					<f:ajax execute="#{research.deleteUser(list.utilisateurId)}"/>
-				</p:commandButton>
 			</h:panelGrid>
 			<hr />
 		</p:dataList>
