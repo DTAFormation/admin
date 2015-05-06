@@ -15,41 +15,41 @@
 	<!-- MENU -->
 	<h:form>
 		<p:growl id="messages" />
-			<p:menubar>
-				<p:submenu label="Element" icon="ui-icon-document">
-					<p:submenu label="Nouveau" icon="ui-icon-contact">
-						<p:menuitem value="Utilisateur" url="addClient.xhtml" />
-						<p:menuitem value="Catalogue" url="ajoutCatalogue.xhtml" />
-						<p:menuitem value="Produit" url="ajoutProduit.xhtml" />
-					</p:submenu>
-					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
-						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
-					</p:submenu>
+		<p:menubar>
+			<p:submenu label="Element" icon="ui-icon-document">
+				<p:submenu label="Nouveau" icon="ui-icon-contact">
+					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Catalogue" url="ajoutCatalogue.xhtml" />
+					<p:menuitem value="Produit" url="ajoutProduit.xhtml" />
 				</p:submenu>
-
-				<p:submenu label="Profil" icon="ui-icon-person">
-					<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
-					<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
+			</p:submenu>
 
-				<p:submenu label="Outils" icon="ui-icon-wrench">
-					<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
-					<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
-					<p:submenu label="Rechercher" icon="ui-icon-zoomin">
-						<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-						<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
-					</p:submenu>
+			<p:submenu label="Profil" icon="ui-icon-person">
+				<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
+				<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
+			</p:submenu>
+
+			<p:submenu label="Outils" icon="ui-icon-wrench">
+				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
+				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
+					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
+			</p:submenu>
 
-				<f:facet name="options">
-					<h:panelGrid columns="2" cellpadding="5">
-						<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
-						<p:commandButton type="button" value="Logout"
-							icon="ui-icon-extlink" />
-					</h:panelGrid>
-				</f:facet>
-			</p:menubar>
+			<f:facet name="options">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+					<p:commandButton type="button" value="Logout"
+						icon="ui-icon-extlink" />
+				</h:panelGrid>
+			</f:facet>
+		</p:menubar>
 
 	</h:form>
 
@@ -61,10 +61,18 @@
 <body>
 	<h:form>
 		<p:panel id="panel" header="Ajout article">
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
 				<p:outputLabel value="Nom:" />
-				<p:inputText value="#{ajoutArticle.nom}" required="true" />
-
+				<p:inputText id="articleInput" value="#{ajoutArticle.nom}"
+					required="true">
+					<f:ajax event="blur" render="articleMessage" />
+					<f:validator binding="#{articleValidator}" />
+				</p:inputText>
+				<p:message id="articleMessage" for="articleInput"
+					errorClass="erreur" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Prix:" />
 				<p:inputText value="#{ajoutArticle.prix}" required="true" />
 
@@ -76,10 +84,23 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Stock:" />
-				<p:inputText value="#{ajoutArticle.stock}" required="true" />
+				<p:inputText value="#{ajoutArticle.stock}" required="true"
+					requiredMessage="Champ obligatoire" />
 			</h:panelGrid>
-			<p:commandButton actionListener="#{ajoutArticle.save()}"
-				value="Submit" />
+
+			<br />
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton actionListener="#{ajoutArticle.save()}"
+						value="Enregistrer" />
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton value="Effacer" style="margin-right:20px;">
+						<p:ajax update="panelgenreal" resetValues="true" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
+
 		</p:panel>
 	</h:form>
 	<p:link outcome="/index.xhtml" value="Retour au menu principal" />

@@ -8,21 +8,18 @@
 	<f:metadata>
 		<f:viewParam name="articleId" />
 	</f:metadata>
-	<c:set var="monArticle" value="${detailProduit.showDetailArticle(articleId)}" ></c:set>
+	<c:set var="monArticle" value="${detailProduitBean.showDetailArticle(articleId)}" ></c:set>
 	<c:set var="monProduit" value="${monArticle.produit}" ></c:set>
 	<c:set var="monCatalogue" value="${monProduit.catalogue}" ></c:set>
 	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
-
-	<h1>Détail du produit n° #{articleId}</h1>
-
+	
 	<p:accordionPanel multiple="true">
 		<p:tab title="Article">
 			<p:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Article ID" />
 				<h:outputText value="#{monArticle.articleId}" />
-
 				<h:outputText value="Article Nom" />
 				<h:outputText value="#{monArticle.nom}" />
 				<h:outputText value="Article Prix" />

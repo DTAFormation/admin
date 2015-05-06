@@ -19,7 +19,7 @@
 		<p:menubar>
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
-					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Utilisateur" url="ajoutClient.xhtml" />
 					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
@@ -52,7 +52,6 @@
 			</f:facet>
 		</p:menubar>
 	</h:form>
-
 	<br />
 
 	<!-- fin menu -->
@@ -66,28 +65,30 @@
 			<p:ajax event="toggle" />
 
 			<h:panelGrid columns="6" cellpadding="5">
-
 				<p:outputLabel for="nomArticle" value="Nom:" />
 				<p:inputText value="#{research.articleName}" id="nomArticle" />
 
 				<p:outputLabel for="produit" value="Produit:" />
-				<p:inputText value="#{research.productArticle}" id="produit" />
+				<p:inputText value="#{research.articleProduct}" id="produit" />
 
 				<p:outputLabel for="id" value="id:" />
 				<p:inputText value="#{research.articleId}" id="id" />
 
 				<p:outputLabel for="prixArticle" value="Prix:" />
-				<p:inputText value="#{research.priceArticle}" id="prixArticle" />
+				<p:inputText value="#{research.articlePrice}" id="prixArticle" />
 
-				<p:outputLabel for="stockArticle" value="Stock:" />
-				<p:inputText value="#{research.stockArticle}" id="stockArticle" />
+				<p:outputLabel for="articleStock" value="Stock:" />
+				<p:inputText value="#{research.articleStock}" id="articleStock" />
+				
+				<p:outputLabel for="articleCatalogue" value="Catalogue:" />
+				<p:inputText value="#{research.articleCatalogue}" id="articleCatalogue" />
 			</h:panelGrid>
-
 			<br />
+			
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton value="Rechercher" update="results"
-						actionListener="#{research.submitResearchArticle()}"
+						actionListener="#{research.submitResearchArticle}"
 						style="margin-right:20px;" />
 				</f:facet>
 
@@ -113,20 +114,18 @@
 			itemType="none" id="results">
 			<f:facet name="header">
 				Resultats de recherche: 
-            	<p:outputLabel value="#{research.resultSize}" />
+            	<p:outputLabel value="#{research.products.size()}" />
 			</f:facet>
 
 			<h:panelGrid columns="2">
-
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
-					<h:outputLink value="#{research.path}">
+					<h:outputLink value="detailProduit.xhtml">
 						<h:graphicImage library="img" name="loupe.png" />
 						<f:param name="articleId" value="#{list.articleId}" />
 					</h:outputLink>
 				</p:lightBox>
 
 				<h:panelGrid columns="2">
-
 					<p:outputLabel for="nom" value="nom:" />
 					<h:outputText value="#{list.nom}" id="nom" />
 
@@ -135,7 +134,6 @@
 
 					<p:outputLabel for="stock" value="stock:" />
 					<h:outputText value="#{list.stock}" id="stock" />
-
 				</h:panelGrid>
 			</h:panelGrid>
 			<hr />
