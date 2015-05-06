@@ -86,8 +86,6 @@ public class ResearchController {
 	 *  Methods research ARTICLE
 	 */
 
-	public void deleteUser(int id){
-		System.out.println("deleteting "+id);
 
 	public void logout() throws IOException{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
