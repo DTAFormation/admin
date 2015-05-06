@@ -8,9 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	//@NamedQuery(name="Adresse.findByAdresse", query="SELECT adresse_id FROM Adresse WHERE code_postal=:codepostal AND departement=:departement AND numero=:numero AND pays=:pays AND rue=:rue AND ville=:ville")
+})
 public class Adresse {
 
 	@Id

@@ -16,7 +16,15 @@ public class AddArticleEJB {
 	private EntityManager em;
 	
 	public void save(Article article){
-		em.persist(article);
+		if(!isArticleNameExists(article.getNom()))
+			em.persist(article);
+	}
+	
+	public boolean isArticleNameExists(String name) {
+		return !em.createNamedQuery("Article.findByName", Article.class)
+				.setParameter("name", name)
+				.getResultList()
+				.isEmpty();
 	}
 
 	public Produit getProduitById(int id) {
@@ -32,5 +40,9 @@ public class AddArticleEJB {
 
 	public EntityManager getEm() {
 		return em;
+	}
+	
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 }

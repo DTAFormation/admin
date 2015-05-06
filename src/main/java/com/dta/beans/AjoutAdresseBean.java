@@ -3,6 +3,8 @@ package com.dta.beans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.context.RequestContext;
+
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.AddAdresseEJB;
@@ -24,7 +26,20 @@ public class AjoutAdresseBean {
 	public void save(){
 		System.out.println(toString());
 		adresse =new Adresse();
-
+		adresse.setCodePostal(codePostal);
+		adresse.setDepartement(departement);
+		adresse.setNum(num);
+		adresse.setPays(pays);
+		adresse.setRue(rue);
+		adresse.setVille(ville);
+		
+		int IDadresse = ejb.save(adresse);
+		if(IDadresse!=-1){
+			RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
+		}
+		else{
+			RequestContext.getCurrentInstance().execute("PF('dlg').show()");
+		}
 		//ejb.save(adresse);
 	}
 	
