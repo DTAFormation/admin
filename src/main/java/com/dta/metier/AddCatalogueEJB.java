@@ -15,4 +15,8 @@ public class AddCatalogueEJB {
 	public void save(Catalogue catalogue){
 		em.persist(catalogue);
 	}
+	
+	public EntityManager getEm() {
+		return em;
+	}
 }

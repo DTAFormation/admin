@@ -7,9 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Produit.findAll", query="SELECT p FROM Produit p"),
+	@NamedQuery(name="Produit.findById", query="SELECT p FROM Produit p WHERE p.produitId = :id"),
+	@NamedQuery(name="Produit.findByName", query="SELECT p FROM Produit p WHERE p.nom = :name")
+})
 public class Produit {
 
 	@Id
@@ -17,11 +24,11 @@ public class Produit {
 	@Column(name="produit_id", length=19)
 	private int produitId;
 	
-	@Column(name="description", length=255)
-	private String description;
-	
-	@Column(name="nom", length=255)
+	@Column(name="nom", unique=true, length=255)
 	private String nom;
+	
+	@Column(name="description", nullable=true, length=255)
+	private String description;
 	
 	@ManyToOne
 	private Catalogue catalogue;
