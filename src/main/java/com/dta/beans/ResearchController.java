@@ -1,13 +1,15 @@
 package com.dta.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.dta.entities.Article;
-import com.dta.entities.Produit;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchProduit;
@@ -40,8 +42,8 @@ public class ResearchController {
 	private SearchUtilisateur searchUtilisateur;
 
 	private List<Article> products;
-	private List<Utilisateur> users; 
-	
+	private List<Utilisateur> users;
+
 	/*
 	 * 
 	 * Constructors
@@ -89,8 +91,13 @@ public class ResearchController {
 	 * 
 	 */
 	
+
 	public void deleteUser(int id){
 		System.out.println("deleteting "+id);
+
+	public void logout() throws IOException{
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
 	
 	public void submitResearchArticle() {
