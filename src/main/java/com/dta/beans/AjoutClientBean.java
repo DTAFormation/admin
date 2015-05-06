@@ -1,14 +1,17 @@
 package com.dta.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 
+import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.AddClientEJB;
 
-@ManagedBean(name="addClient")
-public class ClientAddBean {
+@ManagedBean
+public class AjoutClientBean {
 	
 	Utilisateur utilisateur;
 	
@@ -21,22 +24,13 @@ public class ClientAddBean {
 	private int telephone;
 	private String titre;
 	private String typeUtil;
-	private String address;
+	private List<Adresse> adresses;
 
 	@EJB
 	private AddClientEJB ejb;
 
-	@Override
-	public String toString() {
-		return "ClientAddBean [email=" + email + ", fax=" + fax + ", login="
-				+ login + ", nom=" + nom + ", password=" + password
-				+ ", prenom=" + prenom + ", telephone=" + telephone
-				+ ", titre=" + titre + ", typeUtil=" + typeUtil + "]";
-	}
-
-
 	public void save(){
-		System.out.println(toString());
+		
 		utilisateur =new Utilisateur();
 		utilisateur.setEmail(email);
 		utilisateur.setFax(fax);
@@ -49,7 +43,6 @@ public class ClientAddBean {
 		utilisateur.setTypeUtil(typeUtil);
 		ejb.save(utilisateur);
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -105,10 +98,19 @@ public class ClientAddBean {
 	public void setTypeUtil(String typeUtil) {
 		this.typeUtil = typeUtil;
 	}
-	public String getAddress() {
-		return address;
+	public List<Adresse> getAdresses() {
+		return adresses;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAdresses(List<Adresse> adresses) {
+		this.adresses = adresses;
 	}
+
+	@Override
+	public String toString() {
+		return "ClientAddBean [email=" + email + ", fax=" + fax + ", login="
+				+ login + ", nom=" + nom + ", password=" + password
+				+ ", prenom=" + prenom + ", telephone=" + telephone
+				+ ", titre=" + titre + ", typeUtil=" + typeUtil + "]";
+	}
+
 }
