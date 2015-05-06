@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
+import com.dta.metier.DeleteUtilisateur;
 import com.dta.metier.SearchUtilisateur;
 
 
@@ -18,6 +19,9 @@ public class UtilisateurBean {
 	
 	@EJB
 	private SearchUtilisateur searchUtilisateur;
+	
+	@EJB
+	private DeleteUtilisateur deleteUtilisateur;
 	
 	public Utilisateur showOne(int userID) {
 		Utilisateur utilisateur = searchUtilisateur.findById(userID);
@@ -37,7 +41,7 @@ public class UtilisateurBean {
 		return utilisateurs;
     }
 	
-	public void delete() {
-		// An admin can delete the user 
+	public void delete(Utilisateur utilisateur) {
+		deleteUtilisateur.delete(utilisateur);
     }
 }
