@@ -2,6 +2,7 @@ package com.dta.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +51,9 @@ public class Utilisateur {
 	@Column(name="type_util", length=1)
 	private String typeUtil;
 	
-	@OneToMany(mappedBy="utilisateur", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="utilisateur", 
+			cascade=CascadeType.ALL, 
+			fetch=FetchType.EAGER)
 	private List<Adresse> adresses;
 	
 	@OneToMany(mappedBy="utilisateur")

@@ -10,10 +10,12 @@
 	<f:metadata>
 		<f:viewParam name="idUser" />
 	</f:metadata>
-	
-	<c:set var="utilisateur" scope="request" value="${utilisateurBean.showOne(idUser)}" />
+
+	<c:set var="utilisateur" scope="request"
+		value="${utilisateurBean.GetUtilisateurById(idUser)}" />
 </h:head>
 <body>
+
 	<p:panelGrid columns="2">
 		<f:facet name="header">
 			<p:row>
@@ -40,33 +42,36 @@
 		<h:outputText value="#{utilisateur.fax}" />
 		<f:facet name="footer">
 			<p:row>
-				<p:commandButton action="#" icon="ui-icon-closethick" />
+				<h:form>
+					<p:commandButton action="#{utilisateurBean.delete(idUser)}"
+						value="Supprimer">
+					</p:commandButton>
+				</h:form>
 			</p:row>
 		</f:facet>
 	</p:panelGrid>
 	<br />
-
-	<p:carousel value="#{utilisateurBean.showAdresses(idUser)}"
-		var="adresse" headerText="Adresses">
-		<p:panelGrid columns="2">
-			<h:outputText value="Adresse ID" />
-			<h:outputText value="#{adresse.adresseId}" />
-			<h:outputText value="Numéro" />
-			<h:outputText value="#{adresse.num}" />
-			<h:outputText value="Rue" />
-			<h:outputText value="#{adresse.rue}" />
-			<h:outputText value="Code Postal" />
-			<h:outputText value="#{adresse.codePostal}" />
-			<h:outputText value="Ville" />
-			<h:outputText value="#{adresse.ville}" />
-			<h:outputText value="Département" />
-			<h:outputText value="#{adresse.departement}" />
-			<h:outputText value="Pays" />
-			<h:outputText value="#{adresse.pays}" />
-		</p:panelGrid>
-	</p:carousel>
+	<!-- 
+		<p:carousel value="#{utilisateurBean.showAdresses(idUser)}"
+			var="adresse" headerText="Adresses">
+			<p:panelGrid columns="2">
+				<h:outputText value="Adresse ID" />
+				<h:outputText value="#{adresse.adresseId}" />
+				<h:outputText value="Numéro" />
+				<h:outputText value="#{adresse.num}" />
+				<h:outputText value="Rue" />
+				<h:outputText value="#{adresse.rue}" />
+				<h:outputText value="Code Postal" />
+				<h:outputText value="#{adresse.codePostal}" />
+				<h:outputText value="Ville" />
+				<h:outputText value="#{adresse.ville}" />
+				<h:outputText value="Département" />
+				<h:outputText value="#{adresse.departement}" />
+				<h:outputText value="Pays" />
+				<h:outputText value="#{adresse.pays}" />
+			</p:panelGrid>
+		</p:carousel>-->
 
 	<br />
-
 </body>
 </html>
