@@ -8,8 +8,10 @@ import javax.persistence.Query;
 import javax.persistence.criteria.AbstractQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.xml.registry.infomodel.EmailAddress;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,7 @@ import com.dta.metier.SearchArticle;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchArticleTest{
 
-	static SearchArticle searchArticle;
+	private SearchArticle searchArticle;
 	
 	@Mock private EntityManager em;
 	@Mock private Query query;
@@ -32,9 +34,10 @@ public class SearchArticleTest{
 	@Mock private CriteriaBuilder criteriaBuilder;
 	@Mock private AbstractQuery<Object> abstractQuery;
 
-	@BeforeClass
-	public static void initTest(){
+	@Before
+	public void initTest(){
 		searchArticle = new SearchArticle();
+		searchArticle.setEm(this.em);
 	}
 
 	@Test
@@ -85,7 +88,7 @@ public class SearchArticleTest{
 		Assert.assertEquals(generated, "SELECT a FROM Article a WHERE a.nom LIKE '%test%' AND a.prix=1.0 AND a.stock=1 AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='produit') AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='catalogue')) ");
 
 	}
-/*
+
 	@Test
 	public void searchAllArticlesTest(){
 		
@@ -96,6 +99,7 @@ public class SearchArticleTest{
 		Mockito.when(em.getCriteriaBuilder()).thenReturn(criteriaBuilder);
 		Mockito.when(criteriaBuilder.createQuery()).thenReturn(criteriaQuery);
 		Mockito.when(criteriaQuery.select(Mockito.anyObject())).thenReturn(criteriaQuery);
+		Mockito.when(em.createQuery(Mockito.anyObject())).thenReturn(query);
 		Mockito.when(query.getResultList()).thenReturn(liste);
 		
 		int expectedResult = 2;
@@ -103,5 +107,4 @@ public class SearchArticleTest{
 		int result = searchArticle.findAll().size();
 		Assert.assertEquals(expectedResult, result);
 	}
-*/
 }

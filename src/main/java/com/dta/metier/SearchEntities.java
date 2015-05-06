@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class SearchEntities<T> {
@@ -23,7 +24,16 @@ public abstract class SearchEntities<T> {
 	public List<T> findAll(){
 		CriteriaQuery criteria = em.getCriteriaBuilder().createQuery();
 		criteria.select(criteria.from(entityClass));
-		return em.createQuery(criteria).getResultList();
+		Query query = em.createQuery(criteria);
+		return query.getResultList();
+	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 	
 }
