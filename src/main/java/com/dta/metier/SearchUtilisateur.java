@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.dta.entities.Utilisateur;
+import com.mysql.jdbc.Util;
 
 @Stateless
 public class SearchUtilisateur extends SearchEntities<Utilisateur>{
@@ -75,6 +77,22 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 		if (query.getResultList().size() == 0)
 			return new ArrayList<Utilisateur>();
 		return query.getResultList();
+	}
+	
+	//méthode pour authentification utilisateur
+	public Utilisateur findAuthentification (String login, String password, String type){
+		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :log AND u.password = :passw AND u.typeUtil = :typeUt");
+		System.out.println(type);
+		query_auth.setParameter("log", login);
+		query_auth.setParameter("passw", password);
+		query_auth.setParameter("typeUt", type);
+		try{
+			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
+			System.out.println(result);
+			return result;
+		}catch (NoResultException e){
+			return null;
+		}
 	}
 
 }

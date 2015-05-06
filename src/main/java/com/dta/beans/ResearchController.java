@@ -1,13 +1,15 @@
 package com.dta.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.dta.entities.Article;
-import com.dta.entities.Produit;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchProduit;
@@ -42,8 +44,14 @@ public class ResearchController {
 
 	// research results
 	private List<Article> products;
-	private List<Utilisateur> users; 
-	
+	private List<Utilisateur> users;
+
+	/*
+	 * 
+	 * Constructors
+	 * 
+	 */
+
 
 	public ResearchController(){
 		this("", "", "", "", "", "", "", "", "", "", "", null, null);		
@@ -76,6 +84,17 @@ public class ResearchController {
 	/*
 	 *  Methods research ARTICLE
 	 */
+<<<<<<< HEAD
+	
+	public void logout() throws IOException{
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
+		
+	}
+	
+	public void submitResearchArticle() {
+=======
+>>>>>>> 5f5c0694cdd372876e47b04123003c6c889f0232
 
 	public void submitResearchArticle() {
 		

@@ -18,10 +18,23 @@
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
-	
+
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>dot-luv</param-value>
 	</context-param>
+
+	<filter>
+		<filter-name>GestionSessionFilter</filter-name>
+		<filter-class>com.dta.beans.GestionSessionFilter</filter-class>
+		<init-param>
+			<param-name>avoid-urls</param-name>
+			<param-value>/authentification.xhtml,/errorAuth.xhtml,/deconnexion.xhtml</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>GestionSessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
