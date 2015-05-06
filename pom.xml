@@ -94,6 +94,29 @@
 						<target>1.8</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sql-maven-plugin</artifactId>
+					<version>1.5</version>
+					<dependencies>
+						<dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>5.1.35</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<driver>com.mysql.jdbc.Driver</driver>
+						<url>${jdbc.url}</url>
+						<username>${jdbc.user}</username>
+						<password>${jdbc.pass}</password>
+						<autocommit>true</autocommit>
+						<srcFiles>
+							<srcFile>src/test/sql/init-db.sql</srcFile>
+						</srcFiles>
+					</configuration>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 		<plugins>

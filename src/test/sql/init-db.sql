@@ -1,0 +1,16 @@
+insert into Article (article_id, nom, prix, stock) VALUES (1, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (2, "pomme", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (3, "mangue", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (4, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (5, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (6, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (7, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (8, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (9, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (10, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (11, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (12, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (13, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (14, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (15, "tomate", 12,15);
+insert into Article (article_id, nom, prix, stock) VALUES (16, "tomate", 12,15);
