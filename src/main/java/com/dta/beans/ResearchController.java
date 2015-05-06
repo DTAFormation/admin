@@ -105,12 +105,12 @@ public class ResearchController {
 			// create a model article to search, based on the fields search
 			
 			Article modelArticle = new Article();
+
 			modelArticle.setNom( (this.articleName.equals("")) ? null : this.articleName);
 			modelArticle.setPrix( (this.priceArticle.equals("")) ? -1 : Float.parseFloat(this.priceArticle));
 			modelArticle.setStock( (this.stockArticle.equals("")) ? -1 : Integer.parseInt(this.stockArticle));
 			
 			System.out.println(modelArticle);
-			
 
 			products = searchArticle.findDetail(modelArticle, this.productArticle);
 			
@@ -128,10 +128,8 @@ public class ResearchController {
 		modelUtilisateur.setNom(this.userName.equals("") ? null : this.userName);
 		modelUtilisateur.setPrenom(this.userFirstName.equals("") ? null : this.userFirstName);
 		modelUtilisateur.setEmail(this.userMail.equals("") ? null : this.userMail);
-		modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType);
+		//modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType.substring(0, 1));
 
-		System.out.println(modelUtilisateur);
-		
 		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
 	
