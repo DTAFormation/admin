@@ -16,10 +16,10 @@
 <body>
 	<p:panelGrid columns="2">
 		<f:facet name="header">
-		<p:row>
-            <p:column colspan="2">Utilisateur n° #{idUser}</p:column>
-        </p:row>
-        </f:facet>
+			<p:row>
+				<p:column colspan="2">Utilisateur n° #{idUser}</p:column>
+			</p:row>
+		</f:facet>
 		<h:outputText value="ID" />
 		<h:outputText value="#{utilisateur.utilisateurId}" />
 		<h:outputText value="Type" />
@@ -38,6 +38,11 @@
 		<h:outputText value="#{utilisateur.telephone}" />
 		<h:outputText value="Fax" />
 		<h:outputText value="#{utilisateur.fax}" />
+		<f:facet name="footer">
+			<p:row>
+				<p:commandButton action="" icon="ui-icon-closethick" />
+			</p:row>
+		</f:facet>
 	</p:panelGrid>
 	<br />
 
