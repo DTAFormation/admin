@@ -38,13 +38,11 @@ public class AjoutClientBean {
 
 	public void save(){
 		
-		
-		
 		if(this.typeUtil.equals("a")){
 			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
 			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vous devez posséder les droits administrateur pour ajouter un nouvel administrateur !"));
+				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
 				return;
 			}
 		}
