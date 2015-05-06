@@ -19,7 +19,7 @@
 		<p:menubar>
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
-					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
+					<p:menuitem value="Utilisateur" url="ajoutClient.xhtml" />
 					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
@@ -50,7 +50,6 @@
 			</f:facet>
 		</p:menubar>
 	</h:form>
-
 	<br />
 
 	<!-- fin menu -->
@@ -63,9 +62,7 @@
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
 
-
 			<h:panelGrid columns="6" cellpadding="5">
-
 				<p:outputLabel for="nomUtilisateur" value="Nom:" />
 				<p:inputText value="#{research.userName}" id="nomUtilisateur" />
 
@@ -77,7 +74,7 @@
 				<p:inputText value="#{research.userLogin}" id="loginUtilisateur" />
 
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
-				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
+				<p:inputText value="#{research.userMail}" id="mailUtilisateur"/>
 
 				<p:outputLabel for="typeSelect" value="Type:" />
 				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
@@ -102,7 +99,7 @@
 						actionListener="#{research.submitResearchAllUser}"
 						style="margin-right:20px;" />
 				</f:facet>
-
+				
 				<f:facet name="right">
 					<p:commandButton value="Effacer" style="margin-right:20px;">
 						<p:ajax update="panel" resetValues="true" />
@@ -110,7 +107,6 @@
 				</f:facet>
 			</p:toolbar>
 		</p:fieldset>
-
 		<br />
 
 		<!-- Liste results -->
@@ -121,7 +117,7 @@
 				Resultats de recherche: 
             	<p:outputLabel value="#{research.users.size()}" />
 			</f:facet>
-
+			
 			<h:panelGrid columns="2">
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
 					<h:outputLink value="showUser.xhtml">
@@ -138,15 +134,13 @@
 					<h:outputText value="#{list.prenom}" id="prenom" />
 
 					<p:outputLabel for="email" value="email:" />
-					<h:outputText value="#{list.email}" id="email" />
+					<h:outputText value="#{list.email}" id="email"/>
 				</h:panelGrid>
-
 
 				<p:commandButton style="margin-right:20px;"
 					icon="ui-icon-closethick">
 					<f:ajax execute="#{research.deleteUser(list.utilisateurId)}"/>
 				</p:commandButton>
-
 			</h:panelGrid>
 			<hr />
 		</p:dataList>

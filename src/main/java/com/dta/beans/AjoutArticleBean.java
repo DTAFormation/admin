@@ -22,7 +22,7 @@ public class AjoutArticleBean {
 	
 	@EJB
 	private AddArticleEJB ejb;
-
+	
 	public void save(){
 		produit = ejb.getProduitById(produitId);
 		article = new Article(nom, prix, produit, stock);
@@ -30,9 +30,9 @@ public class AjoutArticleBean {
 	}
 	
 	public List<Produit> getAllProduits() {
-		return ejb.getAllProduits();
+		return ejb.getAllProduits(); 
 	}
-
+	
 	public String getNom() {
 		return nom;
 	}
@@ -64,8 +64,5 @@ public class AjoutArticleBean {
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	
-	
+	}	
 }

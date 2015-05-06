@@ -9,25 +9,25 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.dta.metier.AddClientEJB;
-
+import com.dta.entities.Produit;
+import com.dta.metier.AddProduitEJB;
 
 @ManagedBean
 @RequestScoped
-public class ExistenceLoginValidator implements Validator{
-
-	private static final String LOGIN_EXISTE_DEJA = "Ce login est deja utilise";
+public class ProduitValidator implements Validator {
+	
+	private static final String PRODUIT_EXISTANT = "Ce nom de produit est déjà pris";
 	
 	@EJB
-	private AddClientEJB addclientEJB;
+	private AddProduitEJB ejb;
 	
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
-		String login = (String) arg2;
-		if(addclientEJB.SearchExistenceLogin(login)){
+		String prodnom = (String) arg2;
+		if(ejb.getEm().createNamedQuery("Produit.findByName", Produit.class).setParameter("name", prodnom).getResultList().size() != 0){
 		      throw new ValidatorException(
-                      new FacesMessage( FacesMessage.SEVERITY_ERROR, LOGIN_EXISTE_DEJA, null ) );
+                      new FacesMessage(FacesMessage.SEVERITY_ERROR, PRODUIT_EXISTANT, null));
 		}
 	}
 }
