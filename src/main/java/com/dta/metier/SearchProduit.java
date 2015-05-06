@@ -23,13 +23,12 @@ public class SearchProduit extends SearchEntities<Produit> {
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findAllArticles (String name){
-		Query query1 = em.createQuery("SELECT produitId FROM Produit p WHERE p.nom = :name");
-		query1.setParameter("name", name);
-		String id = (String) query1.getSingleResult();
-
+		Query query_id = em.createQuery("SELECT produitId FROM Produit p WHERE p.nom = :name");
+		query_id.setParameter("name", name);
+		String id = (String) query_id.getSingleResult();
 		Query query = em.createQuery("SELECT a FROM Article a WHERE a.produit = :name");
-		query.setParameter("name", name);
-		return null;
+		query.setParameter("name", id);
+		return query.getResultList();
 	}
 
 
