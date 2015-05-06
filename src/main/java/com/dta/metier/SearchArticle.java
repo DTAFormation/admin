@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 import com.dta.entities.Article;
 
@@ -63,6 +64,11 @@ public class SearchArticle extends SearchEntities<Article>{
 		return request;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Article> findAll(){
+		Query query = em.createNamedQuery("Article.findAll");
+		return query.getResultList();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findDetail (Article article, String produit, String catalogue){

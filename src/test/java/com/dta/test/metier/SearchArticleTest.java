@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.AbstractQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Selection;
 import javax.xml.registry.infomodel.EmailAddress;
 
 import org.junit.Assert;
@@ -33,6 +34,7 @@ public class SearchArticleTest{
 	@Mock private CriteriaQuery<Object> criteriaQuery;
 	@Mock private CriteriaBuilder criteriaBuilder;
 	@Mock private AbstractQuery<Object> abstractQuery;
+	@Mock private Selection selection;
 
 	@Before
 	public void initTest(){
@@ -96,12 +98,6 @@ public class SearchArticleTest{
 		liste.add(new Article("bob", 10, new Produit(), 10));
 		liste.add(new Article("bil", 20, new Produit(), 20));
 
-		Mockito.when(em.getCriteriaBuilder()).thenReturn(criteriaBuilder);
-		Mockito.when(criteriaBuilder.createQuery()).thenReturn(criteriaQuery);
-		Mockito.when(criteriaQuery.select(Mockito.anyObject())).thenReturn(criteriaQuery);
-		Mockito.when(em.createQuery(Mockito.anyObject())).thenReturn(query);
-		Mockito.when(query.getResultList()).thenReturn(liste);
-		
 		int expectedResult = 2;
 		
 		int result = searchArticle.findAll().size();
