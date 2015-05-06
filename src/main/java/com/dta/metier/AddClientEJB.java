@@ -16,6 +16,7 @@ public class AddClientEJB{
 	
 	public void save(Utilisateur utilisateur){
 		em.persist(utilisateur);
+		
 	}
 	
 	//Methode pour le validator.

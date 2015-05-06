@@ -36,9 +36,10 @@ public class AjoutAdresseBean {
 		int IDadresse = ejb.save(adresse);
 		if(IDadresse!=-1){
 			RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
+			RequestContext.getCurrentInstance().execute("PF('dlgAdresseEnregistre').show()");
 		}
 		else{
-			RequestContext.getCurrentInstance().execute("PF('dlg').show()");
+			RequestContext.getCurrentInstance().execute("PF('dlgAdresseErreur').show()");
 		}
 		//ejb.save(adresse);
 	}
