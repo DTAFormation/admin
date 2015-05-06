@@ -3,7 +3,7 @@ package com.dta.metier;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.dta.entities.Utilisateur;
 
@@ -20,11 +20,11 @@ public class AddClientEJB{
 	
 	//Methode pour le validator.
 	public boolean SearchExistenceEmail(String email){
-		Query query = em.createQuery("Utilisateur.findByEmail",Utilisateur.class).setParameter("email", email);
+		TypedQuery<String> query = em.createNamedQuery("Utilisateur.findByEmail",String.class).setParameter("email", email);
 		return (query.getResultList().size()!=0);
 	}
 	public boolean SearchExistenceLogin(String login){
-		Query query = em.createQuery("Utilisateur.findByLogin",Utilisateur.class).setParameter("login", login);
+		TypedQuery<String> query = em.createNamedQuery("Utilisateur.findByLogin",String.class).setParameter("login", login);
 		return (query.getResultList().size()!=0);
 	}
 
