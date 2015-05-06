@@ -64,7 +64,6 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 				request += "u.typeUtil ='" + utilisateur.getTypeUtil() + "' ";
 		}
 		
-		System.out.println("\n \n \n \n \n " + request);
 		return request;
 	}
 		

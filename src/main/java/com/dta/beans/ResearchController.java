@@ -114,7 +114,7 @@ public class ResearchController {
 		modelUtilisateur.setNom(this.userName.equals("") ? null : this.userName);
 		modelUtilisateur.setPrenom(this.userFirstName.equals("") ? null : this.userFirstName);
 		modelUtilisateur.setEmail(this.userMail.equals("") ? null : this.userMail);
-		//modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType.substring(0, 1));
+		modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType.substring(0, 1));
 
 		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
@@ -127,40 +127,6 @@ public class ResearchController {
 		System.out.println("deleteting user "+id);
 	}
 	
-/*
-	private List<Article> mockRequest(int id){
-
-		List<Article> result = new ArrayList<Article>();
-		Article art = new Article();
-
-		art.setNom("article n°"+id);
-		art.setPrix(500);
-		art.setProduit(null);
-		art.setStock(100);
-		result.add(art);
-
-		return result;
-	}
-
-	private List<Utilisateur> mockRequest(String name){
-
-		List<Utilisateur> result = new ArrayList<Utilisateur>();
-
-		for(int i=0; i<50; i++){
-			Utilisateur ut = new Utilisateur();
-			
-			ut.setNom(name);
-			ut.setPrenom("bob");
-			ut.setEmail("bob@gmail.com");
-			ut.setLogin("boby");
-			ut.setTitre("bricoleur");
-			ut.setUtilisateurId(i);
-
-			result.add(ut);
-		}
-		return result;
-	}
-*/
 
 	@Override
 	public String toString() {

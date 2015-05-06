@@ -24,8 +24,7 @@
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur"
-						url="rechercherUtilisateur.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
 			</p:submenu>
 
@@ -39,8 +38,7 @@
 				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur"
-						url="rechercherUtilisateur.xhtml" />
+					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
 				</p:submenu>
 			</p:submenu>
 
@@ -80,12 +78,13 @@
 
 				<p:outputLabel for="articleStock" value="Stock:" />
 				<p:inputText value="#{research.articleStock}" id="articleStock" />
-				
+
 				<p:outputLabel for="articleCatalogue" value="Catalogue:" />
-				<p:inputText value="#{research.articleCatalogue}" id="articleCatalogue" />
+				<p:inputText value="#{research.articleCatalogue}"
+					id="articleCatalogue" />
 			</h:panelGrid>
 			<br />
-			
+
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton value="Rechercher" update="results"
@@ -106,11 +105,13 @@
 				</f:facet>
 			</p:toolbar>
 		</p:fieldset>
+	</h:form>
 
-		<br />
+	<br />
 
-		<!-- Liste results -->
+	<!-- Liste results -->
 
+	<h:form prependId="false">
 		<p:dataList value="#{research.products}" var="list" type="unordered"
 			itemType="none" id="results">
 			<f:facet name="header">
@@ -118,7 +119,7 @@
             	<p:outputLabel value="#{research.products.size()}" />
 			</f:facet>
 
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
 					<h:outputLink value="detailProduit.xhtml">
 						<h:graphicImage library="img" name="loupe.png" />
@@ -139,7 +140,6 @@
 			</h:panelGrid>
 			<hr />
 		</p:dataList>
-
 	</h:form>
 </body>
 

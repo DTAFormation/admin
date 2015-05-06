@@ -30,4 +30,6 @@ public class SearchProduit extends SearchEntities<Produit> {
 		query.setParameter("name", id);
 		return query.getResultList();
 	}
+	
+	
 }
