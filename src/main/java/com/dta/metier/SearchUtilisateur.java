@@ -11,12 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Utilisateur;
-import com.dta.test.metier.SearchArticleTest;
 
 @Stateless
 public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 
-	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateur.class);	
 	
 	public SearchUtilisateur() {
 		super(Utilisateur.class);
