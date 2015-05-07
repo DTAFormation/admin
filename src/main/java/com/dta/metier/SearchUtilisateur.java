@@ -7,11 +7,16 @@ import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Utilisateur;
+import com.dta.test.metier.SearchArticleTest;
 
 @Stateless
 public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 
+	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);	
 	
 	public SearchUtilisateur() {
 		super(Utilisateur.class);
@@ -36,7 +41,6 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 	}
 	
 	public String requestGenerator(Utilisateur utilisateur){
-		System.out.println("\n \n \n \n \n " + utilisateur);
 		String request = "SELECT u FROM Utilisateur u WHERE ";
 		
 		if(utilisateur.getLogin() != null)
@@ -88,9 +92,9 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 		query_auth.setParameter("typeUt", type);
 		try{
 			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
-			System.out.println(result);
 			return result;
 		}catch (NoResultException e){
+			LOG.info(e.toString());
 			return null;
 		}
 	}
