@@ -20,10 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dta.entities.Article;
-import com.dta.entities.Produit;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchUtilisateur;
 
 import static org.mockito.Mockito.*;
@@ -47,6 +44,54 @@ public class SearchUtilisateurTest {
 		searchUtilisateur.setEm(em);
 	}
 	
+	@Test
+	public void findByNameTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
+		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null));
+		when(em.createNamedQuery("Utilisateur.findByName")).thenReturn(query);
+		when(query.getResultList()).thenReturn(utilisateurEnBase);
+			
+		LOG.info("Objet supposé etre reçu");
+		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
+		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null);
+		utilisateurAttendu.add(monUtilisateurAttendu);
+		
+		LOG.info("Lorsque service.findByName(nomTest)");
+		List<Utilisateur> result = searchUtilisateur.findByName("nomTest");
+
+		LOG.info("");
+		assertEquals(result.get(0).toString(),utilisateurAttendu.get(0).toString());
+	}
+	
+	
+	@Test
+	public void findByTitreTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
+		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null));
+		when(em.createNamedQuery("Utilisateur.findByTitre")).thenReturn(query);
+		when(query.getResultList()).thenReturn(utilisateurEnBase);
+			
+		LOG.info("Objet supposé etre reçu");
+		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
+		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
+		utilisateurAttendu.add(monUtilisateurAttendu);
+		
+		LOG.info("Lorsque service.findByTitre(mlle)");
+		List<Utilisateur> result = searchUtilisateur.findByTitre("mlle");
+
+		LOG.info("");
+		assertEquals(result.get(0).toString(),utilisateurAttendu.get(0).toString());
+	}
+	
+	
 	
 	@Test
 	public void findByIdTest(){
@@ -56,8 +101,6 @@ public class SearchUtilisateurTest {
 		// Programmer le comportement du mock
 		Utilisateur utilisateursEnBase = new Utilisateur();
 		when(em.find(Utilisateur.class, 0)).thenReturn(utilisateursEnBase);
-		
-		
 		
 		LOG.info("Objet supposÃ© etre reÃ§u");
 		Utilisateur monUtilisateurAttendu = new Utilisateur();
@@ -69,51 +112,31 @@ public class SearchUtilisateurTest {
 		assertEquals(result.toString(),monUtilisateurAttendu.toString());
 	}
 	
-	
-	/*
 	@Test
-	public void findByNameTest(){
+	public void findDetailTest(){
 			
-		LOG.info("Etant donnÃ© un id de produit existant en base");
+		LOG.info("Etant donné un id de produit existant en base");
 		
 		// Programmer le comportement du mock
-		List<Utilisateur> articlesEnBase = new ArrayList<>();
-		articlesEnBase.add(new Utilisateur("testNom"));
-		when(em.createNamedQuery("Article.findByName")).thenReturn(query);
-		when(query.getResultList()).thenReturn(articlesEnBase);
+		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
+		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null));
+		
+		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login ='loginTest' ")).thenReturn(query);
+		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
-		LOG.info("Objet supposÃ© etre reÃ§u");
+		
+		LOG.info("Objet supposé etre reçu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
-		Utilisateur monUtilisateurAttendu = new Utilisateur("testNom", 0.0f, null, 0);
+		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
 		
 		LOG.info("Lorsque service.findByName(testNom)");
-		List<Utilisateur> result = searchUtilisateur.findByName("testNom");
+		Utilisateur utilisateurModel = new Utilisateur(null, 0, "loginTest", null, null, null, 0, null, null, null);
+		List<Utilisateur> result = searchUtilisateur.findDetail(utilisateurModel);
 		
 		LOG.info("");
 		assertEquals(result.get(0).toString(),utilisateurAttendu.get(0).toString());
 	}
-	
-	/*
-	
-	@SuppressWarnings("unchecked")
-	public List<Utilisateur> findByName(String name){
-		Query query = em.createQuery("Utilisateur.findByName");
-		query.setParameter("name", name);
-		return query.getResultList();		
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Utilisateur> findByTitre(String type){
-		Query query = em.createNamedQuery("Utilisateur.findByTitre");
-		query.setParameter("typeUt", type);
-		return query.getResultList();
-	}
-	
-	public Utilisateur findById(int id){
-		return em.find(Utilisateur.class, id);
-	}
-	*/
 	
 	@Test
 	public void requestGeneratorTest(){

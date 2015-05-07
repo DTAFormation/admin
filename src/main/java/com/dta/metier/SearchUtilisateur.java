@@ -19,7 +19,7 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findByName(String name){
-		Query query = em.createQuery("Utilisateur.findByName");
+		Query query = em.createNamedQuery("Utilisateur.findByName");
 		query.setParameter("name", name);
 		return query.getResultList();		
 	}
