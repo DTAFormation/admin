@@ -42,6 +42,7 @@ public class UtilisateurBean {
 			return;
 		}
 		deleteUtilisateur.delete(utilisateurId);
-	}
-
+		RequestContext.getCurrentInstance().execute("PF('dlgSucceed').show()");
+    }
+	
 }
