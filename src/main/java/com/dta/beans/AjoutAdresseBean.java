@@ -19,7 +19,6 @@ public class AjoutAdresseBean {
 	private int idAdresse;
 	
 	public void save(){
-		System.out.println(toString());
 		adresse =new Adresse();
 		adresse.setCodePostal(codePostal);
 		adresse.setDepartement(departement);
