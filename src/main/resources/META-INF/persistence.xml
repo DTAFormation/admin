@@ -10,6 +10,7 @@
 		<class>com.dta.entities.Produit</class>
 		<class>com.dta.entities.Article</class>
 		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
