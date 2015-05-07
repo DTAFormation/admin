@@ -69,6 +69,7 @@ public class SearchUtilisateurTest {
 		assertEquals(result.toString(),monUtilisateurAttendu.toString());
 	}
 	
+	
 	/*
 	@Test
 	public void findByNameTest(){
@@ -112,7 +113,70 @@ public class SearchUtilisateurTest {
 	public Utilisateur findById(int id){
 		return em.find(Utilisateur.class, id);
 	}
+	*/
 	
+	@Test
+	public void requestGeneratorTest(){
+		Utilisateur utilisateur = new Utilisateur();
+		
+		utilisateur.setLogin("login");
+		utilisateur.setEmail(null);
+		utilisateur.setNom(null);
+		utilisateur.setPrenom(null);
+		utilisateur.setTypeUtil(null);
+		
+		String generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.login ='login' ");
+		
+		utilisateur.setLogin(null);
+		utilisateur.setEmail(null);
+		utilisateur.setNom("nom");
+		utilisateur.setPrenom(null);
+		utilisateur.setTypeUtil(null);
+		
+		generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.nom ='nom' ");
+		
+		utilisateur.setLogin(null);
+		utilisateur.setEmail(null);
+		utilisateur.setNom(null);
+		utilisateur.setPrenom("prenom");
+		utilisateur.setTypeUtil(null);
+		
+		generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.prenom ='prenom' ");
+		
+		utilisateur.setLogin(null);
+		utilisateur.setEmail(null);
+		utilisateur.setNom(null);
+		utilisateur.setPrenom(null);
+		utilisateur.setTypeUtil("a");
+		
+		generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.typeUtil ='a' ");
+		
+		utilisateur.setLogin(null);
+		utilisateur.setEmail("email");
+		utilisateur.setNom(null);
+		utilisateur.setPrenom(null);
+		utilisateur.setTypeUtil(null);
+		
+		generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.email ='email' ");
+		
+		utilisateur.setLogin("login");
+		utilisateur.setEmail("email");
+		utilisateur.setNom("nom");
+		utilisateur.setPrenom("prenom");
+		utilisateur.setTypeUtil("a");
+		
+		generated = searchUtilisateur.requestGenerator(utilisateur);
+		Assert.assertEquals(generated, "SELECT u FROM Utilisateur u WHERE u.login ='login' AND u.nom ='nom' AND u.prenom ='prenom' AND u.email ='email' AND u.typeUtil ='a' ");
+		
+	}
+	
+	
+	/*
 	public String requestGenerator(Utilisateur utilisateur){
 		System.out.println("\n \n \n \n \n " + utilisateur);
 		String request = "SELECT u FROM Utilisateur u WHERE ";
