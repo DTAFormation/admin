@@ -33,7 +33,10 @@ public class Produit {
 	@Column(nullable=true)
 	private List<Article> articles;
 	
-	public Produit() {}
+	public Produit() {
+		
+	}
+	
 	public Produit(String description, String nom, Catalogue catalogue,
 			List<Article> articles) {
 		this.description = description;
@@ -70,7 +73,12 @@ public class Produit {
 	public void setCatalogue(Catalogue catalogue) {
 		this.catalogue = catalogue;
 	}
-	
+	public List<Article> getArticles() {
+		return articles;
+	}
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
 	@Override
 	public String toString() {
 		return "Produit [produitId=" + produitId + ", description="
