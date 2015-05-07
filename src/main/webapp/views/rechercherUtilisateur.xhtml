@@ -45,7 +45,8 @@
 			<f:facet name="options">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
-					<p:commandButton type="button" value="Logout" actionListener="#{research.logout()}" icon="ui-icon-extlink" ></p:commandButton>
+					<p:commandButton type="button" value="Logout"
+						actionListener="#{research.logout()}" icon="ui-icon-extlink"></p:commandButton>
 				</h:panelGrid>
 			</f:facet>
 		</p:menubar>
@@ -74,7 +75,7 @@
 				<p:inputText value="#{research.userLogin}" id="loginUtilisateur" />
 
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
-				<p:inputText value="#{research.userMail}" id="mailUtilisateur"/>
+				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
 
 				<p:outputLabel for="typeSelect" value="Type:" />
 				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
@@ -99,7 +100,7 @@
 						actionListener="#{research.submitResearchAllUser}"
 						style="margin-right:20px;" />
 				</f:facet>
-				
+
 				<f:facet name="right">
 					<p:commandButton value="Effacer" style="margin-right:20px;">
 						<p:ajax update="panel" resetValues="true" />
@@ -117,7 +118,7 @@
 				Resultats de recherche: 
             	<p:outputLabel value="#{research.users.size()}" />
 			</f:facet>
-			
+
 			<h:panelGrid columns="2">
 				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
 					<h:outputLink value="showUser.xhtml">
@@ -134,7 +135,7 @@
 					<h:outputText value="#{list.prenom}" id="prenom" />
 
 					<p:outputLabel for="email" value="email:" />
-					<h:outputText value="#{list.email}" id="email"/>
+					<h:outputText value="#{list.email}" id="email" />
 				</h:panelGrid>
 			</h:panelGrid>
 			<hr />
