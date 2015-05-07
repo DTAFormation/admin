@@ -28,6 +28,10 @@ public class GestionSessionFilter implements Filter {
 		}
 	}
 
+	public void destroy() {
+
+	}
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
@@ -47,16 +51,11 @@ public class GestionSessionFilter implements Filter {
     		http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
         }
     	else
-    		System.out.println(authentificationBean.getUtilisateur().getTypeUtil() 
-    				+ "    " + authentificationBean.getUtilisateur().getLogin() 
-    				+ "    " + authentificationBean.getUtilisateur().getPassword());
-      }
-      
-      chain.doFilter(request, response);	
-	}
-	
-	public void destroy() {
-
+    		System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
+    }
+         
+        chain.doFilter(request, response);
+		
 	}
 
 }
