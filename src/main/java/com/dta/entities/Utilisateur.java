@@ -43,6 +43,7 @@ public class Utilisateur {
 	private String titre;
 	@Column(name="type_util", length=1)
 	private String typeUtil;
+	
 	@OneToMany(mappedBy="utilisateur", 
 			cascade=CascadeType.ALL, 
 			fetch=FetchType.EAGER)
