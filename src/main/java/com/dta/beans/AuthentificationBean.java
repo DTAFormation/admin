@@ -48,8 +48,6 @@ public class AuthentificationBean {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
 	
-	
-	
 	public String getLogin() {
 		return login;
 	}
