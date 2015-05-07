@@ -65,6 +65,8 @@ public class AjoutClientBean {
 		utilisateur.setTypeUtil(typeUtil);
 		if (adresses!=null){
 			utilisateur.setAdresses(adresses);
+			for(Adresse a : utilisateur.getAdresses())
+				a.setUtilisateur(utilisateur);
 		}
 		ejb.save(utilisateur);
 		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
