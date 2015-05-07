@@ -32,7 +32,6 @@ public class Adresse {
 	@OneToMany(mappedBy="adresse")
 	private List<Commande> commande;
 	@ManyToOne
-	@JoinTable(name="adresses_utilisateur")
 	private Utilisateur utilisateur;
 		
 	public Adresse() {}
