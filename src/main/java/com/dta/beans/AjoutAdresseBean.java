@@ -1,13 +1,10 @@
 package com.dta.beans;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import org.primefaces.context.RequestContext;
 
 import com.dta.entities.Adresse;
-import com.dta.entities.Utilisateur;
-import com.dta.metier.AddAdresseEJB;
 
 @ManagedBean
 public class AjoutAdresseBean {
@@ -17,11 +14,9 @@ public class AjoutAdresseBean {
 	private String pays;
 	private String rue;
 	private String ville;
-	
 	private Adresse adresse;
 	
-	@EJB
-	private AddAdresseEJB ejb;
+	private int idAdresse;
 	
 	public void save(){
 		System.out.println(toString());
@@ -32,18 +27,11 @@ public class AjoutAdresseBean {
 		adresse.setPays(pays);
 		adresse.setRue(rue);
 		adresse.setVille(ville);
-		
-		int IDadresse = ejb.save(adresse);
-		if(IDadresse!=-1){
-			RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
-			RequestContext.getCurrentInstance().execute("PF('dlgAdresseEnregistre').show()");
-		}
-		else{
-			RequestContext.getCurrentInstance().execute("PF('dlgAdresseErreur').show()");
-		}
-		//ejb.save(adresse);
+
+		AjoutClientBean.saveAdresses(adresse);
+		RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
+		RequestContext.getCurrentInstance().execute("PF('dlgAdresseEnregistre').show()");
 	}
-	
 	public int getCodePostal() {
 		return codePostal;
 	}
@@ -79,5 +67,11 @@ public class AjoutAdresseBean {
 	}
 	public void setVille(String ville) {
 		this.ville = ville;
+	}
+	public int getIdAdresse() {
+		return idAdresse;
+	}
+	public void setIdAdresse(int idAdresse) {
+		this.idAdresse = idAdresse;
 	}
 }
