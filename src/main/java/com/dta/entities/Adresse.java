@@ -35,7 +35,10 @@ public class Adresse {
 	@JoinTable(name="adresses_utilisateur")
 	private Utilisateur utilisateur;
 		
-	public Adresse() {}
+	public Adresse() {
+		
+	}
+	
 	public Adresse(int codePostal, String departement, int num, String pays,
 			String rue, String ville, List<Commande> commande,
 			Utilisateur utilisateur) {
