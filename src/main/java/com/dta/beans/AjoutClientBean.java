@@ -1,5 +1,6 @@
 package com.dta.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -26,13 +27,19 @@ public class AjoutClientBean {
 	private int telephone;
 	private String titre;
 	private String typeUtil;
-	private List<Adresse> adresses;
+	private static List<Adresse> adresses;
 
 	@EJB
 	private AddClientEJB ejb;
 
+	public static void saveAdresses(Adresse adresse){
+		if (adresses==null){
+			adresses= new ArrayList<Adresse>();
+		}
+		adresses.add(adresse);
+	}
+	
 	public void save(){
-		
 		utilisateur =new Utilisateur();
 		utilisateur.setEmail(email);
 		utilisateur.setFax(fax);
@@ -43,8 +50,23 @@ public class AjoutClientBean {
 		utilisateur.setTelephone(telephone);
 		utilisateur.setTitre(titre);
 		utilisateur.setTypeUtil(typeUtil);
+		if (adresses!=null)
+			utilisateur.setAdresses(adresses);
 		ejb.save(utilisateur);
 		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
+		reset();
+	}
+	private void reset() {
+		email="";
+		fax=0;
+		login="";
+		nom="";
+		password="";
+		prenom="";
+		telephone=0;
+		titre="";
+		typeUtil="";
+		adresses=new ArrayList<Adresse>();
 	}
 
 	public String getEmail() {
@@ -105,7 +127,7 @@ public class AjoutClientBean {
 		return adresses;
 	}
 	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
+		AjoutClientBean.adresses = adresses;
 	}
 
 	@Override
