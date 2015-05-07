@@ -1,0 +1,43 @@
+package com.dta.validateur.addclient;
+
+import javax.faces.validator.ValidatorException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import com.dta.metier.AddClientEJB;
+
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class ExistenceLoginValidatorTest {
+	@Mock private AddClientEJB addclientEJB;
+	private ExistenceLoginValidator elv;
+	
+	@Before
+	public void init(){
+		elv=new ExistenceLoginValidator();
+		elv.setAddclientEJB(addclientEJB);	
+	}
+	
+	@Test(expected=ValidatorException.class)
+	public void validateTrueTest(){
+		String login = "login";
+		
+		when(addclientEJB.SearchExistenceLogin(login)).thenReturn(true);
+		elv.validate(null, null, login);
+	}
+	
+	@Test
+	public void validateFalseTest(){
+		String login = "login";
+		
+		when(addclientEJB.SearchExistenceLogin(login)).thenReturn(false);
+		elv.validate(null, null, login);
+		Mockito.verify(addclientEJB).SearchExistenceLogin(login);
+	}
+}

@@ -20,7 +20,8 @@ public class ExistenceLoginValidator implements Validator{
 	
 	@EJB
 	private AddClientEJB addclientEJB;
-	
+
+
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
@@ -29,5 +30,14 @@ public class ExistenceLoginValidator implements Validator{
 		      throw new ValidatorException(
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, LOGIN_EXISTE_DEJA, null ) );
 		}
+	}
+	
+	
+	
+	protected AddClientEJB getAddclientEJB() {
+		return addclientEJB;
+	}
+	protected void setAddclientEJB(AddClientEJB addclientEJB) {
+		this.addclientEJB = addclientEJB;
 	}
 }

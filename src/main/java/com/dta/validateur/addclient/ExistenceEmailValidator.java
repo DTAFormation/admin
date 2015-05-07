@@ -29,4 +29,11 @@ public class ExistenceEmailValidator implements Validator{
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, EMAIL_EXISTE_DEJA, null ) );
 		}
 	}
+
+	protected AddClientEJB getAddclientEJB() {
+		return addclientEJB;
+	}
+	protected void setAddclientEJB(AddClientEJB addclientEJB) {
+		this.addclientEJB = addclientEJB;
+	}
 }
