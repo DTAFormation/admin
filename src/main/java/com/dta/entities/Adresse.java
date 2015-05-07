@@ -13,18 +13,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="Adresse.findByAdresse", 
-			query="SELECT a "
-					+ "FROM Adresse a "
-					+ "WHERE a.codePostal=:codepostal "
-					+ "AND a.departement=:departement "
-					+ "AND a.num=:numero "
-					+ "AND a.pays=:pays "
-					+ "AND a.rue=:rue "
-					+ "AND a.ville=:ville"
-	)
-})
 public class Adresse {
 
 	@Id
