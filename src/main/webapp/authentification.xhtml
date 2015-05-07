@@ -29,8 +29,8 @@
 					<f:selectItem itemLabel="Modérateur" itemValue="m" />
 				</p:selectOneRadio>
 			</h:panelGrid>
+			<p:commandButton actionListener="#{autehentificationBean.verifyAuth()}" value="Connexion"></p:commandButton>
 		</p:panel>
-	<p:commandButton actionListener="#{autehentificationBean.verifyAuth()}" value="Connexion"></p:commandButton>
 	</h:form>
 
 </body>

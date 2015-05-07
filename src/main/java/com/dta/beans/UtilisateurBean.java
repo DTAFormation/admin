@@ -30,14 +30,19 @@ public class UtilisateurBean {
 	
 	public void delete(int utilisateurId) {
 		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
+		
 		if(searchUtilisateur.findById(utilisateurId).getTypeUtil().equals("a")){
-			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
 			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
 				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
 				return;
 			}
-		}				
+		}
+		if(auth.getUtilisateur().getUtilisateurId() == utilisateurId){
+			RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth2').show()");
+			return;
+		}
 		deleteUtilisateur.delete(utilisateurId);
     }
 	

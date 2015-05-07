@@ -6,10 +6,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import com.dta.entities.Utilisateur;
-import com.mysql.jdbc.Util;
 
 @Stateless
 public class SearchUtilisateur extends SearchEntities<Utilisateur>{
@@ -19,14 +17,16 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 		super(Utilisateur.class);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findByName(String name){
-		TypedQuery<Utilisateur> query = em.createQuery("Utilisateur.findByName", Utilisateur.class);
+		Query query = em.createNamedQuery("Utilisateur.findByName");
 		query.setParameter("name", name);
 		return query.getResultList();		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findByTitre(String type){
-		TypedQuery<Utilisateur> query = em.createNamedQuery("Utilisateur.findByTitre", Utilisateur.class);
+		Query query = em.createNamedQuery("Utilisateur.findByTitre");
 		query.setParameter("typeUt", type);
 		return query.getResultList();
 	}
