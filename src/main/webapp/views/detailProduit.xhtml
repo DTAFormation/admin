@@ -8,13 +8,14 @@
 	<f:metadata>
 		<f:viewParam name="articleId" />
 	</f:metadata>
-	<c:set var="monArticle" value="${detailProduitBean.showDetailArticle(articleId)}" ></c:set>
-	<c:set var="monProduit" value="${monArticle.produit}" ></c:set>
-	<c:set var="monCatalogue" value="${monProduit.catalogue}" ></c:set>
+	<c:set var="monArticle"
+		value="${detailProduitBean.showDetailArticle(articleId)}"></c:set>
+	<c:set var="monProduit" value="${monArticle.produit}"></c:set>
+	<c:set var="monCatalogue" value="${monProduit.catalogue}"></c:set>
 	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
-	
+
 	<p:accordionPanel multiple="true">
 		<p:tab title="Article">
 			<p:panelGrid columns="2" cellpadding="10">
@@ -47,6 +48,10 @@
 			</p:panelGrid>
 		</p:tab>
 	</p:accordionPanel>
+	<h:form>
+		<p:commandButton action="#{articleBean.delete(articleId)}"
+			value="Supprimer" style="margin:5px; float:right;" />
+	</h:form>
 
 </h:body>
 </html>
