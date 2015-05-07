@@ -1,9 +1,10 @@
 package com.dta.metier;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class AddProduitTest {
 	private EntityManager em;
 	
 	@Mock
-	private Query query;
+	private TypedQuery<Produit> query;
 	
 	private AddProduitEJB ejb;
 	
@@ -38,38 +39,41 @@ public class AddProduitTest {
 	}
 	
 	@Test
-	public void creerProduit() {
-		LOG.info("Etant donne un objet Produit");
-		
+	public void creerProduit() {		
+		LOG.info("Etant donne un objet Produit");		
 		Produit produit = new Produit("ceci est une description", "nom");
 		
-		when(em.createNamedQuery("Produit.findByName")).thenReturn(query);
+		when(em.createNamedQuery("Produit.findByName", Produit.class)).thenReturn(query);
+		when(query.setParameter("name", "nom")).thenReturn(query);
 		when(query.getResultList()).thenReturn(new ArrayList<Produit>());
 		
 		LOG.info("Lorsque ejb.save(produit)");
-		
 		ejb.save(produit);
 		
-		LOG.info("Alors 'produit' est present en BDD");
+		LOG.info("Alors 'produit' a été persisté");
 		verify(em).persist(produit);
+		
+		LOG.info("FIN");
 	}
 	
+	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void creerProduitAvecNomExistant() {
-		LOG.info("Etant donne des objets Produit avec le meme nom");
-		
+		LOG.info("Etant donne des objets Produit avec le meme nom");		
 		Produit produit1 = new Produit("ceci est une description", "nom");
 		Produit produit2 = new Produit("ceci est une autre description", "nom");
 		
-		when(em.createNamedQuery("Produit.findByName")).thenReturn(query);
-		when(query.getResultList()).thenReturn(new ArrayList<Produit>());
+		when(em.createNamedQuery("Produit.findByName", Produit.class)).thenReturn(query);
+		when(query.setParameter("name", "nom")).thenReturn(query);
+		when(query.getResultList()).thenReturn(new ArrayList<Produit>(), Arrays.asList(produit1));
 		
-		LOG.info("Lorsque ejb.save(produit)");
-		
-		ejb.save(produit1);
-		ejb.save(produit2);
-		
-		LOG.info("Alors 'produit' est present en BDD");
-		verify(em).persist(produit1);
+		boolean firstAttempt = false;
+		boolean secondAttempt = true;
+
+		assertEquals(firstAttempt, ejb.isProduitNameExists(produit1.getNom()));
+		assertEquals(secondAttempt, ejb.isProduitNameExists(produit2.getNom()));
+	
+		LOG.info("FIN");
 	}
 }
