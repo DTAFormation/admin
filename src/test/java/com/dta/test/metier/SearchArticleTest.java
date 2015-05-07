@@ -8,15 +8,12 @@ import javax.persistence.Query;
 import javax.persistence.criteria.AbstractQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Selection;
-import javax.xml.registry.infomodel.EmailAddress;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +36,6 @@ public class SearchArticleTest{
 	@Mock private CriteriaQuery<Object> criteriaQuery;
 	@Mock private CriteriaBuilder criteriaBuilder;
 	@Mock private AbstractQuery<Object> abstractQuery;
-	@Mock private Selection selection;
 
 	@Before
 	public void setUp() {

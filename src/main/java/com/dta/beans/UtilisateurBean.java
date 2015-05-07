@@ -23,6 +23,7 @@ public class UtilisateurBean {
 	@EJB
 	private SearchUtilisateur searchUtilisateur;
 	
+
 	public Utilisateur GetUtilisateurById(int utilisateurId) {
 		return searchUtilisateur.findById(utilisateurId);
     }
@@ -36,12 +37,7 @@ public class UtilisateurBean {
 				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
 				return;
 			}
-		}		
-		
-		
-		
-		
-		
+		}				
 		deleteUtilisateur.delete(utilisateurId);
     }
 	

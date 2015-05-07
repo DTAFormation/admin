@@ -15,8 +15,10 @@ public class AddClientEJB{
 	private EntityManager em;
 	
 	public void save(Utilisateur utilisateur){
+		if(utilisateur.getAdresses()!=null)
+			for(int i =0;i<utilisateur.getAdresses().size();i++)
+				em.persist(utilisateur.getAdresses().get(i));
 		em.persist(utilisateur);
-		
 	}
 	
 	//Methode pour le validator.

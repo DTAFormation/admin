@@ -46,12 +46,12 @@ public class ResearchController {
 	private List<Article> products;
 	private List<Utilisateur> users;
 
+
 	/*
 	 * 
 	 * Constructors
 	 * 
 	 */
-
 
 	public ResearchController(){
 		this("", "", "", "", "", "", "", "", "", "", "", null, null);		
@@ -84,11 +84,10 @@ public class ResearchController {
 	/*
 	 *  Methods research ARTICLE
 	 */
-	
+
 	public void logout() throws IOException{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
-		
 	}
 
 	public void submitResearchArticle() {
