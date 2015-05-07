@@ -51,8 +51,8 @@
 		</f:facet>
 	</p:panelGrid>
 	<br />
-	<p:carousel value="#{utilisateur.adresses}" 
-		var="adresse" headerText="Adresses">
+	<p:carousel value="#{utilisateur.adresses}" var="adresse"
+		headerText="Adresses">
 		<p:panelGrid columns="2">
 			<h:outputText value="Adresse ID" />
 			<h:outputText value="#{adresse.adresseId}" />
@@ -71,6 +71,10 @@
 		</p:panelGrid>
 	</p:carousel>
 
+	<p:dialog header="Accès refusé" widgetVar="dlgErreurAuth"
+		dynamic="true">
+	Vous devez posséder les droits administrateur pour supprimer un administrateur !
+</p:dialog>
 	<br />
 </body>
 </html>
