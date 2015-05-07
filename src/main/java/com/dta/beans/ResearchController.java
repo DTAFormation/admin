@@ -7,7 +7,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
@@ -45,6 +44,8 @@ public class ResearchController {
 	// research results
 	private List<Article> products;
 	private List<Utilisateur> users;
+	
+	
 
 	/*
 	 * 
@@ -81,21 +82,19 @@ public class ResearchController {
 	}
 
 
+	//logout
+	
+	public void logout() throws IOException{
+		System.out.println("test");
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
+	}
+	
 	/*
 	 *  Methods research ARTICLE
 	 */
-<<<<<<< HEAD
-	
-	public void logout() throws IOException{
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
-		
-	}
-	
-	public void submitResearchArticle() {
-=======
->>>>>>> 5f5c0694cdd372876e47b04123003c6c889f0232
 
+	
 	public void submitResearchArticle() {
 		
 		//priority to research by id
