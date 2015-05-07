@@ -51,8 +51,8 @@
 	</p:panelGrid>
 	<br />
 	<p:carousel value="#{utilisateur.adresses}" 
-		var="adresse" headerText="Adresses" style="width:550px;">
-		<p:panelGrid columns="2">
+		var="adresse" headerText="Adresses" style="min-width:550px;">
+		<p:panelGrid columns="2" style="width:100%;">
 			<h:outputText value="Adresse ID" />
 			<h:outputText value="#{adresse.adresseId}" />
 			<h:outputText value="Numéro" />
