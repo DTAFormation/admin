@@ -10,11 +10,19 @@ import com.dta.entities.Utilisateur;
 public class DeleteUtilisateur {
 	
 	@PersistenceContext(unitName="ecommercedb")
-	protected EntityManager em;
+	private EntityManager em;
 	
 	public void delete(int utilisateurId){
 		Utilisateur utilisateur = em.find(Utilisateur.class, utilisateurId);
 		em.remove(utilisateur);		
 	}
-		
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
 }

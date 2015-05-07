@@ -10,12 +10,19 @@ import com.dta.entities.Article;
 public class DeleteArticle {
 
 	@PersistenceContext(unitName="ecommercedb")
-	protected EntityManager em;
+	private EntityManager em;
 	
 	public void delete(int articleId){
 		Article article = em.find(Article.class, articleId);
-		System.out.println(article.toString());
 		em.remove(article);		
 	}
-	
+
+	protected EntityManager getEm() {
+		return em;
+	}
+
+	protected void setEm(EntityManager em) {
+		this.em = em;
+	}
+		
 }
