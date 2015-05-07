@@ -20,18 +20,12 @@ public class GestionSessionFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		String urls = filterConfig.getInitParameter("avoid-urls");
-		System.out.println("1 " + urls);
 		StringTokenizer token = new StringTokenizer(urls, ",");
 		urlList = new ArrayList<String>();
 
 		while (token.hasMoreTokens()) {
 			urlList.add(token.nextToken());
 		}
-		System.out.println("2 " + urlList);
-	}
-
-	public void destroy() {
-
 	}
 
 	@Override
@@ -42,27 +36,27 @@ public class GestionSessionFilter implements Filter {
         HttpServletResponse http_response = (HttpServletResponse) response;
         AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("autehentificationBean");
         String url = http_request.getServletPath();
-        System.out.println("3 " + url);
         boolean allowedRequest = false;
-        System.out.println(http_request.getSession().getAttributeNames());
          
         if(urlList.contains(url)) {
-        	System.out.println("4 " + url);
         	allowedRequest = true;
         }
         
       if (!allowedRequest) {
-    	System.out.println("5 " + allowedRequest);
     	if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
-    		System.out.println("7 " );
-    		http_response.sendRedirect("authentification.xhtml");
+    		http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
         }
     	else
-    		System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
-    }
-         
-        chain.doFilter(request, response);
-		
+    		System.out.println(authentificationBean.getUtilisateur().getTypeUtil() 
+    				+ "    " + authentificationBean.getUtilisateur().getLogin() 
+    				+ "    " + authentificationBean.getUtilisateur().getPassword());
+      }
+      
+      chain.doFilter(request, response);	
+	}
+	
+	public void destroy() {
+
 	}
 
 }

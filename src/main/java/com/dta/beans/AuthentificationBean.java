@@ -7,7 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchUtilisateur;
@@ -45,18 +44,9 @@ public class AuthentificationBean {
     }
 	
 	public void logout() throws IOException{
-		
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		System.out.println(session);
-		session.invalidate();
-		System.out.println(session);
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
-//		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-//		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
-		
 	}
-	
-	
 	
 	public String getLogin() {
 		return login;
