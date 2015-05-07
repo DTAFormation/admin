@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
 
@@ -70,11 +71,12 @@
 				</p:inputText>
 				<p:message id="articleMessage" for="articleInput"
 					errorClass="erreur" />
+				<p:watermark for="articleInput" value="Nom" />
 			</h:panelGrid>
 			
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Prix:" />
-				<p:inputText value="#{ajoutArticle.prix}" required="true" />
+				<pe:inputNumber value="#{ajoutArticle.prix}" required="true" />
 
 				<p:outputLabel value="Produit:" />
 				<p:selectOneMenu value="#{ajoutArticle.produitId}">
@@ -84,8 +86,7 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Stock:" />
-				<p:inputText value="#{ajoutArticle.stock}" required="true"
-					requiredMessage="Champ obligatoire" />
+				<pe:inputNumber value="#{ajoutArticle.stock}" required="true" />
 			</h:panelGrid>
 
 			<br />

@@ -70,7 +70,10 @@
 				</p:inputText>
 				<p:message id="produitMessage" for="produitInput"
 					errorClass="erreur" />
+				<p:watermark for="produitInput" value="Produit" />
 			</h:panelGrid>
+			
+			
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Description:" />
 				<p:inputText value="#{ajoutProduit.description}" />

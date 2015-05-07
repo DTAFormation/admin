@@ -9,14 +9,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.dta.entities.Article;
 import com.dta.metier.AddArticleEJB;
 
 @ManagedBean
 @RequestScoped
 public class ArticleValidator implements Validator {
 	
-	private static final String ARTICLE_EXISTANT = "Ce nom d'article est déjà pris";
+	private static final String ARTICLE_EXISTANT = "Ce nom d article est deja pris";
 	
 	@EJB
 	private AddArticleEJB ejb;
@@ -25,7 +24,7 @@ public class ArticleValidator implements Validator {
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String artnom = (String) arg2;
-		if(ejb.getEm().createNamedQuery("Article.findByName", Article.class).setParameter("name", artnom).getResultList().size() != 0){
+		if(ejb.isArticleNameExists(artnom)){
 		      throw new ValidatorException(
                       new FacesMessage(FacesMessage.SEVERITY_ERROR, ARTICLE_EXISTANT, null));
 		}

@@ -3,8 +3,13 @@ package com.dta.beans;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.persistence.Column;
+import javax.servlet.http.HttpSession;
+
+import org.primefaces.context.RequestContext;
 
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
@@ -28,8 +33,19 @@ public class AjoutClientBean {
 
 	@EJB
 	private AddClientEJB ejb;
+	
+	private HttpSession session;
 
 	public void save(){
+		
+		if(this.typeUtil.equals("a")){
+			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
+			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
+				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
+				return;
+			}
+		}
 		
 		utilisateur =new Utilisateur();
 		utilisateur.setEmail(email);
@@ -42,6 +58,7 @@ public class AjoutClientBean {
 		utilisateur.setTitre(titre);
 		utilisateur.setTypeUtil(typeUtil);
 		ejb.save(utilisateur);
+		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
 	}
 
 	public String getEmail() {

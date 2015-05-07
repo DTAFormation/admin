@@ -31,7 +31,7 @@ public class SearchArticle extends SearchEntities<Article>{
 		if(model.getNom()!=null){
 			request += "a.nom LIKE '%"+model.getNom()+"%' ";
 		}
-		if(model.getPrix()!=-1){
+		if(model.getPrix()!=-1.0f){
 			if(model.getNom()!=null){
 				request += "AND a.prix="+model.getPrix()+" ";
 			}
@@ -40,14 +40,14 @@ public class SearchArticle extends SearchEntities<Article>{
 			}
 		}
 		if(model.getStock()!=-1){
-			if(model.getPrix()!=-1 || model.getNom() != null){
+			if(model.getPrix()!=-1.0f || model.getNom() != null){
 				request += "AND a.stock="+model.getStock()+" ";
 			}else{
 				request += "a.stock="+model.getStock()+" ";
 			}
 		}
 		if(!produit.equals("")){
-			if(model.getPrix()!=-1 || model.getNom() != null || model.getStock()!=-1){
+			if(model.getPrix()!=-1.0f || model.getNom() != null || model.getStock()!=-1){
 				request += "AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
 			}else{
 				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";

@@ -16,7 +16,15 @@ public class AddProduitEJB {
 	private EntityManager em;
 	
 	public void save(Produit produit){
-		em.persist(produit);
+		if(!isProduitNameExists(produit.getNom()))
+			em.persist(produit);		
+	}
+	
+	public boolean isProduitNameExists(String name) {
+		return !em.createNamedQuery("Produit.findByName", Produit.class)
+				.setParameter("name", name)
+				.getResultList()
+				.isEmpty();
 	}
 	
 	public Catalogue getCatalogueById(int id) {
@@ -32,5 +40,9 @@ public class AddProduitEJB {
 
 	public EntityManager getEm() {
 		return em;
+	}
+	
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 }
