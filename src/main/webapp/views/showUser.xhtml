@@ -16,7 +16,7 @@
 </h:head>
 <body>
 
-	<p:panelGrid columns="2">
+	<p:panelGrid columns="2" style="width:550px;">
 		<f:facet name="header">
 			<p:row>
 				<p:column colspan="2">Utilisateur n° #{idUser}</p:column>
@@ -44,15 +44,14 @@
 			<p:row>
 				<h:form>
 					<p:commandButton action="#{utilisateurBean.delete(idUser)}"
-						value="Supprimer">
-					</p:commandButton>
+						value="Supprimer" style="margin:5px;"/>
 				</h:form>
 			</p:row>
 		</f:facet>
 	</p:panelGrid>
 	<br />
 	<p:carousel value="#{utilisateur.adresses}" 
-		var="adresse" headerText="Adresses">
+		var="adresse" headerText="Adresses" style="width:550px;">
 		<p:panelGrid columns="2">
 			<h:outputText value="Adresse ID" />
 			<h:outputText value="#{adresse.adresseId}" />
@@ -71,6 +70,11 @@
 		</p:panelGrid>
 	</p:carousel>
 
+	<p:dialog header="Accès refusé" widgetVar="dlgErreurAuth"
+		dynamic="true">
+	Vous devez posséder les droits administrateur pour supprimer un administrateur !
+</p:dialog>
 	<br />
 </body>
+
 </html>

@@ -46,9 +46,10 @@ public class Utilisateur {
 	@OneToMany(mappedBy="utilisateur", 
 			cascade=CascadeType.ALL, 
 			fetch=FetchType.EAGER)
-
 	private List<Adresse> adresses;
-	@OneToMany(mappedBy="utilisateur")
+	@OneToMany(mappedBy="utilisateur", 
+			cascade=CascadeType.ALL, 
+			fetch=FetchType.EAGER)
 	private List<Commande> commandes;
 	
 	public Utilisateur() {}
