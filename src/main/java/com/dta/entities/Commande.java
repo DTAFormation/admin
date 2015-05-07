@@ -31,10 +31,10 @@ public class Commande {
 	@JoinTable(name="commandes_utilisateur")
 	private Utilisateur utilisateur;
 	
-	/*@ManyToMany
-	private Map<Integer, Integer> bonCommande;*/
+	public Commande() {
+		
+	}
 	
-	public Commande() {}
 	public Commande(Date dateExpCarteCredit, Date dateCommande,
 			String numCarteCredit, String typeCarteCredit, Adresse adresse,
 			Utilisateur utilisateur) {

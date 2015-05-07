@@ -52,7 +52,9 @@ public class Utilisateur {
 			fetch=FetchType.EAGER)
 	private List<Commande> commandes;
 	
-	public Utilisateur() {}
+	public Utilisateur() {
+		
+	}
 	public Utilisateur(String email, int fax, String login, String nom,
 			String password, String prenom, int telephone, String titre,
 			String typeUtil, List<Adresse> adresses) {
@@ -135,7 +137,12 @@ public class Utilisateur {
 	public void setAdresses(List<Adresse> adresses) {
 		this.adresses = adresses;
 	}
-	
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
 	@Override
 	public String toString() {
 		return "Utilisateur [utilisateurId=" + utilisateurId + ", email="

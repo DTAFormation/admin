@@ -32,7 +32,10 @@ public class Article {
 	@Column(name="stock", length=19)
 	private int stock;
 	
-	public Article() {}
+	public Article() {
+		
+	}
+	
 	public Article(String nom, float prix, Produit produit, int stock) {
 		this.nom = nom;
 		this.prix = prix;

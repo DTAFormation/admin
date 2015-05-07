@@ -31,7 +31,10 @@ public class Catalogue {
 	@Column(nullable=false)
 	private List<Produit> produits;
 	
-	public Catalogue() {}
+	public Catalogue() {
+		
+	}
+	
 	public Catalogue(String description, String nom, List<Produit> produits) {
 		this.description = description;
 		this.nom = nom;
