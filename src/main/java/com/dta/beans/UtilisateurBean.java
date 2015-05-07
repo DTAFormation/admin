@@ -16,34 +16,32 @@ import com.dta.metier.SearchUtilisateur;
 @ManagedBean
 @RequestScoped
 public class UtilisateurBean {
-	
+
 	@EJB
 	private DeleteUtilisateur deleteUtilisateur;
-	
+
 	@EJB
 	private SearchUtilisateur searchUtilisateur;
-	
+
 
 	public Utilisateur GetUtilisateurById(int utilisateurId) {
 		return searchUtilisateur.findById(utilisateurId);
-    }
-	
+	}
+
 	public void delete(int utilisateurId) {
-		
+
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
-		
-		if(searchUtilisateur.findById(utilisateurId).getTypeUtil().equals("a")){
-			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
-				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
-				return;
-			}
+
+		if("a".equals(searchUtilisateur.findById(utilisateurId).getTypeUtil()) && (!"a".equals(auth.getUtilisateur().getTypeUtil()))){
+			RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
+			return;
 		}
 		if(auth.getUtilisateur().getUtilisateurId() == utilisateurId){
 			RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth2').show()");
 			return;
 		}
 		deleteUtilisateur.delete(utilisateurId);
-    }
-	
+	}
+
 }
