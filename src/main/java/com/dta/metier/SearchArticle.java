@@ -1,11 +1,9 @@
 package com.dta.metier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 
 import com.dta.entities.Article;
 
@@ -31,7 +29,8 @@ public class SearchArticle extends SearchEntities<Article>{
 		if(model.getNom()!=null){
 			request += "a.nom LIKE '%"+model.getNom()+"%' ";
 		}
-		if(model.getPrix()!=-1.0f){
+		//if(model.getPrix()!=-1.0f){
+		if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f)){
 			if(model.getNom()!=null){
 				request += "AND a.prix="+model.getPrix()+" ";
 			}
@@ -40,14 +39,14 @@ public class SearchArticle extends SearchEntities<Article>{
 			}
 		}
 		if(model.getStock()!=-1){
-			if(model.getPrix()!=-1.0f || model.getNom() != null){
+			if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f) || model.getNom() != null){
 				request += "AND a.stock="+model.getStock()+" ";
 			}else{
 				request += "a.stock="+model.getStock()+" ";
 			}
 		}
 		if(!produit.equals("")){
-			if(model.getPrix()!=-1.0f || model.getNom() != null || model.getStock()!=-1){
+			if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f) || model.getNom() != null || model.getStock()!=-1){
 				request += "AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
 			}else{
 				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
@@ -79,7 +78,6 @@ public class SearchArticle extends SearchEntities<Article>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Article> findById(int articleId){
-		//Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleId = :id");
 		Query query = em.createNamedQuery("Article.findById");
 		query.setParameter("id", articleId);
 		return query.getResultList();
