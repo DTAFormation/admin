@@ -1,21 +1,99 @@
-package com.dta.metier;
+package com.dta.test.metier;
+
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.NoResultException;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.AbstractQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.dta.entities.Article;
+import com.dta.entities.Produit;
 import com.dta.entities.Utilisateur;
+import com.dta.metier.SearchArticle;
+import com.dta.metier.SearchUtilisateur;
 
-@Stateless
-public class SearchUtilisateur extends SearchEntities<Utilisateur>{
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
+public class SearchUtilisateurTest {
+
+	private SearchUtilisateur searchUtilisateur;
+
+	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);	
 	
-	public SearchUtilisateur() {
-		super(Utilisateur.class);
+	@Mock private EntityManager em;
+	@Mock private Query query;
+	@Mock private CriteriaQuery<Object> criteriaQuery;
+	@Mock private CriteriaBuilder criteriaBuilder;
+	@Mock private AbstractQuery<Object> abstractQuery;
+
+	@Before
+	public void setUp() {
+		searchUtilisateur = new SearchUtilisateur();
+		searchUtilisateur.setEm(em);
 	}
+	
+	
+	@Test
+	public void findByIdTest(){
+			
+		LOG.info("Etant donné un id de utilisateur existant en base");
+		
+		// Programmer le comportement du mock
+		Utilisateur utilisateursEnBase = new Utilisateur();
+		when(em.find(Utilisateur.class, 0)).thenReturn(utilisateursEnBase);
+		
+		
+		
+		LOG.info("Objet supposé etre reçu");
+		Utilisateur monUtilisateurAttendu = new Utilisateur();
+		
+		LOG.info("Lorsque service.findById(0)");
+		Utilisateur result = searchUtilisateur.findById(0);
+		System.out.println(result);
+		LOG.info("");
+		assertEquals(result.toString(),monUtilisateurAttendu.toString());
+	}
+	
+	/*
+	@Test
+	public void findByNameTest(){
+			
+		LOG.info("Etant donné un id de produit existant en base");
+		
+		// Programmer le comportement du mock
+		List<Utilisateur> articlesEnBase = new ArrayList<>();
+		articlesEnBase.add(new Utilisateur("testNom"));
+		when(em.createNamedQuery("Article.findByName")).thenReturn(query);
+		when(query.getResultList()).thenReturn(articlesEnBase);
+			
+		LOG.info("Objet supposé etre reçu");
+		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
+		Utilisateur monUtilisateurAttendu = new Utilisateur("testNom", 0.0f, null, 0);
+		utilisateurAttendu.add(monUtilisateurAttendu);
+		
+		LOG.info("Lorsque service.findByName(testNom)");
+		List<Utilisateur> result = searchUtilisateur.findByName("testNom");
+		
+		LOG.info("");
+		assertEquals(result.get(0).toString(),utilisateurAttendu.get(0).toString());
+	}
+	
+	/*
 	
 	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findByName(String name){
@@ -94,5 +172,5 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 			return null;
 		}
 	}
-
+	*/ 
 }
