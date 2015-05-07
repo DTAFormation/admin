@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.persistence.Column;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
@@ -77,7 +75,7 @@ public class AjoutClientBean {
 		fax=0;
 		login="";
 		nom="";
-		password="";
+		password=new String();
 		prenom="";
 		telephone=0;
 		titre="";

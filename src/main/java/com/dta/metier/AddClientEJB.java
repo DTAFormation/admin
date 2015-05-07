@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 
 @Stateless
@@ -18,9 +17,6 @@ public class AddClientEJB{
 	private EntityManager em;
 	
 	public void save(Utilisateur utilisateur){
-//		if(utilisateur.getAdresses()!=null)
-//			for(Adresse addr :utilisateur.getAdresses())
-//				em.persist(addr);
 		em.persist(utilisateur);
 	}
 	

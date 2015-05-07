@@ -1,7 +1,6 @@
 package com.dta.metier;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.Before;
 import org.junit.Test;
