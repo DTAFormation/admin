@@ -1,46 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<f:metadata>
-		<f:viewParam name="idUser" value="1" />
+		<f:viewParam name="idUser" />
 	</f:metadata>
-</h:head> 
-<body> 
-	
-	<p:dataTable value="#{utilisateur.showOne(idUser)}" var="utilisateur">
-		<h1>Détail de l'utilisateur n° #{utilisateur.utilisateurId}</h1>
-		<p:column headerText="Id">
-			<h:outputText value="#{utilisateur.utilisateurId}" />
-		</p:column>
-		<p:column headerText="Login">
-			<h:outputText value="#{utilisateur.login}" />
-		</p:column>
-		<p:column headerText="Titre">
-			<h:outputText value="#{utilisateur.titre}" />
-		</p:column>
-		<p:column headerText="Nom">
-			<h:outputText value="#{utilisateur.nom}" />
-		</p:column>
-		<p:column headerText="Prenom">
-			<h:outputText value="#{utilisateur.prenom}" />
-		</p:column>
-		<p:column headerText="Email">
-			<h:outputText value="#{utilisateur.email}" />
-		</p:column>
-		<p:column headerText="Téléphone">
-			<h:outputText value="#{utilisateur.telephone}" />
-		</p:column>
-		<p:column headerText="Fax">
-			<h:outputText value="#{utilisateur.fax}" />
-		</p:column>
-		<p:column headerText="Type">
-			<h:outputText value="#{utilisateur.typeUtil}" />
-		</p:column>
-	</p:dataTable>
-</body> 
+
+	<c:set var="utilisateur" scope="request"
+		value="${utilisateurBean.GetUtilisateurById(idUser)}" />
+</h:head>
+<body>
+
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:row>
+				<p:column colspan="2">Utilisateur n° #{idUser}</p:column>
+			</p:row>
+		</f:facet>
+		<h:outputText value="ID" />
+		<h:outputText value="#{utilisateur.utilisateurId}" />
+		<h:outputText value="Type" />
+		<h:outputText value="#{utilisateur.typeUtil}" />
+		<h:outputText value="Login" />
+		<h:outputText value="#{utilisateur.login}" />
+		<h:outputText value="Civilité" />
+		<h:outputText value="#{utilisateur.titre}" />
+		<h:outputText value="Nom" />
+		<h:outputText value="#{utilisateur.nom}" />
+		<h:outputText value="Prenom" />
+		<h:outputText value="#{utilisateur.prenom}" />
+		<h:outputText value="Email" />
+		<h:outputText value="#{utilisateur.email}" />
+		<h:outputText value="Téléphone" />
+		<h:outputText value="#{utilisateur.telephone}" />
+		<h:outputText value="Fax" />
+		<h:outputText value="#{utilisateur.fax}" />
+		<f:facet name="footer">
+			<p:row>
+				<h:form>
+					<p:commandButton action="#{utilisateurBean.delete(idUser)}"
+						value="Supprimer">
+					</p:commandButton>
+				</h:form>
+			</p:row>
+		</f:facet>
+	</p:panelGrid>
+	<br />
+	<p:carousel value="#{utilisateur.adresses}" 
+		var="adresse" headerText="Adresses">
+		<p:panelGrid columns="2">
+			<h:outputText value="Adresse ID" />
+			<h:outputText value="#{adresse.adresseId}" />
+			<h:outputText value="Numéro" />
+			<h:outputText value="#{adresse.num}" />
+			<h:outputText value="Rue" />
+			<h:outputText value="#{adresse.rue}" />
+			<h:outputText value="Code Postal" />
+			<h:outputText value="#{adresse.codePostal}" />
+			<h:outputText value="Ville" />
+			<h:outputText value="#{adresse.ville}" />
+			<h:outputText value="Département" />
+			<h:outputText value="#{adresse.departement}" />
+			<h:outputText value="Pays" />
+			<h:outputText value="#{adresse.pays}" />
+		</p:panelGrid>
+	</p:carousel>
+
+	<br />
+</body>
 </html>

@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
 
@@ -19,8 +20,8 @@
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
 					<p:menuitem value="Utilisateur" url="addClient.xhtml" />
-					<p:menuitem value="Article" url="ajoutArticle.xhtml" />
 					<p:menuitem value="Catalogue" url="ajoutCatalogue.xhtml" />
+					<p:menuitem value="Produit" url="ajoutProduit.xhtml" />
 				</p:submenu>
 				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
 					<p:menuitem value="Article" url="rechercherArticle.xhtml" />
@@ -58,40 +59,40 @@
 	<!-- fin menu -->
 
 </h:head>
-<h:body>
+<body>
 	<h:form>
-		<p:panel id="panel" header="Ajout produit">
+		<p:panel id="panel" header="Ajout article">
 			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
 				<p:outputLabel value="Nom:" />
-				<p:inputText id="produitInput" value="#{ajoutProduit.nom}"
+				<p:inputText id="articleInput" value="#{ajoutArticle.nom}"
 					required="true">
-					<f:ajax event="blur" render="produitMessage" />
-					<f:validator binding="#{produitValidator}" />
+					<f:ajax event="blur" render="articleMessage" />
+					<f:validator binding="#{articleValidator}" />
 				</p:inputText>
-				<p:message id="produitMessage" for="produitInput"
+				<p:message id="articleMessage" for="articleInput"
 					errorClass="erreur" />
-				<p:watermark for="produitInput" value="Produit" />
+				<p:watermark for="articleInput" value="Nom" />
 			</h:panelGrid>
-			
 			
 			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Description:" />
-				<p:inputText value="#{ajoutProduit.description}" />
+				<p:outputLabel value="Prix:" />
+				<pe:inputNumber value="#{ajoutArticle.prix}" required="true" />
 
-				<p:outputLabel value="Catalogue:" />
-				<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
-					<f:selectItem itemLabel="-- Choisir catalogue --"
-						itemValue="#{null}" />
-					<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
-						itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
+				<p:outputLabel value="Produit:" />
+				<p:selectOneMenu value="#{ajoutArticle.produitId}">
+					<f:selectItem itemLabel="-- Choisir produit --" itemValue="#{null}" />
+					<f:selectItems value="#{ajoutArticle.allProduits}" var="prod"
+						itemLabel="#{prod.nom}" itemValue="#{prod.produitId}" />
 				</p:selectOneMenu>
-			</h:panelGrid>
 
+				<p:outputLabel value="Stock:" />
+				<pe:inputNumber value="#{ajoutArticle.stock}" required="true" />
+			</h:panelGrid>
 
 			<br />
 			<p:toolbar>
 				<f:facet name="left">
-					<p:commandButton actionListener="#{ajoutProduit.save}"
+					<p:commandButton actionListener="#{ajoutArticle.save()}"
 						value="Enregistrer" />
 				</f:facet>
 				<f:facet name="right">
@@ -100,8 +101,9 @@
 					</p:commandButton>
 				</f:facet>
 			</p:toolbar>
+
 		</p:panel>
 	</h:form>
 	<p:link outcome="/index.xhtml" value="Retour au menu principal" />
-</h:body>
+</body>
 </html>

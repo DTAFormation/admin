@@ -1,14 +1,23 @@
 package com.dta.beans;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.persistence.Column;
+import javax.servlet.http.HttpSession;
+
+import org.primefaces.context.RequestContext;
+
+import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.AddClientEJB;
 
-@ManagedBean(name="addClient")
-public class ClientAddBean {
+@ManagedBean
+public class AjoutClientBean {
 	
 	Utilisateur utilisateur;
 	
@@ -21,22 +30,29 @@ public class ClientAddBean {
 	private int telephone;
 	private String titre;
 	private String typeUtil;
-	private String address;
+	private static List<Adresse> adresses;
 
 	@EJB
 	private AddClientEJB ejb;
+	
+	private HttpSession session;
 
-	@Override
-	public String toString() {
-		return "ClientAddBean [email=" + email + ", fax=" + fax + ", login="
-				+ login + ", nom=" + nom + ", password=" + password
-				+ ", prenom=" + prenom + ", telephone=" + telephone
-				+ ", titre=" + titre + ", typeUtil=" + typeUtil + "]";
+	public static void saveAdresses(Adresse adresse){
+		if (adresses==null){
+			adresses= new ArrayList<Adresse>();
+		}
+		adresses.add(adresse);
 	}
-
-
+	
 	public void save(){
-		System.out.println(toString());
+		if(this.typeUtil.equals("a")){
+			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
+			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
+				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
+				return;
+			}
+		}
 		utilisateur =new Utilisateur();
 		utilisateur.setEmail(email);
 		utilisateur.setFax(fax);
@@ -47,9 +63,24 @@ public class ClientAddBean {
 		utilisateur.setTelephone(telephone);
 		utilisateur.setTitre(titre);
 		utilisateur.setTypeUtil(typeUtil);
+		if (adresses!=null)
+			utilisateur.setAdresses(adresses);
 		ejb.save(utilisateur);
+		RequestContext.getCurrentInstance().execute("PF('dlgClientAjoute').show()");
+		reset();
 	}
-
+	private void reset() {
+		email="";
+		fax=0;
+		login="";
+		nom="";
+		password="";
+		prenom="";
+		telephone=0;
+		titre="";
+		typeUtil="";
+		adresses=new ArrayList<Adresse>();
+	}
 
 	public String getEmail() {
 		return email;
@@ -105,10 +136,19 @@ public class ClientAddBean {
 	public void setTypeUtil(String typeUtil) {
 		this.typeUtil = typeUtil;
 	}
-	public String getAddress() {
-		return address;
+	public List<Adresse> getAdresses() {
+		return adresses;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAdresses(List<Adresse> adresses) {
+		AjoutClientBean.adresses = adresses;
 	}
+
+	@Override
+	public String toString() {
+		return "ClientAddBean [email=" + email + ", fax=" + fax + ", login="
+				+ login + ", nom=" + nom + ", password=" + password
+				+ ", prenom=" + prenom + ", telephone=" + telephone
+				+ ", titre=" + titre + ", typeUtil=" + typeUtil + "]";
+	}
+
 }

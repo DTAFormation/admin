@@ -1,32 +1,28 @@
 package com.dta.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-
+import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.GetUtilisateurEJG;
+import com.dta.metier.DeleteUtilisateur;
+import com.dta.metier.SearchUtilisateur;
 
 
-@ManagedBean(name="utilisateur")
-@SessionScoped
+@ManagedBean
+@RequestScoped
 public class UtilisateurBean {
-
-	private Utilisateur utilisateur;
 	
 	@EJB
-	private GetUtilisateurEJG utilisateurEJB;
+	private DeleteUtilisateur deleteUtilisateur;
 	
-	public UtilisateurBean() {
-		this.utilisateur = new Utilisateur();
-	}
+	@EJB
+	private SearchUtilisateur searchUtilisateur;
 	
+<<<<<<< HEAD
 	public int getUtilisateurId() {
 		return utilisateur.getUtilisateurId();
 	}
@@ -115,17 +111,23 @@ public class UtilisateurBean {
 
 		utilisateurs.add(u);
 		return utilisateurs;
+=======
+	public Utilisateur GetUtilisateurById(int utilisateurId) {
+		return searchUtilisateur.findById(utilisateurId);
+    }
+	
+	public List<Adresse> showAdresses(int utilisateurId) {
+		Utilisateur utilisateur = searchUtilisateur.findById(utilisateurId); 
+		return utilisateur.getAdresses();
+>>>>>>> a459a9922c795df6ade12f95b2d9d1c47ee2ee45
     }
 	
 	public List<Utilisateur> getShowAll() {
-		List<Utilisateur> utilisateurs = new ArrayList<>();
-		//Utilisateur u = new Utilisateur("email", 11, "login", "nom", "password", "prenom", 6, "titre", "typeUtil");
-		Utilisateur u = utilisateurEJB.find(1);
-		Utilisateur u1 = utilisateurEJB.find(2);
-		Utilisateur u2 = utilisateurEJB.find(3);
-		utilisateurs.add(u);
-		utilisateurs.add(u1);
-		utilisateurs.add(u2);
-		return utilisateurs;
+		return searchUtilisateur.findAll();
     }
+	
+	public void delete(int utilisateurId) {
+		deleteUtilisateur.delete(utilisateurId);
+    }
+	
 }

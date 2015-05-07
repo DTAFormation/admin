@@ -1,61 +1,66 @@
 package com.dta.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import com.dta.entities.Catalogue;
 import com.dta.entities.Produit;
 import com.dta.metier.AddProduitEJB;
 
-@ManagedBean(name="addProduit")
+@ManagedBean(name="ajoutProduit")
 public class AjoutProduitBean {
 
 	Produit produit;
 	
-	private String description;
-	//private Catalogue catalogue=new Catalogue();
 	private String nom;
-
+	private String description;
+	private int catalogueId;
+	private Catalogue catalogue;
+	
 	@EJB
 	private AddProduitEJB ejb;
 
-	@Override
-	public String toString() {
-		return "AjoutProduitBean [produit=" + produit + ", description="
-				+ description + ", nom=" + nom + "]";
-	}
-	
 	public void save(){
-		/*catalogue.setDescription("Hiihhi");
-		catalogue.setNom("Charle");*/
-		produit = new Produit(description, nom);
+		catalogue = ejb.getCatalogueById(catalogueId);
+		produit = new Produit(description, nom, catalogue, null);
 		ejb.save(produit);
 	}
 	
-	
+	public List<Catalogue> getAllCatalogues() {
+		return ejb.getAllCatalogues();
+	}
+
 	public Produit getProduit() {
 		return produit;
 	}
+
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	/*
-	public Catalogue getCatalogue() {
-		return catalogue;
+
+	public int getCatalogueId() {
+		return catalogueId;
 	}
-	public void setCatalogue(Catalogue catalogue) {
-		this.catalogue = catalogue;
-	}
-	*/
+
+	public void setCatalogueId(int catalogueId) {
+		this.catalogueId = catalogueId;
+	}	
 }

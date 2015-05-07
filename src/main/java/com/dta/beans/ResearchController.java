@@ -1,70 +1,156 @@
 package com.dta.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.dta.entities.Article;
+import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchProduit;
+import com.dta.metier.SearchUtilisateur;
 
 @ManagedBean(name="research")
 public class ResearchController {
 
-	private String msg;
-
+	//user fields
 	private String userName;
+	private String userFirstName;
+	private String userMail;
+	private String userLogin;
 	private String userType;
 
+	//article fields
 	private String articleName;
-	private String product;
-	private int articleId;
+	private String articleProduct;
+	private String articleId;
+	private String articlePrice;
+	private String articleStock;
+	private String articleCatalogue;
 	
 	@EJB
 	private SearchArticle searchArticle;
 	
 	@EJB
 	private SearchProduit searchProduit;
+	
+	@EJB
+	private SearchUtilisateur searchUtilisateur;
 
+	// research results
 	private List<Article> products;
+	private List<Utilisateur> users;
+
+
+	/*
+	 * 
+	 * Constructors
+	 * 
+	 */
 
 	public ResearchController(){
-
-		this("", "", "CLIENT", "", "", 0, null);
-
-		List<Article> liste = new ArrayList<Article>();
-
-		products = liste;
-
+		this("", "", "", "", "", "", "", "", "", "", "", null, null);		
+		products = new ArrayList<Article>();
+		users = new ArrayList<Utilisateur>();
 	}
 
-
-	public ResearchController(String msg, String userName, String userType,
-			String articleName, String product, int articleId,
-			List<Article> products) {
+	public ResearchController(String userName, String userFirstName,
+			String userMail, String userLogin, String userType,
+			String articleName, String articleProduct, String articleId,
+			String articlePrice, String articleStock, String articleCatalogue,
+			List<Article> products, List<Utilisateur> users) {
 		super();
-		this.msg = msg;
 		this.userName = userName;
+		this.userFirstName = userFirstName;
+		this.userMail = userMail;
+		this.userLogin = userLogin;
 		this.userType = userType;
 		this.articleName = articleName;
-		this.product = product;
+		this.articleProduct = articleProduct;
 		this.articleId = articleId;
+		this.articlePrice = articlePrice;
+		this.articleStock = articleStock;
+		this.articleCatalogue = articleCatalogue;
 		this.products = products;
+		this.users = users;
 	}
 
 
-	public String getMsg(){
-		return this.msg;
+	/*
+	 *  Methods research ARTICLE
+	 */
+
+	public void logout() throws IOException{
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
 
-	public void setMsg(String msg){
-		this.msg = msg;
-	}
+	public void submitResearchArticle() {
+		
+		//priority to research by id
+		if(!this.articleId.equals("")){
+			int articleId = Integer.parseInt(this.articleId);
+			products = searchArticle.findById(articleId);
+			
+		}else{
+			// create a model article based on the search fields
+			Article modelArticle = new Article();
+			modelArticle.setNom( (this.articleName.equals("")) ? null : this.articleName);
+			modelArticle.setPrix( (this.articlePrice.equals("")) ? -1 : Float.parseFloat(this.articlePrice));
+			modelArticle.setStock( (this.articleStock.equals("")) ? -1 : Integer.parseInt(this.articleStock));
 
-	public List<Article> getProducts(){
-		return this.products;
+			products = searchArticle.findDetail(modelArticle, this.articleProduct, this.articleCatalogue);
+		}
+	}
+	
+	public void submitResearchAllArticle(){
+		products = searchArticle.findAll();
+	}
+	
+	public void deleteArticle(int id){
+		System.out.println("deleteting article "+id);
+	}
+	
+	
+	/*
+	 * Methods research USER
+	 */	
+
+	public void submitResearchUser(){
+		Utilisateur modelUtilisateur = new Utilisateur();
+		modelUtilisateur.setLogin(this.userLogin.equals("") ? null : this.userLogin);
+		modelUtilisateur.setNom(this.userName.equals("") ? null : this.userName);
+		modelUtilisateur.setPrenom(this.userFirstName.equals("") ? null : this.userFirstName);
+		modelUtilisateur.setEmail(this.userMail.equals("") ? null : this.userMail);
+		modelUtilisateur.setTypeUtil(this.userType.equals("") ? null : this.userType.substring(0, 1));
+
+		users = searchUtilisateur.findDetail(modelUtilisateur);
+	}
+	
+	public void submitResearchAllUser(){
+		users = searchUtilisateur.findAll();
+	}
+	
+	public void deleteUser(int id){
+		System.out.println("deleteting user "+id);
+	}
+	
+
+	@Override
+	public String toString() {
+		return "ResearchController [userName=" + userName + ", userFirstName="
+				+ userFirstName + ", userMail=" + userMail + ", userLogin="
+				+ userLogin + ", userType=" + userType + ", articleName="
+				+ articleName + ", articleProduct=" + articleProduct
+				+ ", articleId=" + articleId + ", articlePrice=" + articlePrice
+				+ ", articleStock=" + articleStock + ", searchArticle="
+				+ searchArticle + ", searchProduit=" + searchProduit
+				+ ", products=" + products + "]";
 	}
 
 	public String getUserName() {
@@ -73,6 +159,30 @@ public class ResearchController {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+	public String getUserMail() {
+		return userMail;
+	}
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+	public String getUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
 	}
 
 	public String getUserType() {
@@ -91,95 +201,84 @@ public class ResearchController {
 		this.articleName = articleName;
 	}
 
-	public String getProduct() {
-		return product;
+	public String getArticleProduct() {
+		return articleProduct;
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setArticleProduct(String articleProduct) {
+		this.articleProduct = articleProduct;
 	}
 
-	public int getArticleId() {
+	public String getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(int articleId) {
+	public void setArticleId(String articleId) {
 		this.articleId = articleId;
+	}
+
+	public String getArticlePrice() {
+		return articlePrice;
+	}
+
+	public void setArticlePrice(String articlePrice) {
+		this.articlePrice = articlePrice;
+	}
+
+	public String getArticleStock() {
+		return articleStock;
+	}
+
+	public void setArticleStock(String articleStock) {
+		this.articleStock = articleStock;
+	}
+
+	public String getArticleCatalogue() {
+		return articleCatalogue;
+	}
+
+	public void setArticleCatalogue(String articleCatalogue) {
+		this.articleCatalogue = articleCatalogue;
+	}
+
+	public SearchArticle getSearchArticle() {
+		return searchArticle;
+	}
+
+	public void setSearchArticle(SearchArticle searchArticle) {
+		this.searchArticle = searchArticle;
+	}
+
+	public SearchProduit getSearchProduit() {
+		return searchProduit;
+	}
+
+	public void setSearchProduit(SearchProduit searchProduit) {
+		this.searchProduit = searchProduit;
+	}
+
+	public SearchUtilisateur getSearchUtilisateur() {
+		return searchUtilisateur;
+	}
+
+	public void setSearchUtilisateur(SearchUtilisateur searchUtilisateur) {
+		this.searchUtilisateur = searchUtilisateur;
+	}
+
+	public List<Article> getProducts() {
+		return products;
 	}
 
 	public void setProducts(List<Article> products) {
 		this.products = products;
 	}
 
-	@Override
-	public String toString() {
-		return "ResearchController [msg=" + msg + "]";
+	public List<Utilisateur> getUsers() {
+		return users;
 	}
 
-	public void submitResearchArticle() {
-
-		//requetes recherche
-		if(this.articleId!=0){
-			products = mockRequest(this.articleId);
-			
-		}else if(!this.articleName.equals("") && !this.product.equals("")){
-			
-		}else if(!this.articleName.equals("")){
-			products = searchArticle.findByName(this.articleName);
-			
-		}else if(!this.product.equals("")){
-			products = searchProduit.findAllArticles(this.product);
-			
-		}
-		
-		System.out.println("\n\n --> recherche: ");
-		System.out.println(this.toString());
-
-	}
-
-	public void submitResearchUser(){
-
-	}
-
-	public int getResultSize(){
-		return products.size();
-	}
-	
-	public void submitResearchAllArticle(){
-		//getAll
-		System.out.println("azll");
-		products = searchArticle.findAll();
-	}
-
-	private List<Article> mockRequest(int id){
-
-		List<Article> result = new ArrayList<Article>();
-		Article art = new Article();
-
-		art.setNom("article n°"+id);
-		art.setPrix(500);
-		art.setProduit(null);
-		art.setStock(100);
-		result.add(art);
-
-		return result;
-	}
-
-	private List<Article> mockRequest(String name){
-
-		List<Article> result = new ArrayList<Article>();
-
-		for(int i=0; i<50; i++){
-			Article art = new Article();
-
-			art.setNom(name+" n°"+i);
-			art.setPrix(500);
-			art.setProduit(null);
-			art.setStock(100);
-			result.add(art);
-		}
-
-		return result;
+	public void setUsers(List<Utilisateur> users) {
+		this.users = users;
 	}
 
 }
