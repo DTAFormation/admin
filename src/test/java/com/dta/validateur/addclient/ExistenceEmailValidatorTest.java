@@ -1,6 +1,8 @@
 package com.dta.validateur.addclient;
 
 
+import static org.mockito.Mockito.when;
+
 import javax.faces.validator.ValidatorException;
 
 import org.junit.Before;
@@ -11,8 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.dta.metier.AddClientEJB;
-
-import static org.mockito.Mockito.*;
+import com.dta.validateur.ExistenceEmailValidator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExistenceEmailValidatorTest {

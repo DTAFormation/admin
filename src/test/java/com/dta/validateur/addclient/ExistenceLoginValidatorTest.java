@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.dta.metier.AddClientEJB;
+import com.dta.validateur.ExistenceLoginValidator;
 
 import static org.mockito.Mockito.*;
 

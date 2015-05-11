@@ -1,4 +1,4 @@
-package com.dta.validateur.addclient;
+package com.dta.validateur;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -9,24 +9,24 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.dta.metier.AddArticleEJB;
+import com.dta.metier.AddCatalogueEJB;
 
 @ManagedBean
 @RequestScoped
-public class ArticleValidator implements Validator {
+public class CatalogueValidator implements Validator {
 	
-	private static final String ARTICLE_EXISTANT = "Ce nom d article est deja pris";
+	private static final String CATALOGUE_EXISTANT = "Ce nom de catalogue est deja pris";
 	
 	@EJB
-	private AddArticleEJB ejb;
+	private AddCatalogueEJB ejb;
 	
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
-		String artnom = (String) arg2;
-		if(ejb.isArticleNameExists(artnom)){
+		String catnom = (String) arg2;
+		if(ejb.isCatalogueNameExists(catnom)){
 		      throw new ValidatorException(
-                      new FacesMessage(FacesMessage.SEVERITY_ERROR, ARTICLE_EXISTANT, null));
+                      new FacesMessage(FacesMessage.SEVERITY_ERROR, CATALOGUE_EXISTANT, null));
 		}
 	}
 }

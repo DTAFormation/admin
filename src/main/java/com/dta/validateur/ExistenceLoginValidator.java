@@ -1,4 +1,4 @@
-package com.dta.validateur.addclient;
+package com.dta.validateur;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -34,10 +34,10 @@ public class ExistenceLoginValidator implements Validator{
 	
 	
 	
-	protected AddClientEJB getAddclientEJB() {
+	public AddClientEJB getAddclientEJB() {
 		return addclientEJB;
 	}
-	protected void setAddclientEJB(AddClientEJB addclientEJB) {
+	public void setAddclientEJB(AddClientEJB addclientEJB) {
 		this.addclientEJB = addclientEJB;
 	}
 }

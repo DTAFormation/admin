@@ -1,4 +1,4 @@
-package com.dta.validateur.addclient;
+package com.dta.validateur;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
