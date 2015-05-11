@@ -82,12 +82,8 @@
 
 					<p:outputLabel value="Login : " for="loginInput" />
 					<p:inputText id="loginInput" value="#{ajoutClientBean.login}"
-<<<<<<< HEAD
 						type="text" required="true"
 						requiredMessage="Veuillez préciser votre login">
-=======
-						type="text" required="true">
->>>>>>> localdevelop
 						<f:ajax event="blur" render="LoginMessage" />
 						<f:validator binding="#{existenceLoginValidator}" />
 					</p:inputText>
@@ -107,12 +103,8 @@
 				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Email : " for="EmailInput" />
 					<p:inputText id="EmailInput" value="#{ajoutClientBean.email}"
-<<<<<<< HEAD
 						type="email" required="true"
 						requiredMessage="Veuillez préciser votre email">
-=======
-						type="email" required="true">
->>>>>>> localdevelop
 						<f:ajax event="blur" render="emailMessage" />
 						<f:validator binding="#{existenceEmailValidator}" />
 					</p:inputText>
@@ -148,100 +140,49 @@
 </body>
 
 <p:dialog header="Dialog" widgetVar="dlgadress" dynamic="true">
-<<<<<<< HEAD
-	<h:body>
-		<h:form>
-			<p:fieldset legend="Information Personnelle" toggleable="false"
-				toggleSpeed="500" id="panelpersonnel">
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel value="Pays : " for="PaysInput" />
-					<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}"
-						type="text" required="true" />
+<h:form>
+	<p:fieldset legend="Détails de l'adresse" toggleable="false"
+		toggleSpeed="500" id="detailsAdresse">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Pays : " for="PaysInput" />
+			<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}"
+				type="text" required="true" />
 
-					<p:outputLabel value="Departement : " for="DepartementInput" />
-					<p:inputText id="DepartementInput"
-						value="#{ajoutAdresseBean.departement}" type="text"
-						required="true" />
+			<p:outputLabel value="Departement : " for="DepartementInput" />
+			<p:inputText id="DepartementInput"
+				value="#{ajoutAdresseBean.departement}" type="text" required="true" />
 
-					<p:outputLabel value="Ville : " for="VilleInput" />
-					<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}"
-						type="text" required="true" />
+			<p:outputLabel value="Ville : " for="VilleInput" />
+			<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}"
+				type="text" required="true" />
 
-					<p:outputLabel value="CodePostal : " for="CodePostalInput" />
-					<p:inputText id="CodePostalInput"
-						value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
+			<p:outputLabel value="CodePostal : " for="CodePostalInput" />
+			<p:inputText id="CodePostalInput"
+				value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
 
-					<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
-					<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}"
-						type="text" required="true" />
+			<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
+			<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}"
+				type="text" required="true" />
 
-					<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
-					<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}"
-						type="text" required="true" />
-				</h:panelGrid>
-			</p:fieldset>
-
-			<p:toolbar>
-				<f:facet name="left">
-					<p:commandButton action="#{ajoutAdresseBean.save()}"
-						value="Enregistrer" />
-				</f:facet>
-				<f:facet name="right">
-					<p:commandButton value="Effacer" style="margin-right:20px;">
-						<p:ajax update="panelpersonnel" resetValues="true" />
-					</p:commandButton>
-				</f:facet>
-			</p:toolbar>
-		</h:form>
-	</h:body>
+			<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
+			<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}"
+				type="text" required="true" />
+		</h:panelGrid>
+	</p:fieldset>
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton action="#{ajoutAdresseBean.save()}"
+				value="Enregistrer" />
+		</f:facet>
+		<f:facet name="right">
+			<p:commandButton value="Effacer" style="margin-right:20px;">
+				<p:ajax update="detailsAdresse" resetValues="true" />
+			</p:commandButton>
+		</f:facet>
+	</p:toolbar>
+</h:form>
 </p:dialog>
 
-
-=======
-	<h:form>
-		<p:fieldset legend="Détails de l'adresse" toggleable="false"
-			toggleSpeed="500" id="detailsAdresse">
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Pays : " for="PaysInput" />
-				<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}"
-					type="text" required="true" />
-
-				<p:outputLabel value="Departement : " for="DepartementInput" />
-				<p:inputText id="DepartementInput"
-					value="#{ajoutAdresseBean.departement}" type="text" required="true" />
-
-				<p:outputLabel value="Ville : " for="VilleInput" />
-				<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}"
-					type="text" required="true" />
-
-				<p:outputLabel value="CodePostal : " for="CodePostalInput" />
-				<p:inputText id="CodePostalInput"
-					value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
-
-				<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
-				<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}"
-					type="text" required="true" />
-
-				<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
-				<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}"
-					type="text" required="true" />
-			</h:panelGrid>
-		</p:fieldset>
-		<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton action="#{ajoutAdresseBean.save()}"
-					value="Enregistrer" />
-			</f:facet>
-			<f:facet name="right">
-				<p:commandButton value="Effacer" style="margin-right:20px;">
-					<p:ajax update="detailsAdresse" resetValues="true" />
-				</p:commandButton>
-			</f:facet>
-		</p:toolbar>
-	</h:form>
-</p:dialog>
-
->>>>>>> localdevelop
 <p:dialog header="Client Ajoute" widgetVar="dlgClientAjoute"
 	dynamic="true">
 	YYYYYYAAAAA!!!!!
@@ -250,13 +191,6 @@
 	dynamic="true">
 	Probleme de serveur, Adresse non enregistré
 </p:dialog>
-<<<<<<< HEAD
-<p:dialog header="Adresse Enregistre" widgetVar="dlgAdresseEnregistre"
-	dynamic="true">
-	Bien joué !!!!
-</p:dialog>
-=======
->>>>>>> localdevelop
 <p:dialog header="Accès refusé" widgetVar="dlgErreurAuth" dynamic="true">
 	Vous devez posséder les droits administrateur pour ajouter un nouvel administrateur !
 </p:dialog>
