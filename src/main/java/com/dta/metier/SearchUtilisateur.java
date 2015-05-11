@@ -85,11 +85,11 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 	//méthode pour authentification utilisateur
 	public Utilisateur findAuthentification (String login, String password, String type){
 		
-		Query query_auth = em.createQuery("Utilisateur.findAuthentification");
-		query_auth.setParameter("log", login);
-		query_auth.setParameter("passw", password);
-		query_auth.setParameter("typeUt", type);
-		
+		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND u.typeUtil = :type");
+		query_auth.setParameter("login", login);
+		query_auth.setParameter("password", password);
+		query_auth.setParameter("type", type);
+
 		try{
 			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
 			return result;
@@ -97,6 +97,7 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 			LOG.info(e.toString());
 			return null;
 		}
+
 	}
 
 }

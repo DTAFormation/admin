@@ -217,10 +217,10 @@ public class SearchUtilisateurTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setUtilisateurId(1);
 		
-		when(em.createQuery("Utilisateur.findAuthentification")).thenReturn(query);
+		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND u.typeUtil = :type")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(utilisateur);
 		
-		Utilisateur util = searchUtilisateur.findAuthentification("log", "passw", "typeUt");
+		Utilisateur util = searchUtilisateur.findAuthentification("login", "password", "type");
 		Assert.assertEquals(util.getUtilisateurId(), 1);
 	}
 	
