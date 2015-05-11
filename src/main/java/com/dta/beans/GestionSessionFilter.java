@@ -42,7 +42,7 @@ public class GestionSessionFilter implements Filter {
         String url = http_request.getServletPath();
         boolean allowedRequest = false;
          
-        if(urlList.contains(url)) {
+        if(urlList.contains(url) || isResourceUrl(url)) {
         	allowedRequest = true;
         }
         
@@ -56,6 +56,10 @@ public class GestionSessionFilter implements Filter {
          
         chain.doFilter(request, response);
 		
+	}
+	
+	private boolean isResourceUrl(String url) {
+		return url.startsWith("/javax.faces.resource/");
 	}
 
 }
