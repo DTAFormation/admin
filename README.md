@@ -33,7 +33,7 @@ etape 3 : configurer sur le localhost:9990
 - next
 - Choisir msql
 - next
-- prendre l'url present dans le fichier persistance.xml
+- url : jdbc:mysql://127.0.0.1:3306/ecommercedb
 - utiliser le nom de root./ tester /valider.
 
 etape 4: dans eclipse. mise ajour du persistance.xml.
