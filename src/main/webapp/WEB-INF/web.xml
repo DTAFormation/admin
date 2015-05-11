@@ -29,7 +29,7 @@
 		<filter-class>com.dta.beans.GestionSessionFilter</filter-class>
 		<init-param>
 			<param-name>avoid-urls</param-name>
-			<param-value>/authentification.xhtml,/errorAuth.xhtml,/deconnexion.xhtml</param-value>
+			<param-value>/authentification.xhtml,/errorAuth.xhtml</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

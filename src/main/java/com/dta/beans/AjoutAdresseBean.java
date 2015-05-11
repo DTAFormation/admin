@@ -2,8 +2,6 @@ package com.dta.beans;
 
 import javax.faces.bean.ManagedBean;
 
-import org.primefaces.context.RequestContext;
-
 import com.dta.entities.Adresse;
 
 @ManagedBean
@@ -27,9 +25,7 @@ public class AjoutAdresseBean {
 		adresse.setRue(rue);
 		adresse.setVille(ville);
 
-		AjoutClientBean.saveAdresses(adresse);
-		RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
-		RequestContext.getCurrentInstance().execute("PF('dlgAdresseEnregistre').show()");
+		AjoutClientBean.saveAdresse(adresse);
 	}
 	public int getCodePostal() {
 		return codePostal;

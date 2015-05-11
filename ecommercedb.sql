@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`utilisateur_id`, `email`, `fax`, `login`, `nom`, `password`, `prenom`, `telephone`, `titre`, `type_util`) VALUES
 (1, 'thunder@hotmail.com', 1357, 'thunder', 'abitbol', 'theclass', 'georges', 3548, 'm', 'a'),
-(2, 'epicness@hotmail.com', 7865, 'plop', 'dupond', 'ploplop', 'julie', 8541, 'mme', 'u'),
+(2, 'epicness@hotmail.com', 7865, 'plop', 'dupond', 'ploplop', 'julie', 8541, 'mme', 'c'),
 (3, 'salameche92@hotmail.com', 9852, 'username', 'dupont', 'secret', 'bob', 5026, 'm', 'm'),
 (4, 'vegeta91@hotmail.com', 9025, 'pif1991', 'collins', 'genesis', 'phil', 6932, 'm', 'm');
 
