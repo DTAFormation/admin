@@ -25,7 +25,9 @@ public class UtilisateurBean {
 
 
 	public Utilisateur GetUtilisateurById(int utilisateurId) {
-		return searchUtilisateur.findById(utilisateurId);
+		Utilisateur u = searchUtilisateur.findById(utilisateurId);
+		u.setTypeUtil(Util.getFullUserType(u.getTypeUtil()));
+		return u;
 	}
 
 	public void delete(int utilisateurId) {

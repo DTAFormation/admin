@@ -31,21 +31,21 @@ public class ResearchController {
 	private String articlePrice;
 	private String articleStock;
 	private String articleCatalogue;
-	
+
 	@EJB
 	private SearchArticle searchArticle;
-	
+
 	@EJB
 	private SearchProduit searchProduit;
-	
+
 	@EJB
 	private SearchUtilisateur searchUtilisateur;
 
 	// research results
 	private List<Article> products;
 	private List<Utilisateur> users;
-	
-	
+
+
 
 
 	/*
@@ -81,23 +81,24 @@ public class ResearchController {
 		this.users = users;
 	}
 
-	
 	/*
 	 *  Methods research ARTICLE
 	 */
+
+
 
 	public void logout() throws IOException{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
-	
+
 	public void submitResearchArticle() {
-		
+
 		//priority to research by id
 		if(!"".equals(this.articleId)){
 			int articleId = Integer.parseInt(this.articleId);
 			products = searchArticle.findById(articleId);
-			
+
 		}else{
 			// create a model article based on the search fields
 			Article modelArticle = new Article();
@@ -108,13 +109,13 @@ public class ResearchController {
 			products = searchArticle.findDetail(modelArticle, this.articleProduct, this.articleCatalogue);
 		}
 	}
-	
+
 	public void submitResearchAllArticle(){
 		products = searchArticle.findAll();
 		System.out.println(products);
 	}
-	
-	
+
+
 	/*
 	 * Methods research USER
 	 */	
@@ -129,11 +130,11 @@ public class ResearchController {
 
 		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
-	
+
 	public void submitResearchAllUser(){
 		users = searchUtilisateur.findAll();
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -268,6 +269,9 @@ public class ResearchController {
 	}
 
 	public List<Utilisateur> getUsers() {
+		for(Utilisateur u :users){
+			u.setTypeUtil(Util.getFullUserType(u.getTypeUtil()));
+		}
 		return users;
 	}
 
