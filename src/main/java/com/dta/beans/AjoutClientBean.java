@@ -35,11 +35,20 @@ public class AjoutClientBean {
 	
 	private HttpSession session;
 
-	public static void saveAdresses(Adresse adresse){
+	public static void saveAdresse(Adresse adresse){
 		if (adresses==null){
 			adresses= new ArrayList<Adresse>();
 		}
 		adresses.add(adresse);
+		RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
+		RequestContext.getCurrentInstance().update("clientForm:listeAdresses");
+	}
+	
+	public void cleanAdresses() {
+		if(adresses != null) {
+			adresses.clear();
+		}
+		RequestContext.getCurrentInstance().update("clientForm:listeAdresses");
 	}
 	
 	public void save(){
