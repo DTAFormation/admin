@@ -45,7 +45,7 @@ public class AjoutClientBean {
 	public void save(){
 		if(this.typeUtil.equals("a")){
 			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
+			AuthentificationBean auth = (AuthentificationBean) session.getAttribute("authentificationBean");
 			if(!auth.getUtilisateur().getTypeUtil().equals("a")){
 				RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");
 				return;

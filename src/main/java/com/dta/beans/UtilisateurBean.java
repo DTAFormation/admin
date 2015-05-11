@@ -31,7 +31,7 @@ public class UtilisateurBean {
 	public void delete(int utilisateurId) {
 
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		AuthentificationBean auth = (AuthentificationBean) session.getAttribute("autehentificationBean");
+		AuthentificationBean auth = (AuthentificationBean) session.getAttribute("authentificationBean");
 
 		if("a".equals(searchUtilisateur.findById(utilisateurId).getTypeUtil()) && (!"a".equals(auth.getUtilisateur().getTypeUtil()))){
 			RequestContext.getCurrentInstance().execute("PF('dlgErreurAuth').show()");

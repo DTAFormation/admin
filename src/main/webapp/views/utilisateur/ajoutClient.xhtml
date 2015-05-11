@@ -6,56 +6,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
-	<p align="center">
-		<h:graphicImage library="img" name="logoDTA.png" />
-		<br />
-	</p>
-
-	<!-- MENU -->
-	<h:form>
-		<p:growl id="messages" />
-		<p:menubar>
-			<p:submenu label="Element" icon="ui-icon-document">
-				<p:submenu label="Nouveau" icon="ui-icon-contact">
-					<p:menuitem value="Utilisateur" url="ajoutClient.xhtml" />
-					<p:menuitem value="Article" url="../article/ajoutArticle.xhtml" />
-				</p:submenu>
-				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
-					<p:menuitem value="Article" url="../article/rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
-				</p:submenu>
-			</p:submenu>
-
-			<p:submenu label="Profil" icon="ui-icon-person">
-				<p:menuitem value="Editer" url="#" icon="ui-icon-pencil" />
-				<p:menuitem value="Visualiser" url="#" icon="ui-icon-zoomin" />
-			</p:submenu>
-
-			<p:submenu label="Outils" icon="ui-icon-wrench">
-				<p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
-				<p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
-				<p:submenu label="Rechercher" icon="ui-icon-zoomin">
-					<p:menuitem value="Article" url="../article/rechercherArticle.xhtml" />
-					<p:menuitem value="Utilisateur" url="rechercherUtilisateur.xhtml" />
-				</p:submenu>
-			</p:submenu>
-
-			<f:facet name="options">
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
-					<p:commandButton type="button" value="Logout"
-						icon="ui-icon-extlink" />
-				</h:panelGrid>
-			</f:facet>
-		</p:menubar>
-	</h:form>
-	<br />
-	<!-- fin menu -->
-
 </h:head>
+<body>
+<header>
+    <p align="center">
+        <h:graphicImage library="img" name="logoDTA.png" />
+        <br />
+    </p>
+</header>
+<menu>
+    <!-- MENU -->
+    <ui:include src="/menu.xhtml" />
+</menu>
+    <br />
 
-<h:body>
+    <!-- fin menu -->
 	<h:form>
 		<p:fieldset legend="Création d'un Utilisateur" toggleable="false"
 			toggleSpeed="500" id="panelgenreal">
@@ -155,7 +120,7 @@
 			</f:facet>
 		</p:toolbar>
 	</h:form>
-</h:body>
+</body>
 
 
 <p:dialog header="Dialog" widgetVar="dlgadress" dynamic="true">

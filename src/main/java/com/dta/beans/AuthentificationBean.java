@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchUtilisateur;
 
-@ManagedBean(name="autehentificationBean")
+@ManagedBean(name="authentificationBean")
 @SessionScoped
 public class AuthentificationBean {
 

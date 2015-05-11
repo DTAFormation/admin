@@ -38,7 +38,7 @@ public class GestionSessionFilter implements Filter {
 		
 		HttpServletRequest http_request = (HttpServletRequest) request;
         HttpServletResponse http_response = (HttpServletResponse) response;
-        AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("autehentificationBean");
+        AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("authentificationBean");
         String url = http_request.getServletPath();
         boolean allowedRequest = false;
          

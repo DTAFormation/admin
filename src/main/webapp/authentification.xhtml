@@ -14,18 +14,18 @@
 		<p:panel id="panel" header="Identifiez-vous">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Login :" for="login"></p:outputLabel>
-				<p:inputText id="login" value="#{autehentificationBean.login}"
+				<p:inputText id="login" value="#{authentificationBean.login}"
 					required="true"></p:inputText>
 				<p:outputLabel for="password" value="Password :"></p:outputLabel>
-				<p:password id="password" value="#{autehentificationBean.password}"></p:password>
+				<p:password id="password" value="#{authentificationBean.password}"></p:password>
 				<p:outputLabel value="Profil" for="profil"></p:outputLabel>
 				<p:selectOneRadio id="profil"
-					value="#{autehentificationBean.typeUtil}">
+					value="#{authentificationBean.typeUtil}">
 					<f:selectItem itemLabel="Administrateur" itemValue="a" />
 					<f:selectItem itemLabel="Modérateur" itemValue="m" />
 				</p:selectOneRadio>
 			</h:panelGrid>
-			<p:commandButton actionListener="#{autehentificationBean.verifyAuth()}" value="Connexion"></p:commandButton>
+			<p:commandButton actionListener="#{authentificationBean.verifyAuth()}" value="Connexion"></p:commandButton>
 		</p:panel>
 	</h:form>
 
