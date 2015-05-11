@@ -35,29 +35,29 @@ public class GestionSessionFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		
+
 		HttpServletRequest http_request = (HttpServletRequest) request;
-        HttpServletResponse http_response = (HttpServletResponse) response;
-        AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("authentificationBean");
-        String url = http_request.getServletPath();
-        boolean allowedRequest = false;
-         
-        if(urlList.contains(url) || isResourceUrl(url)) {
-        	allowedRequest = true;
-        }
-        
-      if (!allowedRequest) {
-    	if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
-    		http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
-        }
-    	else
-    		System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
-    }
-         
-        chain.doFilter(request, response);
-		
+		HttpServletResponse http_response = (HttpServletResponse) response;
+		AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("authentificationBean");
+		String url = http_request.getServletPath();
+		boolean allowedRequest = false;
+
+		if(urlList.contains(url) || isResourceUrl(url)) {
+			allowedRequest = true;
+		}
+
+		if (!allowedRequest) {
+			if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
+				http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
+			}
+			else
+				System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
+		}
+
+		chain.doFilter(request, response);
+
 	}
-	
+
 	private boolean isResourceUrl(String url) {
 		return url.startsWith("/javax.faces.resource/");
 	}
