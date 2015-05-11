@@ -47,7 +47,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findByNameTest(){
 			
-		LOG.info("Etant donn� un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -55,7 +55,7 @@ public class SearchUtilisateurTest {
 		when(em.createNamedQuery("Utilisateur.findByName")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
-		LOG.info("Objet suppos� etre re�u");
+		LOG.info("Objet supposee etre recu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
@@ -71,7 +71,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findByTitreTest(){
 			
-		LOG.info("Etant donn� un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -79,7 +79,7 @@ public class SearchUtilisateurTest {
 		when(em.createNamedQuery("Utilisateur.findByTitre")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
-		LOG.info("Objet suppos� etre re�u");
+		LOG.info("Objet suppose etre recu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
@@ -96,7 +96,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findByIdTest(){
 			
-		LOG.info("Etant donné un id de utilisateur existant en base");
+		LOG.info("Etant donne un id de utilisateur existant en base");
 		
 		// Programmer le comportement du mock
 		Utilisateur utilisateursEnBase = new Utilisateur();
@@ -115,7 +115,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findDetailTest(){
 			
-		LOG.info("Etant donn� un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -125,7 +125,7 @@ public class SearchUtilisateurTest {
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
 		
-		LOG.info("Objet suppos� etre re�u");
+		LOG.info("Objet suppose etre recu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);

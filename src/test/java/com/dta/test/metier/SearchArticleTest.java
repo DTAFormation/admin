@@ -111,7 +111,7 @@ public class SearchArticleTest{
 	@Test
 	public void findByIdTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Article> articlesEnBase = new ArrayList<>();
@@ -121,7 +121,7 @@ public class SearchArticleTest{
 		
 		
 		
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet suppose etre recu");
 		List<Article> articleAttendu = new ArrayList<>();
 		Article monArticleAttendu = new Article();
 		articleAttendu.add(monArticleAttendu);
@@ -137,7 +137,7 @@ public class SearchArticleTest{
 	@Test
 	public void findByNameTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Article> articlesEnBase = new ArrayList<>();
@@ -145,7 +145,7 @@ public class SearchArticleTest{
 		when(em.createNamedQuery("Article.findByName")).thenReturn(query);
 		when(query.getResultList()).thenReturn(articlesEnBase);
 			
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet suppose etre recu");
 		List<Article> articleAttendu = new ArrayList<>();
 		Article monArticleAttendu = new Article("testNom", 0.0f, null, 0);
 		articleAttendu.add(monArticleAttendu);
@@ -160,7 +160,7 @@ public class SearchArticleTest{
 	@Test
 	public void findDetailTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donne un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Article> articlesEnBase = new ArrayList<>();
@@ -170,7 +170,7 @@ public class SearchArticleTest{
 		when(query.getResultList()).thenReturn(articlesEnBase);
 			
 		
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet suppose etre recu");
 		List<Article> articleAttendu = new ArrayList<>();
 		Article monArticleAttendu = new Article("testNom", 1.0f, null, 0);
 		articleAttendu.add(monArticleAttendu);

@@ -41,9 +41,9 @@ public class DeleteTest {
 
 	@Test
 	public void testDeleteArticle() {
-		LOG.info("Création d'un produit P");
+		LOG.info("Creation d'un produit P");
 		Produit produit = new Produit("description", "nomProduit");
-		LOG.info("Création d'un article A dans les produits P");
+		LOG.info("Creation d'un article A dans les produits P");
 		Article article = new Article("nomArticle", 18.2f, produit, 12);
 
 		when(em.find(Article.class, 0)).thenReturn(article);
@@ -55,7 +55,7 @@ public class DeleteTest {
 	
 	@Test
 	public void testDeleteUtilisateur() {
-		LOG.info("Création d'un utilisateur");
+		LOG.info("Creation d'un utilisateur");
 		Utilisateur utilisateur = new Utilisateur(
 				"email@dta.com",
 				1,
