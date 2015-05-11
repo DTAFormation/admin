@@ -47,7 +47,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findByNameTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donnï¿½ un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -55,7 +55,7 @@ public class SearchUtilisateurTest {
 		when(em.createNamedQuery("Utilisateur.findByName")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet supposï¿½ etre reï¿½u");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
@@ -71,7 +71,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findByTitreTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donnï¿½ un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -79,7 +79,7 @@ public class SearchUtilisateurTest {
 		when(em.createNamedQuery("Utilisateur.findByTitre")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet supposï¿½ etre reï¿½u");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
@@ -115,7 +115,7 @@ public class SearchUtilisateurTest {
 	@Test
 	public void findDetailTest(){
 			
-		LOG.info("Etant donné un id de produit existant en base");
+		LOG.info("Etant donnï¿½ un id de produit existant en base");
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
@@ -125,7 +125,7 @@ public class SearchUtilisateurTest {
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
 		
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet supposï¿½ etre reï¿½u");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
 		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
 		utilisateurAttendu.add(monUtilisateurAttendu);
@@ -214,16 +214,14 @@ public class SearchUtilisateurTest {
 	*/
 	
 	@Test public void findAuthentificationTest(){
-		
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setUtilisateurId(1);
 		
-		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :log AND u.password = :passw AND u.typeUtil = :typeUt")).thenReturn(query);
+		when(em.createQuery("Utilisateur.findAuthentification")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(utilisateur);
 		
 		Utilisateur util = searchUtilisateur.findAuthentification("log", "passw", "typeUt");
 		Assert.assertEquals(util.getUtilisateurId(), 1);
-		
 	}
 	
 	/*

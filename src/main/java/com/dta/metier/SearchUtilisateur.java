@@ -84,10 +84,12 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 	
 	//méthode pour authentification utilisateur
 	public Utilisateur findAuthentification (String login, String password, String type){
-		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :log AND u.password = :passw AND u.typeUtil = :typeUt");
+		
+		Query query_auth = em.createQuery("Utilisateur.findAuthentification");
 		query_auth.setParameter("log", login);
 		query_auth.setParameter("passw", password);
 		query_auth.setParameter("typeUt", type);
+		
 		try{
 			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
 			return result;

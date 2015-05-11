@@ -18,6 +18,10 @@ import javax.persistence.OneToMany;
     @NamedQuery(name="Utilisateur.findByName", query="SELECT u FROM Utilisateur u WHERE u.nom = :name"),
 	@NamedQuery(name="Utilisateur.findByEmail", query="SELECT u.email FROM Utilisateur u WHERE u.email= :email"),
 	@NamedQuery(name="Utilisateur.findByLogin", query="SELECT u.login FROM Utilisateur u WHERE u.login= :login"),
+	@NamedQuery(
+		name="Utilisateur.findAuthentification", 
+		query="SELECT u FROM Utilisateur u WHERE u.login = :log AND u.password = :passw AND u.typeUtil = :typeUt"
+	)
 }) 
 public class Utilisateur {
 
