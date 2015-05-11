@@ -14,14 +14,7 @@ public class SearchArticle extends SearchEntities<Article>{
 		super(Article.class);
 
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Article> findByName(String name){
-		Query query = em.createNamedQuery("Article.findByName");
-		query.setParameter("name", name);
-		return query.getResultList();
-	}
-		
+			
 	public String requestGenerator(Article model, String produit, String catalogue){
 
 		String request = "SELECT a FROM Article a WHERE ";
@@ -76,6 +69,13 @@ public class SearchArticle extends SearchEntities<Article>{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Article> findByName(String name){
+		Query query = em.createNamedQuery("Article.findByName");
+		query.setParameter("name", name);
+		return query.getResultList();
+	}	
+	
+	@SuppressWarnings("unchecked")
 	public List<Article> findById(int articleId){
 		Query query = em.createNamedQuery("Article.findById");
 		query.setParameter("id", articleId);
@@ -83,7 +83,8 @@ public class SearchArticle extends SearchEntities<Article>{
 	}
 	
 	public void deleteArticle(int articleId){
-		Query query = em.createQuery("DELETE FROM Article a WHERE articleId = "+articleId);
+		Query query = em.createQuery("Article.deleteById");
+		query.setParameter("id", articleId);
 		query.getFirstResult();
 	}
 }
