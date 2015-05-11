@@ -30,7 +30,7 @@ public class SearchUtilisateurTest {
 
 	private SearchUtilisateur searchUtilisateur;
 
-	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateurTest.class);	
 	
 	@Mock private EntityManager em;
 	@Mock private Query query;
@@ -102,7 +102,7 @@ public class SearchUtilisateurTest {
 		Utilisateur utilisateursEnBase = new Utilisateur();
 		when(em.find(Utilisateur.class, 0)).thenReturn(utilisateursEnBase);
 		
-		LOG.info("Objet supposé etre reçu");
+		LOG.info("Objet suppose etre recu");
 		Utilisateur monUtilisateurAttendu = new Utilisateur();
 		
 		LOG.info("Lorsque service.findById(0)");
