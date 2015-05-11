@@ -1,0 +1,25 @@
+package com.dta.beans;
+
+public class Util {
+
+	public static String getFullUserType(String userType) {
+		String fullType;
+		switch (userType) {
+		case "a":
+			fullType = "administrateur";
+			break;
+		case "c":
+			fullType = "client";
+			break;
+		case "m":
+			fullType = "modérateur";
+			break;
+
+		default:
+			fullType = userType;
+			break;
+		}
+
+		return fullType;
+	}
+}
