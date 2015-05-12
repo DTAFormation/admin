@@ -12,12 +12,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.dta.metier.AddClientEJB;
+import com.dta.metier.AddUtilisateurEJB;
 import com.dta.validateur.ExistenceEmailValidator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExistenceEmailValidatorTest {
-	@Mock private AddClientEJB addclientEJB;
+	@Mock private AddUtilisateurEJB addclientEJB;
 	private ExistenceEmailValidator elv;
 	
 	@Before
