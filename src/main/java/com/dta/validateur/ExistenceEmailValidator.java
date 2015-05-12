@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.dta.metier.AddClientEJB;
+import com.dta.metier.AddUtilisateurEJB;
 
 @ManagedBean
 @RequestScoped
@@ -18,7 +18,7 @@ public class ExistenceEmailValidator implements Validator{
 	private static final String EMAIL_EXISTE_DEJA = "Cette adresse email est deja utilisee";
 	
 	@EJB
-	private AddClientEJB addclientEJB;
+	private AddUtilisateurEJB addclientEJB;
 	
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
@@ -30,10 +30,10 @@ public class ExistenceEmailValidator implements Validator{
 		}
 	}
 
-	public AddClientEJB getAddclientEJB() {
+	public AddUtilisateurEJB getAddclientEJB() {
 		return addclientEJB;
 	}
-	public void setAddclientEJB(AddClientEJB addclientEJB) {
+	public void setAddclientEJB(AddUtilisateurEJB addclientEJB) {
 		this.addclientEJB = addclientEJB;
 	}
 }
