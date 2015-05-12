@@ -5,14 +5,18 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Article;
 
 @Stateless(name="SearchArticleEJB")
 public class SearchArticleEJB extends SearchEntities<Article>{
 
+private static final Logger LOG = LoggerFactory.getLogger(SearchEntities.class); 
+    
 	public SearchArticleEJB() {
 		super(Article.class);
-
 	}
 			
 	public String requestGenerator(Article model, String produit, String catalogue){
@@ -51,10 +55,11 @@ public class SearchArticleEJB extends SearchEntities<Article>{
 				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='"+catalogue+"')) ";
 			}
 		}
-		System.out.println("\n \n \n \n \n  requete: " + request);
+		LOG.info("requete: " + request);
 		return request;
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Article> findAll(){
 		Query query = em.createNamedQuery("Article.findAll");

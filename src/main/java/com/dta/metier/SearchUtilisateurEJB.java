@@ -77,7 +77,7 @@ public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 	public List<Utilisateur> findDetail (Utilisateur user){
 		String requete = requestGenerator(user);
 		Query query = em.createQuery(requete);
-		if (query.getResultList().size() == 0)
+		if (query.getResultList().isEmpty())
 			return new ArrayList<Utilisateur>();
 		return query.getResultList();
 	}
