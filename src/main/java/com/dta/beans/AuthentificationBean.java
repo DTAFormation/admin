@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.dta.entities.Utilisateur;
@@ -51,8 +52,9 @@ public class AuthentificationBean {
 	}
 
 	public void logout() throws IOException{
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.invalidateSession();
+		ec.redirect(ec.getRequestContextPath() + "/authentification.xhtml");
 	}
 
 	public String getLogin() {
