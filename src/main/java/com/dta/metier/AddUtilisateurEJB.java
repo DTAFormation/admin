@@ -24,15 +24,14 @@ public class AddUtilisateurEJB {
 		TypedQuery<String> query = em.createNamedQuery(
 				"Utilisateur.findByEmail", String.class).setParameter("email",
 				email);
-		List<String> result = query.getResultList();
-		return result.isEmpty();
+		return !query.getResultList().isEmpty();
 	}
 
 	public boolean searchExistenceLogin(String login) {
 		TypedQuery<String> query = em.createNamedQuery(
 				"Utilisateur.findByLogin", String.class).setParameter("login",
 				login);
-		return query.getResultList().isEmpty();
+		return !query.getResultList().isEmpty();
 	}
 
 	protected EntityManager getEm() {

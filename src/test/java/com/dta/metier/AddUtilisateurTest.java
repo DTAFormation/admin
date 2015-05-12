@@ -66,7 +66,7 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void SearchExistenceEmailTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String email="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(email);
@@ -83,7 +83,7 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void SearchExistenceLoginTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String Login="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(Login);
