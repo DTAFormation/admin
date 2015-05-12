@@ -13,15 +13,7 @@ public class ModifyArticleEJB {
 	private EntityManager em;
 	
 	public void update(Article article){
-		if(isArticleExists(article.getArticleId()))
-			em.persist(article);
-	}
-	
-	public boolean isArticleExists(int id) {
-		return !em.createNamedQuery("Article.findById", Article.class)
-				.setParameter("articleId", id)
-				.getResultList()
-				.isEmpty();
+		em.merge(article);
 	}
 		
 	public EntityManager getEm() {

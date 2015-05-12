@@ -24,7 +24,6 @@ public class DetailProduitBean{
 			
 	public Article showDetailArticle(int id) {		
 		article = searchArticle.findById(id).get(0);
-		System.out.println("searchArticle : " + article);
 		return article;
     }
 	
@@ -33,7 +32,6 @@ public class DetailProduitBean{
 	}
 
 	public Article getArticle() {
-		System.out.println("getArticle : " + article);
 		return article;
 	}
 
