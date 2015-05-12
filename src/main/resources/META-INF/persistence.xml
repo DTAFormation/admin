@@ -9,10 +9,13 @@
 		<class>com.dta.entities.Utilisateur</class>
 		<class>com.dta.entities.Produit</class>
 		<class>com.dta.entities.Article</class>
+		<class>com.dta.entities.Adresse</class>
+		<class>com.dta.entities.LigneCommande</class>
+		<class>com.dta.entities.Commande</class>
 		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
-			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		<!-- 	<property name="hibernate.hbm2ddl.auto" value="create" /> -->
+			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
