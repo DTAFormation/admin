@@ -10,9 +10,9 @@ import javax.faces.context.FacesContext;
 
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.SearchArticle;
-import com.dta.metier.SearchProduit;
-import com.dta.metier.SearchUtilisateur;
+import com.dta.metier.SearchArticleEJB;
+import com.dta.metier.SearchProduitEJB;
+import com.dta.metier.SearchUtilisateurEJB;
 
 @ManagedBean(name="research")
 public class ResearchController {
@@ -33,13 +33,13 @@ public class ResearchController {
 	private String articleCatalogue;
 
 	@EJB
-	private SearchArticle searchArticle;
+	private SearchArticleEJB searchArticle;
 
 	@EJB
-	private SearchProduit searchProduit;
+	private SearchProduitEJB searchProduit;
 
 	@EJB
-	private SearchUtilisateur searchUtilisateur;
+	private SearchUtilisateurEJB searchUtilisateur;
 
 	// research results
 	private List<Article> products;
@@ -236,27 +236,27 @@ public class ResearchController {
 		this.articleCatalogue = articleCatalogue;
 	}
 
-	public SearchArticle getSearchArticle() {
+	public SearchArticleEJB getSearchArticle() {
 		return searchArticle;
 	}
 
-	public void setSearchArticle(SearchArticle searchArticle) {
+	public void setSearchArticle(SearchArticleEJB searchArticle) {
 		this.searchArticle = searchArticle;
 	}
 
-	public SearchProduit getSearchProduit() {
+	public SearchProduitEJB getSearchProduit() {
 		return searchProduit;
 	}
 
-	public void setSearchProduit(SearchProduit searchProduit) {
+	public void setSearchProduit(SearchProduitEJB searchProduit) {
 		this.searchProduit = searchProduit;
 	}
 
-	public SearchUtilisateur getSearchUtilisateur() {
+	public SearchUtilisateurEJB getSearchUtilisateur() {
 		return searchUtilisateur;
 	}
 
-	public void setSearchUtilisateur(SearchUtilisateur searchUtilisateur) {
+	public void setSearchUtilisateur(SearchUtilisateurEJB searchUtilisateur) {
 		this.searchUtilisateur = searchUtilisateur;
 	}
 

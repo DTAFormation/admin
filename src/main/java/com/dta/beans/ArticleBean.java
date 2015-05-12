@@ -5,13 +5,13 @@ import javax.faces.bean.ManagedBean;
 
 import org.primefaces.context.RequestContext;
 
-import com.dta.metier.DeleteArticle;
+import com.dta.metier.DeleteArticleEJB;
 
 @ManagedBean
 public class ArticleBean {
 	
 	@EJB
-	private DeleteArticle articleProduit;
+	private DeleteArticleEJB articleProduit;
 	
 	public void delete(int articleId) {
 		articleProduit.delete(articleId);

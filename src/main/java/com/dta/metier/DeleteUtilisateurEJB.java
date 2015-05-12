@@ -6,8 +6,8 @@ import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Utilisateur;
 
-@Stateless
-public class DeleteUtilisateur {
+@Stateless(name="DeleteUtilisateurEJB")
+public class DeleteUtilisateurEJB {
 	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
