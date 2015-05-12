@@ -5,14 +5,14 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import com.dta.entities.Article;
-import com.dta.metier.SearchArticle;
+import com.dta.metier.SearchArticleEJB;
 
 @ManagedBean
 public class DetailProduitBean{
 	
 	
 	@EJB
-	private SearchArticle searchArticle;
+	private SearchArticleEJB searchArticle;
 	
 		
 	public Article showDetailArticle(int id) {

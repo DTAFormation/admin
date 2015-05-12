@@ -5,10 +5,10 @@ import javax.persistence.Query;
 
 import com.dta.entities.Produit;
 
-@Stateless
-public class SearchProduit extends SearchEntities<Produit> {
+@Stateless(name="SearchProduitEJB")
+public class SearchProduitEJB extends SearchEntities<Produit> {
 
-	public SearchProduit() {
+	public SearchProduitEJB() {
 		super(Produit.class);
 	}
 	

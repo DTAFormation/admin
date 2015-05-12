@@ -10,14 +10,13 @@ import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Article;
 
-@Stateless
-public class SearchArticle extends SearchEntities<Article>{
+@Stateless(name="SearchArticleEJB")
+public class SearchArticleEJB extends SearchEntities<Article>{
 
     private static final Logger LOG = LoggerFactory.getLogger(SearchEntities.class); 
     
-	public SearchArticle() {
+	public SearchArticleEJB() {
 		super(Article.class);
-
 	}
 			
 	public String requestGenerator(Article model, String produit, String catalogue){
