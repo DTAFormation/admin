@@ -7,6 +7,7 @@
 <h:head>
 	<f:metadata>
 		<f:viewParam name="articleId" />
+		<f:event listener="#{detailProduitBean.initArticle(articleId)}" type="preRenderView"></f:event>
 	</f:metadata>
 	<c:set var="monArticle" value="${detailProduitBean.showDetailArticle(articleId)}"></c:set>
 	<c:set var="monProduit" value="${monArticle.produit}"></c:set>
@@ -16,7 +17,7 @@
 <h:body>
 	<h:form>
 		<p:accordionPanel multiple="true">
-			<p:tab title="Article">							
+			<p:tab title="Article">
 				<p:dataTable var="art" value="#{detailProduitBean.article}" editable="true">					
 					<p:column headerText="Id">
 		               	<h:outputText value="#{art.articleId}" />
@@ -43,7 +44,6 @@
 	           			<p:rowEditor />
 	       			</p:column>
 				</p:dataTable>
-				
 			</p:tab>
 			
 			<p:tab title="Produit de l'article">
