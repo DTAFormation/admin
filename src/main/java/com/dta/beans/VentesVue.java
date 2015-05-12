@@ -13,14 +13,14 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
 import com.dta.entities.Article;
-import com.dta.metier.SearchArticle;
+import com.dta.metier.SearchArticleEJB;
 import com.dta.metier.SearchCommandeEJB;
 
 @ManagedBean
 public class VentesVue implements Serializable{
 
 	@EJB
-	private SearchArticle searchArticle;
+	private SearchArticleEJB searchArticle;
 	@EJB
 	private SearchCommandeEJB searchCommande;
 	
