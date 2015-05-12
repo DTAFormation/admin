@@ -9,14 +9,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.dta.metier.AddClientEJB;
+import com.dta.metier.AddUtilisateurEJB;
 import com.dta.validateur.ExistenceLoginValidator;
 
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExistenceLoginValidatorTest {
-	@Mock private AddClientEJB addclientEJB;
+	@Mock private AddUtilisateurEJB addclientEJB;
 	private ExistenceLoginValidator elv;
 	
 	@Before

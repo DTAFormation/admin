@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<body>
+	<header>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+	</header>
+	<menu>
+		<!-- MENU -->
+		<ui:include src="/menu.xhtml" />
+	</menu>
+	<br />
+
+	<!-- fin menu -->
+	<h:form id="clientForm">
+		<p:growl id="msgs" showDetail="false" />
+
+		<p:fieldset legend="Création d'un Utilisateur" toggleable="false"
+			toggleSpeed="500" id="panelGeneral">
+
+
+			<p:fieldset legend="Information Personnelle" toggleable="false"
+				toggleSpeed="500" id="panelpersonnel">
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel value="Nom : " for="NomInput" />
+					<p:inputText id="NomInput" value="#{ajoutUtilisateurBean.nom}"
+						type="text" required="true"
+						requiredMessage="Veuillez préciser votre nom" />
+					<p:messages for="NomInput" autoUpdate="true" />
+
+					<p:outputLabel value="Prenom : " for="PrenomInput" />
+					<p:inputText id="PrenomInput"
+						value="#{ajoutUtilisateurBean.prenom}" type="text" required="true"
+						requiredMessage="Veuillez préciser votre prenom" />
+					<p:messages for="PrenomInput" autoUpdate="true" />
+				</h:panelGrid>
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="CivilitéInput " value="Civilité :" />
+					<p:selectOneMenu id="CivilitéInput"
+						value="#{ajoutUtilisateurBean.titre}" style="width:150px">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
+						<f:selectItem itemLabel="Madame" itemValue="Madame" />
+						<f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Telephone : " for="telephoneInput" />
+					<p:inputText id="telephoneInput"
+						value="#{ajoutUtilisateurBean.telephone}" type="tel" />
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset legend="Liste des Adresses" toggleable="false"
+				toggleSpeed="500" id="panelAdresses">
+				<p:dataTable id="listeAdresses"
+					value="#{ajoutUtilisateurBean.adresses}" var="adresse"
+					emptyMessage="Pas d'adresse enregistrée" editable="true">
+					<p:column headerText="Rue">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.rue}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.rue}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Numero de rue">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.num}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.num}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Ville">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.ville}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.ville}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="CP">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.codePostal}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.codePostal}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Departement">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.departement}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.departement}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Pays">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.pays}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.pays}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Edition">
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Ajouter adresse" immediate="true"
+							onclick="PF('dlgadress').show()" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton action="#{ajoutUtilisateurBean.cleanAdresses()}"
+							value="Effacer" immediate="true" />
+					</f:facet>
+				</p:toolbar>
+			</p:fieldset>
+
+
+			<p:fieldset legend="Donnée du Profil" toggleable="false"
+				toggleSpeed="500" id="panelprofil">
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<p:outputLabel value="Login : " for="loginInput" />
+					<p:inputText id="loginInput" value="#{ajoutUtilisateurBean.login}"
+						type="text" required="true"
+						requiredMessage="Veuillez préciser votre login">
+						<f:ajax event="blur" render="LoginMessage" />
+						<f:validator binding="#{existenceLoginValidator}" />
+					</p:inputText>
+					<p:message id="LoginMessage" for="loginInput" errorClass="erreur" />
+				</h:panelGrid>
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="ResponsabilitéInput "
+						value="Type Utilisateur :" />
+					<p:selectOneMenu id="ResponsabilitéInput"
+						value="#{ajoutUtilisateurBean.typeUtil}" style="width:150px">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Administrateur" itemValue="a" />
+						<f:selectItem itemLabel="Moderateur" itemValue="m" />
+						<f:selectItem itemLabel="Client" itemValue="c" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel value="Email : " for="EmailInput" />
+					<p:inputText id="EmailInput" value="#{ajoutUtilisateurBean.email}"
+						type="email" required="true"
+						requiredMessage="Veuillez préciser votre email">
+						<f:ajax event="blur" render="emailMessage" />
+						<f:validator binding="#{existenceEmailValidator}" />
+					</p:inputText>
+					<p:message id="emailMessage" for="EmailInput" errorClass="erreur" />
+				</h:panelGrid>
+
+				<!-- Gestion PassWord -->
+
+				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+					<p:outputLabel for="pwd1" value="Password: *" />
+					<p:password id="pwd1" value="#{ajoutUtilisateurBean.password}"
+						match="pwd2" label="Password 1" required="true" />
+
+					<p:outputLabel for="pwd2" value="Réecrire Password: *" />
+					<p:password id="pwd2" value="#{ajoutUtilisateurBean.password}"
+						label="Password 2" required="true" />
+				</h:panelGrid>
+			</p:fieldset>
+		</p:fieldset>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton action="#{ajoutUtilisateurBean.save()}"
+					value="Enregistrer">
+				</p:commandButton>
+			</f:facet>
+			<f:facet name="right">
+				<p:commandButton value="Effacer" style="margin-right:20px;">
+					<p:ajax update="panelGeneral" resetValues="true" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</body>
+
+<p:dialog header="Dialog" widgetVar="dlgadress" dynamic="true">
+	<h:form id="adresseForm">
+		<p:fieldset legend="Détails de l'adresse" toggleable="false"
+			toggleSpeed="500" id="detailsAdresse">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Pays : " for="PaysInput" />
+				<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}"
+					type="text" required="true" />
+
+				<p:outputLabel value="Departement : " for="DepartementInput" />
+				<p:inputText id="DepartementInput"
+					value="#{ajoutAdresseBean.departement}" type="text" required="true" />
+
+				<p:outputLabel value="Ville : " for="VilleInput" />
+				<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}"
+					type="text" required="true" />
+
+				<p:outputLabel value="CodePostal : " for="CodePostalInput" />
+				<p:inputText id="CodePostalInput"
+					value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
+
+				<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
+				<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}"
+					type="text" required="true" />
+
+				<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
+				<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}"
+					type="text" required="true" />
+			</h:panelGrid>
+		</p:fieldset>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton action="#{ajoutAdresseBean.save()}"
+					value="Enregistrer" />
+			</f:facet>
+			<f:facet name="right">
+				<p:commandButton value="Effacer" style="margin-right:20px;">
+					<p:ajax update="detailsAdresse" resetValues="true" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</p:dialog>
+
+<p:dialog header="Adresse Erreur" widgetVar="dlgAdresseErreur"
+	dynamic="true">
+	Probleme de serveur, Adresse non enregistré
+</p:dialog>
+
+</html>
+
+

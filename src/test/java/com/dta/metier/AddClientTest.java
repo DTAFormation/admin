@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Adresse;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.AddClientEJB;
+import com.dta.metier.AddUtilisateurEJB;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -30,11 +30,11 @@ public class AddClientTest {
 	@Mock private EntityManager em;
 	@Mock private TypedQuery<String> query;
 	
-	private AddClientEJB ejb;
+	private AddUtilisateurEJB ejb;
 	
 	@Before
 	public void init(){
-		ejb = new AddClientEJB();
+		ejb = new AddUtilisateurEJB();
 		ejb.setEm(em);
 	}
 	
@@ -66,7 +66,7 @@ public class AddClientTest {
 	
 	@Test
 	public void SearchExistenceEmailTest(){
-		 LOG.info("Etant donné une adresse email existant en base");
+		 LOG.info("Etant donnï¿½ une adresse email existant en base");
 		 String email="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(email);
@@ -83,7 +83,7 @@ public class AddClientTest {
 	
 	@Test
 	public void SearchExistenceLoginTest(){
-		 LOG.info("Etant donné une adresse email existant en base");
+		 LOG.info("Etant donnï¿½ une adresse email existant en base");
 		 String Login="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(Login);

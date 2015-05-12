@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.dta.metier.AddClientEJB;
+import com.dta.metier.AddUtilisateurEJB;
 
 
 @ManagedBean
@@ -19,7 +19,7 @@ public class ExistenceLoginValidator implements Validator{
 	private static final String LOGIN_EXISTE_DEJA = "Ce login est deja utilise";
 	
 	@EJB
-	private AddClientEJB addclientEJB;
+	private AddUtilisateurEJB addclientEJB;
 
 
 	@Override
@@ -34,10 +34,10 @@ public class ExistenceLoginValidator implements Validator{
 	
 	
 	
-	public AddClientEJB getAddclientEJB() {
+	public AddUtilisateurEJB getAddclientEJB() {
 		return addclientEJB;
 	}
-	public void setAddclientEJB(AddClientEJB addclientEJB) {
+	public void setAddclientEJB(AddUtilisateurEJB addclientEJB) {
 		this.addclientEJB = addclientEJB;
 	}
 }
