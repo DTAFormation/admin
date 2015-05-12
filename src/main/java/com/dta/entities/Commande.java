@@ -1,15 +1,24 @@
 package com.dta.entities;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Commande.getVentes", query="Select sum(l.quantite) from LigneCommande l where l.article.articleId = :id"),
+})
 public class Commande {
 
 	@Id
@@ -30,6 +39,9 @@ public class Commande {
 	@ManyToOne
 	@JoinTable(name="commandes_utilisateur")
 	private Utilisateur utilisateur;
+	
+	@OneToMany(mappedBy="commande")
+	private List<LigneCommande> ligneCommandes;
 	
 	public Commande() {
 		
@@ -52,6 +64,14 @@ public class Commande {
 	public void setCommandeId(int commandeId) {
 		this.commandeId = commandeId;
 	}
+	public List<LigneCommande> getLigneCommandes() {
+		return ligneCommandes;
+	}
+
+	public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+		this.ligneCommandes = ligneCommandes;
+	}
+
 	public Date getDateExpCarteCredit() {
 		return dateExpCarteCredit;
 	}

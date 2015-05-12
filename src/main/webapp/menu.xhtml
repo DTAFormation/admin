@@ -31,7 +31,10 @@
             </p:submenu>
 
             <p:submenu label="Outils" icon="ui-icon-wrench">
-                <p:menuitem value="Analyse" url="#" icon="fa fa-line-chart" />
+                <p:submenu label="Analyse" icon="ui-icon-bookmark" >
+                	<p:menuitem value="Ventes" url="/views/analyse/ventes.xhtml" icon="ui-icon-bookmark">
+                	</p:menuitem>
+                </p:submenu>
                 <p:menuitem value="Reglages" url="#" icon="ui-icon-gear" />
                 <p:submenu label="Rechercher" icon="ui-icon-zoomin">
                     <p:menuitem value="Article" url="/views/article/rechercherArticle.xhtml" />
