@@ -23,7 +23,7 @@ public class ModifyArticleEJB {
 				.getResultList()
 				.isEmpty();
 	}
-
+		
 	public EntityManager getEm() {
 		return em;
 	}
@@ -32,3 +32,4 @@ public class ModifyArticleEJB {
 		this.em = em;
 	}
 }
+

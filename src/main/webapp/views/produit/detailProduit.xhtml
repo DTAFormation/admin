@@ -8,47 +8,76 @@
 	<f:metadata>
 		<f:viewParam name="articleId" />
 	</f:metadata>
-	<c:set var="monArticle"
-		value="${detailProduitBean.showDetailArticle(articleId)}"></c:set>
+	<c:set var="monArticle" value="${detailProduitBean.showDetailArticle(articleId)}"></c:set>
 	<c:set var="monProduit" value="${monArticle.produit}"></c:set>
 	<c:set var="monCatalogue" value="${monProduit.catalogue}"></c:set>
 	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
-
-	<p:accordionPanel multiple="true">
-		<p:tab title="Article">
-			<p:panelGrid columns="2" cellpadding="10">
-				<h:outputText value="Article ID" />
-				<h:outputText value="#{monArticle.articleId}" />
-				<h:outputText value="Article Nom" />
-				<h:outputText value="#{monArticle.nom}" />
-				<h:outputText value="Article Prix" />
-				<h:outputText value="#{monArticle.prix}" />
-				<h:outputText value="Article Stock" />
-				<h:outputText value="#{monArticle.stock}" />
-			</p:panelGrid>
-		</p:tab>
-		<p:tab title="Produit de l'article">
-			<p:panelGrid columns="2" cellpadding="10">
-				<h:outputText value="Produit ID" />
-				<h:outputText value="#{monProduit.produitId}" />
-				<h:outputText value="Produit Nom" />
-				<h:outputText value="#{monProduit.nom}" />
-			</p:panelGrid>
-		</p:tab>
-		<p:tab title="Catalogue de l'article">
-			<p:panelGrid columns="2" cellpadding="10">
-				<h:outputText value="Catalogue ID" />
-				<h:outputText value="#{monCatalogue.catalogueId}" />
-				<h:outputText value="Catalogue Nom" />
-				<h:outputText value="#{monCatalogue.nom}" />
-				<h:outputText value="Catalogue Description" />
-				<h:outputText value="#{monCatalogue.description}" />
-			</p:panelGrid>
-		</p:tab>
-	</p:accordionPanel>
 	<h:form>
+		<p:accordionPanel multiple="true">
+			<p:tab title="Article">
+
+				<p:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Article ID" />
+					<h:outputText value="#{monArticle.articleId}" />
+					<h:outputText value="Article Nom" />
+					<h:outputText value="#{monArticle.nom}" />
+					<h:outputText value="Article Prix" />
+					<h:outputText value="#{monArticle.prix}" />
+					<h:outputText value="Article Stock" />
+					<h:outputText value="#{monArticle.stock}" />
+				</p:panelGrid>
+								
+				<p:dataTable var="art" value="#{detailProduitBean.article}" editable="true">					
+					<p:column headerText="Id">
+		               	<h:outputText value="#{art.articleId}" />
+		       		</p:column>		       		
+					<p:column headerText="Name">
+		           		<p:cellEditor>
+		               		<f:facet name="output"><h:outputText value="#{art.nom}" /></f:facet>
+		               		<f:facet name="input"><p:inputText value="#{art.nom}" style="width:100%"/></f:facet>
+		           		</p:cellEditor>
+		       		</p:column>
+					<p:column headerText="Price">
+		           		<p:cellEditor>
+		               		<f:facet name="output"><h:outputText value="#{art.prix}" /></f:facet>
+		               		<f:facet name="input"><p:inputText value="#{art.prix}" style="width:100%"/></f:facet>
+		           		</p:cellEditor>
+		       		</p:column>
+					<p:column headerText="Stock">
+		           		<p:cellEditor>
+		               		<f:facet name="output"><h:outputText value="#{art.stock}" /></f:facet>
+		               		<f:facet name="input"><p:inputText value="#{art.stock}" style="width:100%"/></f:facet>
+		           		</p:cellEditor>
+		       		</p:column>	       		
+		       		<p:column>
+	           			<p:rowEditor />
+	       			</p:column>
+				</p:dataTable>
+				
+			</p:tab>
+			
+			<p:tab title="Produit de l'article">
+				<p:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Produit ID" />
+					<h:outputText value="#{monProduit.produitId}" />
+					<h:outputText value="Produit Nom" />
+					<h:outputText value="#{monProduit.nom}" />
+				</p:panelGrid>
+			</p:tab>
+			<p:tab title="Catalogue de l'article">
+				<p:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Catalogue ID" />
+					<h:outputText value="#{monCatalogue.catalogueId}" />
+					<h:outputText value="Catalogue Nom" />
+					<h:outputText value="#{monCatalogue.nom}" />
+					<h:outputText value="Catalogue Description" />
+					<h:outputText value="#{monCatalogue.description}" />
+				</p:panelGrid>
+			</p:tab>
+		</p:accordionPanel>
+
 		<p:commandButton action="#{articleBean.delete(articleId)}"
 			value="Supprimer" style="margin:5px; float:right;" />
 		<p:commandButton 
