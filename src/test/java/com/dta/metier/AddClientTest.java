@@ -75,7 +75,7 @@ public class AddClientTest {
 		 when(query.getResultList()).thenReturn(usersEnBase);
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceEmail(email);
+		 boolean result = ejb.searchExistenceEmail(email);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);
@@ -94,7 +94,7 @@ public class AddClientTest {
 		 
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceLogin(Login);
+		 boolean result = ejb.searchExistenceLogin(Login);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);

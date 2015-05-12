@@ -1,6 +1,5 @@
 package com.dta.beans;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,23 +16,19 @@ import com.dta.metier.SearchArticle;
 import com.dta.metier.SearchCommandeEJB;
 
 @ManagedBean
-public class VentesVue implements Serializable{
+public class VentesVue {
 
 	@EJB
 	private SearchArticle searchArticle;
 	@EJB
 	private SearchCommandeEJB searchCommande;
 	
-	private static final long serialVersionUID = 1L;
-
 	private BarChartModel articleChart;
 
 	@PostConstruct
 	public void init() {
 		createAnimatedModels();
 	}
-
-
 
 	public BarChartModel getArticleChart() {
 		return articleChart;
@@ -67,7 +62,4 @@ public class VentesVue implements Serializable{
 
 		return model;
 	}
-
-
-
 }
