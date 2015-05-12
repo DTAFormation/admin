@@ -9,14 +9,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.dta.entities.Utilisateur;
-import com.dta.metier.SearchUtilisateur;
+import com.dta.metier.SearchUtilisateurEJB;
 
 @ManagedBean(name="authentificationBean")
 @SessionScoped
 public class AuthentificationBean {
 
 	@EJB
-	private SearchUtilisateur searchUtilisateur;
+	private SearchUtilisateurEJB searchUtilisateur;
 
 	Utilisateur utilisateur;
 

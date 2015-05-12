@@ -23,9 +23,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddClientTest {
+public class AddUtilisateurTest {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(AddClientTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AddUtilisateurTest.class);
 	
 	@Mock private EntityManager em;
 	@Mock private TypedQuery<String> query;
@@ -50,7 +50,7 @@ public class AddClientTest {
 	}
 	
 	@Test
-	public void testAjoutClientAvecAdresse(){
+	public void testAjoutUtilisateurAvecAdresse(){
 		Adresse adresse = new Adresse(11310, "aude", 4, "france", "rue du midi", "villemagne", null, null);
 		List<Adresse> adresses = new ArrayList<Adresse>();
 		adresses.add(adresse);

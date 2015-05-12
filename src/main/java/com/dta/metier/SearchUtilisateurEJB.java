@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Utilisateur;
 
-@Stateless
-public class SearchUtilisateur extends SearchEntities<Utilisateur>{
+@Stateless(name="SearchUtilisateurEJB")
+public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 
-	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateur.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateurEJB.class);	
 	
-	public SearchUtilisateur() {
+	public SearchUtilisateurEJB() {
 		super(Utilisateur.class);
 	}
 	
@@ -94,7 +94,7 @@ public class SearchUtilisateur extends SearchEntities<Utilisateur>{
 			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
 			return result;
 		}catch (NoResultException e){
-			LOG.info(e.toString());
+			LOG.info("error NoResultException", e);
 			return null;
 		}
 

@@ -6,8 +6,8 @@ import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Article;
 
-@Stateless
-public class DeleteArticle {
+@Stateless(name="DeleteArticleEJB")
+public class DeleteArticleEJB {
 
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;

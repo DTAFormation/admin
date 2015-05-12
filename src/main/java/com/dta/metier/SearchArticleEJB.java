@@ -7,10 +7,10 @@ import javax.persistence.Query;
 
 import com.dta.entities.Article;
 
-@Stateless
-public class SearchArticle extends SearchEntities<Article>{
+@Stateless(name="SearchArticleEJB")
+public class SearchArticleEJB extends SearchEntities<Article>{
 
-	public SearchArticle() {
+	public SearchArticleEJB() {
 		super(Article.class);
 
 	}
