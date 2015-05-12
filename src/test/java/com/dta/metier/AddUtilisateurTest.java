@@ -66,7 +66,7 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void SearchExistenceEmailTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String email="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(email);
@@ -75,7 +75,7 @@ public class AddUtilisateurTest {
 		 when(query.getResultList()).thenReturn(usersEnBase);
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceEmail(email);
+		 boolean result = ejb.searchExistenceEmail(email);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);
@@ -83,7 +83,7 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void SearchExistenceLoginTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String Login="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(Login);
@@ -94,7 +94,7 @@ public class AddUtilisateurTest {
 		 
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceLogin(Login);
+		 boolean result = ejb.searchExistenceLogin(Login);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);

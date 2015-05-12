@@ -51,7 +51,7 @@ public class AddCatalogueTest {
 		LOG.info("Lorsque ejb.save(catalogue)");
 		ejb.save(catalogue);
 		
-		LOG.info("Alors 'catalogue' a été persisté");
+		LOG.info("Alors 'catalogue' a ete persiste");
 		verify(em).persist(catalogue);
 		
 		LOG.info("FIN");

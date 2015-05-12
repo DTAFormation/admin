@@ -29,7 +29,7 @@ public class ExistenceLoginValidatorTest {
 	public void validateTrueTest(){
 		String login = "login";
 		
-		when(addclientEJB.SearchExistenceLogin(login)).thenReturn(true);
+		when(addclientEJB.searchExistenceLogin(login)).thenReturn(true);
 		elv.validate(null, null, login);
 	}
 	
@@ -37,8 +37,8 @@ public class ExistenceLoginValidatorTest {
 	public void validateFalseTest(){
 		String login = "login";
 		
-		when(addclientEJB.SearchExistenceLogin(login)).thenReturn(false);
+		when(addclientEJB.searchExistenceLogin(login)).thenReturn(false);
 		elv.validate(null, null, login);
-		Mockito.verify(addclientEJB).SearchExistenceLogin(login);
+		Mockito.verify(addclientEJB).searchExistenceLogin(login);
 	}
 }

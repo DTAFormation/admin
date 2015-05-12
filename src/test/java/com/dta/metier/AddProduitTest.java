@@ -50,7 +50,7 @@ public class AddProduitTest {
 		LOG.info("Lorsque ejb.save(produit)");
 		ejb.save(produit);
 		
-		LOG.info("Alors 'produit' a été persisté");
+		LOG.info("Alors 'produit' a ete persiste");
 		verify(em).persist(produit);
 		
 		LOG.info("FIN");

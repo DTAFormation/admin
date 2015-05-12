@@ -51,7 +51,7 @@ public class AddArticleTest {
 		LOG.info("Lorsque ejb.save(article)");
 		ejb.save(article);
 		
-		LOG.info("Alors 'article' a été persisté");
+		LOG.info("Alors 'article' a ete persiste");
 		verify(em).persist(article);
 		
 		LOG.info("FIN");

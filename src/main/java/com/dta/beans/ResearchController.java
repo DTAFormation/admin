@@ -8,6 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchArticleEJB;
@@ -16,6 +19,8 @@ import com.dta.metier.SearchUtilisateurEJB;
 
 @ManagedBean(name="research")
 public class ResearchController {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(ResearchController.class); 
 
 	//user fields
 	private String userName;
@@ -96,8 +101,8 @@ public class ResearchController {
 
 		//priority to research by id
 		if(!"".equals(this.articleId)){
-			int articleId = Integer.parseInt(this.articleId);
-			products = searchArticle.findById(articleId);
+			int searchArticleId = Integer.parseInt(this.articleId);
+			products = searchArticle.findById(searchArticleId);
 
 		}else{
 			// create a model article based on the search fields
@@ -112,7 +117,7 @@ public class ResearchController {
 
 	public void submitResearchAllArticle(){
 		products = searchArticle.findAll();
-		System.out.println(products);
+		LOG.info(products.toString());
 	}
 
 

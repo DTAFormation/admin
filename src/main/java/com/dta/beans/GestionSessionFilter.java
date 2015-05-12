@@ -14,8 +14,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class GestionSessionFilter implements Filter {
 	private List<String> urlList;
+	
+    private static final Logger LOG = LoggerFactory.getLogger(GestionSessionFilter.class); 
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -28,6 +33,7 @@ public class GestionSessionFilter implements Filter {
 		}
 	}
 
+	@Override
 	public void destroy() {
 
 	}
@@ -36,10 +42,10 @@ public class GestionSessionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest http_request = (HttpServletRequest) request;
-		HttpServletResponse http_response = (HttpServletResponse) response;
-		AuthentificationBean authentificationBean = (AuthentificationBean) http_request.getSession().getAttribute("authentificationBean");
-		String url = http_request.getServletPath();
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		AuthentificationBean authentificationBean = (AuthentificationBean) httpRequest.getSession().getAttribute("authentificationBean");
+		String url = httpRequest.getServletPath();
 		boolean allowedRequest = false;
 
 		if(urlList.contains(url) || isResourceUrl(url)) {
@@ -48,10 +54,10 @@ public class GestionSessionFilter implements Filter {
 
 		if (!allowedRequest) {
 			if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
-				http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/authentification.xhtml");
 			}
 			else
-				System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
+				LOG.info(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
 		}
 
 		chain.doFilter(request, response);
