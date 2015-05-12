@@ -6,22 +6,14 @@ import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Catalogue;
 
-@Stateless(name="ModifyCatalogueEJB")
+@Stateless(name="modifyCatalogueEJB")
 public class ModifyCatalogueEJB {
 
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 
 	public void update(Catalogue catalogue){
-		if(isCatalogueExists(catalogue.getCatalogueId()))
-			em.persist(catalogue);
-	}
-
-	public boolean isCatalogueExists(int id) {
-		return !em.createNamedQuery("Catalogue.findById", Catalogue.class)
-				.setParameter("catalogueId", id)
-				.getResultList()
-				.isEmpty();
+		em.merge(catalogue);
 	}
 
 	public EntityManager getEm() {

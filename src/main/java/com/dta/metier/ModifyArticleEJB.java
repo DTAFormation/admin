@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Article;
 
-@Stateless(name="ModifyArticleEJB")
+@Stateless(name="modifyArticleEJB")
 public class ModifyArticleEJB {
 	
 	@PersistenceContext(unitName="ecommercedb")
