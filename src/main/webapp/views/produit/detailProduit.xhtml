@@ -7,7 +7,7 @@
 <h:head>
 	<f:metadata>
 		<f:viewParam name="articleId" />
-		<f:event listener="#{detailProduitBean.initArticle(articleId)}" type="preRenderView"></f:event>
+		<f:viewAction action="#{detailProduitBean.initArticle(articleId)}" />
 	</f:metadata>
 	<c:set var="monArticle" value="${detailProduitBean.showDetailArticle(articleId)}"></c:set>
 	<c:set var="monProduit" value="${monArticle.produit}"></c:set>

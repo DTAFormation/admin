@@ -33,7 +33,6 @@ public class DetailProduitBean {
 	}
 
 	public Article getArticle() {
-		System.out.println("Article: " + article);
 		return article;
 	}
 
