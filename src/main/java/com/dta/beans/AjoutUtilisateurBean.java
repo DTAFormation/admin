@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -43,12 +44,19 @@ public class AjoutUtilisateurBean {
 		RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
 		updateListeAdresses();
 		RequestContext.getCurrentInstance().update("adresseForm");
+		notifySaveAdresse();
 	}
-	
+
+	private static void notifySaveAdresse() {
+		FacesMessage msg = new FacesMessage("Adresse enregistrée");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		RequestContext.getCurrentInstance().update("clientForm:msgs");
+	}
+
 	private static void updateListeAdresses() {
 		RequestContext.getCurrentInstance().update("clientForm:listeAdresses");
 	}
-	
+
 	public void cleanAdresses() {
 		if (adresses != null) {
 			adresses.clear();
@@ -63,8 +71,9 @@ public class AjoutUtilisateurBean {
 			AuthentificationBean auth = (AuthentificationBean) session
 					.getAttribute("authentificationBean");
 			if (!auth.getUtilisateur().getTypeUtil().equals("a")) {
-				RequestContext.getCurrentInstance().execute(
-						"PF('dlgErreurAuth').show()");
+//				RequestContext.getCurrentInstance().execute(
+//						"PF('dlgErreurAuth').show()");
+				notifyAuthError();
 				return;
 			}
 		}
@@ -84,9 +93,23 @@ public class AjoutUtilisateurBean {
 				a.setUtilisateur(utilisateur);
 		}
 		addUtilisateurEJB.save(utilisateur);
-		RequestContext.getCurrentInstance().execute(
-				"PF('dlgClientAjoute').show()");
+//		RequestContext.getCurrentInstance().execute(
+//				"PF('dlgClientAjoute').show()");
+		notifyAddUser();
 		reset();
+	}
+
+	private void notifyAuthError() {
+		FacesMessage msg = new FacesMessage(
+				"Vous devez posséder les droits administrateur pour créer un administrateur");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		RequestContext.getCurrentInstance().update("clientForm:msgs");
+	}
+
+	private void notifyAddUser() {
+		FacesMessage msg = new FacesMessage("Utilisateur enregistré");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		RequestContext.getCurrentInstance().update("clientForm:msgs");
 	}
 
 	private void reset() {
@@ -100,6 +123,11 @@ public class AjoutUtilisateurBean {
 		titre = "";
 		typeUtil = "";
 		adresses = new ArrayList<Adresse>();
+		updateClientForm();
+	}
+	
+	private void updateClientForm() {
+		RequestContext.getCurrentInstance().update("clientForm");
 	}
 
 	public String getEmail() {

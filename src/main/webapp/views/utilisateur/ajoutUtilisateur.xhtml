@@ -22,6 +22,8 @@
 
 	<!-- fin menu -->
 	<h:form id="clientForm">
+		<p:growl id="msgs" showDetail="false" />
+
 		<p:fieldset legend="Création d'un Utilisateur" toggleable="false"
 			toggleSpeed="500" id="panelGeneral">
 
@@ -36,8 +38,8 @@
 					<p:messages for="NomInput" autoUpdate="true" />
 
 					<p:outputLabel value="Prenom : " for="PrenomInput" />
-					<p:inputText id="PrenomInput" value="#{ajoutUtilisateurBean.prenom}"
-						type="text" required="true"
+					<p:inputText id="PrenomInput"
+						value="#{ajoutUtilisateurBean.prenom}" type="text" required="true"
 						requiredMessage="Veuillez préciser votre prenom" />
 					<p:messages for="PrenomInput" autoUpdate="true" />
 				</h:panelGrid>
@@ -59,31 +61,71 @@
 
 			<p:fieldset legend="Liste des Adresses" toggleable="false"
 				toggleSpeed="500" id="panelAdresses">
-				<p:dataTable id="listeAdresses" value="#{ajoutUtilisateurBean.adresses}"
-					var="adresse" emptyMessage="Pas d'adresse enregistrée">
-					<p:column>
-						<f:facet name="header">Rue</f:facet>
-						<h:outputText value="#{adresse.rue}" />
+				<p:dataTable id="listeAdresses"
+					value="#{ajoutUtilisateurBean.adresses}" var="adresse"
+					emptyMessage="Pas d'adresse enregistrée" editable="true">
+					<p:column headerText="Rue">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.rue}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.rue}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Numero de rue</f:facet>
-						<h:outputText value="#{adresse.num}" />
+					<p:column headerText="Numero de rue">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.num}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.num}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Ville</f:facet>
-						<h:outputText value="#{adresse.ville}" />
+					<p:column headerText="Ville">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.ville}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.ville}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
-					<p:column>
-						<f:facet name="header">CP</f:facet>
-						<h:outputText value="#{adresse.codePostal}" />
+					<p:column headerText="CP">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.codePostal}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.codePostal}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Departement</f:facet>
-						<h:outputText value="#{adresse.departement}" />
+					<p:column headerText="Departement">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.departement}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.departement}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Pays</f:facet>
-						<h:outputText value="#{adresse.pays}" />
+					<p:column headerText="Pays">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{adresse.pays}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{adresse.pays}" style="width:100%;" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Edition">
+						<p:rowEditor />
 					</p:column>
 				</p:dataTable>
 				<p:toolbar>
@@ -206,16 +248,9 @@
 	</h:form>
 </p:dialog>
 
-<p:dialog header="Client Ajoute" widgetVar="dlgClientAjoute"
-	dynamic="true">
-	YYYYYYAAAAA!!!!!
-</p:dialog>
 <p:dialog header="Adresse Erreur" widgetVar="dlgAdresseErreur"
 	dynamic="true">
 	Probleme de serveur, Adresse non enregistré
-</p:dialog>
-<p:dialog header="Accès refusé" widgetVar="dlgErreurAuth" dynamic="true">
-	Vous devez posséder les droits administrateur pour ajouter un nouvel administrateur !
 </p:dialog>
 
 </html>
