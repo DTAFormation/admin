@@ -63,9 +63,5 @@ public class LigneCommande {
 
 	public void setCommande(Commande commande) {
 		this.commande = commande;
-	}
-	
-	
-	 
-	
+	}	
 }

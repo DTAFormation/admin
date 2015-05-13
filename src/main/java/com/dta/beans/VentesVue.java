@@ -45,6 +45,7 @@ public class VentesVue {
 	private void createAnimatedModels() {
 
 		Axis yAxis;
+		Axis xAxis;
 
 		articleChart = initArticle();
 		articleChart.setTitle("Ventes des articles");
@@ -53,14 +54,19 @@ public class VentesVue {
 		yAxis = articleChart.getAxis(AxisType.Y);
 		yAxis.setMin(0); 
 		yAxis.setMax(searchCommande.getMaxVentes()); 
+		xAxis = articleChart.getAxis(AxisType.X);
+		xAxis.setTickAngle(45);
 
 		bestArticleChart = initMeilleurArticle();
 		bestArticleChart.setTitle("Meilleures ventes d'articles");
 		bestArticleChart.setAnimate(true);
 		bestArticleChart.setLegendPosition("ne");
 		yAxis = bestArticleChart.getAxis(AxisType.Y);
-		yAxis.setMin(0); 
-		yAxis.setMax(searchCommande.getMaxVentes()); 
+		yAxis.setMin(0);
+		yAxis.setMax(searchCommande.getMaxVentes());
+		xAxis = bestArticleChart.getAxis(AxisType.X);
+		xAxis.setTickAngle(45);
+		xAxis.setTickInterval("50");
 		
 	}
 
