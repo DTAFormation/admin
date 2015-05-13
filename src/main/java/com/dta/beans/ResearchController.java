@@ -112,7 +112,7 @@ public class ResearchController {
 
 	public void submitResearchAllArticle(){
 		products = searchArticle.findAll();
-		System.out.println(products);
+		//System.out.println(products);
 	}
 
 

@@ -50,8 +50,9 @@ public class GestionSessionFilter implements Filter {
 			if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
 				http_response.sendRedirect(http_request.getContextPath() + "/authentification.xhtml");
 			}
-			else
-				System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
+			else {
+				//System.out.println(authentificationBean.getUtilisateur().getTypeUtil() + "    " + authentificationBean.getUtilisateur().getLogin()+ "    " + authentificationBean.getUtilisateur().getPassword());
+			}
 		}
 
 		chain.doFilter(request, response);

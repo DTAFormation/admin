@@ -51,7 +51,7 @@ public class SearchArticle extends SearchEntities<Article>{
 				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='"+catalogue+"')) ";
 			}
 		}
-		System.out.println("\n \n \n \n \n  requete: " + request);
+		//System.out.println("\n \n \n \n \n  requete: " + request);
 		return request;
 	}
 	
