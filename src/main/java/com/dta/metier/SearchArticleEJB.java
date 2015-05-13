@@ -21,7 +21,7 @@ private static final Logger LOG = LoggerFactory.getLogger(SearchEntities.class);
 			
 	public String requestGenerator(Article model, String produit, String catalogue){
 
-		String request = "SELECT a FROM Article a  ";
+		String request = "SELECT a FROM Article a ";
 
 		if(model.getNom()!=null){
 			request += "WHERE a.nom LIKE '%"+model.getNom()+"%' ";
