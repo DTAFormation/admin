@@ -1,5 +1,6 @@
 package com.dta.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
@@ -100,12 +101,11 @@ public class VentesVue {
 			meilleuresVentes.put(searchCommande.getVentesById(a.getArticleId()), a.getNom());
 		}
 		
-		int i=0;
-		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) {
-			if(i++<meilleuresVentes.size()-3) continue;
-			article.set(entry.getValue(), entry.getKey());
-		}
-	
+		// Récupère les 3 meilleures ventes et les classe par ordre décroissant
+		List<Entry<Long, String>> temp = new ArrayList<Entry<Long, String>>();
+		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) temp.add(entry);
+		for(int i=temp.size()-1; i>=temp.size()-3; --i) article.set(temp.get(i).getValue(), temp.get(i).getKey());
+
 		model.addSeries(article);
 
 		return model;
