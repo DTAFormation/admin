@@ -18,15 +18,22 @@ public class ProduitValidator implements Validator {
 	private static final String PRODUIT_EXISTANT = "Ce nom de produit est deja pris";
 
 	@EJB
-	private AddProduitEJB ejb;
+	private AddProduitEJB addProduitEJB;
 
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String prodnom = (String) arg2;
-		if(ejb.isProduitNameExists(prodnom)){
+		if(addProduitEJB.isProduitNameExists(prodnom)){
 			throw new ValidatorException(
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, PRODUIT_EXISTANT, null));
 		}
 	}
+	
+	public AddProduitEJB getAddProduitEJB() {
+        return addProduitEJB;
+    }
+    public void setAddProduitEJB(AddProduitEJB addProduitEJB) {
+        this.addProduitEJB = addProduitEJB;
+    }
 }

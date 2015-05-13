@@ -20,7 +20,15 @@ public class ArticleValidator implements Validator {
 	@EJB
 	private AddArticleEJB ejb;
 	
-	@Override
+	public AddArticleEJB getEjb() {
+        return ejb;
+    }
+
+    public void setEjb(AddArticleEJB ejb) {
+        this.ejb = ejb;
+    }
+
+    @Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String artnom = (String) arg2;

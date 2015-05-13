@@ -20,7 +20,15 @@ public class CatalogueValidator implements Validator {
 	@EJB
 	private AddCatalogueEJB ejb;
 	
-	@Override
+	public AddCatalogueEJB getEjb() {
+        return ejb;
+    }
+
+    public void setEjb(AddCatalogueEJB ejb) {
+        this.ejb = ejb;
+    }
+
+    @Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String catnom = (String) arg2;
