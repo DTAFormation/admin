@@ -82,22 +82,20 @@ public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 		return query.getResultList();
 	}
 	
-	//méthode pour authentification utilisateur
-	public Utilisateur findAuthentification (String login, String password, String type){
+	//methode pour authentification utilisateur
+	public Object findAuthentification (String login, String password) {
 		
-		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND u.typeUtil = :type");
+		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND (u.typeUtil ='a' OR u.typeUtil ='m')");
 		query_auth.setParameter("login", login);
 		query_auth.setParameter("password", password);
-		query_auth.setParameter("type", type);
-
-		try{
-			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
-			return result;
-		}catch (NoResultException e){
-			LOG.info("error NoResultException", e);
-			return null;
+		Object result;
+		try {
+			result = query_auth.getSingleResult();
+		} catch (NoResultException e) {
+			LOG.info("CONNEXION ERREUR : L UTILISATEUR N A PAS ETE TROUVE");
+			result = null;
 		}
-
+		return result;
 	}
 
 }

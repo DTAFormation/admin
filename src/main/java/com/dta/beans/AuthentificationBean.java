@@ -35,7 +35,11 @@ public class AuthentificationBean {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			return;
 		}
-		utilisateur = searchUtilisateur.findAuthentification(login, password, typeUtil);
+		
+		
+		utilisateur = (Utilisateur) searchUtilisateur.findAuthentification(login, password);
+		
+		
 		if(utilisateur == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Utilisateur inconnu"));
 			FacesContext.getCurrentInstance().getExternalContext().redirect("errorAuth.xhtml");

@@ -1,11 +1,13 @@
 package com.dta.test.metier;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.AbstractQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,8 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Utilisateur;
 import com.dta.metier.SearchUtilisateurEJB;
-
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchUtilisateurTest {
@@ -198,48 +198,38 @@ public class SearchUtilisateurTest {
 		
 	}
 	
-	
-	/*
+	@Test
+	public void findAuthentificationTest(){
 		
-	
-	@SuppressWarnings("unchecked")
-	public List<Utilisateur> findDetail (Utilisateur user){
-		String requete = requestGenerator(user);
-		Query query = em.createQuery(requete);
-		if (query.getResultList().size() == 0)
-			return new ArrayList<Utilisateur>();
-		return query.getResultList();
+		LOG.info("DEBUT TEST findAuthentificationTest");
+
+		
+		Utilisateur utilisateurExpected = new Utilisateur();
+		utilisateurExpected.setUtilisateurId(1);
+		
+		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND (u.typeUtil ='a' OR u.typeUtil ='m')")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(utilisateurExpected);
+		
+		Utilisateur utilisateurTrouve = (Utilisateur) searchUtilisateur.findAuthentification("login", "password");
+		Assert.assertEquals(utilisateurTrouve.getUtilisateurId(), 1);
+		
+		LOG.info("FIN TEST findAuthentificationTest");
 	}
 	
-	*/
-	
-	@Test public void findAuthentificationTest(){
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setUtilisateurId(1);
+	@Test
+	public void findAuthentification_NoResult_Test(){
 		
-		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND u.typeUtil = :type")).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(utilisateur);
+		LOG.info("DEBUT TEST findAuthentification_NoResult_Test");
+
+		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :login AND u.password = :password AND (u.typeUtil ='a' OR u.typeUtil ='m')")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(new NoResultException());
+		LOG.info("Etant donne un utilisateur qui se connecte avec un mauvais login ou password");
+
+		Object utilisateur = searchUtilisateur.findAuthentification("login", "password");
 		
-		Utilisateur util = searchUtilisateur.findAuthentification("login", "password", "type");
-		Assert.assertEquals(util.getUtilisateurId(), 1);
+		LOG.info("Une erreur est levee : " + utilisateur.toString());
+
+		Assert.assertEquals(utilisateur.toString(),"javax.persistence.NoResultException");
+		LOG.info("FIN TEST findAuthentification_NoResult_Test");
 	}
-	
-	/*
-	
-	//méthode pour authentification utilisateur
-	public Utilisateur findAuthentification (String login, String password, String type){
-		Query query_auth = em.createQuery("SELECT u FROM Utilisateur u WHERE u.login = :log AND u.password = :passw AND u.typeUtil = :typeUt");
-		System.out.println(type);
-		query_auth.setParameter("log", login);
-		query_auth.setParameter("passw", password);
-		query_auth.setParameter("typeUt", type);
-		try{
-			Utilisateur result = (Utilisateur) query_auth.getSingleResult();
-			System.out.println(result);
-			return result;
-		}catch (NoResultException e){
-			return null;
-		}
-	}
-	*/ 
 }
