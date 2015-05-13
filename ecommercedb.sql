@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(4);
+(5);
 
 -- --------------------------------------------------------
 
