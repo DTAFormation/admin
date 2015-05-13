@@ -74,10 +74,12 @@ public class Article {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", nom=" + nom + ", prix="
 				+ prix + ", produit=" + produit + ", stock=" + stock + "]";
 	}
+
+
 }

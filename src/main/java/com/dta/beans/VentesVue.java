@@ -1,6 +1,5 @@
 package com.dta.beans;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
@@ -16,19 +15,17 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
 import com.dta.entities.Article;
-import com.dta.metier.SearchArticle;
+import com.dta.metier.SearchArticleEJB;
 import com.dta.metier.SearchCommandeEJB;
 
 @ManagedBean
-public class VentesVue implements Serializable{
+public class VentesVue {
 
 	@EJB
-	private SearchArticle searchArticle;
+	private SearchArticleEJB searchArticle;
 	@EJB
 	private SearchCommandeEJB searchCommande;
 	
-	private static final long serialVersionUID = 1L;
-
 	private BarChartModel articleChart;
 	private BarChartModel bestArticleChart;
 
@@ -36,7 +33,6 @@ public class VentesVue implements Serializable{
 	public void init() {
 		createAnimatedModels();
 	}
-
 
 	public BarChartModel getBestArticleChart() {
 		return bestArticleChart;
@@ -108,7 +104,4 @@ public class VentesVue implements Serializable{
 
 		return model;
 	}
-	
-
-
 }

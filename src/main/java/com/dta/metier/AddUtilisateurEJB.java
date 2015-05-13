@@ -20,19 +20,18 @@ public class AddUtilisateurEJB {
 	}
 
 	// Methode pour le validator.
-	public boolean SearchExistenceEmail(String email) {
+	public boolean searchExistenceEmail(String email) {
 		TypedQuery<String> query = em.createNamedQuery(
 				"Utilisateur.findByEmail", String.class).setParameter("email",
 				email);
-		List<String> result = query.getResultList();
-		return (result.size() != 0);
+		return !query.getResultList().isEmpty();
 	}
 
-	public boolean SearchExistenceLogin(String login) {
+	public boolean searchExistenceLogin(String login) {
 		TypedQuery<String> query = em.createNamedQuery(
 				"Utilisateur.findByLogin", String.class).setParameter("login",
 				login);
-		return (query.getResultList().size() != 0);
+		return !query.getResultList().isEmpty();
 	}
 
 	protected EntityManager getEm() {

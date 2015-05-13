@@ -48,7 +48,7 @@ public class AjoutUtilisateurBean {
 	}
 
 	private static void notifySaveAdresse() {
-		FacesMessage msg = new FacesMessage("Adresse enregistrée");
+		FacesMessage msg = new FacesMessage("Adresse enregistree");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		RequestContext.getCurrentInstance().update("clientForm:msgs");
 	}
@@ -65,14 +65,14 @@ public class AjoutUtilisateurBean {
 	}
 
 	public void save() {
-		if (this.typeUtil.equals("a")) {
+		if ("a".equals(this.typeUtil)) {
 			session = (HttpSession) FacesContext.getCurrentInstance()
 					.getExternalContext().getSession(false);
 			AuthentificationBean auth = (AuthentificationBean) session
 					.getAttribute("authentificationBean");
-			if (!auth.getUtilisateur().getTypeUtil().equals("a")) {
-//				RequestContext.getCurrentInstance().execute(
-//						"PF('dlgErreurAuth').show()");
+			if (!"a".equals(auth.getUtilisateur().getTypeUtil())) {
+				RequestContext.getCurrentInstance().execute(
+						"PF('dlgErreurAuth').show()");
 				notifyAuthError();
 				return;
 			}
@@ -93,21 +93,21 @@ public class AjoutUtilisateurBean {
 				a.setUtilisateur(utilisateur);
 		}
 		addUtilisateurEJB.save(utilisateur);
-//		RequestContext.getCurrentInstance().execute(
-//				"PF('dlgClientAjoute').show()");
+		RequestContext.getCurrentInstance().execute(
+				"PF('dlgClientAjoute').show()");
 		notifyAddUser();
 		reset();
 	}
 
 	private void notifyAuthError() {
 		FacesMessage msg = new FacesMessage(
-				"Vous devez posséder les droits administrateur pour créer un administrateur");
+				"Vous devez posseder les droits administrateur pour creer un administrateur");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		RequestContext.getCurrentInstance().update("clientForm:msgs");
 	}
 
 	private void notifyAddUser() {
-		FacesMessage msg = new FacesMessage("Utilisateur enregistré");
+		FacesMessage msg = new FacesMessage("Utilisateur enregistre");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		RequestContext.getCurrentInstance().update("clientForm:msgs");
 	}

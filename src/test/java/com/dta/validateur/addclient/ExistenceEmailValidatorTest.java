@@ -30,7 +30,7 @@ public class ExistenceEmailValidatorTest {
 	public void validateTrueTest(){
 		String Email = "Email";
 		
-		when(addclientEJB.SearchExistenceEmail(Email)).thenReturn(true);
+		when(addclientEJB.searchExistenceEmail(Email)).thenReturn(true);
 		elv.validate(null, null, Email);
 	}
 	
@@ -38,8 +38,8 @@ public class ExistenceEmailValidatorTest {
 	public void validateFalseTest(){
 		String Email = "Email";
 		
-		when(addclientEJB.SearchExistenceEmail(Email)).thenReturn(false);
+		when(addclientEJB.searchExistenceEmail(Email)).thenReturn(false);
 		elv.validate(null, null, Email);
-		Mockito.verify(addclientEJB).SearchExistenceEmail(Email);
+		Mockito.verify(addclientEJB).searchExistenceEmail(Email);
 	}
 }

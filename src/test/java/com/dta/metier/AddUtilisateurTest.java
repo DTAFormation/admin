@@ -23,9 +23,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddClientTest {
+public class AddUtilisateurTest {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(AddClientTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AddUtilisateurTest.class);
 	
 	@Mock private EntityManager em;
 	@Mock private TypedQuery<String> query;
@@ -50,7 +50,7 @@ public class AddClientTest {
 	}
 	
 	@Test
-	public void testAjoutClientAvecAdresse(){
+	public void testAjoutUtilisateurAvecAdresse(){
 		Adresse adresse = new Adresse(11310, "aude", 4, "france", "rue du midi", "villemagne", null, null);
 		List<Adresse> adresses = new ArrayList<Adresse>();
 		adresses.add(adresse);
@@ -66,7 +66,7 @@ public class AddClientTest {
 	
 	@Test
 	public void SearchExistenceEmailTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String email="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(email);
@@ -75,7 +75,7 @@ public class AddClientTest {
 		 when(query.getResultList()).thenReturn(usersEnBase);
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceEmail(email);
+		 boolean result = ejb.searchExistenceEmail(email);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);
@@ -83,7 +83,7 @@ public class AddClientTest {
 	
 	@Test
 	public void SearchExistenceLoginTest(){
-		 LOG.info("Etant donn� une adresse email existant en base");
+		 LOG.info("Etant donne une adresse email existant en base");
 		 String Login="test@email.fr";
 		 List<String> usersEnBase = new ArrayList<>();
 		 usersEnBase.add(Login);
@@ -94,7 +94,7 @@ public class AddClientTest {
 		 
 		 LOG.info("Lorsque ejb.SearchExistenceEmail(email)");
 		 
-		 boolean result = ejb.SearchExistenceLogin(Login);
+		 boolean result = ejb.searchExistenceLogin(Login);
 		 
 		 LOG.info("Alors le service renvoie vrai");
 		 assertEquals("userExists devrait retourner vrai si l'email est en base", true, result);

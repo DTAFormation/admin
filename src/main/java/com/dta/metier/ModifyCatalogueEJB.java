@@ -4,24 +4,23 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.dta.entities.Article;
+import com.dta.entities.Catalogue;
 
-@Stateless(name="modifyArticleEJB")
-public class ModifyArticleEJB {
-	
+@Stateless(name="modifyCatalogueEJB")
+public class ModifyCatalogueEJB {
+
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
-	
-	public void update(Article article){
-		em.merge(article);
+
+	public void update(Catalogue catalogue){
+		em.merge(catalogue);
 	}
-		
+
 	public EntityManager getEm() {
 		return em;
 	}
-	
+
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
 }
-

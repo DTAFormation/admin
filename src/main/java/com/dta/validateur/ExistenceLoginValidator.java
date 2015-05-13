@@ -26,7 +26,7 @@ public class ExistenceLoginValidator implements Validator{
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String login = (String) arg2;
-		if(addclientEJB.SearchExistenceLogin(login)){
+		if(addclientEJB.searchExistenceLogin(login)){
 		      throw new ValidatorException(
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, LOGIN_EXISTE_DEJA, null ) );
 		}

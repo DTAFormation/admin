@@ -21,14 +21,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Utilisateur;
-import com.dta.metier.SearchUtilisateur;
+import com.dta.metier.SearchUtilisateurEJB;
 
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchUtilisateurTest {
 
-	private SearchUtilisateur searchUtilisateur;
+	private SearchUtilisateurEJB searchUtilisateur;
 
 	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateurTest.class);	
 	
@@ -40,7 +40,7 @@ public class SearchUtilisateurTest {
 
 	@Before
 	public void setUp() {
-		searchUtilisateur = new SearchUtilisateur();
+		searchUtilisateur = new SearchUtilisateurEJB();
 		searchUtilisateur.setEm(em);
 	}
 	

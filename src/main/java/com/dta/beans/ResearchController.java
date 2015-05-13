@@ -8,14 +8,19 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
-import com.dta.metier.SearchArticle;
-import com.dta.metier.SearchProduit;
-import com.dta.metier.SearchUtilisateur;
+import com.dta.metier.SearchArticleEJB;
+import com.dta.metier.SearchProduitEJB;
+import com.dta.metier.SearchUtilisateurEJB;
 
 @ManagedBean(name="research")
 public class ResearchController {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(ResearchController.class); 
 
 	//user fields
 	private String userName;
@@ -33,13 +38,13 @@ public class ResearchController {
 	private String articleCatalogue;
 
 	@EJB
-	private SearchArticle searchArticle;
+	private SearchArticleEJB searchArticle;
 
 	@EJB
-	private SearchProduit searchProduit;
+	private SearchProduitEJB searchProduit;
 
 	@EJB
-	private SearchUtilisateur searchUtilisateur;
+	private SearchUtilisateurEJB searchUtilisateur;
 
 	// research results
 	private List<Article> products;
@@ -96,8 +101,8 @@ public class ResearchController {
 
 		//priority to research by id
 		if(!"".equals(this.articleId)){
-			int articleId = Integer.parseInt(this.articleId);
-			products = searchArticle.findById(articleId);
+			int searchArticleId = Integer.parseInt(this.articleId);
+			products = searchArticle.findById(searchArticleId);
 
 		}else{
 			// create a model article based on the search fields
@@ -112,7 +117,7 @@ public class ResearchController {
 
 	public void submitResearchAllArticle(){
 		products = searchArticle.findAll();
-		//System.out.println(products);
+		LOG.info(products.toString());
 	}
 
 
@@ -236,27 +241,27 @@ public class ResearchController {
 		this.articleCatalogue = articleCatalogue;
 	}
 
-	public SearchArticle getSearchArticle() {
+	public SearchArticleEJB getSearchArticle() {
 		return searchArticle;
 	}
 
-	public void setSearchArticle(SearchArticle searchArticle) {
+	public void setSearchArticle(SearchArticleEJB searchArticle) {
 		this.searchArticle = searchArticle;
 	}
 
-	public SearchProduit getSearchProduit() {
+	public SearchProduitEJB getSearchProduit() {
 		return searchProduit;
 	}
 
-	public void setSearchProduit(SearchProduit searchProduit) {
+	public void setSearchProduit(SearchProduitEJB searchProduit) {
 		this.searchProduit = searchProduit;
 	}
 
-	public SearchUtilisateur getSearchUtilisateur() {
+	public SearchUtilisateurEJB getSearchUtilisateur() {
 		return searchUtilisateur;
 	}
 
-	public void setSearchUtilisateur(SearchUtilisateur searchUtilisateur) {
+	public void setSearchUtilisateur(SearchUtilisateurEJB searchUtilisateur) {
 		this.searchUtilisateur = searchUtilisateur;
 	}
 

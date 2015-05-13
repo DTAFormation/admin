@@ -24,7 +24,7 @@ public class ExistenceEmailValidator implements Validator{
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
 			throws ValidatorException {
 		String email = (String) arg2;
-		if(addclientEJB.SearchExistenceEmail(email)){
+		if(addclientEJB.searchExistenceEmail(email)){
 		      throw new ValidatorException(
                       new FacesMessage( FacesMessage.SEVERITY_ERROR, EMAIL_EXISTE_DEJA, null ) );
 		}

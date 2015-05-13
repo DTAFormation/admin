@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 import com.dta.entities.Utilisateur;
-import com.dta.metier.DeleteUtilisateur;
-import com.dta.metier.SearchUtilisateur;
+import com.dta.metier.DeleteUtilisateurEJB;
+import com.dta.metier.SearchUtilisateurEJB;
 
 
 @ManagedBean
@@ -18,10 +18,10 @@ import com.dta.metier.SearchUtilisateur;
 public class UtilisateurBean {
 
 	@EJB
-	private DeleteUtilisateur deleteUtilisateur;
+	private DeleteUtilisateurEJB deleteUtilisateur;
 
 	@EJB
-	private SearchUtilisateur searchUtilisateur;
+	private SearchUtilisateurEJB searchUtilisateur;
 
 
 	public Utilisateur GetUtilisateurById(int utilisateurId) {

@@ -4,18 +4,19 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.dta.entities.Article;
+import com.dta.entities.Produit;
 
-@Stateless(name="modifyArticleEJB")
-public class ModifyArticleEJB {
+@Stateless(name="DeleteProduitEJB")
+public class DeleteProduitEJB {
 	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 	
-	public void update(Article article){
-		em.merge(article);
+	public void delete(int produitId){
+		Produit produit = em.find(Produit.class, produitId);
+			em.remove(produit);
 	}
-		
+
 	public EntityManager getEm() {
 		return em;
 	}
@@ -24,4 +25,3 @@ public class ModifyArticleEJB {
 		this.em = em;
 	}
 }
-
