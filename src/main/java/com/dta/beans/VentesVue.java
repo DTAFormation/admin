@@ -1,6 +1,9 @@
 package com.dta.beans;
 
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -24,10 +27,15 @@ public class VentesVue {
 	private SearchCommandeEJB searchCommande;
 	
 	private BarChartModel articleChart;
+	private BarChartModel bestArticleChart;
 
 	@PostConstruct
 	public void init() {
 		createAnimatedModels();
+	}
+
+	public BarChartModel getBestArticleChart() {
+		return bestArticleChart;
 	}
 
 	public BarChartModel getArticleChart() {
@@ -38,16 +46,25 @@ public class VentesVue {
 
 		Axis yAxis;
 
-		articleChart = initBarModel();
+		articleChart = initArticle();
 		articleChart.setTitle("Ventes des articles");
 		articleChart.setAnimate(true);
 		articleChart.setLegendPosition("ne");
 		yAxis = articleChart.getAxis(AxisType.Y);
 		yAxis.setMin(0); 
-		yAxis.setMax(30); //TODO nombre de ventes du produit le plus vendu
+		yAxis.setMax(searchCommande.getMaxVentes()); 
+
+		bestArticleChart = initMeilleurArticle();
+		bestArticleChart.setTitle("Meilleures ventes d'articles");
+		bestArticleChart.setAnimate(true);
+		bestArticleChart.setLegendPosition("ne");
+		yAxis = bestArticleChart.getAxis(AxisType.Y);
+		yAxis.setMin(0); 
+		yAxis.setMax(searchCommande.getMaxVentes()); 
+		
 	}
 
-	private BarChartModel initBarModel() {
+	private BarChartModel initArticle() {
 		BarChartModel model = new BarChartModel();
 
 		List<Article> articles = searchArticle.findAll();
@@ -55,7 +72,32 @@ public class VentesVue {
 		ChartSeries article = new ChartSeries();
 		article.setLabel("Articles");
 		for(Article a : articles){
-			article.set(a.getNom(), searchCommande.getVentes(a.getArticleId()));
+			article.set(a.getNom(), searchCommande.getVentesById(a.getArticleId()));
+		}
+	
+		model.addSeries(article);
+
+		return model;
+	}
+
+	private BarChartModel initMeilleurArticle() {
+		BarChartModel model = new BarChartModel();
+
+		List<Article> articles = searchArticle.findAll();
+		
+		ChartSeries article = new ChartSeries();
+		article.setLabel("Articles");
+		
+		SortedMap<Long, String> meilleuresVentes = new TreeMap<Long, String>();
+		
+		for(Article a : articles) {
+			meilleuresVentes.put(searchCommande.getVentesById(a.getArticleId()), a.getNom());
+		}
+		
+		int i=0;
+		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) {
+			if(i++<meilleuresVentes.size()-3) continue;
+			article.set(entry.getValue(), entry.getKey());
 		}
 	
 		model.addSeries(article);

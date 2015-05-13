@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Commande.getVentes", query="Select sum(l.quantite) from LigneCommande l where l.article.articleId = :id"),
+	@NamedQuery(name="Commande.getVentesById", query="Select sum(l.quantite) from LigneCommande l where l.article.articleId = :id"),
+	@NamedQuery(name="Commande.getVentes", query="select sum(l.quantite) as somme from LigneCommande l group by l.article.articleId"),
+	@NamedQuery(name="Commande.getVentesOrdonnees", query="select a.nom, sum(lc.quantite) as c from Article a, LigneCommande lc where a.articleId = lc.article.articleId group by a.nom order by c desc")
 })
 public class Commande {
 
