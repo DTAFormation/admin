@@ -1,4 +1,4 @@
-package com.dta.validateur.addclient;
+package com.dta.validateur;
 
 import static org.mockito.Mockito.when;
 
