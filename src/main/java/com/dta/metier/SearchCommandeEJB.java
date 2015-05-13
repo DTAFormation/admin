@@ -2,7 +2,6 @@ package com.dta.metier;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -27,16 +26,16 @@ public class SearchCommandeEJB extends SearchEntities<Commande> {
 	public long getMaxVentes() {
 
 		Query query = em.createNamedQuery("Commande.getVentes");
-		ArrayList<Long> result = (ArrayList<Long>) query.getResultList();
-		Collections.sort(result);
-		return result.get(result.size() - 1);
+		ArrayList<Long> result = new ArrayList<Long>();
+		if( query.getResultList().size() != 0){
+			result = (ArrayList<Long>) query.getResultList();
+			Collections.sort(result);
+			return result.get(result.size() - 1);
+		 }
+		else {
+			return 0;
+		}
 	}
 	
-	public void getVentesOrdonnees() {
-		Query query = em.createNamedQuery("Commande.getVentesOrdonnees");
-		List<Object> a = query.getResultList();
-		//System.out.println(a.toString());
-		
-	}
 
 }
