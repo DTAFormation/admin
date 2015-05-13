@@ -21,38 +21,38 @@ private static final Logger LOG = LoggerFactory.getLogger(SearchEntities.class);
 			
 	public String requestGenerator(Article model, String produit, String catalogue){
 
-		String request = "SELECT a FROM Article a WHERE ";
+		String request = "SELECT a FROM Article a  ";
 
 		if(model.getNom()!=null){
-			request += "a.nom LIKE '%"+model.getNom()+"%' ";
+			request += "WHERE a.nom LIKE '%"+model.getNom()+"%' ";
 		}
 		if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f)){
 			if(model.getNom()!=null){
 				request += "AND a.prix="+model.getPrix()+" ";
 			}
 			else{
-				request += "a.prix="+model.getPrix()+" ";
+				request += "WHERE a.prix="+model.getPrix()+" ";
 			}
 		}
 		if(model.getStock()!=-1){
 			if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f) || model.getNom() != null){
 				request += "AND a.stock="+model.getStock()+" ";
 			}else{
-				request += "a.stock="+model.getStock()+" ";
+				request += "WHERE a.stock="+model.getStock()+" ";
 			}
 		}
 		if(!"".equals(produit)){
 			if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f) || model.getNom() != null || model.getStock()!=-1){
 				request += "AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
 			}else{
-				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
+				request += "WHERE a.produit IN (SELECT p.produitId FROM Produit p WHERE p.nom ='"+produit+"') ";
 			}
 		}
 		if(!"".equals(catalogue)){
 			if(Float.floatToRawIntBits(model.getPrix())!=Float.floatToRawIntBits(-1.0f) || model.getNom() != null || model.getStock()!=-1 || !"".equals(produit)){
 				request += "AND a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='"+catalogue+"')) ";
 			}else{
-				request += "a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='"+catalogue+"')) ";
+				request += "WHERE a.produit IN (SELECT p.produitId FROM Produit p WHERE p.catalogue IN (SELECT c.catalogueId FROM Catalogue c WHERE c.nom ='"+catalogue+"')) ";
 			}
 		}
 		LOG.info("requete: " + request);
