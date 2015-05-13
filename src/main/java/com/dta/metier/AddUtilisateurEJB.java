@@ -1,7 +1,5 @@
 package com.dta.metier;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +16,7 @@ public class AddUtilisateurEJB {
 	public void save(Utilisateur utilisateur) {
 		em.persist(utilisateur);
 	}
-
+	
 	// Methode pour le validator.
 	public boolean searchExistenceEmail(String email) {
 		TypedQuery<String> query = em.createNamedQuery(

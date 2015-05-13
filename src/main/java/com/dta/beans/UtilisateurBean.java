@@ -24,7 +24,7 @@ public class UtilisateurBean {
 	private SearchUtilisateurEJB searchUtilisateur;
 
 
-	public Utilisateur GetUtilisateurById(int utilisateurId) {
+	public Utilisateur getUtilisateurById(int utilisateurId) {
 		Utilisateur u = searchUtilisateur.findById(utilisateurId);
 		u.setTypeUtil(Util.getFullUserType(u.getTypeUtil()));
 		return u;
