@@ -36,9 +36,6 @@ public class DetailArticleBean {
 	@EJB
 	private SearchArticleEJB searchArticle;
 
-	// @EJB
-	// private DeleteArticleEJB deleteArticleEJB;
-
 	public void openDetailArticle() {
 		Map<String, String> params = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap();
@@ -63,11 +60,6 @@ public class DetailArticleBean {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		RequestContext.getCurrentInstance()
 				.update("criteresRechercheForm:msgs");
-	}
-
-	public void deleteArticle() {
-		// deleteArticleEJB.delete(requestedId);
-		// closeDetailWidget();
 	}
 
 	private void closeDetailWidget() {

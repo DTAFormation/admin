@@ -59,20 +59,6 @@ public class Utilisateur {
 	public Utilisateur() {
 		
 	}
-	public Utilisateur(String email, int fax, String login, String nom,
-			String password, String prenom, int telephone, String titre,
-			String typeUtil, List<Adresse> adresses) {
-		this.email = email;
-		this.fax = fax;
-		this.login = login;
-		this.nom = nom;
-		this.password = password;
-		this.prenom = prenom;
-		this.telephone = telephone;
-		this.titre = titre;
-		this.typeUtil = typeUtil;
-		this.adresses = adresses;
-	}
 	
 	
 	public int getUtilisateurId() {

@@ -55,37 +55,20 @@ public class ResearchController {
 	private List<Article> products;
 	private List<Utilisateur> users;
 
-	/*
-	 * 
-	 * Constructors
-	 * 
-	 */
-
 	public ResearchController(){
-		this("", "", "", "", "", "", "", "", "", "", "", null, null);		
-		products = new ArrayList<Article>();
-		users = new ArrayList<Utilisateur>();
-	}
-
-	public ResearchController(String userName, String userFirstName,
-			String userMail, String userLogin, String userType,
-			String articleName, String articleProduct, String articleId,
-			String articlePrice, String articleStock, String articleCatalogue,
-			List<Article> products, List<Utilisateur> users) {
-		super();
-		this.userName = userName;
-		this.userFirstName = userFirstName;
-		this.userMail = userMail;
-		this.userLogin = userLogin;
-		this.userType = userType;
-		this.articleName = articleName;
-		this.articleProduct = articleProduct;
-		this.articleId = articleId;
-		this.articlePrice = articlePrice;
-		this.articleStock = articleStock;
-		this.articleCatalogue = articleCatalogue;
-		this.products = products;
-		this.users = users;
+		this.userName = "";
+		this.userFirstName = "";
+		this.userMail = "";
+		this.userLogin = "";
+		this.userType = "";
+		this.articleName = "";
+		this.articleProduct = "";
+		this.articleId = "";
+		this.articlePrice = "";
+		this.articleStock = "";
+		this.articleCatalogue = "";
+		this.products = new ArrayList<Article>();
+		this.users = new ArrayList<Utilisateur>();
 	}
 
 	/*
@@ -100,7 +83,6 @@ public class ResearchController {
 	}
 
 	public void reDoLastSearch() {
-		System.out.println("searchAll: " + searchAll);
 		if(searchAll) {
 			submitResearchAllArticle();
 		} else {

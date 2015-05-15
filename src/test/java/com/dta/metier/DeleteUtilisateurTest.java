@@ -33,17 +33,18 @@ public class DeleteUtilisateurTest {
 	@Test
 	public void testDeleteUtilisateur() {
 		LOG.info("Creation d'un utilisateur");
-		Utilisateur utilisateur = new Utilisateur(
-				"email@dta.com",
-				1,
-				"login",
-				"nom",
-				"password",
-				"prenom",
-				1,
-				"titre",
-				"m",
-				null);
+
+		Utilisateur utilisateur= new Utilisateur();
+		utilisateur.setEmail("email@dta.com");
+		utilisateur.setFax(1);
+		utilisateur.setLogin("login");
+		utilisateur.setNom("nom");
+		utilisateur.setPassword("password");
+		utilisateur.setPrenom("prenom");
+		utilisateur.setTelephone(1);
+		utilisateur.setTitre("titre");
+		utilisateur.setTypeUtil("m");
+		utilisateur.setAdresses(null);
 				
 		when(em.find(Utilisateur.class, 0)).thenReturn(utilisateur);
 		doNothing().when(em).remove(utilisateur);

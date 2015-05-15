@@ -41,19 +41,6 @@ public class Adresse {
 	public Adresse() {
 		
 	}
-	
-	public Adresse(int codePostal, String departement, int num, String pays,
-			String rue, String ville, List<Commande> commande,
-			Utilisateur utilisateur) {
-		this.codePostal = codePostal;
-		this.departement = departement;
-		this.num = num;
-		this.pays = pays;
-		this.rue = rue;
-		this.ville = ville;
-		this.commande = commande;
-		this.utilisateur = utilisateur;
-	}
 
 	public int getAdresseId() {
 		return adresseId;

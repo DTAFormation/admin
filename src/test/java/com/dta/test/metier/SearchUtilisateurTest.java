@@ -31,6 +31,10 @@ public class SearchUtilisateurTest {
 	private SearchUtilisateurEJB searchUtilisateur;
 
 	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateurTest.class);	
+
+	Utilisateur utilisateur = new Utilisateur();
+	Utilisateur utilisateurAttendu = new Utilisateur();
+	Utilisateur utilisateurVide = new Utilisateur();
 	
 	@Mock private EntityManager em;
 	@Mock private Query query;
@@ -42,6 +46,40 @@ public class SearchUtilisateurTest {
 	public void setUp() {
 		searchUtilisateur = new SearchUtilisateurEJB();
 		searchUtilisateur.setEm(em);
+
+		utilisateur.setEmail("emailTest");
+		utilisateur.setFax(0);
+		utilisateur.setLogin("loginTest");
+		utilisateur.setNom("nomTest");
+		utilisateur.setPassword("passwordTest");
+		utilisateur.setPrenom("prenomTest");
+		utilisateur.setTelephone(0);
+		utilisateur.setTitre("mlle");
+		utilisateur.setTypeUtil("a");
+		utilisateur.setAdresses(null);
+
+		utilisateurAttendu.setEmail("emailTest");
+		utilisateurAttendu.setFax(0);
+		utilisateurAttendu.setLogin("loginTest");
+		utilisateurAttendu.setNom("nomTest");
+		utilisateurAttendu.setPassword("passwordTest");
+		utilisateurAttendu.setPrenom("prenomTest");
+		utilisateurAttendu.setTelephone(0);
+		utilisateurAttendu.setTitre("mlle");
+		utilisateurAttendu.setTypeUtil("a");
+		utilisateurAttendu.setAdresses(null);
+		
+		utilisateurVide.setEmail(null);
+		utilisateurVide.setFax(0);
+		utilisateurVide.setLogin("loginTest");
+		utilisateurVide.setNom(null);
+		utilisateurVide.setPassword(null);
+		utilisateurVide.setPrenom(null);
+		utilisateurVide.setTelephone(0);
+		utilisateurVide.setTitre(null);
+		utilisateurVide.setTypeUtil(null);
+		utilisateurVide.setAdresses(null);
+		
 	}
 	
 	@Test
@@ -51,13 +89,13 @@ public class SearchUtilisateurTest {
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
-		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null));
+		utilisateurEnBase.add(utilisateur);
 		when(em.createNamedQuery("Utilisateur.findByName")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
 		LOG.info("Objet supposee etre recu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
-		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "", "a", null);
+		Utilisateur monUtilisateurAttendu = this.utilisateurAttendu;
 		utilisateurAttendu.add(monUtilisateurAttendu);
 		
 		LOG.info("Lorsque service.findByName(nomTest)");
@@ -75,20 +113,21 @@ public class SearchUtilisateurTest {
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
-		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null));
+		utilisateurEnBase.add(utilisateur);
+		
 		when(em.createNamedQuery("Utilisateur.findByTitre")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
 			
 		LOG.info("Objet suppose etre recu");
-		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
-		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
-		utilisateurAttendu.add(monUtilisateurAttendu);
+		List<Utilisateur> utilisateursAttendus = new ArrayList<>();
+		Utilisateur monUtilisateurAttendu = this.utilisateurAttendu;
+		utilisateursAttendus.add(monUtilisateurAttendu);
 		
 		LOG.info("Lorsque service.findByTitre(mlle)");
 		List<Utilisateur> result = searchUtilisateur.findByTitre("mlle");
 
 		LOG.info("");
-		assertEquals(result.get(0).toString(),utilisateurAttendu.get(0).toString());
+		assertEquals(result.get(0).toString(),utilisateursAttendus.get(0).toString());
 	}
 	
 	
@@ -119,7 +158,7 @@ public class SearchUtilisateurTest {
 		
 		// Programmer le comportement du mock
 		List<Utilisateur> utilisateurEnBase = new ArrayList<>();
-		utilisateurEnBase.add(new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null));
+		utilisateurEnBase.add(utilisateur);
 		
 		when(em.createQuery("SELECT u FROM Utilisateur u WHERE u.login ='loginTest' ")).thenReturn(query);
 		when(query.getResultList()).thenReturn(utilisateurEnBase);
@@ -127,11 +166,11 @@ public class SearchUtilisateurTest {
 		
 		LOG.info("Objet suppose etre recu");
 		List<Utilisateur> utilisateurAttendu = new ArrayList<>();
-		Utilisateur monUtilisateurAttendu = new Utilisateur("emailTest", 0, "loginTest", "nomTest", "passwordTest", "prenomTest", 0, "mlle", "a", null);
+		Utilisateur monUtilisateurAttendu = this.utilisateurAttendu;
 		utilisateurAttendu.add(monUtilisateurAttendu);
 		
 		LOG.info("Lorsque service.findByName(testNom)");
-		Utilisateur utilisateurModel = new Utilisateur(null, 0, "loginTest", null, null, null, 0, null, null, null);
+		Utilisateur utilisateurModel = utilisateurVide;
 		List<Utilisateur> result = searchUtilisateur.findDetail(utilisateurModel);
 		
 		LOG.info("");

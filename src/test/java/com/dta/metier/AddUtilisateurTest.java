@@ -40,10 +40,19 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void testAjoutClientSansAdresse(){
-		Utilisateur utilisateur= new Utilisateur("testAjout@client.com",
-				000, "logintestAjout", 
-				"nomTest", "passwordTest", 
-				"prenomTest", 123, "Monsieur", "a",null);
+
+		Utilisateur utilisateur= new Utilisateur();
+		utilisateur.setEmail("testAjout@client.com");
+		utilisateur.setFax(000);
+		utilisateur.setLogin("logintestAjout");
+		utilisateur.setNom("nomTest");
+		utilisateur.setPassword("passwordTest");
+		utilisateur.setPrenom("prenomTest");
+		utilisateur.setTelephone(123);
+		utilisateur.setTitre("Monsieur");
+		utilisateur.setTypeUtil("a");
+		utilisateur.setAdresses(null);
+		
 		Mockito.doNothing().when(em).persist(Mockito.anyObject());
 		ejb.save(utilisateur);
 		Mockito.verify(em).persist(Mockito.anyObject());
@@ -51,13 +60,30 @@ public class AddUtilisateurTest {
 	
 	@Test
 	public void testAjoutUtilisateurAvecAdresse(){
-		Adresse adresse = new Adresse(11310, "aude", 4, "france", "rue du midi", "villemagne", null, null);
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal(11310);
+		adresse.setDepartement("aude");
+		adresse.setNum(4);
+		adresse.setPays("France");
+		adresse.setRue("rue du midi");
+		adresse.setVille("villemagne");
+		adresse.setCommande(null);
+		adresse.setUtilisateur(null);
+		
 		List<Adresse> adresses = new ArrayList<Adresse>();
 		adresses.add(adresse);
-		Utilisateur utilisateur= new Utilisateur("testAjout@client.com",
-				000, "logintestAjout", 
-				"nomTest", "passwordTest", 
-				"prenomTest", 123, "Monsieur", "a",adresses);
+		Utilisateur utilisateur= new Utilisateur();
+		utilisateur.setEmail("testAjout@client.com");
+		utilisateur.setFax(000);
+		utilisateur.setLogin("logintestAjout");
+		utilisateur.setNom("nomTest");
+		utilisateur.setPassword("passwordTest");
+		utilisateur.setPrenom("prenomTest");
+		utilisateur.setTelephone(123);
+		utilisateur.setTitre("Monsieur");
+		utilisateur.setTypeUtil("a");
+		utilisateur.setAdresses(adresses);
+		
 		Mockito.doNothing().when(em).persist(Mockito.anyObject());
 		ejb.save(utilisateur);
 		//Mockito.verify(em).persist(adresse);
