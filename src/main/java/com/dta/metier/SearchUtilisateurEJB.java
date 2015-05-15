@@ -17,6 +17,8 @@ public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 
 	private static final Logger LOG = LoggerFactory.getLogger(SearchUtilisateurEJB.class);	
 	
+	private String request;
+	
 	public SearchUtilisateurEJB() {
 		super(Utilisateur.class);
 	}
@@ -40,38 +42,58 @@ public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 	}
 	
 	public String requestGenerator(Utilisateur utilisateur){
-		String request = "SELECT u FROM Utilisateur u ";
+		request = "SELECT u FROM Utilisateur u ";
 		
-		if(utilisateur.getLogin() != null)
-			request += "WHERE u.login ='"+utilisateur.getLogin()+"' ";
-		if(utilisateur.getNom() != null){
-			if(utilisateur.getLogin() != null)
-				request += "AND u.nom ='" + utilisateur.getNom() + "' ";
-			else
-				request += "WHERE u.nom ='" + utilisateur.getNom() + "' ";
-		}
-		if (utilisateur.getPrenom() != null){
-			if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null))
-				request += "AND u.prenom ='" + utilisateur.getPrenom() + "' ";
-			else
-				request += "WHERE u.prenom ='" + utilisateur.getPrenom() + "' ";
-		}
-		if (utilisateur.getEmail() != null){
-			if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null) || (utilisateur.getPrenom() != null))
-				request += "AND u.email ='" + utilisateur.getEmail() + "' ";
-			else
-				request += "WHERE u.email ='" + utilisateur.getEmail() + "' ";
-		}
-		if (utilisateur.getTypeUtil() != null){
-			if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null) || (utilisateur.getPrenom() != null) || (utilisateur.getEmail() != null))
-				request += "AND u.typeUtil ='" + utilisateur.getTypeUtil() + "' ";
-			else
-				request += "WHERE u.typeUtil ='" + utilisateur.getTypeUtil() + "' ";
-		}
+		addWhereLogin(utilisateur);
+		addWhereNom(utilisateur);
+		addWherePrenom(utilisateur);
+		addWhereEmail(utilisateur);
+		addWhereTypeUtil(utilisateur);
 		
 		return request;
 	}
 		
+	private void addWhereLogin(Utilisateur utilisateur) {
+	    if(utilisateur.getLogin() != null) {
+            request += "WHERE u.login ='"+utilisateur.getLogin()+"' ";
+	    }
+	}
+	
+	private void addWhereNom(Utilisateur utilisateur) {
+	    if(utilisateur.getNom() != null){
+            if(utilisateur.getLogin() != null)
+                request += "AND u.nom ='" + utilisateur.getNom() + "' ";
+            else
+                request += "WHERE u.nom ='" + utilisateur.getNom() + "' ";
+        }
+    }
+	
+	private void addWherePrenom(Utilisateur utilisateur) {
+	    if (utilisateur.getPrenom() != null){
+            if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null))
+                request += "AND u.prenom ='" + utilisateur.getPrenom() + "' ";
+            else
+                request += "WHERE u.prenom ='" + utilisateur.getPrenom() + "' ";
+        }
+    }
+	
+	private void addWhereEmail(Utilisateur utilisateur) {
+	    if (utilisateur.getEmail() != null){
+            if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null) || (utilisateur.getPrenom() != null))
+                request += "AND u.email ='" + utilisateur.getEmail() + "' ";
+            else
+                request += "WHERE u.email ='" + utilisateur.getEmail() + "' ";
+        }
+    }
+	
+	private void addWhereTypeUtil(Utilisateur utilisateur) {
+        if (utilisateur.getTypeUtil() != null){
+            if((utilisateur.getLogin() != null) || (utilisateur.getNom() != null) || (utilisateur.getPrenom() != null) || (utilisateur.getEmail() != null))
+                request += "AND u.typeUtil ='" + utilisateur.getTypeUtil() + "' ";
+            else
+                request += "WHERE u.typeUtil ='" + utilisateur.getTypeUtil() + "' ";
+        }
+    }
 	
 	@SuppressWarnings("unchecked")
 	public List<Utilisateur> findDetail (Utilisateur user){
