@@ -108,17 +108,17 @@ public class ResearchController {
 
 			products = searchArticle.findDetail(modelArticle, this.articleProduct, this.articleCatalogue);
 		}
-		updateResultList();
+		updateArticlesList();
 	}
 
 	public void submitResearchAllArticle(){
 		searchAllArticles = true;
 		products = searchArticle.findAll();
-		updateResultList();
+		updateArticlesList();
 		LOG.info(products.toString());
 	}
 	
-	private void updateResultList() {
+	private void updateArticlesList() {
 		RequestContext.getCurrentInstance().update("resultForm:results");
 	}
 
@@ -145,13 +145,18 @@ public class ResearchController {
 		modelUtilisateur.setTypeUtil(("".equals(this.userType) || this.userType == null) ? null : this.userType.substring(0, 1));
 
 		users = searchUtilisateur.findDetail(modelUtilisateur);
+		updateUsersList();
 	}
 
 	public void submitResearchAllUser(){
 		searchAllUtilisateurs = true;
 		users = searchUtilisateur.findAll();
+		updateUsersList();
 	}
 
+	private void updateUsersList() {
+		RequestContext.getCurrentInstance().update("searchUserForm:results");
+	}
 
 	@Override
 	public String toString() {

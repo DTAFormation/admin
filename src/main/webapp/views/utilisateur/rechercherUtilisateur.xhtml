@@ -21,7 +21,8 @@
 	<br />
 
 	<!-- fin menu -->
-	<h:form>
+	<h:form id="searchUserForm">
+		<p:growl id="msgs" showDetail="false" />
 		<p:fieldset legend="Criteres de recherche" toggleable="true"
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
@@ -53,13 +54,13 @@
 			<br />
 			<p:toolbar>
 				<f:facet name="left">
-					<p:commandButton value="Rechercher" update="results"
+					<p:commandButton value="Rechercher"
 						actionListener="#{research.submitResearchUser()}"
 						style="margin-right:20px;" />
 				</f:facet>
 
 				<f:facet name="left">
-					<p:commandButton value="Afficher tout" update="results"
+					<p:commandButton value="Afficher tout"
 						actionListener="#{research.submitResearchAllUser}"
 						style="margin-right:20px;" />
 				</f:facet>
@@ -86,7 +87,7 @@
 				<p:commandLink
 					onclick="openDetails([{name:'id', value: #{list.utilisateurId}}])">
 					<p:graphicImage library="img" name="loupe.png" />
-				</p:commandLink>			
+				</p:commandLink>
 
 				<h:panelGrid columns="2">
 					<p:outputLabel for="nom" value="nom:" />
@@ -97,7 +98,7 @@
 
 					<p:outputLabel for="email" value="email:" />
 					<h:outputText value="#{list.email}" id="email" />
-					
+
 					<p:outputLabel for="privilege" value="privilege :" />
 					<h:outputText value="#{list.typeUtil}" id="privilege" />
 				</h:panelGrid>
@@ -106,12 +107,13 @@
 		</p:dataList>
 		<p:remoteCommand name="openDetails"
 			actionListener="#{detailUtilisateurBean.openDetailUtilisateur}" />
-		<p:remoteCommand name="redoLastSearch" actionListener="#{research.reDoLastSearchUsers}" />
+		<p:remoteCommand name="redoLastSearch"
+			actionListener="#{research.reDoLastSearchUsers}" />
 	</h:form>
 </body>
 
 <p:dialog header="Detail Utilisateur" widgetVar="dlgdetailutilisateur">
-	<h:form id="modifUtilisateurForm">	
+	<h:form id="modifUtilisateurForm">
 		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
 			editable="true">
 			<f:facet name="header">Utilisateur</f:facet>
@@ -125,9 +127,9 @@
 					</f:facet>
 					<f:facet name="input">
 						<h:selectOneMenu value="#{user.typeUtil}">
-							<f:selectItem itemLabel="Administrateur" itemValue="a"/>
-							<f:selectItem itemLabel="Client" itemValue="c"/>
-							<f:selectItem itemLabel="Modérateur" itemValue="m"/>
+							<f:selectItem itemLabel="Administrateur" itemValue="a" />
+							<f:selectItem itemLabel="Client" itemValue="c" />
+							<f:selectItem itemLabel="Modérateur" itemValue="m" />
 						</h:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
@@ -141,12 +143,12 @@
 						<p:inputText value="#{user.login}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>					
+			</p:column>
 			<p:column>
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
-		
+
 		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
 			editable="true">
 			<p:column headerText="Civilité">
@@ -156,13 +158,13 @@
 					</f:facet>
 					<f:facet name="input">
 						<h:selectOneMenu value="#{user.titre}">
-							<f:selectItem itemLabel="Mademoiselle" itemValue="mlle"/>
-							<f:selectItem itemLabel="Madame" itemValue="mme"/>
-							<f:selectItem itemLabel="Monsieur" itemValue="m"/>
+							<f:selectItem itemLabel="Mademoiselle" itemValue="mlle" />
+							<f:selectItem itemLabel="Madame" itemValue="mme" />
+							<f:selectItem itemLabel="Monsieur" itemValue="m" />
 						</h:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
-			</p:column>				
+			</p:column>
 			<p:column headerText="Nom">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -172,7 +174,7 @@
 						<p:inputText value="#{user.nom}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>		
+			</p:column>
 			<p:column headerText="Prénom">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -182,12 +184,12 @@
 						<p:inputText value="#{user.prenom}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>				
+			</p:column>
 			<p:column>
 				<p:rowEditor />
 			</p:column>
-		</p:dataTable>		
-		
+		</p:dataTable>
+
 		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
 			editable="true">
 			<p:column headerText="Email">
@@ -199,7 +201,7 @@
 						<p:inputText value="#{user.email}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>				
+			</p:column>
 			<p:column headerText="Téléphone">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -219,18 +221,18 @@
 						<p:inputText value="#{user.fax}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>					
+			</p:column>
 			<p:column>
 				<p:rowEditor />
 			</p:column>
-		</p:dataTable>		
-		
-		<p:dataTable var="adr" value="#{detailUtilisateurBean.utilisateur.adresses}"
-			editable="true">
+		</p:dataTable>
+
+		<p:dataTable var="adr"
+			value="#{detailUtilisateurBean.utilisateur.adresses}" editable="true">
 			<f:facet name="header">Adresse(s)</f:facet>
 			<p:column headerText="Id">
 				<h:outputText value="#{adr.adresseId}" />
-			</p:column>			
+			</p:column>
 			<p:column headerText="Numéro">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -240,7 +242,7 @@
 						<p:inputText value="#{adr.num}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>				
+			</p:column>
 			<p:column headerText="Rue">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -250,7 +252,7 @@
 						<p:inputText value="#{adr.rue}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>			
+			</p:column>
 			<p:column headerText="Code postal">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -260,7 +262,7 @@
 						<p:inputText value="#{adr.codePostal}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>		
+			</p:column>
 			<p:column headerText="Ville">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -270,7 +272,7 @@
 						<p:inputText value="#{adr.ville}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>	
+			</p:column>
 			<p:column headerText="Département">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -280,7 +282,7 @@
 						<p:inputText value="#{adr.departement}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>	
+			</p:column>
 			<p:column headerText="Pays">
 				<p:cellEditor>
 					<f:facet name="output">
@@ -290,14 +292,15 @@
 						<p:inputText value="#{adr.pays}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-			</p:column>										
+			</p:column>
 			<p:column>
 				<p:rowEditor />
 			</p:column>
-		</p:dataTable>			
-		
-		<p:commandButton action="#{detailUtilisateurBean.saveDetailsUtilisateur()}"
-			value="Valider modifications" style="margin:5px; float:right;" />		
+		</p:dataTable>
+
+		<p:commandButton
+			action="#{detailUtilisateurBean.saveDetailsUtilisateur()}"
+			value="Valider modifications" style="margin:5px; float:right;" />
 	</h:form>
 </p:dialog>
 

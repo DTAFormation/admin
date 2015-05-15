@@ -54,7 +54,7 @@ public class DetailUtilisateurBean {
 		FacesMessage msg = new FacesMessage("Modification enregistrée");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		RequestContext.getCurrentInstance()
-				.update("criteresRechercheForm:msgs");
+				.update("searchUserForm:msgs");
 	}	
 
 	public Utilisateur getUtilisateur() {
