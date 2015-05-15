@@ -142,7 +142,7 @@ public class ResearchController {
 		modelUtilisateur.setNom("".equals(this.userName) ? null : this.userName);
 		modelUtilisateur.setPrenom("".equals(this.userFirstName) ? null : this.userFirstName);
 		modelUtilisateur.setEmail("".equals(this.userMail) ? null : this.userMail);
-		modelUtilisateur.setTypeUtil("".equals(this.userType) ? null : this.userType.substring(0, 1));
+		modelUtilisateur.setTypeUtil(("".equals(this.userType) || this.userType == null) ? null : this.userType.substring(0, 1));
 
 		users = searchUtilisateur.findDetail(modelUtilisateur);
 	}
