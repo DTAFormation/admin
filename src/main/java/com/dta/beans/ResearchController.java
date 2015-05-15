@@ -25,7 +25,8 @@ public class ResearchController {
     
     private static final Logger LOG = LoggerFactory.getLogger(ResearchController.class); 
 
-    private boolean searchAll;
+    private boolean searchAllArticles;
+    private boolean searchAllUtilisateurs;
     
 	//user fields
 	private String userName;
@@ -82,8 +83,9 @@ public class ResearchController {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
 
-	public void reDoLastSearch() {
-		if(searchAll) {
+	
+	public void reDoLastSearchArticles() {
+		if(searchAllArticles) {
 			submitResearchAllArticle();
 		} else {
 			submitResearchArticle();
@@ -91,7 +93,7 @@ public class ResearchController {
 	}
 	
 	public void submitResearchArticle() {
-		searchAll = false;
+		searchAllArticles = false;
 		//priority to research by id
 		if(!"".equals(this.articleId)){
 			int searchArticleId = Integer.parseInt(this.articleId);
@@ -110,7 +112,7 @@ public class ResearchController {
 	}
 
 	public void submitResearchAllArticle(){
-		searchAll = true;
+		searchAllArticles = true;
 		products = searchArticle.findAll();
 		updateResultList();
 		LOG.info(products.toString());
@@ -125,7 +127,16 @@ public class ResearchController {
 	 * Methods research USER
 	 */	
 
+	public void reDoLastSearchUsers() {
+		if(searchAllUtilisateurs) {
+			submitResearchAllUser();
+		} else {
+			submitResearchUser();
+		}
+	}	
+	
 	public void submitResearchUser(){
+		searchAllUtilisateurs = false;
 		Utilisateur modelUtilisateur = new Utilisateur();
 		modelUtilisateur.setLogin("".equals(this.userLogin) ? null : this.userLogin);
 		modelUtilisateur.setNom("".equals(this.userName) ? null : this.userName);
@@ -137,6 +148,7 @@ public class ResearchController {
 	}
 
 	public void submitResearchAllUser(){
+		searchAllUtilisateurs = true;
 		users = searchUtilisateur.findAll();
 	}
 

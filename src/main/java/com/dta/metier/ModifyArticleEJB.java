@@ -18,7 +18,6 @@ public class ModifyArticleEJB {
 	private EntityManager em;
 
 	public void update(Article article){
-
 		try{
 			em.merge(article);
 		} catch(OptimisticLockException e){

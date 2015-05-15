@@ -6,23 +6,28 @@ public class Util {
     }
     
 	public static String getFullUserType(String userType) {
-		String fullType;
 		switch (userType) {
 		case "a":
-			fullType = "administrateur";
-			break;
+			return "Administrateur";
 		case "c":
-			fullType = "client";
-			break;
+			return "Client";
 		case "m":
-			fullType = "moderateur";
-			break;
-
+			return "Modérateur";
 		default:
-			fullType = userType;
-			break;
+			return userType;
 		}
-
-		return fullType;
+	}
+	
+	public static String getFullUserCivilite(String userCivility) {
+		switch(userCivility) {
+		case "mlle" :
+			return "Mademoiselle";
+		case "mme" :
+			return "Madame";
+		case "m" :
+			return "Monsieur";
+		default :
+			return userCivility;
+		}
 	}
 }
