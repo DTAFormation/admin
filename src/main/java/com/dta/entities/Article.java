@@ -76,6 +76,12 @@ public class Article {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
 	@Override
 	public String toString() {

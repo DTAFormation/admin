@@ -68,6 +68,12 @@ public class Catalogue {
 	public void setProduits(List<Produit> produits) {
 		this.produits = produits;
 	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 	
 	@Override
 	public String toString() {

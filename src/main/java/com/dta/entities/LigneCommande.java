@@ -68,4 +68,10 @@ public class LigneCommande {
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}	
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 }

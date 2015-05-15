@@ -147,6 +147,12 @@ public class Utilisateur {
 	public void setCommandes(List<Commande> commandes) {
 		this.commandes = commandes;
 	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 	@Override
 	public String toString() {
 		return "Utilisateur [utilisateurId=" + utilisateurId + ", email="

@@ -24,7 +24,7 @@ public class SearchCommandeTest {
 
 	private SearchCommandeEJB searchCommande;
 
-	private static final Logger LOG = LoggerFactory.getLogger(SearchArticleTest.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(SearchCommandeTest.class);	
 	
 	@Mock private EntityManager em;
 	@Mock private Query query;

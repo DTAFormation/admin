@@ -81,6 +81,12 @@ public class Produit {
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 	@Override
 	public String toString() {
 		return "Produit [produitId=" + produitId + ", description="
