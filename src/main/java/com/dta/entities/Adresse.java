@@ -78,17 +78,17 @@ public class Adresse {
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 	public String getVille() {
 		return ville;
 	}
 	public void setVille(String ville) {
 		this.ville = ville;
-	}
-	public List<Commande> getCommande() {
-		return commande;
-	}
-	public void setCommande(List<Commande> commande) {
-		this.commande = commande;
 	}
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -96,12 +96,14 @@ public class Adresse {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	public long getVersion() {
-		return version;
+
+	public List<Commande> getCommande() {
+		return commande;
 	}
-	public void setVersion(long version) {
-		this.version = version;
+	public void setCommande(List<Commande> commande) {
+		this.commande = commande;
 	}
+
 
 	@Override
 	public String toString() {

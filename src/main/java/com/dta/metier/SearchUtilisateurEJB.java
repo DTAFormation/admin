@@ -114,7 +114,7 @@ public class SearchUtilisateurEJB extends SearchEntities<Utilisateur>{
 		try {
 			result = query_auth.getSingleResult();
 		} catch (NoResultException e) {
-			LOG.info("CONNEXION ERREUR : L UTILISATEUR N A PAS ETE TROUVE");
+			LOG.info("CONNEXION ERREUR : L UTILISATEUR N A PAS ETE TROUVE",e);
 			result = null;
 		}
 		return result;
