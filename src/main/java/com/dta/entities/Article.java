@@ -13,8 +13,7 @@ import javax.persistence.Version;
 @NamedQueries({
 	@NamedQuery(name="Article.findById", query="SELECT a FROM Article a WHERE a.articleId = :id"),
 	@NamedQuery(name="Article.findByName", query="SELECT a FROM Article a WHERE a.nom = :name"),
-	@NamedQuery(name="Article.findAll", query="SELECT a FROM Article a"),
-	@NamedQuery(name="Article.deleteById", query="DELETE FROM Article a WHERE a.articleId = :id")
+	@NamedQuery(name="Article.findAll", query="SELECT a FROM Article a")
 }) 
 public class Article {
 	

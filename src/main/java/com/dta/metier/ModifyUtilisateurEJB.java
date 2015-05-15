@@ -2,6 +2,7 @@ package com.dta.metier;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Utilisateur;
@@ -14,8 +15,13 @@ public class ModifyUtilisateurEJB{
 	private EntityManager em;
 	
 	public void update(Utilisateur utilisateur){
-		if(isUtilisateurLoginExists(utilisateur.getLogin()))
+		if(isUtilisateurLoginExists(utilisateur.getLogin())){
+			try{
 			em.persist(utilisateur);
+			} catch(OptimisticLockException e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public boolean isUtilisateurLoginExists(String login) {

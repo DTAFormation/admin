@@ -2,6 +2,7 @@ package com.dta.metier;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Catalogue;
@@ -13,7 +14,12 @@ public class ModifyCatalogueEJB {
 	private EntityManager em;
 
 	public void update(Catalogue catalogue){
-		em.merge(catalogue);
+
+		try{
+			em.merge(catalogue);
+		} catch(OptimisticLockException e){
+			e.printStackTrace();
+		}
 	}
 
 	public EntityManager getEm() {

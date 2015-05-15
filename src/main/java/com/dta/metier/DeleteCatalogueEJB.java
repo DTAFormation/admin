@@ -2,6 +2,7 @@ package com.dta.metier;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Catalogue;
@@ -14,7 +15,12 @@ public class DeleteCatalogueEJB {
 
 	public void delete(int catalogueId){
 		Catalogue catalogue = em.find(Catalogue.class, catalogueId);
+
+		try{
 			em.remove(catalogue);
+		} catch(OptimisticLockException e){
+			e.printStackTrace();
+		}
 	}
 
 	public EntityManager getEm() {

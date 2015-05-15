@@ -3,6 +3,7 @@ package com.dta.metier;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
@@ -87,9 +88,5 @@ private static final Logger LOG = LoggerFactory.getLogger(SearchEntities.class);
 		return query.getResultList();
 	}
 	
-	public void deleteArticle(int articleId){
-		Query query = em.createQuery("Article.deleteById");
-		query.setParameter("id", articleId);
-		query.getFirstResult();
-	}
+
 }

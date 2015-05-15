@@ -2,6 +2,7 @@ package com.dta.metier;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Catalogue;
@@ -13,8 +14,13 @@ public class AddCatalogueEJB {
 	private EntityManager em;
 
 	public void save(Catalogue catalogue){
-		if(!isCatalogueNameExists(catalogue.getNom()))
-			em.persist(catalogue);
+		if(!isCatalogueNameExists(catalogue.getNom())){
+			try{
+				em.persist(catalogue);	
+			} catch(OptimisticLockException e){
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public boolean isCatalogueNameExists(String name) {

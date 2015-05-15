@@ -2,6 +2,7 @@ package com.dta.metier;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
 import com.dta.entities.Produit;
@@ -13,7 +14,12 @@ public class ModifyProduitEJB {
 	private EntityManager em;
 	
 	public void update(Produit produit){
-		em.merge(produit);		
+		try{
+			em.merge(produit);
+			} catch(OptimisticLockException e){
+				e.printStackTrace();
+			}
+			
 	}
 	
 	public EntityManager getEm() {
