@@ -8,20 +8,21 @@
 <h:head>
 </h:head>
 <body>
-<header>
-    <p align="center">
-        <h:graphicImage library="img" name="logoDTA.png" />
-        <br />
-    </p>
-</header>
-<menu>
-    <!-- MENU -->
-    <ui:include src="/menu.xhtml" />
-</menu>
-    <br />
+	<header>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+	</header>
+	<menu>
+		<!-- MENU -->
+		<ui:include src="/menu.xhtml" />
+	</menu>
+	<br />
 
-    <!-- fin menu -->
-	<h:form>
+	<!-- fin menu -->
+	<h:form id="criteresRechercheForm">
+		<p:growl id="msgs" showDetail="false" />
 		<p:fieldset legend="Criteres de recherche" toggleable="true"
 			toggleSpeed="500" id="panel">
 			<p:ajax event="toggle" />
@@ -50,13 +51,13 @@
 
 			<p:toolbar>
 				<f:facet name="left">
-					<p:commandButton value="Rechercher" update="results"
+					<p:commandButton value="Rechercher"
 						actionListener="#{research.submitResearchArticle}"
 						style="margin-right:20px;" />
 				</f:facet>
 
 				<f:facet name="left">
-					<p:commandButton value="Afficher tout" update="results"
+					<p:commandButton value="Afficher tout"
 						actionListener="#{research.submitResearchAllArticle}"
 						style="margin-right:20px;" />
 				</f:facet>
@@ -68,27 +69,26 @@
 				</f:facet>
 			</p:toolbar>
 		</p:fieldset>
+		<p:remoteCommand name="redoLastSearch" actionListener="#{research.reDoLastSearch}" />
 	</h:form>
 
 	<br />
 
 	<!-- Liste results -->
 
-	<h:form prependId="false">
-		<p:dataList value="#{research.products}" var="list" type="unordered"
-			itemType="none" id="results">
+	<h:form id="resultForm">
+		<p:dataList value="#{research.products}" var="list" id="results"
+			itemType="none">
 			<f:facet name="header">
 				Resultats de recherche: 
             	<p:outputLabel value="#{research.products.size()}" />
 			</f:facet>
 
 			<h:panelGrid columns="3">
-				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
-					<h:outputLink value="../produit/detailProduit.xhtml">
-						<h:graphicImage library="img" name="loupe.png" />
-						<f:param name="articleId" value="#{list.articleId}" />
-					</h:outputLink>
-				</p:lightBox>
+				<p:commandLink
+					onclick="openDetails([{name:'id', value: #{list.articleId}}])">
+					<p:graphicImage library="img" name="loupe.png" />
+				</p:commandLink>
 
 				<h:panelGrid columns="2">
 					<p:outputLabel for="nom" value="nom:" />
@@ -103,7 +103,107 @@
 			</h:panelGrid>
 			<hr />
 		</p:dataList>
+		<p:remoteCommand name="openDetails"
+			actionListener="#{detailArticleBean.openDetailArticle}" />
 	</h:form>
 </body>
+
+<p:dialog header="Detail Article" widgetVar="dlgdetailarticle">
+	<h:form id="modifArticleForm">
+		<p:dataTable var="art" value="#{detailArticleBean.article}"
+			editable="true">
+			<f:facet name="header">Article</f:facet>
+			<p:column headerText="Article Id">
+				<h:outputText value="#{art.articleId}" />
+			</p:column>
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{art.nom}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{art.nom}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Price">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{art.prix}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{art.prix}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Stock">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{art.stock}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{art.stock}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+		<p:dataTable var="prod" value="#{detailArticleBean.article.produit}"
+			editable="true">
+			<f:facet name="header">Produit</f:facet>
+			<p:column headerText="Product Id">
+				<h:outputText value="#{prod.produitId}" />
+			</p:column>
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.nom}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.nom}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+		<p:dataTable var="cata"
+			value="#{detailArticleBean.article.produit.catalogue}"
+			editable="true">
+			<f:facet name="header">Catalogue</f:facet>
+			<p:column headerText="Catalog Id">
+				<h:outputText value="#{cata.catalogueId}" />
+			</p:column>
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{cata.nom}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{cata.nom}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Description">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{cata.description}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{cata.description}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+		<p:commandButton action="#{detailArticleBean.saveDetailsArticle()}"
+			value="Valider modifications" style="margin:5px; float:right;" />
+	</h:form>
+</p:dialog>
 
 </html>

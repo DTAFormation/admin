@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +20,13 @@ import com.dta.metier.SearchProduitEJB;
 import com.dta.metier.SearchUtilisateurEJB;
 
 @ManagedBean(name="research")
+@ViewScoped
 public class ResearchController {
     
     private static final Logger LOG = LoggerFactory.getLogger(ResearchController.class); 
 
+    private boolean searchAll;
+    
 	//user fields
 	private String userName;
 	private String userFirstName;
@@ -49,9 +54,6 @@ public class ResearchController {
 	// research results
 	private List<Article> products;
 	private List<Utilisateur> users;
-
-
-
 
 	/*
 	 * 
@@ -97,8 +99,17 @@ public class ResearchController {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("authentification.xhtml");
 	}
 
+	public void reDoLastSearch() {
+		System.out.println("searchAll: " + searchAll);
+		if(searchAll) {
+			submitResearchAllArticle();
+		} else {
+			submitResearchArticle();
+		}
+	}
+	
 	public void submitResearchArticle() {
-
+		searchAll = false;
 		//priority to research by id
 		if(!"".equals(this.articleId)){
 			int searchArticleId = Integer.parseInt(this.articleId);
@@ -113,11 +124,18 @@ public class ResearchController {
 
 			products = searchArticle.findDetail(modelArticle, this.articleProduct, this.articleCatalogue);
 		}
+		updateResultList();
 	}
 
 	public void submitResearchAllArticle(){
+		searchAll = true;
 		products = searchArticle.findAll();
+		updateResultList();
 		LOG.info(products.toString());
+	}
+	
+	private void updateResultList() {
+		RequestContext.getCurrentInstance().update("resultForm:results");
 	}
 
 

@@ -7,17 +7,16 @@
 <h:head>
 	<f:metadata>
 		<f:viewParam name="articleId" />
-		<f:viewAction action="#{detailArticleBean.initArticle(articleId)}" />
+		<f:viewAction action="#{detailArticleBean.openDetailArticle(articleId)}" />
 	</f:metadata>
-	<c:set var="monArticle" value="${detailArticleBean.showDetailArticle(articleId)}"></c:set>
-	<c:set var="monProduit" value="${monArticle.produit}"></c:set>
-	<c:set var="monCatalogue" value="${monProduit.catalogue}"></c:set>
 	<title>Détail du produit n° #{articleId}</title>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="modifArticleForm">
+		<p:growl id="msgs" showDetail="false" />
 		<p:dataTable var="art" value="#{detailArticleBean.article}"
 			editable="true">
+			<f:facet name="header">Article</f:facet>
 			<p:column headerText="Article Id">
 				<h:outputText value="#{art.articleId}" />
 			</p:column>
@@ -55,9 +54,9 @@
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
-		<br />
 		<p:dataTable var="prod" value="#{detailArticleBean.article.produit}"
 			editable="true">
+			<f:facet name="header">Produit</f:facet>
 			<p:column headerText="Product Id">
 				<h:outputText value="#{prod.produitId}" />
 			</p:column>
@@ -75,10 +74,10 @@
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
-		<br />
 		<p:dataTable var="cata"
 			value="#{detailArticleBean.article.produit.catalogue}"
 			editable="true">
+			<f:facet name="header">Catalogue</f:facet>
 			<p:column headerText="Catalog Id">
 				<h:outputText value="#{cata.catalogueId}" />
 			</p:column>
@@ -106,11 +105,10 @@
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
-		<br />
 		<p:commandButton action="#{articleBean.delete(articleId)}"
 			value="Supprimer" style="margin:5px; float:right;" />
-		<p:commandButton action="#{detailArticleBean.saveDetailsArticle()}" 
-			value="Modifier" style="margin:5px; float:right;" />
+		<p:commandButton action="#{detailArticleBean.saveDetailsArticle()}"
+			value="Valider" style="margin:5px; float:right;" />
 	</h:form>
 
 	<p:dialog header="Suppression résussie" widgetVar="dlgSucceed"
