@@ -5,11 +5,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Utilisateur;
 
 @Stateless(name="ModifyUtilisateurEJB")
 public class ModifyUtilisateurEJB{
-	
+	private static final Logger LOG = LoggerFactory.getLogger(ModifyUtilisateurEJB.class);
 	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
@@ -19,7 +22,7 @@ public class ModifyUtilisateurEJB{
 			try{
 			em.persist(utilisateur);
 			} catch(OptimisticLockException e){
-				e.printStackTrace();
+				LOG.error("ERROR: ", e);
 			}
 		}
 	}

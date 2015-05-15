@@ -6,10 +6,14 @@ import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Utilisateur;
 
 @Stateless
 public class AddUtilisateurEJB {
+	private static final Logger LOG = LoggerFactory.getLogger(AddUtilisateurEJB.class);
 
 	@PersistenceContext(unitName = "ecommercedb")
 	private EntityManager em;
@@ -19,7 +23,7 @@ public class AddUtilisateurEJB {
 		try{
 			em.persist(utilisateur);
 		} catch(OptimisticLockException e){
-			e.printStackTrace();
+			LOG.error("ERROR: ", e);
 		}
 	}
 

@@ -5,11 +5,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Catalogue;
 
 @Stateless(name="AddCatalogueEJB")
 public class AddCatalogueEJB {
-
+	private static final Logger LOG = LoggerFactory.getLogger(AddCatalogueEJB.class);
+	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 
@@ -18,7 +22,7 @@ public class AddCatalogueEJB {
 			try{
 				em.persist(catalogue);	
 			} catch(OptimisticLockException e){
-				e.printStackTrace();
+				LOG.error("ERROR: ", e);
 			}
 		}
 	}

@@ -5,11 +5,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Produit;
 
 @Stateless(name="modifyProduitEJB")
 public class ModifyProduitEJB {
-	
+	private static final Logger LOG = LoggerFactory.getLogger(ModifyProduitEJB.class);
+
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 	
@@ -17,7 +21,7 @@ public class ModifyProduitEJB {
 		try{
 			em.merge(produit);
 			} catch(OptimisticLockException e){
-				e.printStackTrace();
+				LOG.error("ERROR: ", e);
 			}
 			
 	}

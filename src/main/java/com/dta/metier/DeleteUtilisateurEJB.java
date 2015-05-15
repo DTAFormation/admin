@@ -5,10 +5,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Utilisateur;
 
 @Stateless(name="DeleteUtilisateurEJB")
 public class DeleteUtilisateurEJB {
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteUtilisateurEJB.class);
 
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
@@ -18,7 +22,7 @@ public class DeleteUtilisateurEJB {
 		try{
 			em.remove(utilisateur);	
 		} catch(OptimisticLockException e){
-			e.printStackTrace();
+			LOG.error("ERROR: ", e);
 		}
 
 	}

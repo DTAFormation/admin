@@ -7,22 +7,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.entities.Article;
 import com.dta.entities.Produit;
 
 @Stateless(name="AddArticleEJB")
 public class AddArticleEJB {
 
+	private static final Logger LOG = LoggerFactory.getLogger(AddArticleEJB.class);
+	
 	@PersistenceContext(unitName="ecommercedb")
 	private EntityManager em;
 
 	public void save(Article article){
 		if(!isArticleNameExists(article.getNom())){
 
-			try{	
+			try{
 				em.persist(article);
 			} catch(OptimisticLockException e){
-				e.printStackTrace();
+				LOG.error("ERROR: ", e);
 			}
 		}
 	}
