@@ -83,12 +83,10 @@
 			</f:facet>
 
 			<h:panelGrid columns="2">
-				<p:lightBox iframe="true" id="lightbox" iframeTitle="Detail">
-					<h:outputLink value="showUser.xhtml">
-						<h:graphicImage library="img" name="loupe.png" />
-						<f:param name="idUser" value="#{list.utilisateurId}" />
-					</h:outputLink>
-				</p:lightBox>
+				<p:commandLink
+					onclick="openDetails([{name:'id', value: #{list.utilisateurId}}])">
+					<p:graphicImage library="img" name="loupe.png" />
+				</p:commandLink>			
 
 				<h:panelGrid columns="2">
 					<p:outputLabel for="nom" value="nom:" />
@@ -106,8 +104,201 @@
 			</h:panelGrid>
 			<hr />
 		</p:dataList>
-
+		<p:remoteCommand name="openDetails"
+			actionListener="#{detailUtilisateurBean.openDetailUtilisateur}" />
+		<p:remoteCommand name="redoLastSearch" actionListener="#{research.reDoLastSearchUsers}" />
 	</h:form>
 </body>
+
+<p:dialog header="Detail Utilisateur" widgetVar="dlgdetailutilisateur">
+	<h:form id="modifUtilisateurForm">	
+		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
+			editable="true">
+			<f:facet name="header">Utilisateur</f:facet>
+			<p:column headerText="Id">
+				<h:outputText value="#{user.utilisateurId}" />
+			</p:column>
+			<p:column headerText="Type">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{detailUtilisateurBean.fullUserType}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectOneMenu value="#{user.typeUtil}">
+							<f:selectItem itemLabel="Administrateur" itemValue="a"/>
+							<f:selectItem itemLabel="Client" itemValue="c"/>
+							<f:selectItem itemLabel="Modérateur" itemValue="m"/>
+						</h:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Login">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.login}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.login}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>					
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+		
+		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
+			editable="true">
+			<p:column headerText="Civilité">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{detailUtilisateurBean.fullUserCivilite}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectOneMenu value="#{user.titre}">
+							<f:selectItem itemLabel="Mademoiselle" itemValue="mlle"/>
+							<f:selectItem itemLabel="Madame" itemValue="mme"/>
+							<f:selectItem itemLabel="Monsieur" itemValue="m"/>
+						</h:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			<p:column headerText="Nom">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.nom}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.nom}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>		
+			<p:column headerText="Prénom">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.prenom}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.prenom}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>		
+		
+		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
+			editable="true">
+			<p:column headerText="Email">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.email}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.email}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			<p:column headerText="Téléphone">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.telephone}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.telephone}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Fax">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.fax}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.fax}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>					
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>		
+		
+		<p:dataTable var="adr" value="#{detailUtilisateurBean.utilisateur.adresses}"
+			editable="true">
+			<f:facet name="header">Adresse(s)</f:facet>
+			<p:column headerText="Id">
+				<h:outputText value="#{adr.adresseId}" />
+			</p:column>			
+			<p:column headerText="Numéro">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.num}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.num}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			<p:column headerText="Rue">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.rue}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.rue}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>			
+			<p:column headerText="Code postal">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.codePostal}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.codePostal}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>		
+			<p:column headerText="Ville">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.ville}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.ville}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+			<p:column headerText="Département">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.departement}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.departement}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+			<p:column headerText="Pays">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{adr.pays}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{adr.pays}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>										
+			<p:column>
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>			
+		
+		<p:commandButton action="#{detailUtilisateurBean.saveDetailsUtilisateur()}"
+			value="Valider modifications" style="margin:5px; float:right;" />		
+	</h:form>
+</p:dialog>
 
 </html>
