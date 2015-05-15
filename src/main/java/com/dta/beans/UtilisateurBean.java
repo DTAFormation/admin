@@ -3,6 +3,7 @@ package com.dta.beans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,7 @@ import com.dta.metier.SearchUtilisateurEJB;
 
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class UtilisateurBean {
 
 	@EJB
@@ -26,7 +27,9 @@ public class UtilisateurBean {
 
 	public Utilisateur getUtilisateurById(int utilisateurId) {
 		Utilisateur u = searchUtilisateur.findById(utilisateurId);
-		u.setTypeUtil(Util.getFullUserType(u.getTypeUtil()));
+		if (u!=null) {
+			u.setTypeUtil(Util.getFullUserType(u.getTypeUtil()));
+		}
 		return u;
 	}
 

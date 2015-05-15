@@ -15,7 +15,7 @@ public class Util {
 			fullType = "client";
 			break;
 		case "m":
-			fullType = "modérateur";
+			fullType = "moderateur";
 			break;
 
 		default:
