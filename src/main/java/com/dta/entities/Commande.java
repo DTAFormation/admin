@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 @NamedQueries({
@@ -35,6 +36,8 @@ public class Commande {
 	@ManyToOne
 	@JoinTable(name="commandes_adresse")
 	private Adresse adresse;
+	@Version
+	private long version = 0L;
 	@ManyToOne
 	@JoinTable(name="commandes_utilisateur")
 	private Utilisateur utilisateur;

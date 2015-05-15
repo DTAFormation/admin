@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 
 @Entity
@@ -14,6 +15,9 @@ public class LigneCommande {
 	private int ligneCommandeId;
 	
 	private int quantite;
+	
+	@Version
+	private long version = 0L;
 	
 	@ManyToOne
 	private Article article; 

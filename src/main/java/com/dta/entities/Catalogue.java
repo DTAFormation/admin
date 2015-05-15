@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 @NamedQueries({
@@ -30,6 +31,8 @@ public class Catalogue {
 	@OneToMany(mappedBy="catalogue", fetch=FetchType.EAGER)
 	@Column(nullable=false)
 	private List<Produit> produits;
+	@Version
+	private long version = 0L;
 	
 	public Catalogue() {
 		

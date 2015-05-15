@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 @NamedQueries({
@@ -32,7 +33,8 @@ public class Produit {
 	@OneToMany(mappedBy="produit")
 	@Column(nullable=true)
 	private List<Article> articles;
-	
+	@Version
+	private long version = 0L;
 	public Produit() {
 		
 	}

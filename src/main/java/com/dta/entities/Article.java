@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Version;
 
 @Entity
 @NamedQueries({
@@ -32,6 +33,8 @@ public class Article {
 	private Produit produit;
 	@Column(name="stock", length=19)
 	private int stock;
+	@Version
+	private long version = 0L;
 	
 	public Article() {
 		

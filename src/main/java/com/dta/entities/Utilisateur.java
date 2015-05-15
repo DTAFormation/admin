@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 @NamedQueries({
@@ -43,6 +44,8 @@ public class Utilisateur {
 	private String titre;
 	@Column(name="type_util", length=1)
 	private String typeUtil;
+	@Version
+	private long version = 0L;
 	
 	@OneToMany(mappedBy="utilisateur", 
 			cascade=CascadeType.ALL, 

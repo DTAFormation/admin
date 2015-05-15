@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 public class Adresse {
@@ -34,7 +35,9 @@ public class Adresse {
 	@ManyToOne
 	@JoinTable(name="adresses_utilisateur")
 	private Utilisateur utilisateur;
-		
+	@Version
+	private long version = 0L;
+	
 	public Adresse() {
 		
 	}
