@@ -14,14 +14,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class GestionSessionFilter implements Filter {
 	private List<String> urlList;
 	
-    private static final Logger LOG = LoggerFactory.getLogger(GestionSessionFilter.class); 
-
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		String urls = filterConfig.getInitParameter("avoid-urls");
@@ -35,7 +30,7 @@ public class GestionSessionFilter implements Filter {
 
 	@Override
 	public void destroy() {
-
+	    urlList.clear();
 	}
 
 	@Override
@@ -52,14 +47,11 @@ public class GestionSessionFilter implements Filter {
 			allowedRequest = true;
 		}
 
-		if (!allowedRequest) {
-			if (authentificationBean == null || !authentificationBean.isLoggedIn()) {
+		if (!allowedRequest && (authentificationBean == null || !authentificationBean.isLoggedIn())) {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/authentification.xhtml");
-			}
 		}
 
 		chain.doFilter(request, response);
-
 	}
 
 	private boolean isResourceUrl(String url) {
