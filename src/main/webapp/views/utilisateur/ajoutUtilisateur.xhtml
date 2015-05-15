@@ -32,21 +32,21 @@
 				toggleSpeed="500" id="panelpersonnel">
 				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Nom : " for="NomInput" />
-					<p:inputText id="NomInput" value="#{ajoutUtilisateurBean.nom}"
+					<p:inputText id="NomInput" value="#{ajoutUtilisateurBean.utilisateur.nom}"
 						type="text" required="true"
 						requiredMessage="Veuillez préciser votre nom" />
 					<p:messages for="NomInput" autoUpdate="true" />
 
 					<p:outputLabel value="Prenom : " for="PrenomInput" />
 					<p:inputText id="PrenomInput"
-						value="#{ajoutUtilisateurBean.prenom}" type="text" required="true"
+						value="#{ajoutUtilisateurBean.utilisateur.prenom}" type="text" required="true"
 						requiredMessage="Veuillez préciser votre prenom" />
 					<p:messages for="PrenomInput" autoUpdate="true" />
 				</h:panelGrid>
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel for="CivilitéInput " value="Civilité :" />
 					<p:selectOneMenu id="CivilitéInput"
-						value="#{ajoutUtilisateurBean.titre}" style="width:150px">
+						value="#{ajoutUtilisateurBean.utilisateur.titre}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
 						<f:selectItem itemLabel="Madame" itemValue="Madame" />
@@ -55,14 +55,14 @@
 
 					<p:outputLabel value="Telephone : " for="telephoneInput" />
 					<p:inputText id="telephoneInput"
-						value="#{ajoutUtilisateurBean.telephone}" type="tel" />
+						value="#{ajoutUtilisateurBean.utilisateur.telephone}" type="tel" />
 				</h:panelGrid>
 			</p:fieldset>
 
 			<p:fieldset legend="Liste des Adresses" toggleable="false"
 				toggleSpeed="500" id="panelAdresses">
 				<p:dataTable id="listeAdresses"
-					value="#{ajoutUtilisateurBean.adresses}" var="adresse"
+					value="#{ajoutUtilisateurBean.utilisateur.adresses}" var="adresse"
 					emptyMessage="Pas d'adresse enregistrée" editable="true">
 					<p:column headerText="Rue">
 						<p:cellEditor>
@@ -146,7 +146,7 @@
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<p:outputLabel value="Login : " for="loginInput" />
-					<p:inputText id="loginInput" value="#{ajoutUtilisateurBean.login}"
+					<p:inputText id="loginInput" value="#{ajoutUtilisateurBean.utilisateur.login}"
 						type="text" required="true"
 						requiredMessage="Veuillez préciser votre login">
 						<f:ajax event="blur" render="LoginMessage" />
@@ -158,7 +158,7 @@
 					<p:outputLabel for="ResponsabilitéInput "
 						value="Type Utilisateur :" />
 					<p:selectOneMenu id="ResponsabilitéInput"
-						value="#{ajoutUtilisateurBean.typeUtil}" style="width:150px">
+						value="#{ajoutUtilisateurBean.utilisateur.typeUtil}" style="width:150px">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItem itemLabel="Administrateur" itemValue="a" />
 						<f:selectItem itemLabel="Moderateur" itemValue="m" />
@@ -167,7 +167,7 @@
 				</h:panelGrid>
 				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Email : " for="EmailInput" />
-					<p:inputText id="EmailInput" value="#{ajoutUtilisateurBean.email}"
+					<p:inputText id="EmailInput" value="#{ajoutUtilisateurBean.utilisateur.email}"
 						type="email" required="true"
 						requiredMessage="Veuillez préciser votre email">
 						<f:ajax event="blur" render="emailMessage" />
@@ -180,11 +180,11 @@
 
 				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
 					<p:outputLabel for="pwd1" value="Password: *" />
-					<p:password id="pwd1" value="#{ajoutUtilisateurBean.password}"
+					<p:password id="pwd1" value="#{ajoutUtilisateurBean.utilisateur.password}"
 						match="pwd2" label="Password 1" required="true" />
 
 					<p:outputLabel for="pwd2" value="Réecrire Password: *" />
-					<p:password id="pwd2" value="#{ajoutUtilisateurBean.password}"
+					<p:password id="pwd2" value="#{ajoutUtilisateurBean.utilisateur.password}"
 						label="Password 2" required="true" />
 				</h:panelGrid>
 			</p:fieldset>
@@ -210,27 +210,27 @@
 			toggleSpeed="500" id="detailsAdresse">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Pays : " for="PaysInput" />
-				<p:inputText id="PaysInput" value="#{ajoutAdresseBean.pays}"
+				<p:inputText id="PaysInput" value="#{ajoutAdresseBean.adresse.pays}"
 					type="text" required="true" />
 
 				<p:outputLabel value="Departement : " for="DepartementInput" />
 				<p:inputText id="DepartementInput"
-					value="#{ajoutAdresseBean.departement}" type="text" required="true" />
+					value="#{ajoutAdresseBean.adresse.departement}" type="text" required="true" />
 
 				<p:outputLabel value="Ville : " for="VilleInput" />
-				<p:inputText id="VilleInput" value="#{ajoutAdresseBean.ville}"
+				<p:inputText id="VilleInput" value="#{ajoutAdresseBean.adresse.ville}"
 					type="text" required="true" />
 
 				<p:outputLabel value="CodePostal : " for="CodePostalInput" />
 				<p:inputText id="CodePostalInput"
-					value="#{ajoutAdresseBean.codePostal}" type="text" required="true" />
+					value="#{ajoutAdresseBean.adresse.codePostal}" type="text" required="true" />
 
 				<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
-				<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.num}"
+				<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.adresse.num}"
 					type="text" required="true" />
 
 				<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
-				<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.rue}"
+				<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.adresse.rue}"
 					type="text" required="true" />
 			</h:panelGrid>
 		</p:fieldset>
