@@ -84,12 +84,16 @@
             	<p:outputLabel value="#{research.products.size()}" />
 			</f:facet>
 
-			<h:panelGrid columns="3">
+			<h:panelGrid columns="4">
 				<p:commandLink
 					onclick="openDetails([{name:'id', value: #{list.articleId}}])">
 					<p:graphicImage library="img" name="loupe.png" />
 				</p:commandLink>
-
+				
+				<h:panelGrid>
+					<p:graphicImage value="#{list.image}" width="100px"/>
+				</h:panelGrid>
+				
 				<h:panelGrid columns="2">
 					<p:outputLabel for="nom" value="nom:" />
 					<h:outputText value="#{list.nom}" id="nom" />
