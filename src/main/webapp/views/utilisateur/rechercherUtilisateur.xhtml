@@ -117,7 +117,7 @@
 	</h:form>
 </body>
 
-<p:dialog header="Detail Utilisateur" widgetVar="dlgdetailutilisateur">
+<p:dialog header="Detail Utilisateur" widgetVar="dlgdetailutilisateur" width="50%">
 	<h:form id="modifUtilisateurForm">
 		<p:growl id="modifMsgs" showDetail="true" />
 		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
@@ -150,7 +150,7 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			<p:column>
+			<p:column width="30">
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
@@ -191,7 +191,7 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			<p:column>
+			<p:column width="30">
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
@@ -228,7 +228,7 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			<p:column>
+			<p:column width="30">
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
@@ -279,7 +279,7 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			<p:column headerText="Département">
+			<p:column headerText="Dép.">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{adr.departement}" />
@@ -299,7 +299,7 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			<p:column>
+			<p:column width="30">
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
