@@ -41,9 +41,10 @@
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
 				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
 				
-				<p:outputLabel for="typeSelect " value="Type d'utilisateur :" />
+				<p:outputLabel for="typeSelect " value="Type d'utilisateur:" />
 					<p:selectOneMenu id="typeSelect"
 						value="#{research.userType}" style="width:150px">
+					<f:selectItem itemLabel="" itemValue="" />
 					<f:selectItem itemLabel="Client" itemValue="CLIENT" />
 					<f:selectItem itemLabel="Moderateur" itemValue="MODERATEUR" />
 					<f:selectItem itemLabel="Administrateur" itemValue="ADMINISTRATEUR" />
