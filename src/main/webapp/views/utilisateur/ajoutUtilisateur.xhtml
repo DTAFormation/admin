@@ -32,30 +32,38 @@
 				toggleSpeed="500" id="panelpersonnel">
 				<h:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="Nom : " for="NomInput" />
-					<p:inputText id="NomInput" value="#{ajoutUtilisateurBean.utilisateur.nom}"
-						type="text" required="true"
-						requiredMessage="Veuillez préciser votre nom" />
+					<p:inputText id="NomInput"
+						value="#{ajoutUtilisateurBean.utilisateur.nom}" type="text"
+						required="true" requiredMessage="Veuillez préciser votre nom" />
 					<p:messages for="NomInput" autoUpdate="true" />
 
 					<p:outputLabel value="Prenom : " for="PrenomInput" />
 					<p:inputText id="PrenomInput"
-						value="#{ajoutUtilisateurBean.utilisateur.prenom}" type="text" required="true"
-						requiredMessage="Veuillez préciser votre prenom" />
+						value="#{ajoutUtilisateurBean.utilisateur.prenom}" type="text"
+						required="true" requiredMessage="Veuillez préciser votre prenom" />
 					<p:messages for="PrenomInput" autoUpdate="true" />
-				</h:panelGrid>
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel for="CivilitéInput " value="Civilité :" />
-					<p:selectOneMenu id="CivilitéInput"
-						value="#{ajoutUtilisateurBean.utilisateur.titre}" style="width:150px">
-						<f:selectItem itemLabel="Select One" itemValue="" />
+
+					<p:outputLabel for="CiviliteInput " value="Civilité :" />
+					<p:selectOneMenu id="CiviliteInput"
+						value="#{ajoutUtilisateurBean.utilisateur.titre}"
+						style="width:150px" required="true"
+						requiredMessage="Veuillez choisir une civilité">
+						<f:selectItem itemLabel="Select One" />
 						<f:selectItem itemLabel="Monsieur" itemValue="Monsieur" />
 						<f:selectItem itemLabel="Madame" itemValue="Madame" />
 						<f:selectItem itemLabel="Mademoiselle" itemValue="Mademoiselle" />
 					</p:selectOneMenu>
+					<p:messages for="CiviliteInput" autoUpdate="true" />
 
 					<p:outputLabel value="Telephone : " for="telephoneInput" />
 					<p:inputText id="telephoneInput"
 						value="#{ajoutUtilisateurBean.utilisateur.telephone}" type="tel" />
+					<h:outputText value="" />
+
+					<p:outputLabel value="Fax : " for="faxInput" />
+					<p:inputText id="faxInput"
+						value="#{ajoutUtilisateurBean.utilisateur.fax}" type="tel" />
+					<h:outputText value="" />
 				</h:panelGrid>
 			</p:fieldset>
 
@@ -144,48 +152,50 @@
 			<p:fieldset legend="Donnée du Profil" toggleable="false"
 				toggleSpeed="500" id="panelprofil">
 				<h:panelGrid columns="3" cellpadding="5">
-
 					<p:outputLabel value="Login : " for="loginInput" />
-					<p:inputText id="loginInput" value="#{ajoutUtilisateurBean.utilisateur.login}"
-						type="text" required="true"
-						requiredMessage="Veuillez préciser votre login">
+					<p:inputText id="loginInput"
+						value="#{ajoutUtilisateurBean.utilisateur.login}" type="text"
+						required="true" requiredMessage="Veuillez préciser votre login">
 						<f:ajax event="blur" render="LoginMessage" />
 						<f:validator binding="#{existenceLoginValidator}" />
 					</p:inputText>
-					<p:message id="LoginMessage" for="loginInput" errorClass="erreur" />
-				</h:panelGrid>
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel for="ResponsabilitéInput "
-						value="Type Utilisateur :" />
-					<p:selectOneMenu id="ResponsabilitéInput"
-						value="#{ajoutUtilisateurBean.utilisateur.typeUtil}" style="width:150px">
-						<f:selectItem itemLabel="Select One" itemValue="" />
+					<p:messages id="LoginMessage" for="loginInput" autoUpdate="true" />
+
+					<p:outputLabel for="typeUtilInput " value="Type Utilisateur :" />
+					<p:selectOneMenu id="typeUtilInput"
+						value="#{ajoutUtilisateurBean.utilisateur.typeUtil}"
+						style="width:150px" required="true"
+						requiredMessage="Veuillez choisir un type utilisateur">
+						<f:selectItem itemLabel="Select One" />
 						<f:selectItem itemLabel="Administrateur" itemValue="a" />
 						<f:selectItem itemLabel="Moderateur" itemValue="m" />
 						<f:selectItem itemLabel="Client" itemValue="c" />
 					</p:selectOneMenu>
-				</h:panelGrid>
-				<h:panelGrid columns="3" cellpadding="5">
+					<p:messages id="typeUtilMessage" for="typeUtilInput"
+						autoUpdate="true" />
+
 					<p:outputLabel value="Email : " for="EmailInput" />
-					<p:inputText id="EmailInput" value="#{ajoutUtilisateurBean.utilisateur.email}"
-						type="email" required="true"
-						requiredMessage="Veuillez préciser votre email">
+					<p:inputText id="EmailInput"
+						value="#{ajoutUtilisateurBean.utilisateur.email}" type="email"
+						required="true" requiredMessage="Veuillez préciser votre email">
 						<f:ajax event="blur" render="emailMessage" />
 						<f:validator binding="#{existenceEmailValidator}" />
 					</p:inputText>
-					<p:message id="emailMessage" for="EmailInput" errorClass="erreur" />
-				</h:panelGrid>
+					<p:messages id="emailMessage" for="EmailInput" autoUpdate="true" />
 
-				<!-- Gestion PassWord -->
+					<p:outputLabel for="pwd1" value="Password: " />
+					<p:password id="pwd1"
+						value="#{ajoutUtilisateurBean.utilisateur.password}" match="pwd2"
+						label="Password 1" required="true"
+						requiredMessage="Veuillez entrer un mot de passe" />
+					<p:messages id="pwdMessage" for="pwd1" autoUpdate="true" />
 
-				<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
-					<p:outputLabel for="pwd1" value="Password: *" />
-					<p:password id="pwd1" value="#{ajoutUtilisateurBean.utilisateur.password}"
-						match="pwd2" label="Password 1" required="true" />
-
-					<p:outputLabel for="pwd2" value="Réecrire Password: *" />
-					<p:password id="pwd2" value="#{ajoutUtilisateurBean.utilisateur.password}"
+					<p:outputLabel for="pwd2" value="Réecrire Password: " />
+					<p:password id="pwd2"
+						value="#{ajoutUtilisateurBean.utilisateur.password}"
 						label="Password 2" required="true" />
+					<h:outputText value="" />
+
 				</h:panelGrid>
 			</p:fieldset>
 		</p:fieldset>
@@ -215,23 +225,26 @@
 
 				<p:outputLabel value="Departement : " for="DepartementInput" />
 				<p:inputText id="DepartementInput"
-					value="#{ajoutAdresseBean.adresse.departement}" type="text" required="true" />
+					value="#{ajoutAdresseBean.adresse.departement}" type="text"
+					required="true" />
 
 				<p:outputLabel value="Ville : " for="VilleInput" />
-				<p:inputText id="VilleInput" value="#{ajoutAdresseBean.adresse.ville}"
-					type="text" required="true" />
+				<p:inputText id="VilleInput"
+					value="#{ajoutAdresseBean.adresse.ville}" type="text"
+					required="true" />
 
 				<p:outputLabel value="CodePostal : " for="CodePostalInput" />
 				<p:inputText id="CodePostalInput"
-					value="#{ajoutAdresseBean.adresse.codePostal}" type="text" required="true" />
+					value="#{ajoutAdresseBean.adresse.codePostal}" type="text"
+					required="true" />
 
 				<p:outputLabel value="Numero de rue : " for="NumeroRueInput" />
-				<p:inputText id="NumeroRueInput" value="#{ajoutAdresseBean.adresse.num}"
-					type="text" required="true" />
+				<p:inputText id="NumeroRueInput"
+					value="#{ajoutAdresseBean.adresse.num}" type="text" required="true" />
 
 				<p:outputLabel value="Nom de la rue : " for="NomRueInput" />
-				<p:inputText id="NomRueInput" value="#{ajoutAdresseBean.adresse.rue}"
-					type="text" required="true" />
+				<p:inputText id="NomRueInput"
+					value="#{ajoutAdresseBean.adresse.rue}" type="text" required="true" />
 			</h:panelGrid>
 		</p:fieldset>
 		<p:toolbar>
