@@ -25,20 +25,19 @@ public class AjoutUtilisateurBean {
 	private AddUtilisateurEJB addUtilisateurEJB;
 
 	private HttpSession session;
-	
-	 @PostConstruct
-	    public void init() {
-	     if (utilisateur == null) {
-	     utilisateur = new Utilisateur();
-	     utilisateur.setAdresses(new ArrayList<Adresse>());
-	     }
-	    }
+
+	@PostConstruct
+	public void init() {
+		if (utilisateur == null) {
+			utilisateur = new Utilisateur();
+			utilisateur.setAdresses(new ArrayList<Adresse>());
+		}
+	}
 
 	public static void saveAdresse(Adresse adresse) {
-	    List<Adresse> adresses = utilisateur.getAdresses();
-	    adresses.add(adresse);
+		List<Adresse> adresses = utilisateur.getAdresses();
+		adresses.add(adresse);
 		utilisateur.setAdresses(adresses);
-		
 		RequestContext.getCurrentInstance().execute("PF('dlgadress').hide()");
 		updateListeAdresses();
 		RequestContext.getCurrentInstance().update("adresseForm");
@@ -54,10 +53,10 @@ public class AjoutUtilisateurBean {
 	private static void updateListeAdresses() {
 		RequestContext.getCurrentInstance().update("clientForm:listeAdresses");
 	}
-	
+
 	private static void updateMessages() {
-        RequestContext.getCurrentInstance().update("clientForm:msgs");
-    }
+		RequestContext.getCurrentInstance().update("clientForm:msgs");
+	}
 
 	public void cleanAdresses() {
 		utilisateur.setAdresses(new ArrayList<Adresse>());
@@ -105,23 +104,23 @@ public class AjoutUtilisateurBean {
 	}
 
 	private void reset() {
-	    utilisateur = new Utilisateur();
+		utilisateur = new Utilisateur();
 		updateClientForm();
 	}
-	
+
 	private void updateClientForm() {
 		RequestContext.getCurrentInstance().update("clientForm");
 	}
 
-    public Utilisateur getUtilisateur() {
-        if (utilisateur == null) {
-            utilisateur = new Utilisateur();
-        }
-        return utilisateur;
-    }
+	public Utilisateur getUtilisateur() {
+		if (utilisateur == null) {
+			utilisateur = new Utilisateur();
+		}
+		return utilisateur;
+	}
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        AjoutUtilisateurBean.utilisateur = utilisateur;
-    }
-    
+	public void setUtilisateur(Utilisateur utilisateur) {
+		AjoutUtilisateurBean.utilisateur = utilisateur;
+	}
+
 }
