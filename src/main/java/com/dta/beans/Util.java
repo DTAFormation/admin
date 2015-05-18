@@ -12,7 +12,7 @@ public class Util {
 		case "c":
 			return "Client";
 		case "m":
-			return "Modérateur";
+			return "Moderateur";
 		default:
 			return userType;
 		}
