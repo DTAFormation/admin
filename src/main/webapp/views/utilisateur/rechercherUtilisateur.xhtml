@@ -114,6 +114,7 @@
 
 <p:dialog header="Detail Utilisateur" widgetVar="dlgdetailutilisateur">
 	<h:form id="modifUtilisateurForm">
+		<p:growl id="modifMsgs" showDetail="true" />
 		<p:dataTable var="user" value="#{detailUtilisateurBean.utilisateur}"
 			editable="true">
 			<f:facet name="header">Utilisateur</f:facet>
