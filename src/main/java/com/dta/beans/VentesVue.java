@@ -101,10 +101,14 @@ public class VentesVue {
 			meilleuresVentes.put(searchCommande.getVentesById(a.getArticleId()), a.getNom());
 		}
 		
-		// Récupère les 3 meilleures ventes et les classe par ordre décroissant
+		// Recupere les 3 meilleures ventes et les classe par ordre decroissant
 		List<Entry<Long, String>> temp = new ArrayList<Entry<Long, String>>();
-		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) temp.add(entry);
-		for(int i=temp.size()-1; i>=temp.size()-3; --i) article.set(temp.get(i).getValue(), temp.get(i).getKey());
+		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) {
+		    temp.add(entry);
+		}
+		for(int i=temp.size()-1; i>=temp.size()-3; --i) {
+		    article.set(temp.get(i).getValue(), temp.get(i).getKey());
+		}
 
 		model.addSeries(article);
 
