@@ -9,10 +9,13 @@
 	<title>Authentification</title>
 </h:head>
 <h:body>
-
 	<h:form>
+		<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row">
+		<div class="ui-grid-col-4" />
+		<div class="ui-grid-col-4">
 		<p:panel id="panel" header="Identifiez-vous">
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="2" cellpadding="5" id="connexionPanel" >
 				<p:outputLabel value="Login :" for="login"></p:outputLabel>
 				<p:inputText id="login" value="#{authentificationBean.login}"
 					required="true"></p:inputText>
@@ -21,6 +24,9 @@
 			</h:panelGrid>
 			<p:commandButton actionListener="#{authentificationBean.verifyAuth()}" value="Connexion"></p:commandButton>
 		</p:panel>
+		</div>
+		</div>
+		</div>
 	</h:form>
 
 </h:body>

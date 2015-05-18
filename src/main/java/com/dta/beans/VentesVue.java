@@ -26,7 +26,7 @@ public class VentesVue {
 	private SearchArticleEJB searchArticle;
 	@EJB
 	private SearchCommandeEJB searchCommande;
-	
+
 	private BarChartModel articleChart;
 	private BarChartModel bestArticleChart;
 
@@ -49,7 +49,7 @@ public class VentesVue {
 		Axis xAxis;
 
 		articleChart = initArticle();
-		articleChart.setTitle("Ventes des articles");
+		articleChart.setTitle("Ventes");
 		articleChart.setAnimate(true);
 		articleChart.setLegendPosition("ne");
 		yAxis = articleChart.getAxis(AxisType.Y);
@@ -59,7 +59,7 @@ public class VentesVue {
 		xAxis.setTickAngle(45);
 
 		bestArticleChart = initMeilleurArticle();
-		bestArticleChart.setTitle("Meilleures ventes d'articles");
+		bestArticleChart.setTitle("Meilleures ventes");
 		bestArticleChart.setAnimate(true);
 		bestArticleChart.setLegendPosition("ne");
 		yAxis = bestArticleChart.getAxis(AxisType.Y);
@@ -68,20 +68,20 @@ public class VentesVue {
 		xAxis = bestArticleChart.getAxis(AxisType.X);
 		xAxis.setTickAngle(45);
 		xAxis.setTickInterval("50");
-		
+
 	}
 
 	private BarChartModel initArticle() {
 		BarChartModel model = new BarChartModel();
 
 		List<Article> articles = searchArticle.findAll();
-		
+
 		ChartSeries article = new ChartSeries();
 		article.setLabel("Articles");
-		for(Article a : articles){
+		for(Article a : articles) {
 			article.set(a.getNom(), searchCommande.getVentesById(a.getArticleId()));
 		}
-	
+
 		model.addSeries(article);
 
 		return model;
@@ -91,23 +91,23 @@ public class VentesVue {
 		BarChartModel model = new BarChartModel();
 
 		List<Article> articles = searchArticle.findAll();
-		
+
 		ChartSeries article = new ChartSeries();
 		article.setLabel("Articles");
-		
+
 		SortedMap<Long, String> meilleuresVentes = new TreeMap<Long, String>();
-		
+
 		for(Article a : articles) {
 			meilleuresVentes.put(searchCommande.getVentesById(a.getArticleId()), a.getNom());
 		}
-		
+
 		// Recupere les 3 meilleures ventes et les classe par ordre decroissant
 		List<Entry<Long, String>> temp = new ArrayList<Entry<Long, String>>();
 		for(Entry<Long, String> entry : meilleuresVentes.entrySet()) {
-		    temp.add(entry);
+			temp.add(entry);
 		}
 		for(int i=temp.size()-1; i>=temp.size()-3; --i) {
-		    article.set(temp.get(i).getValue(), temp.get(i).getKey());
+			article.set(temp.get(i).getValue(), temp.get(i).getKey());
 		}
 
 		model.addSeries(article);

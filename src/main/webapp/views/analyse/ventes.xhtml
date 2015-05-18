@@ -8,20 +8,26 @@
 <h:head></h:head>
 <body>
 	<header>
-	    <p align="center">
-	        <h:graphicImage library="img" name="logoDTA.png" />
-	        <br />
-	    </p>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
 	</header>
 	<menu>
 		<ui:include src="/menu.xhtml" />
 	</menu>
 	<br />
-	<h:panelGrid columns="2" cellpadding="50" columnClasses="left,right" style="width:50%">
-		<p:chart type="bar" model="#{ventesVue.bestArticleChart}"
-			style="width:200px;"></p:chart>
-		<p:chart type="bar" model="#{ventesVue.articleChart}"
-			style="width:350px;"></p:chart>
-	</h:panelGrid>
+	<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-4" />
+			<div class="ui-grid-col-4">
+				<h:panelGrid columns="1" cellpadding="50" columnClasses="left,right"
+					style="width:100%">
+					<p:chart type="bar" model="#{ventesVue.bestArticleChart}"></p:chart>
+					<p:chart type="bar" model="#{ventesVue.articleChart}"></p:chart>
+				</h:panelGrid>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
