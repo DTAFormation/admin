@@ -18,7 +18,7 @@ import com.dta.metier.SearchUtilisateurEJB;
 @ViewScoped
 public class DetailUtilisateurBean {
 
-	public Utilisateur utilisateur;
+	private Utilisateur utilisateur;
 	
 	private int requestedId;
 	
