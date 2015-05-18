@@ -40,13 +40,17 @@
 
 				<p:outputLabel for="mailUtilisateur" value="Mail:" />
 				<p:inputText value="#{research.userMail}" id="mailUtilisateur" />
-
-				<p:outputLabel for="typeSelect" value="Type:" />
-				<p:selectOneListbox id="typeSelect" value="#{research.userType}">
-					<f:selectItem itemLabel="client" itemValue="CLIENT" />
-					<f:selectItem itemLabel="moderateur" itemValue="MODERATEUR" />
-					<f:selectItem itemLabel="administrateur" itemValue="ADMINISTRATEUR" />
-				</p:selectOneListbox>
+				
+				<p:outputLabel for="typeSelect " value="Type d'utilisateur :" />
+					<p:selectOneMenu id="typeSelect"
+						value="#{research.userType}" style="width:150px">
+					<f:selectItem itemLabel="Client" itemValue="CLIENT" />
+					<f:selectItem itemLabel="Moderateur" itemValue="MODERATEUR" />
+					<f:selectItem itemLabel="Administrateur" itemValue="ADMINISTRATEUR" />
+					</p:selectOneMenu>
+				
+				
+				
 			</h:panelGrid>
 
 			<!-- Validation toolbar -->
