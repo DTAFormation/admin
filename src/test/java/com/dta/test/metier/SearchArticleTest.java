@@ -96,8 +96,8 @@ public class SearchArticleTest{
 	public void searchAllArticlesTest(){
 		
 		List<Article> liste = new ArrayList<Article>();
-		liste.add(new Article("bob", 10, new Produit(), 10));
-		liste.add(new Article("bil", 20, new Produit(), 20));
+		liste.add(new Article("bob", 10, new Produit(), 10,"URL de l'image"));
+		liste.add(new Article("bil", 20, new Produit(), 20,"URL de l'image"));
 		
 		when(em.createNamedQuery("Article.findAll")).thenReturn(query);
 		when(query.getResultList()).thenReturn(liste);
@@ -141,13 +141,13 @@ public class SearchArticleTest{
 		
 		// Programmer le comportement du mock
 		List<Article> articlesEnBase = new ArrayList<>();
-		articlesEnBase.add(new Article("testNom", 0.0f, null, 0));
+		articlesEnBase.add(new Article("testNom", 0.0f, null, 0,"URL de l'image"));
 		when(em.createNamedQuery("Article.findByName")).thenReturn(query);
 		when(query.getResultList()).thenReturn(articlesEnBase);
 			
 		LOG.info("Objet suppose etre recu");
 		List<Article> articleAttendu = new ArrayList<>();
-		Article monArticleAttendu = new Article("testNom", 0.0f, null, 0);
+		Article monArticleAttendu = new Article("testNom", 0.0f, null, 0,"URL de l'image");
 		articleAttendu.add(monArticleAttendu);
 		
 		LOG.info("Lorsque service.findByName(testNom)");
@@ -164,7 +164,7 @@ public class SearchArticleTest{
 		
 		// Programmer le comportement du mock
 		List<Article> articlesEnBase = new ArrayList<>();
-		articlesEnBase.add(new Article("testNom", 1.0f, null, 0));
+		articlesEnBase.add(new Article("testNom", 1.0f, null, 0,"URL de l'image"));
 		
 		when(em.createQuery("SELECT a FROM Article a WHERE a.prix=1.0 ")).thenReturn(query);
 		when(query.getResultList()).thenReturn(articlesEnBase);
@@ -172,11 +172,11 @@ public class SearchArticleTest{
 		
 		LOG.info("Objet suppose etre recu");
 		List<Article> articleAttendu = new ArrayList<>();
-		Article monArticleAttendu = new Article("testNom", 1.0f, null, 0);
+		Article monArticleAttendu = new Article("testNom", 1.0f, null, 0,"URL de l'image");
 		articleAttendu.add(monArticleAttendu);
 		
 		LOG.info("Lorsque service.findByName(testNom)");
-		Article articleModel = new Article(null, 1.0f, null, -1);
+		Article articleModel = new Article(null, 1.0f, null, -1,"URL de l'image");
 		String produitModel = "";
 		String catalogueModel = "";
 		System.out.println(searchArticle.requestGenerator(articleModel, produitModel, catalogueModel));

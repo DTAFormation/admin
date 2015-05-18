@@ -42,7 +42,7 @@ public class AddArticleTest {
 	@Test
 	public void creerArticle() {		
 		LOG.info("Etant donne un objet Article");		
-		Article article = new Article("nom",0,null,1);
+		Article article = new Article("nom",0,null,1,"URL de l'image");
 		
 		when(em.createNamedQuery("Article.findByName", Article.class)).thenReturn(query);
 		when(query.setParameter("name", "nom")).thenReturn(query);
@@ -61,8 +61,8 @@ public class AddArticleTest {
 	@SuppressWarnings("unchecked")
 	public void creerArticleAvecNomExistant() {
 		LOG.info("Etant donne des objets Article avec le meme nom");
-		Article article1 = new Article("nom",0,null,1);
-		Article article2 = new Article("nom",0,null,1);
+		Article article1 = new Article("nom",0,null,1,"URL de l'image");
+		Article article2 = new Article("nom",0,null,1,"URL de l'image");
 		
 		when(em.createNamedQuery("Article.findByName", Article.class)).thenReturn(query);
 		when(query.setParameter("name", "nom")).thenReturn(query);

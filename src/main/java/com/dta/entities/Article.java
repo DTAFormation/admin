@@ -45,11 +45,12 @@ public class Article {
 
     }
 
-    public Article(String nom, float prix, Produit produit, int stock) {
+    public Article(String nom, float prix, Produit produit, int stock, String image) {
         this.nom = nom;
         this.prix = prix;
         this.produit = produit;
         this.stock = stock;
+        this.image = image;        
     }
 
     public int getArticleId() {

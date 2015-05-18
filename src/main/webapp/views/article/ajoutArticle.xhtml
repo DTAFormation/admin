@@ -48,7 +48,11 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Stock:" />
-				<pe:inputNumber value="#{ajoutArticle.stock}" required="true" />
+				<pe:inputNumber value="#{ajoutArticle.stock}" required="true" decimalPlaces="0"/>
+				
+				<p:outputLabel value="URL de l'image:" />
+				<p:inputText value="#{ajoutArticle.image}"/>
+				
 			</h:panelGrid>
 
 			<br />

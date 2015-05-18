@@ -17,6 +17,7 @@ public class AjoutArticleBean {
 	private String nom;
 	private float prix;
 	private int stock;
+	private String image;
 	private int produitId;
 	private Produit produit;
 	
@@ -25,7 +26,7 @@ public class AjoutArticleBean {
 	
 	public void save(){
 		produit = ejb.getProduitById(produitId);
-		article = new Article(nom, prix, produit, stock);
+		article = new Article(nom, prix, produit, stock, image);
 		ejb.save(article);
 	}
 	
@@ -64,5 +65,13 @@ public class AjoutArticleBean {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}	
 }
