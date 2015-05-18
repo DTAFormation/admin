@@ -21,7 +21,7 @@
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>dot-luv</param-value>
+		<param-value>bootstrap</param-value>
 	</context-param>
 
 	<filter>
