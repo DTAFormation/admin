@@ -56,9 +56,8 @@ public class DetailUtilisateurBean {
 	}
 
 	private boolean isAuthorizedModif() {
-		if (!typeUtil.equals("c")) {
-			return authentificationBean.getUtilisateur().getTypeUtil()
-					.equals("a");
+		if (!"c".equals(typeUtil)) {
+			return "a".equals(authentificationBean.getUtilisateur().getTypeUtil());
 		}
 		return true;
 	}
