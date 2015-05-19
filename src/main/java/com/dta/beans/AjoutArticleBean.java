@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.context.RequestContext;
+
 import com.dta.entities.Article;
 import com.dta.entities.Produit;
 import com.dta.metier.AddArticleEJB;
@@ -28,6 +30,21 @@ public class AjoutArticleBean {
 		produit = ejb.getProduitById(produitId);
 		article = new Article(nom, prix, produit, stock, image);
 		ejb.save(article);
+		cleanAndUpdate();
+	}
+	
+	public void cleanAndUpdate() {
+		nom = null;
+		prix = 0f;
+		stock = 0;
+		image = null;
+		produitId = 0;
+		produit = null;
+		updateElement("ajoutArticleForm");
+	}
+	
+	private void updateElement(String elementId) {
+		RequestContext.getCurrentInstance().update(elementId);
 	}
 	
 	public List<Produit> getAllProduits() {

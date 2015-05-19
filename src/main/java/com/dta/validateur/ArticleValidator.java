@@ -15,7 +15,7 @@ import com.dta.metier.AddArticleEJB;
 @RequestScoped
 public class ArticleValidator implements Validator {
 	
-	private static final String ARTICLE_EXISTANT = "Ce nom d article est deja pris";
+	private static final String ARTICLE_EXISTANT = "Ce nom est deja pris";
 	
 	@EJB
 	private AddArticleEJB ejb;
