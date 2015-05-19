@@ -83,6 +83,7 @@ public class AjoutUtilisateurBean {
 			}
 			utilisateur.setAdresses(adresses);
 		}
+		utilisateur.setActive(true);
 		addUtilisateurEJB.save(utilisateur);
 		RequestContext.getCurrentInstance().execute(
 				"PF('dlgClientAjoute').show()");
