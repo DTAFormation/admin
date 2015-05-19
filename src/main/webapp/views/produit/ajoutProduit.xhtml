@@ -8,45 +8,47 @@
 <h:head>
 </h:head>
 <body>
-<header>
-    <p align="center">
-        <h:graphicImage library="img" name="logoDTA.png" />
-        <br />
-    </p>
-</header>
-<menu>
-    <!-- MENU -->
-    <ui:include src="/menu.xhtml" />
-</menu>
-    <br />
+	<header>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+	</header>
+	<menu>
+		<!-- MENU -->
+		<ui:include src="/menu.xhtml" />
+	</menu>
+	<br />
 
-    <!-- fin menu -->
-	<h:form>
+	<!-- fin menu -->
+	<h:form id="ajoutProduitForm">
+		<p:growl id="msgs" showDetail="false" />
 		<p:panel id="panel" header="Ajout produit">
 			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
-				<p:outputLabel value="Nom:" />
+				<p:outputLabel for="produitInput" value="Nom:" />
 				<p:inputText id="produitInput" value="#{ajoutProduit.nom}"
-					required="true">
-					<f:ajax event="blur" render="produitMessage" />
+					required="true" requiredMessage="Veuillez entrer un nom de produit">
+					<f:ajax event="blur" render="produitMessages" />
 					<f:validator binding="#{produitValidator}" />
 				</p:inputText>
-				<p:message id="produitMessage" for="produitInput"
-					errorClass="erreur" />
-				<p:watermark for="produitInput" value="Produit" />
-			</h:panelGrid>
-			
-			
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Description:" />
-				<p:inputText value="#{ajoutProduit.description}" />
+				<p:messages id="produitMessages" for="produitInput"
+					autoUpdate="true" />
 
-				<p:outputLabel value="Catalogue:" />
-				<p:selectOneMenu value="#{ajoutProduit.catalogueId}">
-					<f:selectItem itemLabel="-- Choisir catalogue --"
-						itemValue="#{null}" />
+				<p:outputLabel for="descriptionInput" value="Description:" />
+				<p:inputText id="descriptionInput"
+					value="#{ajoutProduit.description}" />
+				<h:outputText value="" />
+
+				<p:outputLabel for="catalogueInput" value="Catalogue:" />
+				<p:selectOneMenu id="catalogueInput"
+					value="#{ajoutProduit.catalogueId}" required="true"
+					requiredMessage="Veuillez choisir un catalogue">
+					<f:selectItem itemLabel="-- Choisir catalogue --" />
 					<f:selectItems value="#{ajoutProduit.allCatalogues}" var="cat"
 						itemLabel="#{cat.nom}" itemValue="#{cat.catalogueId}" />
 				</p:selectOneMenu>
+				<p:messages id="catalogueMessages" for="catalogueInput"
+					autoUpdate="true" />
 			</h:panelGrid>
 
 

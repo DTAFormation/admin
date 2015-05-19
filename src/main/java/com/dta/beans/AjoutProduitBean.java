@@ -3,7 +3,11 @@ package com.dta.beans;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import com.dta.entities.Catalogue;
 import com.dta.entities.Produit;
@@ -26,6 +30,26 @@ public class AjoutProduitBean {
 		catalogue = ejb.getCatalogueById(catalogueId);
 		produit = new Produit(description, nom, catalogue, null);
 		ejb.save(produit);
+		notifyAjout();
+		cleanAndUpdate();
+	}
+	
+	private void notifyAjout() {
+		FacesMessage msg = new FacesMessage("Produit enregistré");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		updateElement("ajoutProduitForm:msgs");
+	}
+
+	private void cleanAndUpdate() {
+		nom = null;
+		description = null;
+		catalogueId = 0;
+		catalogue = null;
+		updateElement("ajoutProduitForm");
+	}
+
+	private void updateElement(String elementId) {
+		RequestContext.getCurrentInstance().update(elementId);
 	}
 	
 	public List<Catalogue> getAllCatalogues() {
