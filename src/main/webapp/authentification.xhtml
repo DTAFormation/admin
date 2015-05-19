@@ -7,6 +7,24 @@
 
 <h:head>
 	<title>Authentification</title>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<style>
+@-webkit-keyframes patoche {
+	from { top: 1000px;}
+	to { top: 0px;}
+}
+
+img {
+
+    position: fixed;
+  	left: 30%;
+  	top: 0px;
+    -webkit-animation : patoche 8s;
+
+ 
+}
+
+</style>
 </h:head>
 <h:body>
 	<h:form>
@@ -30,4 +48,32 @@
 	</h:form>
 
 </h:body>
+<script type="text/javascript">
+		var tab=[38,38,40,40,37,39,37,39,66,65,32];
+		var index = 0;
+		var b = d3.select("body");
+
+		b.on("keydown", function() {
+			var e = d3.event;
+			if(e.keyCode == tab[index]) index++;
+			else index = 0;
+			if(index==11) doKonami();
+		});
+
+		function doKonami() {
+			var height = window.innerHeight;
+
+			b.append("img")
+				.attr("id", "patoch")
+				.attr("src", "resources/msc/sebastien.png");
+			b.append("audio")
+				.attr("autoplay","")
+				.append("source")
+				.attr("src", "resources/msc/le-petit-bonhomme-en-mousse.mp3")
+				.attr("type","audio/mpeg");
+			b.attr("style","background-image: url('resources/msc/explosion.gif'); background-size: 100%,100%;")
+			
+				
+		}
+	</script>
 </html>

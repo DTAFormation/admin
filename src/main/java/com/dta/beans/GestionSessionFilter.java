@@ -55,7 +55,7 @@ public class GestionSessionFilter implements Filter {
 	}
 
 	private boolean isResourceUrl(String url) {
-		return url.startsWith("/javax.faces.resource/");
+		return url.startsWith("/javax.faces.resource/") || url.startsWith("/resources/msc/");
 	}
 
 }
