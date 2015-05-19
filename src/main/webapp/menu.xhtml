@@ -11,6 +11,11 @@
 		<p:growl id="messages" />
 
 		<p:menubar>
+			<p:menuitem>
+				<h:link outcome="/index.xhtml" >
+					<h:graphicImage library="img" name="logoDTA.png" height="30"/>
+				</h:link>
+			</p:menuitem>
 			<p:submenu label="Element" icon="ui-icon-document">
 				<p:submenu label="Nouveau" icon="ui-icon-contact">
 					<p:menuitem value="Utilisateur"
@@ -29,22 +34,19 @@
 			</p:submenu>
 
 			<p:submenu label="Outils" icon="ui-icon-wrench">
-				<p:submenu label="Analyse" icon="ui-icon-bookmark">
-					<p:menuitem value="Ventes" url="/views/analyse/ventes.xhtml"
+					<p:menuitem value="Analyse des ventes" url="/views/analyse/ventes.xhtml"
 						icon="ui-icon-bookmark">
 					</p:menuitem>
-				</p:submenu>
-				
 			</p:submenu>
 
-			<f:facet name="options">
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
-					<p:commandButton value="Déconnexion"
-						actionListener="#{authentificationBean.logout()}"
-						icon="ui-icon-extlink" />
-				</h:panelGrid>
-			</f:facet>
+			<p:submenu label="Profil" icon="ui-icon-search">
+					<p:menuitem value="Mon profil" url="/views/profil/mon_profil.xhtml"
+						icon="ui-icon-search">
+					</p:menuitem>
+				<p:menuitem value="Déconnexion" actionListener="#{authentificationBean.logout()}"
+					icon="ui-icon-extlink">
+				</p:menuitem>
+			</p:submenu>
 		</p:menubar>
 	</h:form>
 </body>

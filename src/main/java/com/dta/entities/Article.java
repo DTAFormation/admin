@@ -50,7 +50,11 @@ public class Article {
         this.prix = prix;
         this.produit = produit;
         this.stock = stock;
-        this.image = image;        
+        if (image.equals("")) {
+        	this.image = "http://culturesciencesphysique.ens-lyon.fr/icones/vide.png";
+		}else {
+			this.image = image;	
+		}     
     }
 
     public int getArticleId() {

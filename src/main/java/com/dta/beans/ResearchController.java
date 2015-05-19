@@ -10,8 +10,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.dta.entities.Article;
 import com.dta.entities.Utilisateur;
@@ -23,7 +21,6 @@ import com.dta.metier.SearchUtilisateurEJB;
 @ViewScoped
 public class ResearchController {
     
-    private static final Logger LOG = LoggerFactory.getLogger(ResearchController.class); 
 
     private boolean searchAllArticles;
     private boolean searchAllUtilisateurs;
@@ -115,7 +112,6 @@ public class ResearchController {
 		searchAllArticles = true;
 		products = searchArticle.findAll();
 		updateArticlesList();
-		LOG.info(products.toString());
 	}
 	
 	private void updateArticlesList() {
