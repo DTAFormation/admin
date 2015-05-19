@@ -9,36 +9,36 @@
 <h:head>
 </h:head>
 <body>
-<header>
-    <p align="center">
-        <h:graphicImage library="img" name="logoDTA.png" />
-        <br />
-    </p>
-</header>
-<menu>
-    <!-- MENU -->
-    <ui:include src="/menu.xhtml" />
-</menu>
-    <br />
+	<header>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+	</header>
+	<menu>
+		<!-- MENU -->
+		<ui:include src="/menu.xhtml" />
+	</menu>
+	<br />
 
-    <!-- fin menu -->
-	<h:form>
+	<!-- fin menu -->
+	<h:form id="ajoutCatalogueForm">
+		<p:growl id="msgs" showDetail="false" />
 		<p:panel id="panel" header="Ajout catalogue">
 			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
-				<p:outputLabel value="Nom:" />
+				<p:outputLabel for="catalogueInput" value="Nom:" />
 				<p:inputText id="catalogueInput" value="#{ajoutCatalogue.nom}"
-					required="true">
+					required="true"
+					requiredMessage="Veuillez entrer un nom de catalogue">
 					<f:ajax event="blur" render="catalogueMessage" />
 					<f:validator binding="#{catalogueValidator}" />
 				</p:inputText>
-				<p:message id="catalogueMessage" for="catalogueInput"
-					errorClass="erreur" />
-				<p:watermark for="catalogueInput" value="Catalogue" />
-			</h:panelGrid>
-
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Description:" />
-				<p:inputText value="#{ajoutCatalogue.description}" />
+				<p:messages id="catalogueMessages" for="catalogueInput"
+					autoUpdate="true" />
+				
+				<p:outputLabel for="descriptionInput" value="Description:" />
+				<p:inputText id="descriptionInput" value="#{ajoutCatalogue.description}" />
+				<h:outputText value="" />
 			</h:panelGrid>
 			<br />
 			<p:toolbar>
