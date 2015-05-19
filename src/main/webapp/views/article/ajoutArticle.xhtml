@@ -9,50 +9,56 @@
 <h:head>
 </h:head>
 <body>
-<header>
-    <p align="center">
-        <h:graphicImage library="img" name="logoDTA.png" />
-        <br />
-    </p>
-</header>
-<menu>
-    <!-- MENU -->
-    <ui:include src="/menu.xhtml" />
-</menu>
-    <br />
+	<header>
+	<p align="center">
+		<h:graphicImage library="img" name="logoDTA.png" />
+		<br />
+	</p>
+	</header>
+	<menu>
+		<!-- MENU -->
+		<ui:include src="/menu.xhtml" />
+	</menu>
+	<br />
 
-    <!-- fin menu -->
-	<h:form>
+	<!-- fin menu -->
+	<h:form id="ajoutArticleForm">
 		<p:panel id="panel" header="Ajout article">
 			<h:panelGrid columns="3" cellpadding="5" id="panelgenreal">
-				<p:outputLabel value="Nom:" />
+				<p:outputLabel for="articleInput" value="Nom:" />
 				<p:inputText id="articleInput" value="#{ajoutArticle.nom}"
-					required="true">
+					required="true"
+					requiredMessage="Veuillez entrer le nom de l'article">
 					<f:ajax event="blur" render="articleMessage" />
 					<f:validator binding="#{articleValidator}" />
 				</p:inputText>
-				<p:message id="articleMessage" for="articleInput"
-					errorClass="erreur" />
-				<p:watermark for="articleInput" value="Nom" />
-			</h:panelGrid>
-			
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Prix:" />
-				<pe:inputNumber value="#{ajoutArticle.prix}" required="true" />
+				<p:messages id="articleMessage" for="articleInput" autoUpdate="true" />
 
-				<p:outputLabel value="Produit:" />
-				<p:selectOneMenu value="#{ajoutArticle.produitId}">
-					<f:selectItem itemLabel="-- Choisir produit --" itemValue="#{null}" />
+				<p:outputLabel for="priceInput" value="Prix:" />
+				<pe:inputNumber id="priceInput" value="#{ajoutArticle.prix}"
+					required="true" requiredMessage="Veuillez entrer un prix" />
+				<p:messages id="priceMessages" for="priceInput" autoUpdate="true" />
+
+				<p:outputLabel for="productInput" value="Produit:" />
+				<p:selectOneMenu id="productInput" value="#{ajoutArticle.produitId}"
+					required="true" requiredMessage="Veuillez choisir un produit">
+					<f:selectItem itemLabel="-- Choisir produit --" />
 					<f:selectItems value="#{ajoutArticle.allProduits}" var="prod"
 						itemLabel="#{prod.nom}" itemValue="#{prod.produitId}" />
 				</p:selectOneMenu>
+				<p:messages id="productMessages" for="productInput"
+					autoUpdate="true" />
 
-				<p:outputLabel value="Stock:" />
-				<pe:inputNumber value="#{ajoutArticle.stock}" required="true" decimalPlaces="0"/>
-				
-				<p:outputLabel value="URL de l'image:" />
-				<p:inputText value="#{ajoutArticle.image}"/>
-				
+
+				<p:outputLabel for="stockInput" value="Stock:" />
+				<pe:inputNumber id="stockInput" value="#{ajoutArticle.stock}"
+					required="true" decimalPlaces="0"
+					requiredMessage="Veuillez entrer un stock" />
+				<p:messages id="stockMessages" for="stockInput" autoUpdate="true" />
+
+				<p:outputLabel for="imgInput" value="URL de l'image:" />
+				<p:inputText id="imgInput" value="#{ajoutArticle.image}" />
+				<h:outputText value="" />
 			</h:panelGrid>
 
 			<br />
